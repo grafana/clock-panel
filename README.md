@@ -1,46 +1,58 @@
-## Clock Panel Plugin for Grafana
+## AJAX Panel for Grafana
 
-The Clock Panel can show the current time or a countdown and updates every second.
+The AJAX Panel can load external content into the dashboard.  This is a more powerful and flexible solution than
+using an <iframe 
 
-Show the time in another office or show a countdown to an important event.
 
 ### Options
 
-- **Mode**:
+- **Method**:
 
-  Default is time. If countdown is chosen then set the Countdown Deadline to start the countdown.
+  GET or POST
 
-- **12 or 24 hour**:
+- **URL**:
 
-  Show time in the 12/24 hour format.
+  The URL to request
 
-- **Offset from UTC**:
+- **Parameters**:
 
-  This is a simple way to get the time for different time zones. Default is empty and that means local time (whatever that is on your computer). -5 would be UTC -5 (New York or central US)
+  The parameters that will be passed in the request.  This is a javascript object with access to the variables:
+  	- `ctrl` The control object.
+  
+  Sample Parameters:
+	```
+	{
+	 from:ctrl.range.from.format('x'),  // x is unix ms timestamp
+	 to:ctrl.range.to.format('x'), 
+	 height:ctrl.height
+	}
+	```
 
-- **Countdown Deadline**:
-
-  Used in conjuction with the mode being set to countdown. Choose a date and time to count down to.
-
-- **Countdown End Text**:
-
-  The text to show when the countdown ends. E.g. LIFTOFF
-
-- **Date/Time formatting options**:
-
-  The font size, weight and date/time formatting can be customized here. If the seconds ticking annoys you then change the time format to HH:mm for the 24 hour clock or h:mm A for the 12 hour clock.
-
-- **Bg Color**:
-
-  Choose a background color for the clock with the color picker.
 
 ### Screenshots
 
-- [Screenshot of two clocks and a countdown](https://raw.githubusercontent.com/grafana/clock-panel/06ecf59c191db642127c6153bc3145e93a1df1f8/src/img/screenshot-clocks.png)
-- [Screenshot of the options screen](https://raw.githubusercontent.com/grafana/clock-panel/06ecf59c191db642127c6153bc3145e93a1df1f8/src/img/screenshot-clock-options.png)
+- [Screenshot of the options screen](https://raw.githubusercontent.com/ryantxu/ajax-panel/master/src/img/screenshot-ajax-options.png)
 
 #### Changelog
 
-##### v0.0.8
+##### v0.0.1
 
-- Remove extraneous comma when 1 second left in the countdown. PR from @linkslice
+- Quick and Dirty, but it works!
+
+
+
+### Roadmap... hopefully soon
+ - code cleanup... i'm still learning angular
+ - Toggle the 'spinner' for panel
+ - Get the panel width?
+ - Error handling
+ - avoid the 'Data source query result invalid, missing data field: undefined' error message
+
+
+### Wishlist... if you are looking for a project :)
+ - Add authentication info to the sub-request?
+ - Configure timer to refresh
+ - Load CSS file?
+ - configure javascript for display
+ - why does the `Time range` > `Override relative time` not work?
+ - Check that parameters have changed before sending a new request
