@@ -1,13 +1,12 @@
 import {PanelCtrl} from 'app/plugins/sdk';
 import moment from 'moment';
+import 'moment-timezone';
 import _ from 'lodash';
 import './css/clock-panel.css!';
 
 const panelDefaults = {
   mode: 'time',
-  clockType: '24 hour',
-  offsetFromUtc: null,
-  offsetFromUtcMinutes: null,
+  timezone: moment.tz.guess(),
   bgColor: null,
   countdownSettings: {
     endCountdownTime: moment().seconds(0).milliseconds(0).add(1, 'day').toDate(),
@@ -20,8 +19,16 @@ const panelDefaults = {
     fontWeight: 'normal'
   },
   timeSettings: {
+    showClock: true,
+    clockType: '24 hour',
     customFormat: 'HH:mm:ss',
     fontSize: '60px',
+    fontWeight: 'normal'
+  },
+  zoneSettings: {
+    showZone: false,
+    zoneFormat: 'offsetAbv',
+    fontSize: '20px',
     fontWeight: 'normal'
   }
 };
@@ -31,6 +38,7 @@ export class ClockCtrl extends PanelCtrl {
     super($scope, $injector);
     _.defaults(this.panel, panelDefaults);
     _.defaults(this.panel.timeSettings, panelDefaults.timeSettings);
+    this.timezones = moment.tz.names();
 
     if (!(this.panel.countdownSettings.endCountdownTime instanceof Date)) {
       this.panel.countdownSettings.endCountdownTime = moment(this.panel.countdownSettings.endCountdownTime).toDate();
@@ -64,28 +72,29 @@ export class ClockCtrl extends PanelCtrl {
   renderTime() {
     let now;
 
-    if (this.panel.offsetFromUtc && this.panel.offsetFromUtcMinutes) {
-      const offsetInMinutes = (parseInt(this.panel.offsetFromUtc, 10) * 60) + parseInt(this.panel.offsetFromUtcMinutes, 10);
-      now = moment().utcOffset(offsetInMinutes);
-    } else if (this.panel.offsetFromUtc && !this.panel.offsetFromUtcMinutes) {
-      now = moment().utcOffset(parseInt(this.panel.offsetFromUtc, 10));
-    } else {
-      now = moment();
-    }
+    now = moment().tz(this.panel.timezone);
 
-    if (this.panel.dateSettings.showDate) {
-      this.date = now.format(this.panel.dateSettings.dateFormat);
-    }
+    this.date = now.format(this.panel.dateSettings.dateFormat);
 
     this.time = now.format(this.getTimeFormat());
+
+    if (this.panel.zoneSettings.zoneFormat === 'name') {
+      this.zone = now._z.name
+    } else if (this.panel.zoneSettings.zoneFormat === 'offsetAbv') {
+      this.zone = now.format('Z z');
+    } else if (this.panel.zoneSettings.zoneFormat === 'offset') {
+      this.zone = now.format('Z');
+    } else if (this.panel.zoneSettings.zoneFormat === 'abv') {
+      this.zone = now.format('z');
+    }
   }
 
   getTimeFormat() {
-    if (this.panel.clockType === '24 hour') {
+    if (this.panel.timeSettings.clockType === '24 hour') {
       return 'HH:mm:ss';
     }
 
-    if (this.panel.clockType === '12 hour') {
+    if (this.panel.timeSettings.clockType === '12 hour') {
       return 'h:mm:ss A';
     }
 

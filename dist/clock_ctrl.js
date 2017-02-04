@@ -1,6 +1,8 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'moment', 'lodash', './css/clock-panel.css!'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'moment', 'moment-timezone', 'lodash', './css/clock-panel.css!'], function (_export, _context) {
+  "use strict";
+
   var PanelCtrl, moment, _, _createClass, panelDefaults, ClockCtrl;
 
   function _classCallCheck(instance, Constructor) {
@@ -38,7 +40,7 @@ System.register(['app/plugins/sdk', 'moment', 'lodash', './css/clock-panel.css!'
       PanelCtrl = _appPluginsSdk.PanelCtrl;
     }, function (_moment) {
       moment = _moment.default;
-    }, function (_lodash) {
+    }, function (_momentTimezone) {}, function (_lodash) {
       _ = _lodash.default;
     }, function (_cssClockPanelCss) {}],
     execute: function () {
@@ -62,9 +64,7 @@ System.register(['app/plugins/sdk', 'moment', 'lodash', './css/clock-panel.css!'
 
       panelDefaults = {
         mode: 'time',
-        clockType: '24 hour',
-        offsetFromUtc: null,
-        offsetFromUtcMinutes: null,
+        timezone: moment.tz.guess(),
         bgColor: null,
         countdownSettings: {
           endCountdownTime: moment().seconds(0).milliseconds(0).add(1, 'day').toDate(),
@@ -77,8 +77,16 @@ System.register(['app/plugins/sdk', 'moment', 'lodash', './css/clock-panel.css!'
           fontWeight: 'normal'
         },
         timeSettings: {
+          showClock: true,
+          clockType: '24 hour',
           customFormat: 'HH:mm:ss',
           fontSize: '60px',
+          fontWeight: 'normal'
+        },
+        zoneSettings: {
+          showZone: false,
+          zoneFormat: 'offsetAbv',
+          fontSize: '20px',
           fontWeight: 'normal'
         }
       };
@@ -89,10 +97,11 @@ System.register(['app/plugins/sdk', 'moment', 'lodash', './css/clock-panel.css!'
         function ClockCtrl($scope, $injector) {
           _classCallCheck(this, ClockCtrl);
 
-          var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ClockCtrl).call(this, $scope, $injector));
+          var _this = _possibleConstructorReturn(this, (ClockCtrl.__proto__ || Object.getPrototypeOf(ClockCtrl)).call(this, $scope, $injector));
 
           _.defaults(_this.panel, panelDefaults);
           _.defaults(_this.panel.timeSettings, panelDefaults.timeSettings);
+          _this.timezones = moment.tz.names();
 
           if (!(_this.panel.countdownSettings.endCountdownTime instanceof Date)) {
             _this.panel.countdownSettings.endCountdownTime = moment(_this.panel.countdownSettings.endCountdownTime).toDate();
@@ -132,29 +141,30 @@ System.register(['app/plugins/sdk', 'moment', 'lodash', './css/clock-panel.css!'
           value: function renderTime() {
             var now = void 0;
 
-            if (this.panel.offsetFromUtc && this.panel.offsetFromUtcMinutes) {
-              var offsetInMinutes = parseInt(this.panel.offsetFromUtc, 10) * 60 + parseInt(this.panel.offsetFromUtcMinutes, 10);
-              now = moment().utcOffset(offsetInMinutes);
-            } else if (this.panel.offsetFromUtc && !this.panel.offsetFromUtcMinutes) {
-              now = moment().utcOffset(parseInt(this.panel.offsetFromUtc, 10));
-            } else {
-              now = moment();
-            }
+            now = moment().tz(this.panel.timezone);
 
-            if (this.panel.dateSettings.showDate) {
-              this.date = now.format(this.panel.dateSettings.dateFormat);
-            }
+            this.date = now.format(this.panel.dateSettings.dateFormat);
 
             this.time = now.format(this.getTimeFormat());
+
+            if (this.panel.zoneSettings.zoneFormat === 'name') {
+              this.zone = now._z.name;
+            } else if (this.panel.zoneSettings.zoneFormat === 'offsetAbv') {
+              this.zone = now.format('Z z');
+            } else if (this.panel.zoneSettings.zoneFormat === 'offset') {
+              this.zone = now.format('Z');
+            } else if (this.panel.zoneSettings.zoneFormat === 'abv') {
+              this.zone = now.format('z');
+            }
           }
         }, {
           key: 'getTimeFormat',
           value: function getTimeFormat() {
-            if (this.panel.clockType === '24 hour') {
+            if (this.panel.timeSettings.clockType === '24 hour') {
               return 'HH:mm:ss';
             }
 
-            if (this.panel.clockType === '12 hour') {
+            if (this.panel.timeSettings.clockType === '12 hour') {
               return 'h:mm:ss A';
             }
 

@@ -14,9 +14,9 @@ Show the time in another office or show a countdown to an important event.
 
   Show time in the 12/24 hour format.
 
-- **Offset from UTC**:
+- **Timezone**:
 
-  This is a simple way to get the time for different time zones. Default is empty and that means local time (whatever that is on your computer). -5 would be UTC -5 (New York or central US)
+  This uses the moment-timezone module to provide suppoer for various zones and their offsets. Default is to guess what your local timezone is (whatever that is on your computer). -5 would be UTC -5 (New York or central US)
 
 - **Countdown Deadline**:
 
