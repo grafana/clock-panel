@@ -64,7 +64,13 @@ System.register(['app/plugins/sdk', 'moment', 'moment-timezone', 'lodash', './cs
 
       panelDefaults = {
         mode: 'time',
-        timezone: moment.tz.guess(),
+        // begin deprecated
+        clockType: '24 hour',
+        offsetFromUtc: null,
+        offsetFromUtcMinutes: null,
+        timezone: null,
+        // end deprecated
+        //  timezone: moment.tz.guess(),
         bgColor: null,
         countdownSettings: {
           endCountdownTime: moment().seconds(0).milliseconds(0).add(1, 'day').toDate(),
@@ -78,7 +84,8 @@ System.register(['app/plugins/sdk', 'moment', 'moment-timezone', 'lodash', './cs
         },
         timeSettings: {
           showClock: true,
-          clockType: '24 hour',
+          clockType: null,
+          //    clockType: '24 hour',
           customFormat: 'HH:mm:ss',
           fontSize: '60px',
           fontWeight: 'normal'
@@ -102,6 +109,19 @@ System.register(['app/plugins/sdk', 'moment', 'moment-timezone', 'lodash', './cs
           _.defaults(_this.panel, panelDefaults);
           _.defaults(_this.panel.timeSettings, panelDefaults.timeSettings);
           _this.timezones = moment.tz.names();
+
+          // handle upgrade period
+          // once upgrade period is completed, these can be set as the defaults above
+          if (!_this.panel.timeSettings.clockType) {
+            _this.panel.timeSettings.clockType = _this.panel.clockType;
+          }
+
+          if (!_this.panel.timezone) {
+            if (!_this.panel.offsetFromUtc && !_this.panel.offsetFromUtcMinutes) {
+              _this.panel.timezone = moment.tz.guess();
+            }
+          }
+          // end upgrade period
 
           if (!(_this.panel.countdownSettings.endCountdownTime instanceof Date)) {
             _this.panel.countdownSettings.endCountdownTime = moment(_this.panel.countdownSettings.endCountdownTime).toDate();
@@ -141,13 +161,27 @@ System.register(['app/plugins/sdk', 'moment', 'moment-timezone', 'lodash', './cs
           value: function renderTime() {
             var now = void 0;
 
-            now = moment().tz(this.panel.timezone);
+            // handle upgrade period
+            // if timezone is defined that means we are on the current model
+            // otherwise fall back to using offsetFromUtc, if those are also not present, guess at the timezone
+            // once upgrade period is over, this block becomes "now = moment().tz(this.panel.timezone);"
+            if (this.panel.timezone) {
+              now = moment().tz(this.panel.timezone);
+            } else if (this.panel.offsetFromUtc && this.panel.offsetFromUtcMinutes) {
+              var offsetInMinutes = parseInt(this.panel.offsetFromUtc, 10) * 60 + parseInt(this.panel.offsetFromUtcMinutes, 10);
+              now = moment().utcOffset(offsetInMinutes);
+            } else if (this.panel.offsetFromUtc && !this.panel.offsetFromUtcMinutes) {
+              now = moment().utcOffset(parseInt(this.panel.offsetFromUtc, 10));
+            } else {
+              now = moment().tz(moment.tz.guess());
+            }
+            // end upgrade period
 
             this.date = now.format(this.panel.dateSettings.dateFormat);
 
             this.time = now.format(this.getTimeFormat());
 
-            if (this.panel.zoneSettings.zoneFormat === 'name') {
+            if (this.panel.zoneSettings.zoneFormat === 'name' && this.panel.timezone) {
               this.zone = now._z.name;
             } else if (this.panel.zoneSettings.zoneFormat === 'offsetAbv') {
               this.zone = now.format('Z z');

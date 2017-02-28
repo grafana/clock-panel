@@ -39,6 +39,10 @@ Show the time in another office or show a countdown to an important event.
 - [Screenshot of two clocks and a countdown](https://raw.githubusercontent.com/grafana/clock-panel/06ecf59c191db642127c6153bc3145e93a1df1f8/src/img/screenshot-clocks.png)
 - [Screenshot of the options screen](https://raw.githubusercontent.com/grafana/clock-panel/06ecf59c191db642127c6153bc3145e93a1df1f8/src/img/screenshot-clock-options.png)
 
+#### Upgrading from versions <= v0.0.8
+
+Versions after v0.0.8 provide support for timezones based on tzdata information via [moment-timezone](http://momentjs.com/timezone/).  When upgrading, existing clocks will continue to use the previously provided information.  Upon editing, it is advised that you provide the correct timezone.  If this is left blank it will continue using previous values but you will be unable to edit the offsets.  If displaying zone information, selecting "Zone name" will have no affect on the display until you have defined a timezone.
+
 #### Changelog
 
 ##### v0.0.8
