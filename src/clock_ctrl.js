@@ -29,8 +29,7 @@ const panelDefaults = {
 export class ClockCtrl extends PanelCtrl {
   constructor($scope, $injector) {
     super($scope, $injector);
-    _.defaults(this.panel, panelDefaults);
-    _.defaults(this.panel.timeSettings, panelDefaults.timeSettings);
+    _.defaultsDeep(this.panel, panelDefaults);
 
     if (!(this.panel.countdownSettings.endCountdownTime instanceof Date)) {
       this.panel.countdownSettings.endCountdownTime = moment(this.panel.countdownSettings.endCountdownTime).toDate();
@@ -106,7 +105,7 @@ export class ClockCtrl extends PanelCtrl {
       return;
     }
 
-    var previous = '';
+    let previous = '';
 
     if (timeLeft.years() > 0) {
       formattedTimeLeft = timeLeft.years() === 1 ? '1 year, ' : timeLeft.years() + ' years, ';

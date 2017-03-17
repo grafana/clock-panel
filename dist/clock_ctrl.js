@@ -91,8 +91,7 @@ System.register(['app/plugins/sdk', 'moment', 'lodash', './css/clock-panel.css!'
 
           var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ClockCtrl).call(this, $scope, $injector));
 
-          _.defaults(_this.panel, panelDefaults);
-          _.defaults(_this.panel.timeSettings, panelDefaults.timeSettings);
+          _.defaultsDeep(_this.panel, panelDefaults);
 
           if (!(_this.panel.countdownSettings.endCountdownTime instanceof Date)) {
             _this.panel.countdownSettings.endCountdownTime = moment(_this.panel.countdownSettings.endCountdownTime).toDate();
