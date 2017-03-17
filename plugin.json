@@ -6,8 +6,8 @@
   "info": {
     "description": "Clock panel for grafana",
     "author": {
-      "name": "Raintank Inc.",
-      "url": "http://raintank.io"
+      "name": "GrafanaLabs",
+      "url": "https://grafana.com"
     },
     "keywords": ["clock", "panel"],
     "logos": {
@@ -22,8 +22,8 @@
       {"name": "Showcase", "path": "src/img/screenshot-showcase.png"},
       {"name": "Options", "path": "src/img/screenshot-clock-options.png"}
     ],
-    "version": "0.0.8",
-    "updated": "2015-06-10"
+    "version": "0.0.9",
+    "updated": "2017-03-18"
   },
 
   "dependencies": {

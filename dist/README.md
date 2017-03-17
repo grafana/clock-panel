@@ -44,3 +44,7 @@ Show the time in another office or show a countdown to an important event.
 ##### v0.0.8
 
 - Remove extraneous comma when 1 second left in the countdown. PR from @linkslice
+
+##### v0.0.9
+
+- Fixes bug with default properties not getting deep cloned [#20](https://github.com/grafana/clock-panel/issues/20)
