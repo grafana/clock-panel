@@ -12,7 +12,8 @@ const panelDefaults = {
   bgColor: null,
   countdownSettings: {
     endCountdownTime: moment().seconds(0).milliseconds(0).add(1, 'day').toDate(),
-    endText: '00:00:00'
+    endText: '00:00:00',
+    customFormat: null
   },
   dateSettings: {
     showDate: false,
