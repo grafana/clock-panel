@@ -1,5 +1,6 @@
 import {PanelCtrl} from 'app/plugins/sdk';
 import moment from 'moment';
+import './external/moment-duration-format';
 import _ from 'lodash';
 import './css/clock-panel.css!';
 
