@@ -31,7 +31,7 @@
 			<label class="gf-form-label width-12">Offset from UTC (hours)</label>
 			<input type="text" class="input-small gf-form-input max-width-9" placeholder="+/- hours" ng-model="ctrl.panel.offsetFromUtc" ng-change="ctrl.render()" ng-model-onblur />
 		</div>
-    <div class="gf-form">
+		<div class="gf-form">
 			<label class="gf-form-label width-12">Offset from UTC (mins)</label>
 			<input type="text" class="input-small gf-form-input max-width-9" placeholder="+/- minutes" ng-model="ctrl.panel.offsetFromUtcMinutes" ng-change="ctrl.render()" ng-model-onblur />
 		</div>
@@ -52,17 +52,17 @@
 	<div class="section gf-form-group" ng-if="ctrl.panel.mode === 'countdown'">
 		<h5 class="section-heading">Countdown options</h5>
 		<div class="gf-form">
-			<label class="gf-form-label width-8">Deadline</label>
+			<label class="gf-form-label width-12">Deadline</label>
 			<span class="gf-form-select-wrapper width-16">
 				<input type="datetime-local" class="input-large gf-form-input" ng-model="ctrl.panel.countdownSettings.endCountdownTime" ng-change="ctrl.render()" ng-model-onblur>
 			</span>
 		</div>
 		<div class="gf-form">
-			<label class="gf-form-label width-8">End Text</label>
+			<label class="gf-form-label width-12">End Text</label>
 			<input type="text" class="gf-form-input max-width-16" ng-model="ctrl.panel.countdownSettings.endText" ng-change="ctrl.render()" ng-model-onblur>
 		</div>
     <div class="gf-form">
-			<label class="gf-form-label width-8">Font Size</label>
+			<label class="gf-form-label width-12">Font Size</label>
 			<input type="text" class="input-small gf-form-input max-width-16" ng-model="ctrl.panel.timeSettings.fontSize" ng-change="ctrl.render()" ng-model-onblur />
 		</div>
 	</div>
