@@ -62,7 +62,25 @@
 			<input type="text" class="gf-form-input max-width-16" ng-model="ctrl.panel.countdownSettings.endText" ng-change="ctrl.render()" ng-model-onblur>
 		</div>
 		<div class="gf-form">
-			<label class="gf-form-label width-12">Custom Format</label>
+			<label class="gf-form-label width-12">Custom Format
+				<info-popover mode="right-normal">
+					<ul>
+						<li>Leave empty to use default formatting</li>
+						<li>Use <code>auto</code> to format based on length</li>
+						<li>Use <code>[square brackets]</code> for escapes</li>
+						<li>Use
+								<code>Y</code> or <code>y</code> for years,
+								<code>M</code> for months,
+								<code>W</code> or <code>w</code> for weeks,
+								<code>D</code> or <code>d</code> for days,
+								<code>H</code> or <code>h</code> for hours,
+								<code>m</code> for minutes,
+								<code>s</code> for seconds
+						</li>
+						<li>Example: <code>d [days], h [hours]</code></li>
+					</ul>
+				</info-popover>
+			</label>
 			<input type="text" class="input-medium gf-form-input max-width-16" ng-model="ctrl.panel.countdownSettings.customFormat" ng-change="ctrl.render()" ng-model-onblur>
 		</div>
     <div class="gf-form">
