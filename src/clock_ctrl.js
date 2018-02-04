@@ -112,6 +112,11 @@ export class ClockCtrl extends PanelCtrl {
       return;
     }
 
+    if (this.panel.countdownSettings.customFormat) {
+      this.time = timeLeft.format(this.panel.countdownSettings.customFormat);
+      return;
+    }
+
     let previous = '';
 
     if (timeLeft.years() > 0) {
