@@ -1,6 +1,8 @@
 'use strict';
 
-System.register(['app/plugins/sdk', 'moment', 'lodash', './css/clock-panel.css!'], function (_export, _context) {
+System.register(['app/plugins/sdk', 'moment', './external/moment-duration-format', 'lodash', './css/clock-panel.css!'], function (_export, _context) {
+  "use strict";
+
   var PanelCtrl, moment, _, _createClass, panelDefaults, ClockCtrl;
 
   function _classCallCheck(instance, Constructor) {
@@ -38,7 +40,7 @@ System.register(['app/plugins/sdk', 'moment', 'lodash', './css/clock-panel.css!'
       PanelCtrl = _appPluginsSdk.PanelCtrl;
     }, function (_moment) {
       moment = _moment.default;
-    }, function (_lodash) {
+    }, function (_externalMomentDurationFormat) {}, function (_lodash) {
       _ = _lodash.default;
     }, function (_cssClockPanelCss) {}],
     execute: function () {
@@ -68,7 +70,8 @@ System.register(['app/plugins/sdk', 'moment', 'lodash', './css/clock-panel.css!'
         bgColor: null,
         countdownSettings: {
           endCountdownTime: moment().seconds(0).milliseconds(0).add(1, 'day').toDate(),
-          endText: '00:00:00'
+          endText: '00:00:00',
+          customFormat: null
         },
         dateSettings: {
           showDate: false,
@@ -89,7 +92,7 @@ System.register(['app/plugins/sdk', 'moment', 'lodash', './css/clock-panel.css!'
         function ClockCtrl($scope, $injector) {
           _classCallCheck(this, ClockCtrl);
 
-          var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ClockCtrl).call(this, $scope, $injector));
+          var _this = _possibleConstructorReturn(this, (ClockCtrl.__proto__ || Object.getPrototypeOf(ClockCtrl)).call(this, $scope, $injector));
 
           _.defaultsDeep(_this.panel, panelDefaults);
 
@@ -172,6 +175,16 @@ System.register(['app/plugins/sdk', 'moment', 'lodash', './css/clock-panel.css!'
 
             if (timeLeft.asSeconds() <= 0) {
               this.time = this.panel.countdownSettings.endText;
+              return;
+            }
+
+            if (this.panel.countdownSettings.customFormat === 'auto') {
+              this.time = timeLeft.format();
+              return;
+            }
+
+            if (this.panel.countdownSettings.customFormat) {
+              this.time = timeLeft.format(this.panel.countdownSettings.customFormat);
               return;
             }
 
