@@ -1,13 +1,18 @@
 import {PanelCtrl} from 'app/plugins/sdk';
 import moment from 'moment';
+import 'moment-timezone';
 import _ from 'lodash';
 import './css/clock-panel.css!';
 
 const panelDefaults = {
   mode: 'time',
+// begin deprecated
   clockType: '24 hour',
   offsetFromUtc: null,
   offsetFromUtcMinutes: null,
+  timezone: null,
+// end deprecated
+//  timezone: moment.tz.guess(),
   bgColor: null,
   countdownSettings: {
     endCountdownTime: moment().seconds(0).milliseconds(0).add(1, 'day').toDate(),
@@ -20,8 +25,17 @@ const panelDefaults = {
     fontWeight: 'normal'
   },
   timeSettings: {
+    showTime: true,
+    clockType: null,
+//    clockType: '24 hour',
     customFormat: 'HH:mm:ss',
     fontSize: '60px',
+    fontWeight: 'normal'
+  },
+  zoneSettings: {
+    showZone: false,
+    zoneFormat: 'offsetAbv',
+    fontSize: '20px',
     fontWeight: 'normal'
   }
 };
@@ -30,6 +44,20 @@ export class ClockCtrl extends PanelCtrl {
   constructor($scope, $injector) {
     super($scope, $injector);
     _.defaultsDeep(this.panel, panelDefaults);
+    this.timezones = moment.tz.names();
+
+    // handle upgrade period
+    // once upgrade period is completed, these can be set as the defaults above
+    if (!this.panel.timeSettings.clockType) {
+      this.panel.timeSettings.clockType = this.panel.clockType;
+    }
+
+    if (!this.panel.timezone) {
+      if ((!this.panel.offsetFromUtc) && (!this.panel.offsetFromUtcMinutes)) {
+        this.panel.timezone = moment.tz.guess();
+      }
+    }
+    // end upgrade period
 
     if (!(this.panel.countdownSettings.endCountdownTime instanceof Date)) {
       this.panel.countdownSettings.endCountdownTime = moment(this.panel.countdownSettings.endCountdownTime).toDate();
@@ -63,28 +91,43 @@ export class ClockCtrl extends PanelCtrl {
   renderTime() {
     let now;
 
-    if (this.panel.offsetFromUtc && this.panel.offsetFromUtcMinutes) {
+    // handle upgrade period
+    // if timezone is defined that means we are on the current model
+    // otherwise fall back to using offsetFromUtc, if those are also not present, guess at the timezone
+    // once upgrade period is over, this block becomes "now = moment().tz(this.panel.timezone);"
+    if (this.panel.timezone) {
+      now = moment().tz(this.panel.timezone);
+    } else if (this.panel.offsetFromUtc && this.panel.offsetFromUtcMinutes) {
       const offsetInMinutes = (parseInt(this.panel.offsetFromUtc, 10) * 60) + parseInt(this.panel.offsetFromUtcMinutes, 10);
       now = moment().utcOffset(offsetInMinutes);
     } else if (this.panel.offsetFromUtc && !this.panel.offsetFromUtcMinutes) {
       now = moment().utcOffset(parseInt(this.panel.offsetFromUtc, 10));
     } else {
-      now = moment();
+      now = moment().tz(moment.tz.guess());
     }
+    // end upgrade period
 
-    if (this.panel.dateSettings.showDate) {
-      this.date = now.format(this.panel.dateSettings.dateFormat);
-    }
+    this.date = now.format(this.panel.dateSettings.dateFormat);
 
     this.time = now.format(this.getTimeFormat());
+
+    if (this.panel.zoneSettings.zoneFormat === 'name' && this.panel.timezone) {
+      this.zone = now._z.name
+    } else if (this.panel.zoneSettings.zoneFormat === 'offsetAbv') {
+      this.zone = now.format('Z z');
+    } else if (this.panel.zoneSettings.zoneFormat === 'offset') {
+      this.zone = now.format('Z');
+    } else if (this.panel.zoneSettings.zoneFormat === 'abv') {
+      this.zone = now.format('z');
+    }
   }
 
   getTimeFormat() {
-    if (this.panel.clockType === '24 hour') {
+    if (this.panel.timeSettings.clockType === '24 hour') {
       return 'HH:mm:ss';
     }
 
-    if (this.panel.clockType === '12 hour') {
+    if (this.panel.timeSettings.clockType === '12 hour') {
       return 'h:mm:ss A';
     }
 
