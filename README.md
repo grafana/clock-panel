@@ -17,6 +17,7 @@ Show the time in another office or show a countdown to an important event.
 - **Timezone**:
 
   This uses the moment-timezone module to provide suppoer for various zones and their offsets. Default is to guess what your local timezone is (whatever that is on your computer).
+  When used for a countdown, this identifies the timezone where the deadline is.  When viewing the panel, your timezone will be guessed to adjust the time remaining accordingly
 
 - **Countdown Deadline**:
 

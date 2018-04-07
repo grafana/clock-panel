@@ -210,8 +210,8 @@ System.register(['app/plugins/sdk', 'moment', 'moment-timezone', 'lodash', './cs
               this.time = this.panel.countdownSettings.endText;
             }
 
-            var now = moment();
-            var timeLeft = moment.duration(moment(this.panel.countdownSettings.endCountdownTime).diff(now));
+            var now = moment().utcOffset(moment.tz.guess());
+            var timeLeft = moment.duration(moment(this.panel.countdownSettings.endCountdownTime).utcOffset(moment.tz(this.panel.timezone).format('Z'), true).diff(now));
             var formattedTimeLeft = '';
 
             if (timeLeft.asSeconds() <= 0) {

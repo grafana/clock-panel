@@ -139,8 +139,8 @@ export class ClockCtrl extends PanelCtrl {
       this.time = this.panel.countdownSettings.endText;
     }
 
-    const now = moment();
-    const timeLeft = moment.duration(moment(this.panel.countdownSettings.endCountdownTime).diff(now));
+    const now = moment().utcOffset(moment.tz.guess());
+    const timeLeft = moment.duration(moment(this.panel.countdownSettings.endCountdownTime).utcOffset(moment.tz(this.panel.timezone).format('Z'), true).diff(now));
     let formattedTimeLeft = '';
 
     if (timeLeft.asSeconds() <= 0) {
