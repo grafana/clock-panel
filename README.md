@@ -28,7 +28,7 @@ Show the time in another office or show a countdown to an important event.
 
 - **Date/Time formatting options**:
 
-  The font size, weight and date/time formatting can be customized here. If the seconds ticking annoys you then change the time format to HH:mm for the 24 hour clock or h:mm A for the 12 hour clock.
+  The font size, weight and date/time formatting can be customized here. If the seconds ticking annoys you then change the time format to HH:mm for the 24 hour clock or h:mm A for the 12 hour clock, or see the [full list of formatting options](https://momentjs.com/docs/#/displaying/).
 
 - **Bg Color**:
 
