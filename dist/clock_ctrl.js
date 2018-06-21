@@ -1,8 +1,6 @@
 'use strict';
 
 System.register(['app/plugins/sdk', 'moment', './external/moment-duration-format', 'lodash', './css/clock-panel.css!'], function (_export, _context) {
-  "use strict";
-
   var PanelCtrl, moment, _, _createClass, panelDefaults, ClockCtrl;
 
   function _classCallCheck(instance, Constructor) {
@@ -92,7 +90,7 @@ System.register(['app/plugins/sdk', 'moment', './external/moment-duration-format
         function ClockCtrl($scope, $injector) {
           _classCallCheck(this, ClockCtrl);
 
-          var _this = _possibleConstructorReturn(this, (ClockCtrl.__proto__ || Object.getPrototypeOf(ClockCtrl)).call(this, $scope, $injector));
+          var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ClockCtrl).call(this, $scope, $injector));
 
           _.defaultsDeep(_this.panel, panelDefaults);
 
