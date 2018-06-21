@@ -1,5 +1,6 @@
 import {PanelCtrl} from 'app/plugins/sdk';
 import moment from 'moment';
+import './external/moment-duration-format';
 import _ from 'lodash';
 import './css/clock-panel.css!';
 
@@ -11,7 +12,8 @@ const panelDefaults = {
   bgColor: null,
   countdownSettings: {
     endCountdownTime: moment().seconds(0).milliseconds(0).add(1, 'day').toDate(),
-    endText: '00:00:00'
+    endText: '00:00:00',
+    customFormat: null
   },
   dateSettings: {
     showDate: false,
@@ -102,6 +104,16 @@ export class ClockCtrl extends PanelCtrl {
 
     if (timeLeft.asSeconds() <= 0) {
       this.time = this.panel.countdownSettings.endText;
+      return;
+    }
+
+    if (this.panel.countdownSettings.customFormat === 'auto') {
+      this.time = timeLeft.format();
+      return;
+    }
+
+    if (this.panel.countdownSettings.customFormat) {
+      this.time = timeLeft.format(this.panel.countdownSettings.customFormat);
       return;
     }
 
