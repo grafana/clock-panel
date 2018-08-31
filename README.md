@@ -4,7 +4,9 @@ The Clock Panel can show the current time or a countdown and updates every secon
 
 Show the time in another office or show a countdown to an important event.
 
-### Options
+### Plugin options
+
+#### Options
 
 - **Mode**:
 
@@ -33,6 +35,12 @@ Show the time in another office or show a countdown to an important event.
 - **Bg Color**:
 
   Choose a background color for the clock with the color picker.
+
+#### Refresh
+  
+- **Sync**:
+
+  Synchronise clock refresh with dashboard.
 
 ### Screenshots
 

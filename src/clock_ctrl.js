@@ -25,6 +25,9 @@ const panelDefaults = {
     customFormat: 'HH:mm:ss',
     fontSize: '60px',
     fontWeight: 'normal'
+  },
+  refreshSettings: {
+    syncWithDashboard: false,
   }
 };
 
@@ -40,12 +43,15 @@ export class ClockCtrl extends PanelCtrl {
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     this.events.on('panel-teardown', this.onPanelTeardown.bind(this));
     this.events.on('panel-initialized', this.render.bind(this));
+    this.events.on('refresh', this.updateClock.bind(this));
+    this.events.on('render', this.updateClock.bind(this))
 
     this.updateClock();
   }
 
   onInitEditMode() {
-    this.addEditorTab('Options', 'public/plugins/grafana-clock-panel/editor.html', 2);
+    this.addEditorTab('Options', 'public/plugins/grafana-clock-panel/editor/options.html', 2);
+    this.addEditorTab('Refresh', 'public/plugins/grafana-clock-panel/editor/refresh.html', 2);
   }
 
   onPanelTeardown() {
@@ -53,13 +59,16 @@ export class ClockCtrl extends PanelCtrl {
   }
 
   updateClock() {
+    this.$timeout.cancel(this.nextTickPromise);
     if (this.panel.mode === 'time') {
       this.renderTime();
     } else {
       this.renderCountdown();
     }
 
-    this.nextTickPromise = this.$timeout(this.updateClock.bind(this), 1000);
+    if (!this.panel.refreshSettings.syncWithDashboard) {
+      this.nextTickPromise = this.$timeout(this.updateClock.bind(this), 1000);
+    }
   }
 
   renderTime() {
