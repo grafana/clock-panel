@@ -40,7 +40,7 @@ Show the time in another office or show a countdown to an important event.
   
 - **Sync**:
 
-  Synchronise clock refresh with dashboard.
+  The clock is paused and only updated when the dashboard refreshes - the clock will show the timestamp for the last refresh.
 
 ### Screenshots
 

@@ -81,6 +81,9 @@ System.register(['app/plugins/sdk', 'moment', './external/moment-duration-format
           customFormat: 'HH:mm:ss',
           fontSize: '60px',
           fontWeight: 'normal'
+        },
+        refreshSettings: {
+          syncWithDashboard: false
         }
       };
 
@@ -101,6 +104,8 @@ System.register(['app/plugins/sdk', 'moment', './external/moment-duration-format
           _this.events.on('init-edit-mode', _this.onInitEditMode.bind(_this));
           _this.events.on('panel-teardown', _this.onPanelTeardown.bind(_this));
           _this.events.on('panel-initialized', _this.render.bind(_this));
+          _this.events.on('refresh', _this.updateClock.bind(_this));
+          _this.events.on('render', _this.updateClock.bind(_this));
 
           _this.updateClock();
           return _this;
@@ -109,7 +114,8 @@ System.register(['app/plugins/sdk', 'moment', './external/moment-duration-format
         _createClass(ClockCtrl, [{
           key: 'onInitEditMode',
           value: function onInitEditMode() {
-            this.addEditorTab('Options', 'public/plugins/grafana-clock-panel/editor.html', 2);
+            this.addEditorTab('Options', 'public/plugins/grafana-clock-panel/editor/options.html', 2);
+            this.addEditorTab('Refresh', 'public/plugins/grafana-clock-panel/editor/refresh.html', 2);
           }
         }, {
           key: 'onPanelTeardown',
@@ -119,13 +125,16 @@ System.register(['app/plugins/sdk', 'moment', './external/moment-duration-format
         }, {
           key: 'updateClock',
           value: function updateClock() {
+            this.$timeout.cancel(this.nextTickPromise);
             if (this.panel.mode === 'time') {
               this.renderTime();
             } else {
               this.renderCountdown();
             }
 
-            this.nextTickPromise = this.$timeout(this.updateClock.bind(this), 1000);
+            if (!this.panel.refreshSettings.syncWithDashboard) {
+              this.nextTickPromise = this.$timeout(this.updateClock.bind(this), 1000);
+            }
           }
         }, {
           key: 'renderTime',
