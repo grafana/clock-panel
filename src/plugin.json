@@ -6,7 +6,7 @@
   "info": {
     "description": "Clock panel for grafana",
     "author": {
-      "name": "GrafanaLabs",
+      "name": "Grafana Labs",
       "url": "https://grafana.com"
     },
     "keywords": ["clock", "panel"],
@@ -22,12 +22,12 @@
       {"name": "Showcase", "path": "img/screenshot-showcase.png"},
       {"name": "Options", "path": "img/screenshot-clock-options.png"}
     ],
-    "version": "0.1.0",
-    "updated": "2018-06-21"
+    "version": "1.0.0",
+    "updated": "2018-11-21"
   },
 
   "dependencies": {
-    "grafanaVersion": "3.x.x",
+    "grafanaVersion": "5.x.x",
     "plugins": [ ]
   }
 }
