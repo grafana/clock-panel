@@ -1,40 +1,50 @@
-import {PanelCtrl} from 'app/plugins/sdk';
+import { PanelCtrl } from 'grafana/app/plugins/sdk';
 import moment from 'moment';
 import './external/moment-duration-format';
 import _ from 'lodash';
-import './css/clock-panel.css!';
-
-const panelDefaults = {
-  mode: 'time',
-  clockType: '24 hour',
-  offsetFromUtc: null,
-  offsetFromUtcMinutes: null,
-  bgColor: null,
-  countdownSettings: {
-    endCountdownTime: moment().seconds(0).milliseconds(0).add(1, 'day').toDate(),
-    endText: '00:00:00',
-    customFormat: null
-  },
-  dateSettings: {
-    showDate: false,
-    dateFormat: 'YYYY-MM-DD',
-    fontSize: '20px',
-    fontWeight: 'normal'
-  },
-  timeSettings: {
-    customFormat: 'HH:mm:ss',
-    fontSize: '60px',
-    fontWeight: 'normal'
-  },
-  refreshSettings: {
-    syncWithDashboard: false,
-  }
-};
+import './css/clock-panel.css';
 
 export class ClockCtrl extends PanelCtrl {
+  static templateUrl = 'partials/module.html';
+
+  panelDefaults = {
+    mode: 'time',
+    clockType: '24 hour',
+    offsetFromUtc: null,
+    offsetFromUtcMinutes: null,
+    bgColor: null,
+    countdownSettings: {
+      endCountdownTime: moment()
+        .seconds(0)
+        .milliseconds(0)
+        .add(1, 'day')
+        .toDate(),
+      endText: '00:00:00',
+      customFormat: null,
+    },
+    dateSettings: {
+      showDate: false,
+      dateFormat: 'YYYY-MM-DD',
+      fontSize: '20px',
+      fontWeight: 'normal',
+    },
+    timeSettings: {
+      customFormat: 'HH:mm:ss',
+      fontSize: '60px',
+      fontWeight: 'normal',
+    },
+    refreshSettings: {
+      syncWithDashboard: false,
+    },
+  };
+  nextTickPromise: any;
+  date: string;
+  time: string;
+
+  /** @ngInject */
   constructor($scope, $injector) {
     super($scope, $injector);
-    _.defaultsDeep(this.panel, panelDefaults);
+    _.defaultsDeep(this.panel, this.panelDefaults);
 
     if (!(this.panel.countdownSettings.endCountdownTime instanceof Date)) {
       this.panel.countdownSettings.endCountdownTime = moment(this.panel.countdownSettings.endCountdownTime).toDate();
@@ -42,16 +52,16 @@ export class ClockCtrl extends PanelCtrl {
 
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     this.events.on('panel-teardown', this.onPanelTeardown.bind(this));
-    this.events.on('panel-initialized', this.render.bind(this));
+    this.events.on('component-did-mount', this.render.bind(this));
     this.events.on('refresh', this.updateClock.bind(this));
-    this.events.on('render', this.updateClock.bind(this))
+    this.events.on('render', this.updateClock.bind(this));
 
     this.updateClock();
   }
 
   onInitEditMode() {
-    this.addEditorTab('Options', 'public/plugins/grafana-clock-panel/editor/options.html', 2);
-    this.addEditorTab('Refresh', 'public/plugins/grafana-clock-panel/editor/refresh.html', 2);
+    this.addEditorTab('Options', 'public/plugins/grafana-clock-panel/partials/options.html', 2);
+    this.addEditorTab('Refresh', 'public/plugins/grafana-clock-panel/partials/refresh.html', 2);
   }
 
   onPanelTeardown() {
@@ -75,7 +85,8 @@ export class ClockCtrl extends PanelCtrl {
     let now;
 
     if (this.panel.offsetFromUtc && this.panel.offsetFromUtcMinutes) {
-      const offsetInMinutes = (parseInt(this.panel.offsetFromUtc, 10) * 60) + parseInt(this.panel.offsetFromUtcMinutes, 10);
+      const offsetInMinutes =
+        parseInt(this.panel.offsetFromUtc, 10) * 60 + parseInt(this.panel.offsetFromUtcMinutes, 10);
       now = moment().utcOffset(offsetInMinutes);
     } else if (this.panel.offsetFromUtc && !this.panel.offsetFromUtcMinutes) {
       now = moment().utcOffset(parseInt(this.panel.offsetFromUtc, 10));
@@ -117,12 +128,12 @@ export class ClockCtrl extends PanelCtrl {
     }
 
     if (this.panel.countdownSettings.customFormat === 'auto') {
-      this.time = timeLeft.format();
+      this.time = (timeLeft as any).format();
       return;
     }
 
     if (this.panel.countdownSettings.customFormat) {
-      this.time = timeLeft.format(this.panel.countdownSettings.customFormat);
+      this.time = (timeLeft as any).format(this.panel.countdownSettings.customFormat);
       return;
     }
 
@@ -165,5 +176,3 @@ export class ClockCtrl extends PanelCtrl {
     });
   }
 }
-
-ClockCtrl.templateUrl = 'module.html';
