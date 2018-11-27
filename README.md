@@ -52,10 +52,11 @@ Show the time in another office or show a countdown to an important event.
 Using Docker:
 
 1. Clone the repository and `cd` to it
+1. make sure you have [npm](https://www.npmjs.com/) installed
+1. install project dependencies: `npm install .`
+1. Start the "watch" task: `npm run watch`
 1. Run a local Grafana instance with the development version of the plugin: `docker run -p 3000:3000 -d --name grafana-plugin-dev --volume $(pwd)/dist:/var/lib/grafana/plugins/clock-panel grafana/grafana`
 1. Check the logs to see that Grafana has started up: `docker logs -f grafana-plugin-dev`
-1. Make sure you have https://github.com/gruntjs/grunt-cli installed
-1. Start the "watch" task: `grunt watch`
 1. Open Grafana at http://localhost:3000/
 1. Log in with username "admin" and password "admin"
 1. Create new dashboard and add the plugin
