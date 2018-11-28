@@ -52,7 +52,7 @@ Show the time in another office or show a countdown to an important event.
 Using Docker:
 
 1. Clone the repository and `cd` to it
-1. make sure you have [npm](https://www.npmjs.com/) installed
+1. make sure you have [yarn]( https://yarnpkg.com/) installed
 1. install project dependencies: `yarn install --pure-lockfile`
 1. Start the "watch" task: `npm run watch`
 1. Run a local Grafana instance with the development version of the plugin: `docker run -p 3000:3000 -d --name grafana-plugin-dev --volume $(pwd)/dist:/var/lib/grafana/plugins/clock-panel grafana/grafana`
