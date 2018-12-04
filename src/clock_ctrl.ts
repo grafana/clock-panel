@@ -52,6 +52,7 @@ export class ClockCtrl extends PanelCtrl {
 
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     this.events.on('panel-teardown', this.onPanelTeardown.bind(this));
+    this.events.on('panel-initialized', this.render.bind(this));
     this.events.on('component-did-mount', this.render.bind(this));
     this.events.on('refresh', this.updateClock.bind(this));
     this.events.on('render', this.updateClock.bind(this));
