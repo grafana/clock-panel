@@ -22,8 +22,8 @@
       {"name": "Showcase", "path": "img/screenshot-showcase.png"},
       {"name": "Options", "path": "img/screenshot-clock-options.png"}
     ],
-    "version": "1.0.0",
-    "updated": "2018-11-21"
+    "version": "1.0.1",
+    "updated": "2018-12-03"
   },
 
   "dependencies": {
