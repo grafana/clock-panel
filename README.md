@@ -61,7 +61,13 @@ Using Docker:
 1. Log in with username "admin" and password "admin"
 1. Create new dashboard and add the plugin
 
+To build a production build with minification: `yarn build`
+
 #### Changelog
+
+##### v1.0.1
+
+- Updates Lodash dependency to fix security warning
 
 ##### v1.0.0
 
