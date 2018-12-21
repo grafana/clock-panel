@@ -78,7 +78,10 @@ export class ClockCtrl extends PanelCtrl {
     }
 
     if (!this.panel.refreshSettings.syncWithDashboard) {
-      this.nextTickPromise = this.$timeout(this.updateClock.bind(this), 1000);
+      const now = moment();
+      const waitTime = 1000;
+      const msTillUpdate = waitTime - now.toObject().milliseconds;
+      this.nextTickPromise = this.$timeout(this.updateClock.bind(this), msTillUpdate);
     }
   }
 
