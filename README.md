@@ -1,4 +1,5 @@
 ## Clock Panel Plugin for Grafana
+[![CircleCI](https://circleci.com/gh/grafana/clock-panel.svg?style=svg)](https://circleci.com/gh/grafana/clock-panel)
 
 The Clock Panel can show the current time or a countdown and updates every second.
 
