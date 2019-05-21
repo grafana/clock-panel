@@ -1,5 +1,5 @@
 import { PanelCtrl } from 'grafana/app/plugins/sdk';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import './external/moment-duration-format';
 import _ from 'lodash';
 import './css/clock-panel.css';
@@ -7,11 +7,11 @@ import './css/clock-panel.css';
 export class ClockCtrl extends PanelCtrl {
   static templateUrl = 'partials/module.html';
 
+  timezones = moment.tz.names();
   panelDefaults = {
     mode: 'time',
     clockType: '24 hour',
-    offsetFromUtc: null,
-    offsetFromUtcMinutes: null,
+    timezone: null,
     bgColor: null,
     countdownSettings: {
       endCountdownTime: moment()
@@ -31,6 +31,11 @@ export class ClockCtrl extends PanelCtrl {
     timeSettings: {
       customFormat: 'HH:mm:ss',
       fontSize: '60px',
+      fontWeight: 'normal',
+    },
+    timezoneSettings: {
+      showTimezone: false,
+      fontSize: '12px',
       fontWeight: 'normal',
     },
     refreshSettings: {
@@ -85,14 +90,10 @@ export class ClockCtrl extends PanelCtrl {
   renderTime() {
     let now;
 
-    if (this.panel.offsetFromUtc && this.panel.offsetFromUtcMinutes) {
-      const offsetInMinutes =
-        parseInt(this.panel.offsetFromUtc, 10) * 60 + parseInt(this.panel.offsetFromUtcMinutes, 10);
-      now = moment().utcOffset(offsetInMinutes);
-    } else if (this.panel.offsetFromUtc && !this.panel.offsetFromUtcMinutes) {
-      now = moment().utcOffset(parseInt(this.panel.offsetFromUtc, 10));
+    if (this.panel.timezone) {
+      now = moment().tz(this.panel.timezone);
     } else {
-      now = moment();
+      now = moment().tz(moment.tz.guess());
     }
 
     if (this.panel.dateSettings.showDate) {
@@ -119,7 +120,7 @@ export class ClockCtrl extends PanelCtrl {
       this.time = this.panel.countdownSettings.endText;
     }
 
-    const now = moment();
+    const now = moment().tz(moment.tz.guess());
     const timeLeft = moment.duration(moment(this.panel.countdownSettings.endCountdownTime).diff(now));
     let formattedTimeLeft = '';
 
