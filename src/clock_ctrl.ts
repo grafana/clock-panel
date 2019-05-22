@@ -87,14 +87,16 @@ export class ClockCtrl extends PanelCtrl {
     }
   }
 
-  renderTime() {
-    let now;
-
+  tz() {
     if (this.panel.timezone) {
-      now = moment().tz(this.panel.timezone);
+      return this.panel.timezone;
     } else {
-      now = moment().tz(moment.tz.guess());
+      return moment.tz.guess();
     }
+  }
+
+  renderTime() {
+    let now = moment().tz(this.tz());
 
     if (this.panel.dateSettings.showDate) {
       this.date = now.format(this.panel.dateSettings.dateFormat);
@@ -120,8 +122,8 @@ export class ClockCtrl extends PanelCtrl {
       this.time = this.panel.countdownSettings.endText;
     }
 
-    const now = moment().tz(moment.tz.guess());
-    const timeLeft = moment.duration(moment(this.panel.countdownSettings.endCountdownTime).diff(now));
+    const now = moment().tz(this.tz());
+    const timeLeft = moment.duration(moment(this.panel.countdownSettings.endCountdownTime).utcOffset(moment.tz(this.tz()).format('Z'), true).diff(now));
     let formattedTimeLeft = '';
 
     if (timeLeft.asSeconds() <= 0) {
