@@ -4,3 +4,7 @@
   justify-content: center;
   flex-direction: column;
 }
+
+.clock-panel h4 {
+  line-height: 1.4;
+}

@@ -104,7 +104,7 @@ export class ClockCtrl extends PanelCtrl {
     if (this.panel.timezoneSettings.zoneFormat === 'name') {
       this.zone = now._z.name
     } else if (this.panel.timezoneSettings.zoneFormat === 'nameOffset') {
-      this.zone = `${now._z.name}` + '\n' + `(${now.format('Z z')})`;
+      this.zone = `${now._z.name}` + '<br />' + `(${now.format('Z z')})`;
     } else if (this.panel.timezoneSettings.zoneFormat === 'offsetAbbv') {
       this.zone = now.format('Z z');
     } else if (this.panel.timezoneSettings.zoneFormat === 'offset') {
