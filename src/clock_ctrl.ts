@@ -92,7 +92,7 @@ export class ClockCtrl extends PanelCtrl {
   tz() {
     let timezone = '',
         now;
-        
+
     if (this.panel.timezone) {
       timezone = this.panel.timezone;
     } else {
@@ -101,10 +101,10 @@ export class ClockCtrl extends PanelCtrl {
     
     now = moment().tz(timezone);
     
-    if (this.panel.timezoneSettings.zoneFormat === 'name' && this.panel.timezone) {
+    if (this.panel.timezoneSettings.zoneFormat === 'name') {
       this.zone = now._z.name
     } else if (this.panel.timezoneSettings.zoneFormat === 'nameOffset') {
-      this.zone = `${now._z.name}  (${now.format('Z z')})`;
+      this.zone = `${now._z.name}` + '\n' + `(${now.format('Z z')})`;
     } else if (this.panel.timezoneSettings.zoneFormat === 'offsetAbbv') {
       this.zone = now.format('Z z');
     } else if (this.panel.timezoneSettings.zoneFormat === 'offset') {
