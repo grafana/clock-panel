@@ -35,6 +35,7 @@ export class ClockCtrl extends PanelCtrl {
     },
     timezoneSettings: {
       showTimezone: false,
+      zoneFormat: 'offsetAbbv',
       fontSize: '12px',
       fontWeight: 'normal',
     },
@@ -45,6 +46,7 @@ export class ClockCtrl extends PanelCtrl {
   nextTickPromise: any;
   date: string;
   time: string;
+  zone: string;
 
   /** @ngInject */
   constructor($scope, $injector) {
@@ -88,11 +90,30 @@ export class ClockCtrl extends PanelCtrl {
   }
 
   tz() {
+    let timezone = '',
+        now;
+        
     if (this.panel.timezone) {
-      return this.panel.timezone;
+      timezone = this.panel.timezone;
     } else {
-      return moment.tz.guess();
+      timezone = moment.tz.guess();
     }
+    
+    now = moment().tz(timezone);
+    
+    if (this.panel.timezoneSettings.zoneFormat === 'name' && this.panel.timezone) {
+      this.zone = now._z.name
+    } else if (this.panel.timezoneSettings.zoneFormat === 'nameOffset') {
+      this.zone = `${now._z.name}  (${now.format('Z z')})`;
+    } else if (this.panel.timezoneSettings.zoneFormat === 'offsetAbbv') {
+      this.zone = now.format('Z z');
+    } else if (this.panel.timezoneSettings.zoneFormat === 'offset') {
+      this.zone = now.format('Z');
+    } else if (this.panel.timezoneSettings.zoneFormat === 'abbv') {
+      this.zone = now.format('z');
+    }
+
+    return timezone;
   }
 
   renderTime() {

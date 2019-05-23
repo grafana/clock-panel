@@ -88,14 +88,20 @@
 				<select class="input-small gf-form-input" ng-model="ctrl.panel.timezone" ng-options="t as t for t in ctrl.timezones" ng-change="ctrl.render()"></select>
 			</div>
 		</div>
-		<gf-form-switch class="gf-form" label="Show" label-class="width-8" checked="ctrl.panel.timezoneSettings.showTimezone" on-change="ctrl.render()"></gf-form-switch>
+		<gf-form-switch class="gf-form" label="Show" label-class="width-10" checked="ctrl.panel.timezoneSettings.showTimezone" on-change="ctrl.render()"></gf-form-switch>
 		<div class="gf-form">
-			<label class="gf-form-label width-8">Font Size</label>
-			<input type="text" class="input-small gf-form-input max-width-10" ng-model="ctrl.panel.timezoneSettings.fontSize" ng-change="ctrl.render()" ng-model-onblur>
+			<label class="gf-form-label width-10">Display Format</label>
+			<span class="gf-form-select-wrapper max-width-12">
+				<select class="input-small gf-form-input " ng-model="ctrl.panel.timezoneSettings.zoneFormat"																		 ng-options="t.value as t.label for t in [{label: 'Zone name', value: 'name'}, {label: 'Zone name + Offset', value: 'nameOffset'}, {label: 'Offset + Abbreviation', value: 'offsetAbbv'}, {label: 'Offset', value: 'offset'}, {label: 'Abbreviation', value: 'abbv'}]" ng-change="ctrl.render()"></select>
+			</span>
 		</div>
 		<div class="gf-form">
-			<label class="gf-form-label width-8">Font Weight</label>
-			<span class="gf-form-select-wrapper max-width-10">
+			<label class="gf-form-label width-10">Font Size</label>
+			<input type="text" class="input-small gf-form-input max-width-12" ng-model="ctrl.panel.timezoneSettings.fontSize" ng-change="ctrl.render()" ng-model-onblur>
+		</div>
+		<div class="gf-form">
+			<label class="gf-form-label width-10">Font Weight</label>
+			<span class="gf-form-select-wrapper max-width-12">
 				<select class="input-small gf-form-input " ng-model="ctrl.panel.timezoneSettings.fontWeight" ng-options="t for t in ['normal', 'bold']" ng-change="ctrl.render()"></select>
 			</span>
 		</div>
