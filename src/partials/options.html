@@ -18,35 +18,26 @@
 	<div class="section gf-form-group" ng-if="ctrl.panel.mode === 'time'">
 		<h5 class="section-heading">Time format</h5>
 		<div class="gf-form">
-			<label class="gf-form-label width-12">12 or 24 hour</label>
-			<div class="gf-form-select-wrapper max-width-9">
+			<label class="gf-form-label width-10">12 or 24 hour</label>
+			<div class="gf-form-select-wrapper max-width-12">
 				<select class="input-small gf-form-input" ng-model="ctrl.panel.clockType" ng-options="t for t in ['12 hour', '24 hour', 'custom']" ng-change="ctrl.render()"></select>
 			</div>
 		</div>
-    <div class="gf-form" ng-show="ctrl.panel.clockType === 'custom'">
-			<label class="gf-form-label width-12">Custom format</label>
-			<input type="text" class="input-small gf-form-input width-9" ng-model="ctrl.panel.timeSettings.customFormat" ng-change="ctrl.render()" ng-model-onblur />
+    	<div class="gf-form" ng-show="ctrl.panel.clockType === 'custom'">
+			<label class="gf-form-label width-10">Custom format</label>
+			<input type="text" class="input-small gf-form-input width-12" ng-model="ctrl.panel.timeSettings.customFormat" ng-change="ctrl.render()" ng-model-onblur />
 		</div>
 		<div class="gf-form">
-			<label class="gf-form-label width-12">Offset from UTC (hours)</label>
-			<input type="text" class="input-small gf-form-input max-width-9" placeholder="+/- hours" ng-model="ctrl.panel.offsetFromUtc" ng-change="ctrl.render()" ng-model-onblur />
+			<label class="gf-form-label width-10">Font Size</label>
+			<input type="text" class="input-small gf-form-input width-12" ng-model="ctrl.panel.timeSettings.fontSize" ng-change="ctrl.render()" ng-model-onblur />
 		</div>
 		<div class="gf-form">
-			<label class="gf-form-label width-12">Offset from UTC (mins)</label>
-			<input type="text" class="input-small gf-form-input max-width-9" placeholder="+/- minutes" ng-model="ctrl.panel.offsetFromUtcMinutes" ng-change="ctrl.render()" ng-model-onblur />
-		</div>
-		<div class="gf-form">
-			<label class="gf-form-label width-12">Font Size</label>
-			<input type="text" class="input-small gf-form-input width-9" ng-model="ctrl.panel.timeSettings.fontSize" ng-change="ctrl.render()" ng-model-onblur />
-		</div>
-		<div class="gf-form">
-			<label class="gf-form-label width-12">Font Weight</label>
-			<span class="gf-form-select-wrapper max-width-9">
+			<label class="gf-form-label width-10">Font Weight</label>
+			<span class="gf-form-select-wrapper max-width-12">
 				<select class="input-small gf-form-input " ng-model="ctrl.panel.timeSettings.fontWeight"
 																							 ng-options="t for t in ['normal', 'bold']" ng-change="ctrl.render()"></select>
 			</span>
 		</div>
-
 	</div>
 
 	<div class="section gf-form-group" ng-if="ctrl.panel.mode === 'countdown'">
@@ -89,6 +80,33 @@
 		</div>
 	</div>
 
+	<div class="section gf-form-group">
+		<h5 class="section-heading">Timezone</h5>
+		<div class="gf-form">
+			<label class="gf-form-label width-10">Timezone</label>
+			<div class="gf-form-select-wrapper max-width-12">
+				<select class="input-small gf-form-input" ng-model="ctrl.panel.timezone" ng-options="t as t for t in ctrl.timezones" ng-change="ctrl.render()"></select>
+			</div>
+		</div>
+		<gf-form-switch class="gf-form" label="Show" label-class="width-10" checked="ctrl.panel.timezoneSettings.showTimezone" on-change="ctrl.render()"></gf-form-switch>
+		<div class="gf-form">
+			<label class="gf-form-label width-10">Display Format</label>
+			<span class="gf-form-select-wrapper max-width-12">
+				<select class="input-small gf-form-input " ng-model="ctrl.panel.timezoneSettings.zoneFormat"																		 ng-options="t.value as t.label for t in [{label: 'Zone name', value: 'name'}, {label: 'Zone name + Offset', value: 'nameOffset'}, {label: 'Offset + Abbreviation', value: 'offsetAbbv'}, {label: 'Offset', value: 'offset'}, {label: 'Abbreviation', value: 'abbv'}]" ng-change="ctrl.render()"></select>
+			</span>
+		</div>
+		<div class="gf-form">
+			<label class="gf-form-label width-10">Font Size</label>
+			<input type="text" class="input-small gf-form-input max-width-12" ng-model="ctrl.panel.timezoneSettings.fontSize" ng-change="ctrl.render()" ng-model-onblur>
+		</div>
+		<div class="gf-form">
+			<label class="gf-form-label width-10">Font Weight</label>
+			<span class="gf-form-select-wrapper max-width-12">
+				<select class="input-small gf-form-input " ng-model="ctrl.panel.timezoneSettings.fontWeight" ng-options="t for t in ['normal', 'bold']" ng-change="ctrl.render()"></select>
+			</span>
+		</div>
+	</div>
+	
 	<div class="section gf-form-group" ng-if="ctrl.panel.mode === 'time'">
 		<h5 class="section-heading">Date options</h5>
 

@@ -1,5 +1,5 @@
 import { PanelCtrl } from 'grafana/app/plugins/sdk';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import './external/moment-duration-format';
 import _ from 'lodash';
 import './css/clock-panel.css';
@@ -7,11 +7,11 @@ import './css/clock-panel.css';
 export class ClockCtrl extends PanelCtrl {
   static templateUrl = 'partials/module.html';
 
+  timezones = moment.tz.names();
   panelDefaults = {
     mode: 'time',
     clockType: '24 hour',
-    offsetFromUtc: null,
-    offsetFromUtcMinutes: null,
+    timezone: null,
     bgColor: null,
     countdownSettings: {
       endCountdownTime: moment()
@@ -33,6 +33,12 @@ export class ClockCtrl extends PanelCtrl {
       fontSize: '60px',
       fontWeight: 'normal',
     },
+    timezoneSettings: {
+      showTimezone: false,
+      zoneFormat: 'offsetAbbv',
+      fontSize: '12px',
+      fontWeight: 'normal',
+    },
     refreshSettings: {
       syncWithDashboard: false,
     },
@@ -40,6 +46,7 @@ export class ClockCtrl extends PanelCtrl {
   nextTickPromise: any;
   date: string;
   time: string;
+  zone: string;
 
   /** @ngInject */
   constructor($scope, $injector) {
@@ -82,18 +89,35 @@ export class ClockCtrl extends PanelCtrl {
     }
   }
 
-  renderTime() {
-    let now;
+  tz() {
+    let timezone = '',
+        now;
 
-    if (this.panel.offsetFromUtc && this.panel.offsetFromUtcMinutes) {
-      const offsetInMinutes =
-        parseInt(this.panel.offsetFromUtc, 10) * 60 + parseInt(this.panel.offsetFromUtcMinutes, 10);
-      now = moment().utcOffset(offsetInMinutes);
-    } else if (this.panel.offsetFromUtc && !this.panel.offsetFromUtcMinutes) {
-      now = moment().utcOffset(parseInt(this.panel.offsetFromUtc, 10));
+    if (this.panel.timezone) {
+      timezone = this.panel.timezone;
     } else {
-      now = moment();
+      timezone = moment.tz.guess();
     }
+    
+    now = moment().tz(timezone);
+    
+    if (this.panel.timezoneSettings.zoneFormat === 'name') {
+      this.zone = now._z.name
+    } else if (this.panel.timezoneSettings.zoneFormat === 'nameOffset') {
+      this.zone = `${now._z.name}` + '<br />' + `(${now.format('Z z')})`;
+    } else if (this.panel.timezoneSettings.zoneFormat === 'offsetAbbv') {
+      this.zone = now.format('Z z');
+    } else if (this.panel.timezoneSettings.zoneFormat === 'offset') {
+      this.zone = now.format('Z');
+    } else if (this.panel.timezoneSettings.zoneFormat === 'abbv') {
+      this.zone = now.format('z');
+    }
+
+    return timezone;
+  }
+
+  renderTime() {
+    let now = moment().tz(this.tz());
 
     if (this.panel.dateSettings.showDate) {
       this.date = now.format(this.panel.dateSettings.dateFormat);
@@ -119,8 +143,8 @@ export class ClockCtrl extends PanelCtrl {
       this.time = this.panel.countdownSettings.endText;
     }
 
-    const now = moment();
-    const timeLeft = moment.duration(moment(this.panel.countdownSettings.endCountdownTime).diff(now));
+    const now = moment().tz(this.tz());
+    const timeLeft = moment.duration(moment(this.panel.countdownSettings.endCountdownTime).utcOffset(moment.tz(this.tz()).format('Z'), true).diff(now));
     let formattedTimeLeft = '';
 
     if (timeLeft.asSeconds() <= 0) {
