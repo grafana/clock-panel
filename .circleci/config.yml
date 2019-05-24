@@ -90,7 +90,7 @@ jobs:
           path: coverage
 
   publish-github-release:
-    working_directory: ~/grafana-dynatrace-datasource
+    working_directory: ~/grafana-clock-panel
     docker:
       - image: cibuilds/github:0.12
     steps:
