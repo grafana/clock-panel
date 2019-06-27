@@ -44,12 +44,12 @@ export class ClockCtrl extends PanelCtrl {
     },
   };
   nextTickPromise: any;
-  date: string;
-  time: string;
-  zone: string;
+  date = '';
+  time = '';
+  zone = '';
 
   /** @ngInject */
-  constructor($scope, $injector) {
+  constructor($scope: any, $injector: any) {
     super($scope, $injector);
     _.defaultsDeep(this.panel, this.panelDefaults);
 
@@ -98,13 +98,15 @@ export class ClockCtrl extends PanelCtrl {
     } else {
       timezone = moment.tz.guess();
     }
-    
+
     now = moment().tz(timezone);
-    
+
+    const tzname = (now as any)._z.name;
+
     if (this.panel.timezoneSettings.zoneFormat === 'name') {
-      this.zone = now._z.name
+      this.zone = tzname;
     } else if (this.panel.timezoneSettings.zoneFormat === 'nameOffset') {
-      this.zone = `${now._z.name}` + '<br />' + `(${now.format('Z z')})`;
+      this.zone = `${tzname}` + '<br />' + `(${now.format('Z z')})`;
     } else if (this.panel.timezoneSettings.zoneFormat === 'offsetAbbv') {
       this.zone = now.format('Z z');
     } else if (this.panel.timezoneSettings.zoneFormat === 'offset') {
@@ -117,7 +119,7 @@ export class ClockCtrl extends PanelCtrl {
   }
 
   renderTime() {
-    let now = moment().tz(this.tz());
+    const now = moment().tz(this.tz());
 
     if (this.panel.dateSettings.showDate) {
       this.date = now.format(this.panel.dateSettings.dateFormat);
@@ -144,7 +146,10 @@ export class ClockCtrl extends PanelCtrl {
     }
 
     const now = moment().tz(this.tz());
-    const timeLeft = moment.duration(moment(this.panel.countdownSettings.endCountdownTime).utcOffset(moment.tz(this.tz()).format('Z'), true).diff(now));
+    const timeLeft = moment.duration(
+      moment(this.panel.countdownSettings.endCountdownTime)
+        .utcOffset(moment.tz(this.tz()).format('Z'), true)
+        .diff(now));
     let formattedTimeLeft = '';
 
     if (timeLeft.asSeconds() <= 0) {
@@ -189,7 +194,7 @@ export class ClockCtrl extends PanelCtrl {
     this.time = formattedTimeLeft;
   }
 
-  link(scope, elem) {
+  link(scope: any, elem: any) {
     this.events.on('render', () => {
       const $panelContainer = elem.find('.panel-container');
 
