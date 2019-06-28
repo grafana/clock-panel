@@ -22,12 +22,12 @@
     "@types/jest": "^24.0.13",
     "@types/lodash": "4.14.132",
     "@types/moment-timezone": "^0.5.12",
-    "jest": "^24.8.0",
     "lodash": "4.17.11",
     "moment": "2.24.0",
     "moment-timezone": "0.5.25",
-    "ts-jest": "^24.0.2",
-    "tslib": "^1.10.0",
-    "typescript": "^3.5.2"
+    "jest": "24.8.0",
+    "ts-jest": "24.0.2",
+    "tslib": "1.10.0",
+    "typescript": "3.5.1"
   }
 }
