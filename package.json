@@ -18,6 +18,7 @@
   "author": "Grafana Labs",
   "license": "MIT",
   "devDependencies": {
+    "@grafana/toolkit": "next",
     "@types/grafana": "https://git@github.com/CorpGlory/types-grafana.git",
     "@types/jest": "^24.0.13",
     "@types/lodash": "4.14.132",
@@ -29,5 +30,13 @@
     "ts-jest": "^24.0.2",
     "tslib": "^1.10.0",
     "typescript": "^3.5.2"
+  },
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^1.0.0",
+    "style-loader": "^0.22",
+    "ts-loader": "^6.0.4"
   }
 }
