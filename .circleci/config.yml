@@ -1,32 +1,60 @@
 version: 2
+
 jobs:
-  build:
+  build_frontend:
     docker:
-      # specify the version you desire here
       - image: circleci/node:10
-
-    working_directory: ~/plugin
-
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: install yarn
-          command: 'sudo npm install -g yarn --quiet'
-      - run:
-          name: install dependencies
-          command: 'yarn install --pure-lockfile'
-      - run:
-          name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci'
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-      - store_artifacts:
-          path: artifacts
-      - store_artifacts:
-          path: dist
+      - run: echo build frontend
+  build_backend:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: echo build backend
+  bundle:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: echo bundle
+  test_master:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: echo test master
+  test_latest:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: echo test latest
+  deploy:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: echo deploy
+
+workflows:
+  version: 2
+  build_bundle_test_deploy:
+    jobs:
+      - build_frontend
+      - build_backend
+      - bundle:
+          requires:
+            - build_frontend
+            - build_backend
+      - test_master:
+          requires:
+            - bundle
+      - test_latest:
+          requires:
+            - bundle
+      - deploy:
+          requires:
+            - test_master
+            - test_latest
