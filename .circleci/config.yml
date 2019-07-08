@@ -82,11 +82,13 @@ jobs:
           root: .
           paths:
             - build/*
+      - store_artifacts:
+          path: build/artifacts
 
   test_master:
     docker:
       - image: circleci/node:10-browsers
-      - image: grafana/master
+      - image: grafana/grafana:master
     working_directory: ~/plugin
     steps:
       - checkout
@@ -112,7 +114,7 @@ jobs:
   test_latest:
     docker:
       - image: circleci/node:10-browsers
-      - image: grafana/latest
+      - image: grafana/grafana:latest
     working_directory: ~/plugin
     steps:
       - checkout
