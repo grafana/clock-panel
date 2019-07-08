@@ -53,10 +53,10 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-      - persist_to_workspace:
-          root: .
-          paths:
-            - build/*
+      # - persist_to_workspace:
+      #     root: .
+      #     paths:
+      #       - build/*
 
   bundle:
     docker:
