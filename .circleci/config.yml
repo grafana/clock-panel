@@ -47,7 +47,7 @@ jobs:
           command: 'yarn install --pure-lockfile'
       - run:
           name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci-build --platform XXX'
+          command: echo TODO... build backend #'npx grafana-toolkit plugin:ci-build --platform XXX'
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
@@ -64,6 +64,8 @@ jobs:
     working_directory: ~/plugin
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
@@ -88,6 +90,8 @@ jobs:
     working_directory: ~/plugin
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
@@ -112,6 +116,8 @@ jobs:
     working_directory: ~/plugin
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
@@ -135,6 +141,8 @@ jobs:
     working_directory: ~/plugin
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
