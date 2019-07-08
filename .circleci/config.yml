@@ -19,7 +19,7 @@ jobs:
           command: 'yarn install --pure-lockfile'
       - run:
           name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci --build'
+          command: 'npx grafana-toolkit plugin:ci-build'
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
@@ -28,16 +28,35 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - dist/*
             - build/*
-            - artifacts/*
 
   build_backend:
     docker:
       - image: circleci/node:10
+    working_directory: ~/plugin
     steps:
       - checkout
-      - run: echo TODO build backend?
+      - restore_cache:
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: install yarn
+          command: 'sudo npm install -g yarn --quiet'
+      - run:
+          name: install dependencies
+          command: 'yarn install --pure-lockfile'
+      - run:
+          name: Run Toolkit CI
+          command: 'npx grafana-toolkit plugin:ci-build --platform XXX'
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build/*
 
   bundle:
     docker:
@@ -56,12 +75,11 @@ jobs:
           command: 'yarn install --pure-lockfile'
       - run:
           name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci --bundle'
+          command: 'npx grafana-toolkit plugin:ci-bundle'
       - persist_to_workspace:
           root: .
           paths:
             - build/*
-            - artifacts/*
 
   test_master:
     docker:
@@ -81,7 +99,7 @@ jobs:
           command: 'yarn install --pure-lockfile'
       - run:
           name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci --test'
+          command: 'npx grafana-toolkit plugin:ci-test'
       - persist_to_workspace:
           root: .
           paths:
@@ -105,7 +123,7 @@ jobs:
           command: 'yarn install --pure-lockfile'
       - run:
           name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci --test'
+          command: 'npx grafana-toolkit plugin:ci-test'
       - persist_to_workspace:
           root: .
           paths:
@@ -128,11 +146,10 @@ jobs:
           command: 'yarn install --pure-lockfile'
       - run:
           name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci --deploy'
-      - persist_to_workspace:
-          root: .
-          paths:
-            - build/*
+          command: 'npx grafana-toolkit plugin:ci-deploy'
+      - store_artifacts:
+          path: build/artifacts
+
 
 workflows:
   version: 2
