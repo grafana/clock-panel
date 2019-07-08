@@ -16,8 +16,8 @@
   "author": "Grafana Labs",
   "license": "MIT",
   "devDependencies": {
+    "@grafana/toolkit": "next",
     "@types/grafana": "https://git@github.com/CorpGlory/types-grafana.git",
-    "@grafana/toolkit": "latest",
     "@types/lodash": "4.14.132",
     "@types/moment-timezone": "^0.5.12",
     "lodash": "4.17.11",

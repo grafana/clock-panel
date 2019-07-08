@@ -81,7 +81,7 @@ jobs:
           command: 'yarn install --pure-lockfile'
       - run:
           name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci --e2e'
+          command: 'npx grafana-toolkit plugin:ci --test'
       - persist_to_workspace:
           root: .
           paths:
@@ -105,7 +105,7 @@ jobs:
           command: 'yarn install --pure-lockfile'
       - run:
           name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci --e2e'
+          command: 'npx grafana-toolkit plugin:ci --test'
       - persist_to_workspace:
           root: .
           paths:
