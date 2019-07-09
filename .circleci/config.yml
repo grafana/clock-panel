@@ -88,7 +88,6 @@ jobs:
   test_master:
     docker:
       - image: circleci/node:10-browsers
-      - image: grafana/grafana:master
     working_directory: ~/plugin
     steps:
       - checkout
@@ -97,6 +96,12 @@ jobs:
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
+      - run: |
+        docker run
+          -d
+          -p 3000:3000
+          --name grafana
+          grafana/grafana:master
       - run:
           name: install yarn
           command: 'sudo npm install -g yarn --quiet'
@@ -114,7 +119,6 @@ jobs:
   test_latest:
     docker:
       - image: circleci/node:10-browsers
-      - image: grafana/grafana:latest
     working_directory: ~/plugin
     steps:
       - checkout
@@ -123,6 +127,12 @@ jobs:
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
+      - run: |
+        docker run
+          -d
+          -p 3000:3000
+          --name grafana
+          grafana/grafana:latest
       - run:
           name: install yarn
           command: 'sudo npm install -g yarn --quiet'
