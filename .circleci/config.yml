@@ -101,6 +101,12 @@ jobs:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
+          name: install yarn
+          command: 'sudo npm install -g yarn --quiet'
+      - run:
+          name: install dependencies
+          command: 'yarn install --pure-lockfile'
+      - run:
           name: Wait for docker image
           command: dockerize -wait tcp://127.0.0.1:3000 -timeout 120s
       - run:
