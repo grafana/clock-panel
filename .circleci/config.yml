@@ -88,6 +88,7 @@ jobs:
   test_master:
     docker:
       - image: circleci/node:10-browsers
+      - image: grafana/grafana:master
     working_directory: ~/plugin
     environment:
       GRAFANA_URL: http://127.0.0.1:3000
@@ -99,14 +100,6 @@ jobs:
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Run Grafana Docker
-          command: >
-            docker run \
-              -d \
-              -p 3000:3000 \
-              --name grafana \
-              grafana/grafana:latest
       - run:
           name: Wait for docker image
           command: dockerize -wait tcp://127.0.0.1:3000 -timeout 120s
