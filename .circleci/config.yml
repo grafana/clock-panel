@@ -90,6 +90,7 @@ jobs:
       - image: circleci/node:10-browsers
     working_directory: ~/plugin
     steps:
+      - setup_remote_docker
       - checkout
       - attach_workspace:
           at: .
@@ -122,6 +123,7 @@ jobs:
     working_directory: ~/plugin
     steps:
       - checkout
+      - setup_remote_docker
       - attach_workspace:
           at: .
       - restore_cache:
