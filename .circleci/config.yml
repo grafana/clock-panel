@@ -47,7 +47,7 @@ jobs:
           command: 'yarn install --pure-lockfile'
       - run:
           name: Run Toolkit CI
-          command: npx grafana-toolkit plugin:ci-build --platform XXX'
+          command: npx grafana-toolkit plugin:ci-build --platform XXX
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
