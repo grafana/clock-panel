@@ -655,9 +655,9 @@
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
 "@grafana/toolkit@next":
-  version "6.3.0-alpha.34"
-  resolved "https://registry.yarnpkg.com/@grafana/toolkit/-/toolkit-6.3.0-alpha.34.tgz#4f304a2aa8ad5c769bf9289488cc97d1b28cc32e"
-  integrity sha512-Y75Pll1TwBDKBuHBu1uIOwmIXc9TFA6HIASEx5IZMsgVKUs0e2cG+E4N+ruU3D0wb0pFG79HEdfwRpKd8oY4fQ==
+  version "6.3.0-alpha.35"
+  resolved "https://registry.yarnpkg.com/@grafana/toolkit/-/toolkit-6.3.0-alpha.35.tgz#1b7a693afa4a51d48386b089decda0d6416a86a3"
+  integrity sha512-rixsLHc5bQldQ9Rx4bfglYvtZ5/u1h947bbEv7Gd5juXcn5xfrZIP31Ecd3XwmXkjGZWYwvD2IKsB12yS3/siQ==
   dependencies:
     "@babel/core" "7.4.5"
     "@babel/preset-env" "7.4.5"
