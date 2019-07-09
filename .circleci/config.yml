@@ -89,6 +89,8 @@ jobs:
     docker:
       - image: circleci/node:10-browsers
     working_directory: ~/plugin
+    environment:
+      GRAFANA_URL: http://127.0.0.1:3000
     steps:
       - setup_remote_docker
       - checkout
@@ -97,18 +99,17 @@ jobs:
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
-      - run: >
-          docker run \
-            -d \
-            -p 3000:3000 \
-            --name grafana \
-            grafana/grafana:latest
       - run:
-          name: install yarn
-          command: 'sudo npm install -g yarn --quiet'
+          name: Run Grafana Docker
+          command: >
+            docker run \
+              -d \
+              -p 3000:3000 \
+              --name grafana \
+              grafana/grafana:latest
       - run:
-          name: install dependencies
-          command: 'yarn install --pure-lockfile'
+          name: Wait for docker image
+          command: dockerize -wait tcp://127.0.0.1:3000 -timeout 120s
       - run:
           name: Run Toolkit CI
           command: 'npx grafana-toolkit plugin:ci-test'
@@ -130,24 +131,7 @@ jobs:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run: >
-          docker run \
-            -d \
-            -p 3000:3000 \
-            --name grafana \
-            grafana/grafana:latest
-      - run:
-          name: install yarn
-          command: 'sudo npm install -g yarn --quiet'
-      - run:
-          name: install dependencies
-          command: 'yarn install --pure-lockfile'
-      - run:
-          name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci-test'
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ci-work/*
+          echo someday...
 
   deploy:
     docker:
