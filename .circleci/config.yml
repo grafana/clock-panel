@@ -28,7 +28,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - build/*
+            - ci-work/*
 
   build_backend:
     docker:
@@ -47,16 +47,16 @@ jobs:
           command: 'yarn install --pure-lockfile'
       - run:
           name: Run Toolkit CI
-          command: echo TODO... build backend #'npx grafana-toolkit plugin:ci-build --platform XXX'
+          command: npx grafana-toolkit plugin:ci-build --platform XXX'
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
-      # - persist_to_workspace:
-      #     root: .
-      #     paths:
-      #       - build/*
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ci-work/*
 
   bundle:
     docker:
@@ -81,9 +81,9 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - build/*
+            - ci-work/*
       - store_artifacts:
-          path: build/artifacts
+          path: ci-work/artifacts
 
   test_master:
     docker:
@@ -109,7 +109,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - build/*
+            - ci-work/*
 
   test_latest:
     docker:
@@ -135,7 +135,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - build/*
+            - ci-work/*
 
   deploy:
     docker:
@@ -158,7 +158,8 @@ jobs:
           name: Run Toolkit CI
           command: 'npx grafana-toolkit plugin:ci-deploy'
       - store_artifacts:
-          path: build/artifacts
+          path: ci-work/artifacts
+          path: ci-work/coverage
 
 
 workflows:
