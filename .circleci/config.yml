@@ -159,6 +159,7 @@ jobs:
           command: 'npx grafana-toolkit plugin:ci-deploy'
       - store_artifacts:
           path: ci-work/artifacts
+      - store_artifacts:
           path: ci-work/coverage
 
 
