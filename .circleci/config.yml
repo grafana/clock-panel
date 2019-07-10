@@ -36,7 +36,7 @@ jobs:
             yarn install --pure-lockfile --no-progress
             yarn build
             sudo apt-get install jq
-            VERSION=`cat src/plugin.json|jq '.info.version'| sed s/\"//g`
+            VERSION=`cat dist/plugin.json|jq '.info.version'| sed s/\"//g`
             # create zip file
             cd ~
             echo "Creating ZIP"
