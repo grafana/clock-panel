@@ -1,182 +1,159 @@
-version: 2.1
-description: # Reusable Plugin Pipeline
+version: 2
+
+aliases:
+  # Workflow filters
+  - &filter-only-release
+    branches:
+      ignore: /.*/
+    tags:
+      only: /^v[0-9]+(\.[0-9]+){2}(-.+|[^-.]*)$/
+  - &filter-not-release-or-master
+    tags:
+      ignore: /^v[0-9]+(\.[0-9]+){2}(-.+|[^-.]*)$/
+    branches:
+      ignore: master
+  - &filter-only-master
+    branches:
+      only: master
+
+defaults: &defaults
+  working_directory: ~/grafana-clock-panel
+  docker:
+    - image: circleci/node:10.15.3-stretch
 
 jobs:
-  build_frontend:
-    docker:
-      - image: circleci/node:10
-    working_directory: ~/plugin
+  build:
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          name: install yarn
-          command: 'sudo npm install -g yarn --quiet'
-      - run:
-          name: install dependencies
-          command: 'yarn install --pure-lockfile'
-      - run:
-          name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci-build'
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ci-work/*
-
-  build_backend:
-    docker:
-      - image: circleci/node:10
-    working_directory: ~/plugin
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: install yarn
-          command: 'sudo npm install -g yarn --quiet'
-      - run:
-          name: install dependencies
-          command: 'yarn install --pure-lockfile'
-      - run:
-          name: Run Toolkit CI
-          command: npx grafana-toolkit plugin:ci-build --platform XXX
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ci-work/*
-
-  bundle:
-    docker:
-      - image: circleci/node:10
-    working_directory: ~/plugin
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - restore_cache:
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: install yarn
-          command: 'sudo npm install -g yarn --quiet'
-      - run:
-          name: install dependencies
-          command: 'yarn install --pure-lockfile'
-      - run:
-          name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci-bundle'
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ci-work/*
-      - store_artifacts:
-          path: ci-work/artifacts
-
-  test_master:
-    docker:
-      - image: circleci/node:10-browsers
-    working_directory: ~/plugin
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - restore_cache:
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: install yarn
-          command: 'sudo npm install -g yarn --quiet'
-      - run:
-          name: install dependencies
-          command: 'yarn install --pure-lockfile'
-      - run:
-          name: install grafana server
+          name: Build
           command: |
-            wget https://dl.grafana.com/oss/release/grafana_6.2.5_amd64.deb
-            sudo dpkg -i grafana_6.2.5_amd64.deb
-            grafana-cli --version
-            echo TODO link plugins directory
-            sudo service grafana-server start
-
-      - run:
-          name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci-test'
+            PLUGIN_NAME=grafana-clock-panel
+            yarn install --pure-lockfile --no-progress
+            yarn build
+            sudo apt-get install jq
+            VERSION=`cat src/plugin.json|jq '.info.version'| sed s/\"//g`
+            # create zip file
+            cd ~
+            echo "Creating ZIP"
+            zip \
+              -x ${PLUGIN_NAME}/.git/**\* \
+              -x ${PLUGIN_NAME}/node_modules/**\* \
+              -r /tmp/${PLUGIN_NAME}-${VERSION}.zip \
+              ${PLUGIN_NAME}
+            # create tar file
+            echo "Creating TAR"
+            tar \
+              --exclude .git \
+              --exclude ${PLUGIN_NAME}/node_modules \
+              -cvf /tmp/${PLUGIN_NAME}-${VERSION}.tar \
+              ${PLUGIN_NAME}
+            gzip /tmp/${PLUGIN_NAME}-${VERSION}.tar
+            # create artifacts
+            mkdir -p ~/${PLUGIN_NAME}/artifacts
+            mv /tmp/${PLUGIN_NAME}-${VERSION}.zip ~/${PLUGIN_NAME}/artifacts/
+            mv /tmp/${PLUGIN_NAME}-${VERSION}.tar.gz ~/${PLUGIN_NAME}/artifacts/
+          no_output_timeout: 5m
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
       - persist_to_workspace:
           root: .
           paths:
-            - ci-work/*
+            - artifacts
+            - dist
+      - store_artifacts:
+          path: artifacts
+      - store_artifacts:
+          path: dist
 
-  test_latest:
-    docker:
-      - image: circleci/node:10-browsers
-    working_directory: ~/plugin
+  test:
+    <<: *defaults
     steps:
       - checkout
-      - setup_remote_docker
-      - attach_workspace:
-          at: .
-      - restore_cache:
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run: >
-          echo someday...
-
-  deploy:
-    docker:
-      - image: circleci/node:10
-    working_directory: ~/plugin
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
       - restore_cache:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          name: install yarn
-          command: 'sudo npm install -g yarn --quiet'
-      - run:
-          name: install dependencies
-          command: 'yarn install --pure-lockfile'
-      - run:
-          name: Run Toolkit CI
-          command: 'npx grafana-toolkit plugin:ci-deploy'
+          name: Test
+          command: |
+            yarn install --pure-lockfile --no-progress
+            yarn test --coverage
       - store_artifacts:
-          path: ci-work/artifacts
-      - store_artifacts:
-          path: ci-work/coverage
+          path: coverage
 
+  publish-github-release:
+    working_directory: ~/grafana-clock-panel
+    docker:
+      - image: cibuilds/github:0.12
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "d4:1d:ee:dd:b9:1f:d3:6c:f5:25:7c:e2:f2:b8:3e:55"
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Publish Release on GitHub"
+          command: |
+            PLUGIN_NAME=grafana-clock-panel
+            apk add --update --no-cache jq
+            RELEASE_NOTES=`awk 'BEGIN {FS="##"; RS=""} FNR==3 {print; exit}' CHANGELOG.md`
+            VERSION=`cat src/plugin.json|jq '.info.version'| sed s/\"//g`
+            ls -al
+            ls -al ./artifacts
+            git config user.email "eng@grafana.com"
+            git config user.name "CircleCI Automation"
+            git checkout -b release-${VERSION}
+            git add --force dist/
+            git add artifacts/
+            git commit -m "automated release $VERSION [skip ci]"
+            git push -f origin release-${VERSION}
+            git tag -f v${VERSION}
+            git push -f origin v${VERSION}
+            ghr \
+              -t ${GITHUB_TOKEN} \
+              -u ${CIRCLE_PROJECT_USERNAME} \
+              -r ${CIRCLE_PROJECT_REPONAME} \
+              -c ${CIRCLE_SHA1} \
+              -n "${PLUGIN_NAME} v${VERSION}" \
+              -b "${RELEASE_NOTES}" \
+              -delete \
+              v${VERSION} \
+              ./artifacts/
 
 workflows:
   version: 2
-  build_bundle_test_deploy:
+  build-master:
     jobs:
-      - build_frontend
-      - build_backend
-      - bundle:
+      - build:
+          filters: *filter-only-master
+      - test:
           requires:
-            - build_frontend
-            - build_backend
-      - test_master:
+            - build
+          filters: *filter-only-master
+      - approve-release:
+          type: approval
           requires:
-            - bundle
-      - test_latest:
+            - build
+            - test
+          filters: *filter-only-master
+      - publish-github-release:
           requires:
-            - bundle
-      - deploy:
+            - approve-release
+          filters: *filter-only-master
+
+  build-branches-and-prs:
+    jobs:
+      - build:
+          filters: *filter-not-release-or-master
+      - test:
           requires:
-            - test_master
-            - test_latest
+            - build
+          filters: *filter-not-release-or-master
