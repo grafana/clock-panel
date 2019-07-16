@@ -91,7 +91,7 @@ export class ClockCtrl extends PanelCtrl {
 
   tz() {
     let timezone = '',
-        now;
+      now;
 
     if (this.panel.timezone) {
       timezone = this.panel.timezone;
@@ -149,7 +149,8 @@ export class ClockCtrl extends PanelCtrl {
     const timeLeft = moment.duration(
       moment(this.panel.countdownSettings.endCountdownTime)
         .utcOffset(moment.tz(this.tz()).format('Z'), true)
-        .diff(now));
+        .diff(now)
+    );
     let formattedTimeLeft = '';
 
     if (timeLeft.asSeconds() <= 0) {
