@@ -1,0 +1,11 @@
+.clock-panel {
+  display: flex;
+  align-items: right;
+  justify-content: right;
+  flex-direction: column;
+}
+
+.clock-panel h5 {
+  line-height: 1.5;
+  text-align: center;
+}
