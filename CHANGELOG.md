@@ -1,6 +1,10 @@
 # Change Log
 
-## [1.0.3] - 2019-05-24
+## [1.0.4] - unreleased
+
+- Built with @grafana/toolkit
+
+## v1.0.3
 
 - Adds support for displaying timezones
 
