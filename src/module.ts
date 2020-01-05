@@ -1,5 +1,3 @@
-import {ClockCtrl} from './clock_ctrl';
+import { ClockCtrl } from './clock_ctrl';
 
-export {
-  ClockCtrl as PanelCtrl
-};
+export { ClockCtrl as PanelCtrl };
