@@ -20,7 +20,7 @@
     "@types/grafana": "https://git@github.com/CorpGlory/types-grafana.git",
     "@types/lodash": "4.14.132",
     "@types/moment-timezone": "^0.5.12",
-    "lodash": "4.17.11",
+    "lodash": "latest",
     "moment": "2.24.0",
     "moment-timezone": "0.5.25"
   }
