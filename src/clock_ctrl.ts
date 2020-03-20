@@ -27,6 +27,7 @@ export class ClockCtrl extends PanelCtrl {
       dateFormat: 'YYYY-MM-DD',
       fontSize: '20px',
       fontWeight: 'normal',
+      locale: '',
     },
     timeSettings: {
       customFormat: 'HH:mm:ss',
@@ -122,7 +123,7 @@ export class ClockCtrl extends PanelCtrl {
     const now = moment().tz(this.tz());
 
     if (this.panel.dateSettings.showDate) {
-      this.date = now.format(this.panel.dateSettings.dateFormat);
+      this.date = now.locale(this.panel.dateSettings.locale).format(this.panel.dateSettings.dateFormat);
     }
 
     this.time = now.format(this.getTimeFormat());
