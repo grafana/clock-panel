@@ -20,10 +20,10 @@ export const plugin = new PanelPlugin<ClockOptions>(ClockPanel).setDefaults(defa
       path: 'bgColor',
       name: 'Background Color',
     })
+
     //---------------------------------------------------------------------
     // COUNTDOWN
     //---------------------------------------------------------------------
-
     .addTextInput({
       category: ['Countdown'],
       path: 'countdownSettings.endCountdownTime',
@@ -56,6 +56,7 @@ export const plugin = new PanelPlugin<ClockOptions>(ClockPanel).setDefaults(defa
       defaultValue: undefined,
       showIf: o => o.mode === ClockMode.countdown,
     })
+
     //---------------------------------------------------------------------
     // TIME FORMAT
     //---------------------------------------------------------------------
@@ -104,6 +105,7 @@ export const plugin = new PanelPlugin<ClockOptions>(ClockPanel).setDefaults(defa
       },
       defaultValue: FontWeight.normal,
     })
+    
     //---------------------------------------------------------------------
     // TIMEZONE
     //---------------------------------------------------------------------
@@ -199,6 +201,3 @@ export const plugin = new PanelPlugin<ClockOptions>(ClockPanel).setDefaults(defa
       defaultValue: FontWeight.normal,
     });
 });
-
-// : string;
-// fontWeight: string;
