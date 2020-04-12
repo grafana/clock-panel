@@ -20,6 +20,45 @@ export const plugin = new PanelPlugin<ClockOptions>(ClockPanel).setDefaults(defa
       path: 'bgColor',
       name: 'Background Color',
     })
+    //---------------------------------------------------------------------
+    // COUNTDOWN
+    //---------------------------------------------------------------------
+
+    .addTextInput({
+      category: ['Countdown'],
+      path: 'countdownSettings.endCountdownTime',
+      name: 'End Time',
+      settings: {
+        placeholder: 'todo....',
+      },
+      defaultValue: 'TODO',
+      showIf: o => o.mode === ClockMode.countdown,
+    })
+
+    .addTextInput({
+      category: ['Countdown'],
+      path: 'countdownSettings.endText',
+      name: 'End Text',
+      settings: {
+        placeholder: 'todo....',
+      },
+      defaultValue: '00:00:00',
+      showIf: o => o.mode === ClockMode.countdown,
+    })
+
+    .addTextInput({
+      category: ['Countdown'],
+      path: 'countdownSettings.customFormat',
+      name: 'Custom format',
+      settings: {
+        placeholder: 'date format',
+      },
+      defaultValue: undefined,
+      showIf: o => o.mode === ClockMode.countdown,
+    })
+    //---------------------------------------------------------------------
+    // TIME FORMAT
+    //---------------------------------------------------------------------
     .addRadio({
       category: ['Time Format'],
       path: 'clockType',
@@ -65,6 +104,9 @@ export const plugin = new PanelPlugin<ClockOptions>(ClockPanel).setDefaults(defa
       },
       defaultValue: FontWeight.normal,
     })
+    //---------------------------------------------------------------------
+    // TIMEZONE
+    //---------------------------------------------------------------------
     .addTextInput({
       category: ['Timezone'],
       path: 'timezone',
@@ -107,6 +149,46 @@ export const plugin = new PanelPlugin<ClockOptions>(ClockPanel).setDefaults(defa
     .addRadio({
       category: ['Timezone'],
       path: 'timezoneSettings.fontWeight',
+      name: 'Font weight',
+      settings: {
+        options: [
+          { value: FontWeight.normal, label: 'Normal' },
+          { value: FontWeight.bold, label: 'Bold' },
+        ],
+      },
+      defaultValue: FontWeight.normal,
+    })
+
+    //---------------------------------------------------------------------
+    // DATE FORMAT
+    //---------------------------------------------------------------------
+    .addBooleanSwitch({
+      category: ['Date Options'],
+      path: 'dateSettings.showDate',
+      name: 'Show Date',
+      defaultValue: false,
+    })
+    .addTextInput({
+      category: ['Date Options'],
+      path: 'dateSettings.dateFormat',
+      name: 'Date Format',
+      settings: {
+        placeholder: '(TODO... should be picker!)',
+      },
+      defaultValue: 'YYYY-MM-DD',
+    })
+    .addTextInput({
+      category: ['Date Options'],
+      path: 'dateSettings.fontSize',
+      name: 'Font size',
+      settings: {
+        placeholder: 'date format',
+      },
+      defaultValue: '20px',
+    })
+    .addRadio({
+      category: ['Date Options'],
+      path: 'dateSettings.fontWeight',
       name: 'Font weight',
       settings: {
         options: [
