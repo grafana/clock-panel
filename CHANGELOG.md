@@ -1,7 +1,8 @@
 # Change Log
 
-## [1.0.4] - unreleased
+## [1.1.0] - unreleased
 
+- Support for Grafana 7+
 - Built with @grafana/toolkit
 
 ## v1.0.3

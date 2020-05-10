@@ -29,9 +29,8 @@ export class ClockPanel extends PureComponent<Props, State> {
   }
 
   tick() {
-    const timezone = this.props.options.timezone ?? moment.tz.guess();
-    const now = moment().tz(timezone);
-    this.setState({ now });
+    const { timezone } = this.props.options;
+    this.setState({ now: this.getTZ(timezone) });
   }
 
   getTimeFormat() {
@@ -48,18 +47,27 @@ export class ClockPanel extends PureComponent<Props, State> {
     return 'HH:mm:ss';
   }
 
+  // Return a new moment instnce in the selected timezone
+  // eslint-disable-next-line
+  getTZ(tz?: string): Moment {
+    const mtz = (moment as any).tz;
+    if (tz) {
+      return mtz(tz);
+    }
+    return mtz.guess();
+  }
+
   getCountdownText(): string {
     const { now } = this.state;
-    const { countdownSettings } = this.props.options;
+    const { countdownSettings, timezone } = this.props.options;
 
     if (!countdownSettings.endCountdownTime) {
       return countdownSettings.endText;
     }
 
-    const timezone = this.props.options.timezone ?? moment.tz.guess();
     const timeLeft = moment.duration(
       moment(countdownSettings.endCountdownTime)
-        .utcOffset(moment.tz(timezone).format('Z'), true)
+        .utcOffset(this.getTZ(timezone).format('Z'), true)
         .diff(now)
     );
     let formattedTimeLeft = '';
