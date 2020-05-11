@@ -50,11 +50,10 @@ export class ClockPanel extends PureComponent<Props, State> {
   // Return a new moment instnce in the selected timezone
   // eslint-disable-next-line
   getTZ(tz?: string): Moment {
-    const mtz = (moment as any).tz;
-    if (tz) {
-      return mtz(tz);
+    if(!tz) {
+      tz = (moment as any).tz.guess();
     }
-    return mtz.guess();
+    return  (moment() as any).tz(tz);
   }
 
   getCountdownText(): string {
