@@ -1,4 +1,9 @@
 # Change Log
+## 
+
+## [1.1.0] - 13-May-2020
+
+- Release for Grafana 7.x with signing
 
 ## [1.0.4] - unreleased
 
