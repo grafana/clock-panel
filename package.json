@@ -1,11 +1,12 @@
 {
   "name": "clock-panel",
-  "version": "1.0.4-dev",
+  "version": "1.1.0",
   "description": "Clock Panel Plugin for Grafana",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
     "test": "grafana-toolkit plugin:test",
-    "dev": "grafana-toolkit plugin:dev"
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
   },
   "keywords": [
     "clock",
@@ -18,10 +19,10 @@
   "devDependencies": {
     "@grafana/toolkit": "next",
     "@types/grafana": "https://git@github.com/CorpGlory/types-grafana.git",
-    "@types/lodash": "4.14.132",
-    "@types/moment-timezone": "^0.5.12",
+    "@types/lodash": "4.14.150",
+    "@types/moment-timezone": "^0.5.13",
     "lodash": "latest",
-    "moment": "2.24.0",
-    "moment-timezone": "0.5.25"
+    "moment": "2.25.3",
+    "moment-timezone": "0.5.28"
   }
 }
