@@ -158,7 +158,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: ZoneFormat.offsetAbbv,
-      showIf: (s) => s.timezoneSettings?.showTimezone,
+      showIf: s => s.timezoneSettings?.showTimezone,
     })
     .addTextInput({
       category,
@@ -168,7 +168,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'font size',
       },
       defaultValue: '12px',
-      showIf: (s) => s.timezoneSettings?.showTimezone,
+      showIf: s => s.timezoneSettings?.showTimezone,
     })
     .addRadio({
       category,
@@ -181,7 +181,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: FontWeight.normal,
-      showIf: (s) => s.timezoneSettings?.showTimezone,
+      showIf: s => s.timezoneSettings?.showTimezone,
     });
 }
 
@@ -206,7 +206,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: '(TODO... should be picker!)',
       },
       defaultValue: 'YYYY-MM-DD',
-      showIf: (s) => s.dateSettings?.showDate,
+      showIf: s => s.dateSettings?.showDate,
     })
     .addTextInput({
       category,
@@ -216,7 +216,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'date format',
       },
       defaultValue: '20px',
-      showIf: (s) => s.dateSettings?.showDate,
+      showIf: s => s.dateSettings?.showDate,
     })
     .addRadio({
       category,
@@ -229,6 +229,6 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: FontWeight.normal,
-      showIf: (s) => s.dateSettings?.showDate,
+      showIf: s => s.dateSettings?.showDate,
     });
 }
