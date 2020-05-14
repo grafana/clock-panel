@@ -13,6 +13,10 @@ interface State {
   now: Moment;
 }
 
+export function getTimeZoneNames(): string[] {
+  return (moment as any).tz.names();
+}
+
 export class ClockPanel extends PureComponent<Props, State> {
   timerID?: any;
   state = { now: moment(), timezone: '' };

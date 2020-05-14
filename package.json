@@ -20,6 +20,7 @@
     "@grafana/ui": "next",
     "@grafana/data": "next",
     "@grafana/toolkit": "next",
+    "@grafana/runtime": "next",
     "@types/lodash": "latest",
     "@types/moment-timezone": "^0.5.12",
     "lodash": "latest",

@@ -1,6 +1,11 @@
-import { PanelOptionsEditorBuilder } from '@grafana/data';
+import React from 'react';
+import { PanelOptionsEditorBuilder, GrafanaTheme, dateTime } from '@grafana/data';
+import { ColorPicker, Input, Icon, stylesFactory } from '@grafana/ui';
+import { css } from 'emotion';
+import { config } from '@grafana/runtime';
 
 import { ClockOptions, ClockMode, ClockType, FontWeight, ZoneFormat } from './types';
+import { getTimeZoneNames } from './ClockPanel';
 
 export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>) => {
   // Global options
@@ -16,9 +21,45 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
       },
       defaultValue: ClockMode.time,
     })
-    .addColorPicker({
+    .addCustomEditor({
+      id: 'bgColor',
       path: 'bgColor',
       name: 'Background Color',
+      editor: props => {
+        const styles = getStyles(config.theme);
+        let prefix: React.ReactNode = null;
+        let suffix: React.ReactNode = null;
+        if (props.value) {
+          suffix = <Icon className={styles.trashIcon} name="trash-alt" onClick={() => props.onChange(undefined)} />;
+        }
+
+        prefix = (
+          <div className={styles.inputPrefix}>
+            <div className={styles.colorPicker}>
+              <ColorPicker
+                color={props.value || config.theme.colors.panelBg}
+                onChange={props.onChange}
+                enableNamedColors={true}
+              />
+            </div>
+          </div>
+        );
+
+        return (
+          <div>
+            <Input
+              type="text"
+              value={props.value || 'Pick Color'}
+              onBlur={(v: any) => {
+                console.log('CLICK');
+              }}
+              prefix={prefix}
+              suffix={suffix}
+            />
+          </div>
+        );
+      },
+      defaultValue: '',
     });
 
   addCountdown(builder);
@@ -39,19 +80,17 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       path: 'countdownSettings.endCountdownTime',
       name: 'End Time',
       settings: {
-        placeholder: 'todo....',
+        placeholder: 'ISO 8601 or RFC 2822 Date time',
       },
-      defaultValue: 'TODO',
+      defaultValue: dateTime(Date.now())
+        .add(6, 'h')
+        .format(),
       showIf: o => o.mode === ClockMode.countdown,
     })
-
     .addTextInput({
       category,
       path: 'countdownSettings.endText',
       name: 'End Text',
-      settings: {
-        placeholder: 'todo....',
-      },
       defaultValue: '00:00:00',
       showIf: o => o.mode === ClockMode.countdown,
     })
@@ -61,7 +100,7 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       path: 'countdownSettings.customFormat',
       name: 'Custom format',
       settings: {
-        placeholder: 'date format',
+        placeholder: 'optional',
       },
       defaultValue: undefined,
       showIf: o => o.mode === ClockMode.countdown,
@@ -128,15 +167,20 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
 function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
   const category = ['Timezone'];
 
+  const timezones = getTimeZoneNames().map(n => {
+    return { label: n, value: n };
+  });
+  timezones.unshift({ label: 'Default', value: '' });
+
   builder
-    .addTextInput({
+    .addSelect({
       category,
       path: 'timezone',
       name: 'Timezone',
       settings: {
-        placeholder: '(TODO... should be picker!)',
+        options: timezones,
       },
-      defaultValue: undefined,
+      defaultValue: '',
     })
     .addBooleanSwitch({
       category,
@@ -203,7 +247,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       path: 'dateSettings.dateFormat',
       name: 'Date Format',
       settings: {
-        placeholder: '(TODO... should be picker!)',
+        placeholder: 'Enter date format',
       },
       defaultValue: 'YYYY-MM-DD',
       showIf: s => s.dateSettings?.showDate,
@@ -232,3 +276,23 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       showIf: s => s.dateSettings?.showDate,
     });
 }
+
+const getStyles = stylesFactory((theme: GrafanaTheme) => {
+  return {
+    colorPicker: css`
+      padding: 0 ${theme.spacing.sm};
+    `,
+    inputPrefix: css`
+      display: flex;
+      align-items: center;
+    `,
+    trashIcon: css`
+      color: ${theme.colors.textWeak};
+      cursor: pointer;
+
+      &:hover {
+        color: ${theme.colors.text};
+      }
+    `,
+  };
+});
