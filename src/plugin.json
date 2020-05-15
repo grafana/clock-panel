@@ -3,6 +3,8 @@
   "name": "Clock",
   "id": "grafana-clock-panel",
 
+  "skipDataQuery": true,
+
   "info": {
     "description": "Clock panel for grafana",
     "author": {
@@ -11,8 +13,8 @@
     },
     "keywords": ["clock", "panel"],
     "logos": {
-      "small": "img/clock_panel_logo.svg",
-      "large": "img/clock_panel_logo.svg"
+      "small": "img/clock.svg",
+      "large": "img/clock.svg"
     },
     "links": [
       {"name": "Project site", "url": "https://github.com/grafana/clock-panel"},
@@ -27,7 +29,7 @@
   },
 
   "dependencies": {
-    "grafanaVersion": "5.x.x",
+    "grafanaVersion": "7.0.0",
     "plugins": [ ]
   }
 }
