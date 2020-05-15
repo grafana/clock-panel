@@ -1,5 +1,5 @@
 # Change Log
-
+ 
 
 ## [1.1.1]
 
@@ -10,6 +10,7 @@
 
 - Support for Grafana 7+
 - Built with @grafana/toolkit
+- Ported to react
 
 ## v1.0.3
 
