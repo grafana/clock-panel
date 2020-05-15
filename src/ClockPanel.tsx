@@ -19,7 +19,7 @@ export function getTimeZoneNames(): string[] {
 
 export class ClockPanel extends PureComponent<Props, State> {
   timerID?: any;
-  state = { now: moment(), timezone: '' };
+  state = { now: this.getTZ(), timezone: '' };
 
   componentDidMount() {
     this.timerID = setInterval(
@@ -126,8 +126,7 @@ export class ClockPanel extends PureComponent<Props, State> {
       text-align: center;
     `;
 
-    const tzname = (now as any)._z.name;
-    let zone = tzname;
+    let zone = this.props.options.timezone || '';
 
     switch (zoneFormat) {
       case ZoneFormat.offsetAbbv:
@@ -139,6 +138,12 @@ export class ClockPanel extends PureComponent<Props, State> {
       case ZoneFormat.abbv:
         zone = now.format('z');
         break;
+      default:
+        try {
+          zone = (this.getTZ(zone) as any)._z.name;
+        } catch (e) {
+          console.log('Error getting timezone', e);
+        }
     }
 
     return (
