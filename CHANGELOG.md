@@ -1,13 +1,11 @@
 # Change Log
 ## 
 
-## [1.1.0] - 13-May-2020
+## [1.1.0]
 
-- Release for Grafana 7.x with signing
-
-## [1.0.4] - unreleased
-
+- Support for Grafana 7+
 - Built with @grafana/toolkit
+- Ported to react
 
 ## v1.0.3
 

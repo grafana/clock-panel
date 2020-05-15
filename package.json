@@ -17,12 +17,16 @@
   "author": "Grafana Labs",
   "license": "MIT",
   "devDependencies": {
+    "@grafana/ui": "next",
+    "@grafana/data": "next",
     "@grafana/toolkit": "next",
-    "@types/grafana": "https://git@github.com/CorpGlory/types-grafana.git",
-    "@types/lodash": "4.14.150",
-    "@types/moment-timezone": "^0.5.13",
+    "@grafana/runtime": "next",
+    "@types/lodash": "latest",
+    "@types/moment-timezone": "^0.5.12",
     "lodash": "latest",
-    "moment": "2.25.3",
+    "moment": "2.24.0"
+  },
+  "dependencies": {
     "moment-timezone": "0.5.28"
   }
 }
