@@ -1,6 +1,11 @@
 # Change Log
 
-## [1.1.0] - unreleased
+
+## [1.1.1] - unreleased
+
+- Improved background
+
+## [1.1.0]
 
 - Support for Grafana 7+
 - Built with @grafana/toolkit
