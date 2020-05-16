@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { PanelProps } from '@grafana/data';
+import { PanelProps, getColorFromHexRgbOrName } from '@grafana/data';
 import { ClockOptions, ClockType, ZoneFormat, ClockMode } from './types';
 import { css } from 'emotion';
 
@@ -191,13 +191,13 @@ export class ClockPanel extends PureComponent<Props, State> {
   render() {
     const { options, width, height } = this.props;
     const { bgColor, dateSettings, timezoneSettings } = options;
-
+    const hexColor = getColorFromHexRgbOrName(bgColor ?? '');
     const clazz = css`
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      background-color: ${bgColor ?? ''};
+      background-color: ${hexColor};
     `;
 
     return (
