@@ -1,0 +1,28 @@
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+{
+  "plugin": "grafana-clock-panel",
+  "version": "1.1.0",
+  "files": {
+    "LICENSE": "b46400c1ab5630edeb4e43b240a027d203375ebe5a9efb7de88c604c5c5cace0",
+    "README.md": "c28d664bd3b7c31ff67dc89b3caa6bc6d383117cfd7af089ccb079abb5630355",
+    "module.js": "ad4ae64e140ae41c8f5438637ddd0f316815da6415831c28a21860e8bed602a4",
+    "module.js.LICENSE.txt": "e3d68f4e2038dfb5241866a48a748f2647948e450949462bcbb750bb712e1062",
+    "module.js.map": "df7275367fc7e06f70684429bfb265cb8e3d4bb91adc0c78c7dccddad9b2982f",
+    "plugin.json": "8d32b28b338982c1e7c66fe3064725dee06436da8091b5b51538a7915b4c3fd2"
+  },
+  "time": 1589593758002,
+  "keyId": "7e4d0c6a708866e7"
+}
+-----BEGIN PGP SIGNATURE-----
+Version: OpenPGP.js v4.10.1
+Comment: https://openpgpjs.org
+
+wqEEARMKAAYFAl6/Rp4ACgkQfk0ManCIZud+zgIJAVhRsI44gcgVevQbZU5K
+9lwsWgtxEwf5VFaYK0e4liw4MiXkF8XqnuwxrNTE+UxAUXRNU6GSc+3FfyEK
+BrcLPpLMAgjSn+QqC3O+sAn/QP+xaMfgpaD8qbJ3oQvSMsUqwQi/M0GHkT2H
+ymBstoh8AhNcSK9dY7+AB3tLh9/0B8aidXNhqQ==
+=Xotv
+-----END PGP SIGNATURE-----
