@@ -1,5 +1,10 @@
 # Change Log
-## 
+ 
+
+## [1.1.1]
+
+- Improved background
+- Show timzeone
 
 ## [1.1.0]
 

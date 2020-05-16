@@ -1,6 +1,3 @@
-// eslint-disable-next-line
-import moment from 'moment';
-
 export interface ClockOptions {
   mode: ClockMode;
   clockType: ClockType;
@@ -66,39 +63,3 @@ interface TimezoneSettings {
 interface RefreshSettings {
   syncWithDashboard: boolean;
 }
-
-export const defaults: ClockOptions = {
-  mode: ClockMode.time,
-  clockType: ClockType.H24,
-  timezone: undefined,
-  bgColor: undefined,
-  countdownSettings: {
-    endCountdownTime: moment()
-      .seconds(0)
-      .milliseconds(0)
-      .add(1, 'day')
-      .toDate(),
-    endText: '00:00:00',
-    customFormat: undefined,
-  },
-  dateSettings: {
-    showDate: false,
-    dateFormat: 'YYYY-MM-DD',
-    fontSize: '20px',
-    fontWeight: FontWeight.normal,
-  },
-  timeSettings: {
-    customFormat: 'HH:mm:ss',
-    fontSize: '60px',
-    fontWeight: FontWeight.normal,
-  },
-  timezoneSettings: {
-    showTimezone: false,
-    zoneFormat: ZoneFormat.offsetAbbv,
-    fontSize: '12px',
-    fontWeight: FontWeight.normal,
-  },
-  refreshSettings: {
-    syncWithDashboard: false,
-  },
-};

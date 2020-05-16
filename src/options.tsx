@@ -61,6 +61,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
       },
       defaultValue: '',
     });
+  // TODO: refreshSettings.syncWithDashboard
 
   addCountdown(builder);
   addTimeFormat(builder);
