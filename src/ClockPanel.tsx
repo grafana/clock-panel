@@ -167,7 +167,7 @@ export class ClockPanel extends PureComponent<Props, State> {
       font-weight: ${dateSettings.fontWeight};
     `;
 
-    const disp = now.format(dateSettings.dateFormat);
+    const disp = now.locale(dateSettings.locale || '').format(dateSettings.dateFormat);
     return (
       <span>
         <h3 className={clazz}>{disp}</h3>

@@ -23,6 +23,10 @@ Show the time in another office or show a countdown to an important event.
 
   This timezones are supplied by the moment timezone library. Timezone can be set or left to default. Default is moment's guess (whatever that is on your computer). Timezone is also used to calculate countdown deadline in countdown mode.
 
+- **Locale**:
+
+  Locales for date-formatting are supplied by the moment library. The locale can be set or left to default. Default is moment's guess.
+
 - **Countdown Deadline**:
 
   Used in conjunction with the mode being set to countdown. Choose a date and time to count down to.
