@@ -123,7 +123,6 @@ export class ClockPanel extends PureComponent<Props, State> {
       font-size: ${timezoneSettings.fontSize};
       font-weight: ${timezoneSettings.fontWeight};
       line-height: 1.4;
-      text-align: center;
     `;
 
     let zone = this.props.options.timezone || '';
@@ -198,6 +197,7 @@ export class ClockPanel extends PureComponent<Props, State> {
       justify-content: center;
       flex-direction: column;
       background-color: ${bgColor ?? ''};
+      text-align: center;
     `;
 
     return (
