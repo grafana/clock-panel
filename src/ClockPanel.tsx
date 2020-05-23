@@ -95,7 +95,7 @@ export class ClockPanel extends PureComponent<Props, State> {
     }
     if (timeLeft.months() > 0 || previous === 'years') {
       formattedTimeLeft += timeLeft.months() === 1 ? '1 month, ' : timeLeft.months() + ' months, ';
-      previous = 'month';
+      previous = 'months';
     }
     if (timeLeft.days() > 0 || previous === 'months') {
       formattedTimeLeft += timeLeft.days() === 1 ? '1 day, ' : timeLeft.days() + ' days, ';
