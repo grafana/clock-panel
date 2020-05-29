@@ -1,7 +1,10 @@
 # Change Log
 
+## [1.1.2] - unreleased
 
-## [1.1.1] - unreleased
+- Support refresh with dashboard time
+
+## [1.1.1]
 
 - Improved background
 
