@@ -4,7 +4,7 @@ import { ColorPicker, Input, Icon, stylesFactory } from '@grafana/ui';
 import { css } from 'emotion';
 import { config } from '@grafana/runtime';
 
-import { ClockOptions, ClockMode, ClockType, FontWeight, ZoneFormat } from './types';
+import { ClockOptions, ClockMode, ClockType, FontWeight, ZoneFormat, ClockRefresh } from './types';
 import { getTimeZoneNames } from './ClockPanel';
 
 export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>) => {
@@ -20,6 +20,17 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
         ],
       },
       defaultValue: ClockMode.time,
+    })
+    .addRadio({
+      path: 'refresh',
+      name: 'Refresh',
+      settings: {
+        options: [
+          { value: ClockRefresh.sec, label: 'Every second' },
+          { value: ClockRefresh.dashboard, label: 'With the dashboard' },
+        ],
+      },
+      defaultValue: ClockRefresh.sec,
     })
     .addCustomEditor({
       id: 'bgColor',
@@ -61,7 +72,6 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
       },
       defaultValue: '',
     });
-  // TODO: refreshSettings.syncWithDashboard
 
   addCountdown(builder);
   addTimeFormat(builder);

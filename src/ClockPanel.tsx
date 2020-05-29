@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
-import { PanelProps } from '@grafana/data';
-import { ClockOptions, ClockType, ZoneFormat, ClockMode } from './types';
+import { PanelProps, PanelEvents } from '@grafana/data';
+import { ClockOptions, ClockType, ZoneFormat, ClockMode, ClockRefresh } from './types';
 import { css } from 'emotion';
 
 // eslint-disable-next-line
 import moment, { Moment } from 'moment';
 import './external/moment-duration-format';
+import { getLegacyAngularInjector } from '@grafana/runtime';
 
 interface Props extends PanelProps<ClockOptions> {}
 interface State {
@@ -18,18 +19,60 @@ export function getTimeZoneNames(): string[] {
 }
 
 export class ClockPanel extends PureComponent<Props, State> {
-  timerID?: any;
+  timerID?: any = 0;
   state = { now: this.getTZ(), timezone: '' };
 
   componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000 // 1 second
-    );
+    // HACK HACK.. use with super super caution
+    const $injector = getLegacyAngularInjector();
+    const dashboardSrv = $injector.get('dashboardSrv');
+    const emitter = dashboardSrv.dashboard.events;
+    emitter.on(PanelEvents.refresh, this.onPanelRefresh);
+    this.initTimers();
   }
 
+  componentDidUpdate(oldProps: Props) {
+    const old = oldProps.options.refresh;
+    const now = this.props.options.refresh;
+    if (old !== now) {
+      this.initTimers();
+    }
+  }
+
+  initTimers = () => {
+    if (this.timerID) {
+      clearInterval(this.timerID);
+      this.timerID = 0;
+    }
+
+    const { refresh } = this.props.options;
+    if (refresh === ClockRefresh.dashboard) {
+      this.tick();
+    } else {
+      const delay = 1000; // 1sec
+      // if (refresh === ClockRefresh.min) {
+      //   delay = 60 * 1000;
+      // }
+
+      this.timerID = setInterval(
+        () => this.tick(),
+        delay // 1 second or 1 min
+      );
+    }
+  };
+
+  onPanelRefresh = () => {
+    const { refresh } = this.props.options;
+    if (refresh === ClockRefresh.dashboard) {
+      this.tick();
+    }
+  };
+
   componentWillUnmount() {
-    clearInterval(this.timerID);
+    if (this.timerID) {
+      clearInterval(this.timerID);
+      this.timerID = 0;
+    }
   }
 
   tick() {

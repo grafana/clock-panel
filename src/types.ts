@@ -1,5 +1,6 @@
 export interface ClockOptions {
   mode: ClockMode;
+  refresh: ClockRefresh;
   clockType: ClockType;
   timezone?: string;
   bgColor?: string;
@@ -7,12 +8,16 @@ export interface ClockOptions {
   dateSettings: DateSettings;
   timeSettings: TimeSettings;
   timezoneSettings: TimezoneSettings;
-  refreshSettings: RefreshSettings;
 }
 
 export enum ClockMode {
   time = 'time',
   countdown = 'countdown',
+}
+
+export enum ClockRefresh {
+  sec = 'sec',
+  dashboard = 'dashboard',
 }
 
 export enum ClockType {
@@ -58,8 +63,4 @@ interface TimezoneSettings {
   zoneFormat: ZoneFormat;
   fontSize: string;
   fontWeight: FontWeight;
-}
-
-interface RefreshSettings {
-  syncWithDashboard: boolean;
 }
