@@ -2,6 +2,7 @@
 
 ## [1.1.2] - unreleased
 
+- Support local for date formats
 - Support refresh with dashboard time
 
 ## [1.1.1]
