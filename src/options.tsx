@@ -265,6 +265,16 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     })
     .addTextInput({
       category,
+      path: 'dateSettings.locale',
+      name: 'Locale',
+      settings: {
+        placeholder: 'Enter locale: de, fr, es, ... (default: en)',
+      },
+      defaultValue: '',
+      showIf: s => s.dateSettings?.showDate,
+    })
+    .addTextInput({
+      category,
       path: 'dateSettings.fontSize',
       name: 'Font size',
       settings: {
