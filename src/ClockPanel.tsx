@@ -123,7 +123,6 @@ export class ClockPanel extends PureComponent<Props, State> {
       font-size: ${timezoneSettings.fontSize};
       font-weight: ${timezoneSettings.fontWeight};
       line-height: 1.4;
-      text-align: center;
     `;
 
     let zone = this.props.options.timezone || '';
@@ -167,7 +166,7 @@ export class ClockPanel extends PureComponent<Props, State> {
       font-weight: ${dateSettings.fontWeight};
     `;
 
-    const disp = now.format(dateSettings.dateFormat);
+    const disp = now.locale(dateSettings.locale || '').format(dateSettings.dateFormat);
     return (
       <span>
         <h3 className={clazz}>{disp}</h3>
@@ -198,6 +197,7 @@ export class ClockPanel extends PureComponent<Props, State> {
       justify-content: center;
       flex-direction: column;
       background-color: ${bgColor ?? ''};
+      text-align: center;
     `;
 
     return (

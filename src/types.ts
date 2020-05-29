@@ -43,6 +43,7 @@ interface CountdownSettings {
 interface DateSettings {
   showDate: boolean;
   dateFormat: string;
+  locale: string;
   fontSize: string;
   fontWeight: FontWeight;
 }
