@@ -159,11 +159,12 @@ export class ClockPanel extends PureComponent<Props, State> {
 
   renderDate() {
     const { now } = this.state;
-    const { dateSettings } = this.props.options;
+    const { DateColor, dateSettings } = this.props.options;
 
     const clazz = css`
       font-size: ${dateSettings.fontSize};
       font-weight: ${dateSettings.fontWeight};
+	  color: ${DateColor ?? ''};
     `;
 
     const disp = now.locale(dateSettings.locale || '').format(dateSettings.dateFormat);
@@ -176,11 +177,12 @@ export class ClockPanel extends PureComponent<Props, State> {
 
   renderTime() {
     const { now } = this.state;
-    const { timeSettings, mode } = this.props.options;
+    const { TimeColor, timeSettings, mode } = this.props.options;
 
     const clazz = css`
       font-size: ${timeSettings.fontSize};
       font-weight: ${timeSettings.fontWeight};
+	  color: ${TimeColor ?? ''};
     `;
 
     const disp = mode === ClockMode.countdown ? this.getCountdownText() : now.format(this.getTimeFormat());

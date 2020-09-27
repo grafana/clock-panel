@@ -3,6 +3,8 @@ export interface ClockOptions {
   clockType: ClockType;
   timezone?: string;
   bgColor?: string;
+  TimeColor?: string;
+  DateColor?: string;
   countdownSettings: CountdownSettings;
   dateSettings: DateSettings;
   timeSettings: TimeSettings;

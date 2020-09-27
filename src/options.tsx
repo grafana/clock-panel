@@ -21,6 +21,32 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
       },
       defaultValue: ClockMode.time,
     })
+	.addRadio({
+	  id: 'TimeColor',
+      path: 'TimeColor',
+      name: 'Time Color',
+      settings: {
+        options: [
+          { value: 'white', label: 'White' },
+          { value: 'darkred', label: 'Dark Red' },
+		  { value: 'blue', label: 'Blue' },
+        ],
+      },
+      defaultValue: 'white',
+    })
+	.addRadio({
+	  id: 'DateColor',
+      path: 'DateColor',
+      name: 'Date Color',
+      settings: {
+        options: [
+          { value: 'white', label: 'White' },
+          { value: 'darkred', label: 'Dark Red' },
+		  { value: 'blue', label: 'Blue' },
+        ],
+      },
+      defaultValue: 'white',
+    })
     .addCustomEditor({
       id: 'bgColor',
       path: 'bgColor',
