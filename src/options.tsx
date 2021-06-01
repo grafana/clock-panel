@@ -1,7 +1,7 @@
 import React from 'react';
 import { PanelOptionsEditorBuilder, GrafanaTheme, dateTime } from '@grafana/data';
 import { ColorPicker, Input, Icon, stylesFactory } from '@grafana/ui';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { config } from '@grafana/runtime';
 
 import { ClockOptions, ClockMode, ClockType, FontWeight, ZoneFormat } from './types';
@@ -25,7 +25,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
       id: 'bgColor',
       path: 'bgColor',
       name: 'Background Color',
-      editor: props => {
+      editor: (props) => {
         const styles = getStyles(config.theme);
         let prefix: React.ReactNode = null;
         let suffix: React.ReactNode = null;
@@ -48,6 +48,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
         return (
           <div>
             <Input
+              css=""
               type="text"
               value={props.value || 'Pick Color'}
               onBlur={(v: any) => {
@@ -83,17 +84,15 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       settings: {
         placeholder: 'ISO 8601 or RFC 2822 Date time',
       },
-      defaultValue: dateTime(Date.now())
-        .add(6, 'h')
-        .format(),
-      showIf: o => o.mode === ClockMode.countdown,
+      defaultValue: dateTime(Date.now()).add(6, 'h').format(),
+      showIf: (o) => o.mode === ClockMode.countdown,
     })
     .addTextInput({
       category,
       path: 'countdownSettings.endText',
       name: 'End Text',
       defaultValue: '00:00:00',
-      showIf: o => o.mode === ClockMode.countdown,
+      showIf: (o) => o.mode === ClockMode.countdown,
     })
 
     .addTextInput({
@@ -104,7 +103,7 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'optional',
       },
       defaultValue: undefined,
-      showIf: o => o.mode === ClockMode.countdown,
+      showIf: (o) => o.mode === ClockMode.countdown,
     });
 }
 
@@ -137,7 +136,7 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'date format',
       },
       defaultValue: undefined,
-      showIf: opts => opts.clockType === ClockType.Custom,
+      showIf: (opts) => opts.clockType === ClockType.Custom,
     })
     .addTextInput({
       category,
@@ -168,7 +167,7 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
 function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
   const category = ['Timezone'];
 
-  const timezones = getTimeZoneNames().map(n => {
+  const timezones = getTimeZoneNames().map((n) => {
     return { label: n, value: n };
   });
   timezones.unshift({ label: 'Default', value: '' });
@@ -203,7 +202,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: ZoneFormat.offsetAbbv,
-      showIf: s => s.timezoneSettings?.showTimezone,
+      showIf: (s) => s.timezoneSettings?.showTimezone,
     })
     .addTextInput({
       category,
@@ -213,7 +212,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'font size',
       },
       defaultValue: '12px',
-      showIf: s => s.timezoneSettings?.showTimezone,
+      showIf: (s) => s.timezoneSettings?.showTimezone,
     })
     .addRadio({
       category,
@@ -226,7 +225,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: FontWeight.normal,
-      showIf: s => s.timezoneSettings?.showTimezone,
+      showIf: (s) => s.timezoneSettings?.showTimezone,
     });
 }
 
@@ -251,7 +250,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'Enter date format',
       },
       defaultValue: 'YYYY-MM-DD',
-      showIf: s => s.dateSettings?.showDate,
+      showIf: (s) => s.dateSettings?.showDate,
     })
     .addTextInput({
       category,
@@ -261,7 +260,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'Enter locale: de, fr, es, ... (default: en)',
       },
       defaultValue: '',
-      showIf: s => s.dateSettings?.showDate,
+      showIf: (s) => s.dateSettings?.showDate,
     })
     .addTextInput({
       category,
@@ -271,7 +270,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'date format',
       },
       defaultValue: '20px',
-      showIf: s => s.dateSettings?.showDate,
+      showIf: (s) => s.dateSettings?.showDate,
     })
     .addRadio({
       category,
@@ -284,7 +283,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: FontWeight.normal,
-      showIf: s => s.dateSettings?.showDate,
+      showIf: (s) => s.dateSettings?.showDate,
     });
 }
 
