@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react';
-import { PanelProps } from '@grafana/data';
+import { PanelProps, GrafanaTheme2 } from '@grafana/data';
+import { withTheme2, Themeable2, stylesFactory } from '@grafana/ui';
 import { ClockOptions, ClockType, ZoneFormat, ClockMode } from './types';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 
 // eslint-disable-next-line
 import moment, { Moment } from 'moment';
 import './external/moment-duration-format';
 
-interface Props extends PanelProps<ClockOptions> {}
+interface Props extends Themeable2, PanelProps<ClockOptions> {}
 interface State {
   // eslint-disable-next-line
   now: Moment;
@@ -17,7 +18,7 @@ export function getTimeZoneNames(): string[] {
   return (moment as any).tz.names();
 }
 
-export class ClockPanel extends PureComponent<Props, State> {
+class UnthemedClockPanel extends PureComponent<Props, State> {
   timerID?: any;
   state = { now: this.getTZ(), timezone: '' };
 
@@ -69,9 +70,7 @@ export class ClockPanel extends PureComponent<Props, State> {
     }
 
     const timeLeft = moment.duration(
-      moment(countdownSettings.endCountdownTime)
-        .utcOffset(this.getTZ(timezone).format('Z'), true)
-        .diff(now)
+      moment(countdownSettings.endCountdownTime).utcOffset(this.getTZ(timezone).format('Z'), true).diff(now)
     );
     let formattedTimeLeft = '';
 
@@ -188,21 +187,13 @@ export class ClockPanel extends PureComponent<Props, State> {
   }
 
   render() {
-    const { options, width, height } = this.props;
+    const { options, width, height, theme } = this.props;
     const { bgColor, dateSettings, timezoneSettings } = options;
-
-    const clazz = css`
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      background-color: ${bgColor ?? ''};
-      text-align: center;
-    `;
+    const styles = getStyles(theme, bgColor);
 
     return (
       <div
-        className={clazz}
+        className={styles.wrapper}
         style={{
           width,
           height,
@@ -215,3 +206,16 @@ export class ClockPanel extends PureComponent<Props, State> {
     );
   }
 }
+
+export const ClockPanel = withTheme2(UnthemedClockPanel);
+
+const getStyles = stylesFactory((theme: GrafanaTheme2, bgColor: string | undefined) => ({
+  wrapper: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: ${bgColor ? theme.visualization.getColorByName(bgColor) : null};
+    text-align: center;
+  `,
+}));
