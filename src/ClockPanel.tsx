@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { PanelProps } from '@grafana/data';
+import { PanelProps, getColorForTheme } from '@grafana/data';
+import { withTheme, Themeable } from '@grafana/ui';
 import { ClockOptions, ClockType, ZoneFormat, ClockMode } from './types';
 import { css } from 'emotion';
 
@@ -7,7 +8,7 @@ import { css } from 'emotion';
 import moment, { Moment } from 'moment';
 import './external/moment-duration-format';
 
-interface Props extends PanelProps<ClockOptions> {}
+interface Props extends Themeable, PanelProps<ClockOptions> {}
 interface State {
   // eslint-disable-next-line
   now: Moment;
@@ -17,7 +18,7 @@ export function getTimeZoneNames(): string[] {
   return (moment as any).tz.names();
 }
 
-export class ClockPanel extends PureComponent<Props, State> {
+class UnthemedClockPanel extends PureComponent<Props, State> {
   timerID?: any;
   state = { now: this.getTZ(), timezone: '' };
 
@@ -188,15 +189,16 @@ export class ClockPanel extends PureComponent<Props, State> {
   }
 
   render() {
-    const { options, width, height } = this.props;
-    const { bgColor, dateSettings, timezoneSettings } = options;
+    const { options, width, height, theme } = this.props;
+    const { bgColor = '', dateSettings, timezoneSettings } = options;
+    const selectedColor = getColorForTheme(bgColor, theme);
 
     const clazz = css`
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      background-color: ${bgColor ?? ''};
+      background-color: ${selectedColor};
       text-align: center;
     `;
 
@@ -215,3 +217,5 @@ export class ClockPanel extends PureComponent<Props, State> {
     );
   }
 }
+
+export const ClockPanel = withTheme(UnthemedClockPanel);
