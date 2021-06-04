@@ -48,6 +48,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
         return (
           <div>
             <Input
+              css=""
               type="text"
               value={props.value || 'Pick Color'}
               onBlur={(v: any) => {
