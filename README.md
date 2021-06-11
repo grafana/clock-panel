@@ -1,5 +1,5 @@
 ## Clock Panel Plugin for Grafana
-[![CircleCI](https://circleci.com/gh/grafana/clock-panel.svg?style=svg)](https://circleci.com/gh/grafana/clock-panel)
+[![CI](https://github.com/grafana/clock-panel/actions/workflows/ci.yml/badge.svg)](https://github.com/grafana/clock-panel/actions/workflows/ci.yml)
 [![David Dependancy Status](https://david-dm.org/grafana/clock-panel.svg)](https://david-dm.org/grafana/clock-panel)
 [![David Dev Dependency Status](https://david-dm.org/grafana/clock-panel/dev-status.svg)](https://david-dm.org/grafana/clock-panel/?type=dev)
 
