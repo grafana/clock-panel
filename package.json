@@ -17,10 +17,10 @@
   "author": "Grafana Labs",
   "license": "MIT",
   "devDependencies": {
-    "@grafana/ui": "next",
-    "@grafana/data": "next",
-    "@grafana/toolkit": "next",
-    "@grafana/runtime": "next",
+    "@grafana/ui": "7.4.0",
+    "@grafana/data": "7.4.0",
+    "@grafana/toolkit": "7.4.0",
+    "@grafana/runtime": "7.4.0",
     "@types/lodash": "latest",
     "@types/moment-timezone": "^0.5.12",
     "lodash": "latest",
@@ -28,5 +28,9 @@
   },
   "dependencies": {
     "moment-timezone": "0.5.28"
+  },
+  "volta": {
+    "node": "14.17.6",
+    "yarn": "1.22.11"
   }
 }

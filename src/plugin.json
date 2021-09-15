@@ -29,7 +29,7 @@
   },
 
   "dependencies": {
-    "grafanaVersion": "7.0.0",
+    "grafanaVersion": ">=7.4.0",
     "plugins": [ ]
   }
 }

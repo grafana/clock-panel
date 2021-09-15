@@ -1,14 +1,15 @@
 import React, { PureComponent } from 'react';
-import { PanelProps, PanelEvents } from '@grafana/data';
+import { PanelProps, getColorForTheme } from '@grafana/data';
+import { withTheme, Themeable } from '@grafana/ui';
 import { ClockOptions, ClockType, ZoneFormat, ClockMode, ClockRefresh } from './types';
 import { css } from 'emotion';
+import { Unsubscribable } from 'rxjs';
 
 // eslint-disable-next-line
 import moment, { Moment } from 'moment';
 import './external/moment-duration-format';
-import { getLegacyAngularInjector } from '@grafana/runtime';
 
-interface Props extends PanelProps<ClockOptions> {}
+interface Props extends Themeable, PanelProps<ClockOptions> {}
 interface State {
   // eslint-disable-next-line
   now: Moment;
@@ -18,16 +19,13 @@ export function getTimeZoneNames(): string[] {
   return (moment as any).tz.names();
 }
 
-export class ClockPanel extends PureComponent<Props, State> {
+class UnthemedClockPanel extends PureComponent<Props, State> {
   timerID?: any = 0;
   state = { now: this.getTZ(), timezone: '' };
+  subscription?: Unsubscribable;
 
   componentDidMount() {
-    // HACK HACK.. use with super super caution
-    const $injector = getLegacyAngularInjector();
-    const dashboardSrv = $injector.get('dashboardSrv');
-    const emitter = dashboardSrv.dashboard.events;
-    emitter.on(PanelEvents.refresh, this.onPanelRefresh);
+    this.subscription = this.props.eventBus.subscribe({ type: 'refresh' } as any, this.onPanelRefresh);
     this.initTimers();
   }
 
@@ -40,25 +38,22 @@ export class ClockPanel extends PureComponent<Props, State> {
   }
 
   initTimers = () => {
+    const { refresh } = this.props.options;
+
     if (this.timerID) {
       clearInterval(this.timerID);
       this.timerID = 0;
     }
 
-    const { refresh } = this.props.options;
     if (refresh === ClockRefresh.dashboard) {
-      this.tick();
-    } else {
-      const delay = 1000; // 1sec
-      // if (refresh === ClockRefresh.min) {
-      //   delay = 60 * 1000;
-      // }
-
-      this.timerID = setInterval(
-        () => this.tick(),
-        delay // 1 second or 1 min
-      );
+      return this.tick();
     }
+
+    const delay = 1000; // 1sec
+    this.timerID = setInterval(
+      () => this.tick(),
+      delay // 1 second or 1 min
+    );
   };
 
   onPanelRefresh = () => {
@@ -69,6 +64,9 @@ export class ClockPanel extends PureComponent<Props, State> {
   };
 
   componentWillUnmount() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
     if (this.timerID) {
       clearInterval(this.timerID);
       this.timerID = 0;
@@ -112,9 +110,7 @@ export class ClockPanel extends PureComponent<Props, State> {
     }
 
     const timeLeft = moment.duration(
-      moment(countdownSettings.endCountdownTime)
-        .utcOffset(this.getTZ(timezone).format('Z'), true)
-        .diff(now)
+      moment(countdownSettings.endCountdownTime).utcOffset(this.getTZ(timezone).format('Z'), true).diff(now)
     );
     let formattedTimeLeft = '';
 
@@ -219,7 +215,8 @@ export class ClockPanel extends PureComponent<Props, State> {
 
   renderTime() {
     const { now } = this.state;
-    const { timeSettings, mode } = this.props.options;
+    const { options } = this.props;
+    const { timeSettings, mode } = options;
 
     const clazz = css`
       font-size: ${timeSettings.fontSize};
@@ -231,16 +228,16 @@ export class ClockPanel extends PureComponent<Props, State> {
   }
 
   render() {
-    const { options, width, height } = this.props;
-    const { bgColor, dateSettings, timezoneSettings } = options;
+    const { options, width, height, theme } = this.props;
+    const { dateSettings, timezoneSettings, bgColor } = options;
 
     const clazz = css`
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      background-color: ${bgColor ?? ''};
       text-align: center;
+      background-color: ${!bgColor ? theme.colors.bg1 : getColorForTheme(bgColor, theme)};
     `;
 
     return (
@@ -258,3 +255,5 @@ export class ClockPanel extends PureComponent<Props, State> {
     );
   }
 }
+
+export const ClockPanel = withTheme(UnthemedClockPanel);

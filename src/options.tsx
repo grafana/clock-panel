@@ -7,6 +7,7 @@ import { config } from '@grafana/runtime';
 import { ClockOptions, ClockMode, ClockType, FontWeight, ZoneFormat, ClockRefresh } from './types';
 import { getTimeZoneNames } from './ClockPanel';
 
+
 export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>) => {
   // Global options
   builder
@@ -59,6 +60,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
         return (
           <div>
             <Input
+              css=""
               type="text"
               value={props.value || 'Pick Color'}
               onBlur={(v: any) => {
@@ -310,7 +312,6 @@ const getStyles = stylesFactory((theme: GrafanaTheme) => {
     trashIcon: css`
       color: ${theme.colors.textWeak};
       cursor: pointer;
-
       &:hover {
         color: ${theme.colors.text};
       }
