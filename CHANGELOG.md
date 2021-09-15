@@ -1,9 +1,10 @@
 # Change Log
 
-## [1.1.2] - unreleased
+## [1.2.0]
 
 - Support local for date formats
 - Support refresh with dashboard time
+- Added dependency on Grafana 7.4+
 
 ## [1.1.1]
 
