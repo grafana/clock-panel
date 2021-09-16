@@ -1,12 +1,8 @@
-import React from 'react';
-import { PanelOptionsEditorBuilder, GrafanaTheme, dateTime } from '@grafana/data';
-import { ColorPicker, Input, Icon, stylesFactory } from '@grafana/ui';
-import { css } from 'emotion';
-import { config } from '@grafana/runtime';
+import { PanelOptionsEditorBuilder, dateTime } from '@grafana/data';
 
 import { ClockOptions, ClockMode, ClockType, FontWeight, ZoneFormat, ClockRefresh } from './types';
 import { getTimeZoneNames } from './ClockPanel';
-
+import { ColorEditor } from './ColorEditor';
 
 export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>) => {
   // Global options
@@ -37,41 +33,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
       id: 'bgColor',
       path: 'bgColor',
       name: 'Background Color',
-      editor: props => {
-        const styles = getStyles(config.theme);
-        let prefix: React.ReactNode = null;
-        let suffix: React.ReactNode = null;
-        if (props.value) {
-          suffix = <Icon className={styles.trashIcon} name="trash-alt" onClick={() => props.onChange(undefined)} />;
-        }
-
-        prefix = (
-          <div className={styles.inputPrefix}>
-            <div className={styles.colorPicker}>
-              <ColorPicker
-                color={props.value || config.theme.colors.panelBg}
-                onChange={props.onChange}
-                enableNamedColors={true}
-              />
-            </div>
-          </div>
-        );
-
-        return (
-          <div>
-            <Input
-              css=""
-              type="text"
-              value={props.value || 'Pick Color'}
-              onBlur={(v: any) => {
-                console.log('CLICK');
-              }}
-              prefix={prefix}
-              suffix={suffix}
-            />
-          </div>
-        );
-      },
+      editor: ColorEditor,
       defaultValue: '',
     });
 
@@ -95,17 +57,15 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       settings: {
         placeholder: 'ISO 8601 or RFC 2822 Date time',
       },
-      defaultValue: dateTime(Date.now())
-        .add(6, 'h')
-        .format(),
-      showIf: o => o.mode === ClockMode.countdown,
+      defaultValue: dateTime(Date.now()).add(6, 'h').format(),
+      showIf: (o) => o.mode === ClockMode.countdown,
     })
     .addTextInput({
       category,
       path: 'countdownSettings.endText',
       name: 'End Text',
       defaultValue: '00:00:00',
-      showIf: o => o.mode === ClockMode.countdown,
+      showIf: (o) => o.mode === ClockMode.countdown,
     })
 
     .addTextInput({
@@ -116,7 +76,7 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'optional',
       },
       defaultValue: undefined,
-      showIf: o => o.mode === ClockMode.countdown,
+      showIf: (o) => o.mode === ClockMode.countdown,
     });
 }
 
@@ -149,7 +109,7 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'date format',
       },
       defaultValue: undefined,
-      showIf: opts => opts.clockType === ClockType.Custom,
+      showIf: (opts) => opts.clockType === ClockType.Custom,
     })
     .addTextInput({
       category,
@@ -180,7 +140,7 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
 function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
   const category = ['Timezone'];
 
-  const timezones = getTimeZoneNames().map(n => {
+  const timezones = getTimeZoneNames().map((n) => {
     return { label: n, value: n };
   });
   timezones.unshift({ label: 'Default', value: '' });
@@ -215,7 +175,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: ZoneFormat.offsetAbbv,
-      showIf: s => s.timezoneSettings?.showTimezone,
+      showIf: (s) => s.timezoneSettings?.showTimezone,
     })
     .addTextInput({
       category,
@@ -225,7 +185,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'font size',
       },
       defaultValue: '12px',
-      showIf: s => s.timezoneSettings?.showTimezone,
+      showIf: (s) => s.timezoneSettings?.showTimezone,
     })
     .addRadio({
       category,
@@ -238,7 +198,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: FontWeight.normal,
-      showIf: s => s.timezoneSettings?.showTimezone,
+      showIf: (s) => s.timezoneSettings?.showTimezone,
     });
 }
 
@@ -263,7 +223,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'Enter date format',
       },
       defaultValue: 'YYYY-MM-DD',
-      showIf: s => s.dateSettings?.showDate,
+      showIf: (s) => s.dateSettings?.showDate,
     })
     .addTextInput({
       category,
@@ -273,7 +233,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'Enter locale: de, fr, es, ... (default: en)',
       },
       defaultValue: '',
-      showIf: s => s.dateSettings?.showDate,
+      showIf: (s) => s.dateSettings?.showDate,
     })
     .addTextInput({
       category,
@@ -283,7 +243,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'date format',
       },
       defaultValue: '20px',
-      showIf: s => s.dateSettings?.showDate,
+      showIf: (s) => s.dateSettings?.showDate,
     })
     .addRadio({
       category,
@@ -296,25 +256,6 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: FontWeight.normal,
-      showIf: s => s.dateSettings?.showDate,
+      showIf: (s) => s.dateSettings?.showDate,
     });
 }
-
-const getStyles = stylesFactory((theme: GrafanaTheme) => {
-  return {
-    colorPicker: css`
-      padding: 0 ${theme.spacing.sm};
-    `,
-    inputPrefix: css`
-      display: flex;
-      align-items: center;
-    `,
-    trashIcon: css`
-      color: ${theme.colors.textWeak};
-      cursor: pointer;
-      &:hover {
-        color: ${theme.colors.text};
-      }
-    `,
-  };
-});
