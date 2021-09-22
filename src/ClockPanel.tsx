@@ -35,7 +35,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     }
 
     if (prevData !== data) {
-      this.tick();
+      this.onPanelRefresh();
     }
   }
 
