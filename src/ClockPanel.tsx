@@ -3,7 +3,6 @@ import { PanelProps, getColorForTheme } from '@grafana/data';
 import { withTheme, Themeable } from '@grafana/ui';
 import { ClockOptions, ClockType, ZoneFormat, ClockMode, ClockRefresh } from './types';
 import { css } from 'emotion';
-import { Unsubscribable } from 'rxjs';
 
 // eslint-disable-next-line
 import moment, { Moment } from 'moment';
@@ -22,18 +21,21 @@ export function getTimeZoneNames(): string[] {
 class UnthemedClockPanel extends PureComponent<Props, State> {
   timerID?: any = 0;
   state = { now: this.getTZ(), timezone: '' };
-  subscription?: Unsubscribable;
 
   componentDidMount() {
-    this.subscription = this.props.eventBus.subscribe({ type: 'refresh' } as any, this.onPanelRefresh);
     this.initTimers();
   }
 
-  componentDidUpdate(oldProps: Props) {
-    const old = oldProps.options.refresh;
-    const now = this.props.options.refresh;
-    if (old !== now) {
+  componentDidUpdate(prevProps: Props) {
+    const { options, data } = this.props;
+    const { options: prevOptions, data: prevData } = prevProps;
+
+    if (options.refresh !== prevOptions.refresh) {
       this.initTimers();
+    }
+
+    if (prevData !== data) {
+      this.tick();
     }
   }
 
@@ -64,9 +66,6 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
   };
 
   componentWillUnmount() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
     if (this.timerID) {
       clearInterval(this.timerID);
       this.timerID = 0;
