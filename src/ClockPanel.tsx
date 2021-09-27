@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { PanelProps, getColorForTheme } from '@grafana/data';
 import { withTheme, Themeable } from '@grafana/ui';
-import { ClockOptions, ClockType, ZoneFormat, ClockMode } from './types';
+import { ClockOptions, ClockType, ZoneFormat, ClockMode, ClockRefresh } from './types';
 import { css } from 'emotion';
 
 // eslint-disable-next-line
@@ -19,18 +19,57 @@ export function getTimeZoneNames(): string[] {
 }
 
 class UnthemedClockPanel extends PureComponent<Props, State> {
-  timerID?: any;
+  timerID?: any = 0;
   state = { now: this.getTZ(), timezone: '' };
 
   componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000 // 1 second
-    );
+    this.initTimers();
   }
 
+  componentDidUpdate(prevProps: Props) {
+    const { options, data } = this.props;
+    const { options: prevOptions, data: prevData } = prevProps;
+
+    if (options.refresh !== prevOptions.refresh) {
+      this.initTimers();
+    }
+
+    if (prevData !== data) {
+      this.onPanelRefresh();
+    }
+  }
+
+  initTimers = () => {
+    const { refresh } = this.props.options;
+
+    if (this.timerID) {
+      clearInterval(this.timerID);
+      this.timerID = 0;
+    }
+
+    if (refresh === ClockRefresh.dashboard) {
+      return this.tick();
+    }
+
+    const delay = 1000; // 1sec
+    this.timerID = setInterval(
+      () => this.tick(),
+      delay // 1 second or 1 min
+    );
+  };
+
+  onPanelRefresh = () => {
+    const { refresh } = this.props.options;
+    if (refresh === ClockRefresh.dashboard) {
+      this.tick();
+    }
+  };
+
   componentWillUnmount() {
-    clearInterval(this.timerID);
+    if (this.timerID) {
+      clearInterval(this.timerID);
+      this.timerID = 0;
+    }
   }
 
   tick() {
@@ -70,9 +109,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     }
 
     const timeLeft = moment.duration(
-      moment(countdownSettings.endCountdownTime)
-        .utcOffset(this.getTZ(timezone).format('Z'), true)
-        .diff(now)
+      moment(countdownSettings.endCountdownTime).utcOffset(this.getTZ(timezone).format('Z'), true).diff(now)
     );
     let formattedTimeLeft = '';
 
@@ -177,7 +214,8 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
 
   renderTime() {
     const { now } = this.state;
-    const { timeSettings, mode } = this.props.options;
+    const { options } = this.props;
+    const { timeSettings, mode } = options;
 
     const clazz = css`
       font-size: ${timeSettings.fontSize};
@@ -190,16 +228,15 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
 
   render() {
     const { options, width, height, theme } = this.props;
-    const { bgColor = '', dateSettings, timezoneSettings } = options;
-    const selectedColor = getColorForTheme(bgColor, theme);
+    const { dateSettings, timezoneSettings, bgColor } = options;
 
     const clazz = css`
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      background-color: ${selectedColor};
       text-align: center;
+      background-color: ${!bgColor ? theme.colors.bg1 : getColorForTheme(bgColor, theme)};
     `;
 
     return (
