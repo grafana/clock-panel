@@ -1,7 +1,7 @@
 {
   "type": "panel",
-  "name": "Clock-dev",
-  "id": "grafana-clock-panel-dev",
+  "name": "Clock",
+  "id": "grafana-clock-panel",
 
   "skipDataQuery": true,
 
