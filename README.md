@@ -60,6 +60,7 @@ Using Docker:
 1. install project dependencies: `yarn install --pure-lockfile`
 1. Start the "watch" task: `yarn watch`
 1. Run a local Grafana instance with the development version of the plugin: `docker run -p 3000:3000 -d --name grafana-plugin-dev --volume $(pwd)/dist:/var/lib/grafana/plugins/clock-panel grafana/grafana`
+  - In the development environment, it might be necessary to disable plugin signature checking for the plugin being developed (see [here](https://grafana.com/docs/grafana/latest/administration/configuration/#allow_loading_unsigned_plugins)). Otherwise, by design, Grafana will not load the plugin.
 1. Check the logs to see that Grafana has started up: `docker logs -f grafana-plugin-dev`
 1. Open Grafana at http://localhost:3000/
 1. Log in with username "admin" and password "admin"

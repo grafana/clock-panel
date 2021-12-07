@@ -1,6 +1,6 @@
 {
-  "name": "clock-panel",
-  "version": "1.2.0",
+  "name": "clock-panel-dev",
+  "version": "1.2.1",
   "description": "Clock Panel Plugin for Grafana",
   "scripts": {
     "build": "grafana-toolkit plugin:build",

@@ -1,0 +1,1 @@
+docker run -p 3000:3000 -d --name grafana-plugin-dev --volume $PWD/ $PWD/dist:/var/lib/grafana/plugins/clock-panel --volume $PWD/conf:/usr/share/grafana/conf grafana/grafana
