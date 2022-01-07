@@ -27,6 +27,8 @@ Show the time in another office or show a countdown to an important event.
 - **Countdown Deadline**:
 
   Used in conjunction with the mode being set to countdown. Choose a date and time to count down to.
+  
+  This field also supports dashboard (constant) variables (e.g. ``${countdown_target}``) to dynamically set the countdown deadline for the Dashboard.
 
 - **Countdown End Text**:
 
