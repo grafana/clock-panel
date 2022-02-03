@@ -14,6 +14,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
         options: [
           { value: ClockMode.time, label: 'Time' },
           { value: ClockMode.countdown, label: 'Countdown' },
+          { value: ClockMode.countup, label: 'Countup' },
         ],
       },
       defaultValue: ClockMode.time,
@@ -38,6 +39,7 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
     });
 
   addCountdown(builder);
+  addCountup(builder);
   addTimeFormat(builder);
   addTimeZone(builder);
   addDateFormat(builder);
@@ -77,6 +79,43 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       },
       defaultValue: undefined,
       showIf: (o) => o.mode === ClockMode.countdown,
+    });
+}
+
+//---------------------------------------------------------------------
+// COUNTUP
+//---------------------------------------------------------------------
+function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>) {
+  const category = ['Countup'];
+
+  builder
+    .addTextInput({
+      category,
+      path: 'countupSettings.beginCountupTime',
+      name: 'Begin Time',
+      settings: {
+        placeholder: 'ISO 8601 or RFC 2822 Date time',
+      },
+      defaultValue: dateTime(Date.now()).add(6, 'h').format(),
+      showIf: (o) => o.mode === ClockMode.countup,
+    })
+    .addTextInput({
+      category,
+      path: 'countupSettings.beginText',
+      name: 'Begin Text',
+      defaultValue: '00:00:00',
+      showIf: (o) => o.mode === ClockMode.countup,
+    })
+
+    .addTextInput({
+      category,
+      path: 'countupSettings.customFormat',
+      name: 'Custom format',
+      settings: {
+        placeholder: 'optional',
+      },
+      defaultValue: undefined,
+      showIf: (o) => o.mode === ClockMode.countup,
     });
 }
 
