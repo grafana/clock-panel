@@ -1,8 +1,8 @@
 ## Clock Panel Plugin for Grafana
 
-The Clock Panel can show the current time or a countdown and updates every second.
+The Clock Panel can show the current time or a countdown/countup and updates every second.
 
-Show the time in another office or show a countdown to an important event.
+Show the time in another office or show a countdown/countup to an important event.
 
 ### Plugin options
 
@@ -10,7 +10,9 @@ Show the time in another office or show a countdown to an important event.
 
 - **Mode**:
 
-  Default is time. If countdown is chosen then set the Countdown Deadline to start the countdown.
+  Default is time.
+  If countdown is chosen then set the Countdown Deadline to start the countdown.
+  If countup is chosen then set the Countup Startline to start the countup.
 
 - **12 or 24 hour**:
 
@@ -31,6 +33,14 @@ Show the time in another office or show a countdown to an important event.
 - **Countdown End Text**:
 
   The text to show when the countdown ends. E.g. LIFTOFF
+
+- **Countup Startline**:
+
+  Used in conjunction with the mode being set to countup. Choose a date and time to count up from.
+
+- **Countup End Text**:
+
+  The text to show before the countup starts. E.g. LIFTOFF
 
 - **Date/Time formatting options**:
 
