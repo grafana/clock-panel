@@ -109,7 +109,9 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     }
 
     const timeLeft = moment.duration(
-      moment(countdownSettings.endCountdownTime).utcOffset(this.getTZ(timezone).format('Z'), true).diff(now)
+      moment(this.props.replaceVariables(countdownSettings.endCountdownTime))
+        .utcOffset(this.getTZ(timezone).format('Z'), true)
+        .diff(now)
     );
     let formattedTimeLeft = '';
 
