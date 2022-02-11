@@ -3,6 +3,7 @@
 ## [1.3.0]
 
 - Added support for count up mode
+- Added support for template variables in count down/up time setting.
 
 ## [1.2.0]
 
