@@ -163,7 +163,12 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     }
 
     const timePassed = moment.duration(
-      moment(now).diff(moment(countupSettings.beginCountupTime).utcOffset(this.getTZ(timezone).format('Z'), true))
+      moment(now).diff(
+        moment(this.props.replaceVariables(countupSettings.beginCountupTime)).utcOffset(
+          this.getTZ(timezone).format('Z'),
+          true
+        )
+      )
     );
 
     let formattedTimePassed = '';
