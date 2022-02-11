@@ -5,6 +5,7 @@ export interface ClockOptions {
   timezone?: string;
   bgColor?: string;
   countdownSettings: CountdownSettings;
+  countupSettings: CountupSettings;
   dateSettings: DateSettings;
   timeSettings: TimeSettings;
   timezoneSettings: TimezoneSettings;
@@ -13,6 +14,7 @@ export interface ClockOptions {
 export enum ClockMode {
   time = 'time',
   countdown = 'countdown',
+  countup = 'countup',
 }
 
 export enum ClockRefresh {
@@ -42,6 +44,12 @@ export enum FontWeight {
 interface CountdownSettings {
   endCountdownTime: any;
   endText: string;
+  customFormat?: string;
+}
+
+interface CountupSettings {
+  beginCountupTime: any;
+  beginText: string;
   customFormat?: string;
 }
 

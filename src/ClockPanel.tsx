@@ -154,6 +154,59 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     return formattedTimeLeft;
   }
 
+  getCountupText(): string {
+    const { now } = this.state;
+    const { countupSettings, timezone } = this.props.options;
+
+    if (!countupSettings.beginCountupTime) {
+      return countupSettings.beginText;
+    }
+
+    const timePassed = moment.duration(
+      moment(now).diff(moment(countupSettings.beginCountupTime).utcOffset(this.getTZ(timezone).format('Z'), true))
+    );
+
+    let formattedTimePassed = '';
+
+    if (timePassed.asSeconds() <= 0) {
+      return countupSettings.beginText;
+    }
+
+    if (countupSettings.customFormat === 'auto') {
+      return (timePassed as any).format();
+    }
+
+    if (countupSettings.customFormat) {
+      return (timePassed as any).format(countupSettings.customFormat);
+    }
+
+    let previous = '';
+
+    if (timePassed.years() > 0) {
+      formattedTimePassed = timePassed.years() === 1 ? '1 year, ' : timePassed.years() + ' years, ';
+      previous = 'years';
+    }
+    if (timePassed.months() > 0 || previous === 'years') {
+      formattedTimePassed += timePassed.months() === 1 ? '1 month, ' : timePassed.months() + ' months, ';
+      previous = 'months';
+    }
+    if (timePassed.days() > 0 || previous === 'months') {
+      formattedTimePassed += timePassed.days() === 1 ? '1 day, ' : timePassed.days() + ' days, ';
+      previous = 'days';
+    }
+    if (timePassed.hours() > 0 || previous === 'days') {
+      formattedTimePassed += timePassed.hours() === 1 ? '1 hour, ' : timePassed.hours() + ' hours, ';
+      previous = 'hours';
+    }
+
+    if (timePassed.minutes() > 0 || previous === 'hours') {
+      formattedTimePassed += timePassed.minutes() === 1 ? '1 minute, ' : timePassed.minutes() + ' minutes, ';
+    }
+
+    formattedTimePassed += timePassed.seconds() === 1 ? '1 second ' : timePassed.seconds() + ' seconds';
+    return formattedTimePassed;
+  }
+
   renderZone() {
     const { now } = this.state;
     const { timezoneSettings } = this.props.options;
@@ -224,7 +277,13 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
       font-weight: ${timeSettings.fontWeight};
     `;
 
-    const disp = mode === ClockMode.countdown ? this.getCountdownText() : now.format(this.getTimeFormat());
+    var disp = now.format(this.getTimeFormat());
+    if (mode === ClockMode.countdown) {
+      disp = this.getCountdownText();
+    } else if (mode === ClockMode.countup) {
+      disp = this.getCountupText();
+    }
+
     return <h2 className={clazz}>{disp}</h2>;
   }
 
