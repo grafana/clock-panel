@@ -23,12 +23,11 @@
     "@grafana/toolkit": "7.4.0",
     "@grafana/runtime": "7.4.0",
     "@types/lodash": "latest",
-    "@types/moment-timezone": "^0.5.12",
-    "lodash": "latest",
-    "moment": "2.24.0"
+    "lodash": "latest"
   },
   "dependencies": {
-    "moment-timezone": "0.5.28"
+    "moment": "2.29.2",
+    "moment-timezone": "0.5.34"
   },
   "volta": {
     "node": "14.17.6",
