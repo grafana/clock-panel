@@ -5,7 +5,7 @@ import { ClockOptions, ClockType, ZoneFormat, ClockMode, ClockRefresh } from './
 import { css } from 'emotion';
 
 // eslint-disable-next-line
-import moment, { Moment } from 'moment';
+import moment, { Moment } from 'moment-timezone';
 import './external/moment-duration-format';
 
 interface Props extends Themeable, PanelProps<ClockOptions> {}
