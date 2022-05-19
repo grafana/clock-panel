@@ -23,10 +23,10 @@
     "@grafana/toolkit": "7.4.0",
     "@grafana/runtime": "7.4.0",
     "@types/lodash": "latest",
-    "lodash": "latest"
+    "lodash": "latest",
+    "moment": "2.29.2"
   },
   "dependencies": {
-    "moment": "2.29.2",
     "moment-timezone": "0.5.34"
   },
   "volta": {
