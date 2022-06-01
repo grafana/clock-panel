@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react';
-import { PanelProps, getColorForTheme } from '@grafana/data';
-import { withTheme, Themeable } from '@grafana/ui';
+import { PanelProps } from '@grafana/data';
+import { withTheme2, Themeable2 } from '@grafana/ui';
 import { ClockOptions, ClockType, ZoneFormat, ClockMode, ClockRefresh } from './types';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 
 // eslint-disable-next-line
 import moment, { Moment } from 'moment-timezone';
 import './external/moment-duration-format';
 
-interface Props extends Themeable, PanelProps<ClockOptions> {}
+interface Props extends Themeable2, PanelProps<ClockOptions> {}
 interface State {
   // eslint-disable-next-line
   now: Moment;
@@ -302,7 +302,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
       justify-content: center;
       flex-direction: column;
       text-align: center;
-      background-color: ${!bgColor ? theme.colors.bg1 : getColorForTheme(bgColor, theme)};
+      background-color: ${!bgColor ? theme.colors.background.primary : theme.v1.visualization.getColorByName(bgColor)};
     `;
 
     return (
@@ -321,4 +321,4 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
   }
 }
 
-export const ClockPanel = withTheme(UnthemedClockPanel);
+export const ClockPanel = withTheme2(UnthemedClockPanel);
