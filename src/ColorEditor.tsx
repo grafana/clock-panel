@@ -1,6 +1,6 @@
 import React from 'react';
 import { ColorPicker, Input, Icon, stylesFactory } from '@grafana/ui';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { config } from '@grafana/runtime';
 import { GrafanaTheme } from '@grafana/data';
 
