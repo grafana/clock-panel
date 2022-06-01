@@ -24,8 +24,7 @@
     "@grafana/ui": "8.0.0",
     "@types/lodash": "latest",
     "lodash": "latest",
-    "moment": "2.29.2",
-    "webpack-livereload-plugin": "^3.0.2"
+    "moment": "2.29.2"
   },
   "dependencies": {
     "moment-timezone": "0.5.34"
