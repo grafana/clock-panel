@@ -1,5 +1,9 @@
 # Change Log
 
+## [2.0.0]
+- Prevent clock panel from crashing Grafana 9.x.x
+- Drop support for Grafana 7.x.x
+
 ## [1.3.1]
 
 - Fixes error on AMG related to dependency imports
