@@ -7,6 +7,7 @@ import { css } from '@emotion/css';
 // eslint-disable-next-line
 import moment, { Moment } from 'moment-timezone';
 import './external/moment-duration-format';
+import { getTemplateSrv } from '@grafana/runtime';
 
 interface Props extends Themeable2, PanelProps<ClockOptions> {}
 interface State {
@@ -96,6 +97,8 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
   getTZ(tz?: string): Moment {
     if (!tz) {
       tz = (moment as any).tz.guess();
+    } else {
+      tz = getTemplateSrv().replace(tz);
     }
     return (moment() as any).tz(tz);
   }

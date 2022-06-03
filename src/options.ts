@@ -1,8 +1,9 @@
-import { PanelOptionsEditorBuilder, dateTime } from '@grafana/data';
+import { PanelOptionsEditorBuilder, dateTime, SelectableValue } from '@grafana/data';
 
 import { ClockOptions, ClockMode, ClockType, FontWeight, ZoneFormat, ClockRefresh } from './types';
 import { getTimeZoneNames } from './ClockPanel';
 import { ColorEditor } from './ColorEditor';
+import { getTemplateSrv } from '@grafana/runtime';
 
 export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>) => {
   // Global options
@@ -173,6 +174,20 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     });
 }
 
+function getVariableOptions() {
+  return getTemplateSrv()
+    .getVariables()
+    .map((t) => {
+      const value = '${' + t.name + '}';
+      const info: SelectableValue<string> = {
+        label: value,
+        value,
+        icon: 'arrow-right',
+      };
+      return info;
+    });
+}
+
 //---------------------------------------------------------------------
 // TIMEZONE
 //---------------------------------------------------------------------
@@ -191,6 +206,13 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       name: 'Timezone',
       settings: {
         options: timezones,
+        getOptions: async () => {
+          const opts = getVariableOptions();
+          if (opts.length) {
+            return [...opts, ...timezones];
+          }
+          return timezones;
+        },
       },
       defaultValue: '',
     })
