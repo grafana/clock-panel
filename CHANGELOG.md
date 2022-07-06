@@ -1,5 +1,8 @@
 # Change Log
 
+## [2.1.0]
+- Added support to set timezone from template variable
+
 ## [2.0.0]
 - Prevent clock panel from crashing Grafana 9.x.x
 - Drop support for Grafana 7.x.x

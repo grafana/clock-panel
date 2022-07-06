@@ -1,6 +1,6 @@
 {
   "name": "clock-panel",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Clock Panel Plugin for Grafana",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
@@ -24,7 +24,8 @@
     "@grafana/ui": "8.0.0",
     "@types/lodash": "latest",
     "lodash": "latest",
-    "moment": "2.29.2"
+    "moment": "2.29.2",
+    "tslib": "2.3.1"
   },
   "dependencies": {
     "moment-timezone": "0.5.34"
