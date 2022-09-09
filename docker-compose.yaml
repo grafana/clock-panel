@@ -1,0 +1,14 @@
+version: '3.0'
+
+services:
+  grafana:
+    container_name: 'clock'
+    build: 
+      context: ./.config
+      args:
+        grafana_version: ${GRAFANA_VERSION:-9.0.7}
+    ports:
+      - 3000:3000/tcp
+    volumes:
+      - ./dist:/var/lib/grafana/plugins/clock,
+      - ./provisioning:/etc/grafana/provisioning
