@@ -12,7 +12,8 @@
     "server": "docker-compose up --build",
     "test": "jest --watch --onlyChanged",
     "test:ci": "jest --maxWorkers 4",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sign": "npx --yes @grafana/sign-plugin"
   },
   "keywords": [
     "clock",

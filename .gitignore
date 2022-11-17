@@ -3,3 +3,4 @@ dist/
 ci-work/
 coverage/
 .vscode
+.eslintcache
