@@ -285,7 +285,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
       font-weight: ${timeSettings.fontWeight};
     `;
 
-    var disp = now.format(this.getTimeFormat());
+    let disp = now.format(this.getTimeFormat());
     if (mode === ClockMode.countdown) {
       disp = this.getCountdownText();
     } else if (mode === ClockMode.countup) {
