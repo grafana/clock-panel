@@ -232,7 +232,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
           { value: ZoneFormat.nameOffset, label: 'Name + Offset' },
           { value: ZoneFormat.offsetAbbv, label: 'Offset + Abbreviation' },
           { value: ZoneFormat.offset, label: 'Offset' },
-          { value: ZoneFormat.abbv, label: 'Abbriviation' },
+          { value: ZoneFormat.abbv, label: 'Abbreviation' },
         ],
       },
       defaultValue: ZoneFormat.offsetAbbv,
