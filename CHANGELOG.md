@@ -34,6 +34,15 @@
 ## v1.0.3
 
 - Adds support for displaying timezones
+## v2.1.1
+
+- Migrate to create-plugin instead of toolkit
+- Small typo fixes
+- Bump grafana packages / dependencies
+  
+## v2.1.0
+
+- Added support to set timezone from template variable
 
 ## v1.0.1
 
