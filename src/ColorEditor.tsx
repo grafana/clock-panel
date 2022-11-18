@@ -26,8 +26,7 @@ export function ColorEditor(props: any) {
 
   return (
     <div>
-      <Input
-        css=""
+      <Input        
         type="text"
         value={props.value || 'Pick Color'}
         onBlur={(v: any) => {
