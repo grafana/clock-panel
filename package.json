@@ -77,9 +77,5 @@
     "moment-timezone": "0.5.34",
     "react": "17.0.2",
     "react-dom": "17.0.2"
-  },
-  "volta": {
-    "node": "14.17.6",
-    "yarn": "1.22.11"
   }
 }
