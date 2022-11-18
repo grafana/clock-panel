@@ -1,6 +1,5 @@
 import { ClockPanel } from "ClockPanel";
 import {render} from '@testing-library/react'
-import '@testing-library/jest-dom'
 import { FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange } from "@grafana/data";
 import { ClockMode, ClockRefresh, ClockType, FontWeight, ZoneFormat } from "types";
 import React from "react";
