@@ -268,6 +268,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     `;
 
     const display = now.locale(dateSettings.locale || '').format(dateSettings.dateFormat);
+    
     return (
       <span>
         <h3 className={className}>{display}</h3>
