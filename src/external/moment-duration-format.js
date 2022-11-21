@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*! Moment Duration Format v2.2.1
  *  https://github.com/jsmreese/moment-duration-format
  *  Date: 2018-01-21

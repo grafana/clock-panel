@@ -1,0 +1,95 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 1,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 7,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "bgColor": "",
+          "clockType": "24 hour",
+          "countdownSettings": {
+            "endCountdownTime": "2022-11-18T01:26:50+01:00",
+            "endText": "00:00:00"
+          },
+          "countupSettings": {
+            "beginCountupTime": "2022-11-18T01:26:50+01:00",
+            "beginText": "00:00:00"
+          },
+          "dateSettings": {
+            "dateFormat": "YYYY-MM-DD",
+            "fontSize": "20px",
+            "fontWeight": "normal",
+            "locale": "",
+            "showDate": false
+          },
+          "mode": "time",
+          "refresh": "sec",
+          "timeSettings": {
+            "fontSize": "44px",
+            "fontWeight": "normal"
+          },
+          "timezone": "",
+          "timezoneSettings": {
+            "fontSize": "12px",
+            "fontWeight": "normal",
+            "showTimezone": false,
+            "zoneFormat": "offsetAbbv"
+          }
+        },
+        "pluginVersion": "2.1.0",
+        "type": "grafana-clock-panel"
+      }
+    ],
+    "schemaVersion": 37,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Clock",
+    "uid": "bJryn4dVz",
+    "version": 2,
+    "weekStart": ""
+  }

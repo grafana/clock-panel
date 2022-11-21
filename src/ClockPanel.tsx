@@ -92,7 +92,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     return 'HH:mm:ss';
   }
 
-  // Return a new moment instnce in the selected timezone
+  // Return a new moment instance in the selected timezone
   // eslint-disable-next-line
   getTZ(tz?: string): Moment {
     if (!tz) {
@@ -220,7 +220,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     const { timezoneSettings } = this.props.options;
     const { zoneFormat } = timezoneSettings;
 
-    const clazz = css`
+    const className = css`
       font-size: ${timezoneSettings.fontSize};
       font-weight: ${timezoneSettings.fontWeight};
       line-height: 1.4;
@@ -247,7 +247,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     }
 
     return (
-      <h4 className={clazz}>
+      <h4 className={className}>
         {zone}
         {zoneFormat === ZoneFormat.nameOffset && (
           <>
@@ -262,15 +262,16 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     const { now } = this.state;
     const { dateSettings } = this.props.options;
 
-    const clazz = css`
+    const className = css`
       font-size: ${dateSettings.fontSize};
       font-weight: ${dateSettings.fontWeight};
     `;
 
-    const disp = now.locale(dateSettings.locale || '').format(dateSettings.dateFormat);
+    const display = now.locale(dateSettings.locale || '').format(dateSettings.dateFormat);
+    
     return (
       <span>
-        <h3 className={clazz}>{disp}</h3>
+        <h3 className={className}>{display}</h3>
       </span>
     );
   }
@@ -280,26 +281,26 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     const { options } = this.props;
     const { timeSettings, mode } = options;
 
-    const clazz = css`
+    const className = css`
       font-size: ${timeSettings.fontSize};
       font-weight: ${timeSettings.fontWeight};
     `;
 
-    var disp = now.format(this.getTimeFormat());
+    let display = now.format(this.getTimeFormat());
     if (mode === ClockMode.countdown) {
-      disp = this.getCountdownText();
+      display = this.getCountdownText();
     } else if (mode === ClockMode.countup) {
-      disp = this.getCountupText();
+      display = this.getCountupText();
     }
 
-    return <h2 className={clazz}>{disp}</h2>;
+    return <h2 className={className}>{display}</h2>;
   }
 
   render() {
     const { options, width, height, theme } = this.props;
     const { dateSettings, timezoneSettings, bgColor } = options;
 
-    const clazz = css`
+    const className = css`
       display: flex;
       align-items: center;
       justify-content: center;
@@ -310,7 +311,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
 
     return (
       <div
-        className={clazz}
+        className={className}
         style={{
           width,
           height,
