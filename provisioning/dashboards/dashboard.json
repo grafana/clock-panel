@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 9,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -862,6 +861,54 @@
       ],
       "title": "Template variable: countup since ${__from:date}",
       "type": "grafana-clock-panel"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 0,
+        "y": 17
+      },
+      "id": 18,
+      "options": {
+        "bgColor": "",
+        "clockType": "24 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2022-12-31T00:28:17+01:00",
+          "endText": "00:00:00"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2022-12-31T00:28:17+01:00",
+          "beginText": "00:00:00"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "locale": "",
+          "showDate": true
+        },
+        "mode": "time",
+        "refresh": "sec",
+        "timeSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal"
+        },
+        "timezone": "",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": true,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "2.1.1",
+      "title": "Should switch to one line based on height",
+      "type": "grafana-clock-panel"
     }
   ],
   "schemaVersion": 37,
@@ -878,6 +925,6 @@
   "timezone": "",
   "title": "Testing",
   "uid": "bJryn4dVz",
-  "version": 9,
+  "version": 1,
   "weekStart": ""
 }
