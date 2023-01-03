@@ -1,5 +1,9 @@
 # Change Log
 
+## [2.1.2]
+- Improving wrapping of the panel elements to be more responsive to different panel sizes https://github.com/grafana/clock-panel/pull/117
+- Fixing a placeholder for the font size field https://github.com/grafana/clock-panel/pull/116
+- 
 ## [2.1.1]
 - Migrate to create-plugin instead of toolkit
 - Small typo fixes
