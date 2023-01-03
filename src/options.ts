@@ -156,7 +156,7 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       path: 'timeSettings.fontSize',
       name: 'Font size',
       settings: {
-        placeholder: 'date format',
+        placeholder: 'Font size (e.g. 12px)',
       },
       defaultValue: '12px',
     })
