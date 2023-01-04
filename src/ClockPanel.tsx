@@ -303,8 +303,8 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     const className = css`
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-direction: column;
+      justify-content: center;      
+      flex-flow: column wrap;
       text-align: center;
       background-color: ${!bgColor ? theme.colors.background.primary : theme.v1.visualization.getColorByName(bgColor)};
     `;
