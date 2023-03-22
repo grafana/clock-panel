@@ -31,7 +31,7 @@
     "@grafana/eslint-config": "^5.1.0",
     "@grafana/tsconfig": "^1.2.0-rc1",
     "@swc/core": "^1.2.144",
-    "@swc/helpers": "^0.4.12",
+    "@swc/helpers": "^0.4.14",
     "@swc/jest": "^0.2.20",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
