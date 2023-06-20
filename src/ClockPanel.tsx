@@ -17,10 +17,8 @@ export function getTimeZoneNames(): string[] {
 
 function getTZ(tz?: string): Moment {
   if (!tz) {
-    console.log('I am guessing the timezone');
     tz = (moment as any).tz.guess();
   } else {
-    console.log('I am using the timezone from the settings');
     tz = getTemplateSrv().replace(tz);
   }
   return (moment() as any).tz(tz);
@@ -201,7 +199,7 @@ export function UnthemedClockPanelFunctional(props: Props) {
         try {
           zone = (getTZ(zone) as any)._z.name;
         } catch (e) {
-          console.log('Error getting timezone', e);
+          console.error('Error getting timezone', e);
         }
     }
 
