@@ -224,6 +224,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
       font-size: ${timezoneSettings.fontSize};
       font-weight: ${timezoneSettings.fontWeight};
       line-height: 1.4;
+      margin: 0;
     `;
 
     let zone = this.props.options.timezone || '';
@@ -265,6 +266,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     const className = css`
       font-size: ${dateSettings.fontSize};
       font-weight: ${dateSettings.fontWeight};
+      margin: 0;
     `;
 
     const display = now.locale(dateSettings.locale || '').format(dateSettings.dateFormat);
@@ -284,6 +286,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     const className = css`
       font-size: ${timeSettings.fontSize};
       font-weight: ${timeSettings.fontWeight};
+      margin: 0;
     `;
 
     let display = now.format(this.getTimeFormat());
