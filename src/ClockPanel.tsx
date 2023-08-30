@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PanelProps } from '@grafana/data';
-import { withTheme2, Themeable2 } from '@grafana/ui';
+import { useTheme2 } from '@grafana/ui';
 import { ClockOptions, ClockType, ZoneFormat, ClockMode, ClockRefresh, TimeSettings } from './types';
 import { css } from '@emotion/css';
 
@@ -9,7 +9,7 @@ import moment, { Moment } from 'moment-timezone';
 import './external/moment-duration-format';
 import { getTemplateSrv } from '@grafana/runtime';
 
-interface Props extends Themeable2, PanelProps<ClockOptions> {}
+interface Props extends PanelProps<ClockOptions> {}
 
 export function getTimeZoneNames(): string[] {
   return (moment as any).tz.names();
@@ -36,9 +36,11 @@ function getTimeFormat(clockType: ClockType, timeSettings: TimeSettings): string
   return 'HH:mm:ss';
 }
 
-export function ClockPanelFunctional(props: Props) {
+export function ClockPanel(props: Props) {
   const [now, setNow] = useState<Moment>(getMoment(props.options.timezone));
-  const { options, width, height, theme } = props;
+  const { options, width, height } = props;
+  console.log(options);
+  const theme = useTheme2();
   const { timezone, dateSettings, timezoneSettings, bgColor } = options;
 
   const className = css`
@@ -52,6 +54,7 @@ export function ClockPanelFunctional(props: Props) {
 
   // Clock refresh only on dashboard refresh
   useEffect(() => {
+    console.log('useEffect');
     if (props.options.refresh === ClockRefresh.dashboard) {
       setNow(getMoment(props.options.timezone));
     }
@@ -276,5 +279,3 @@ export function ClockPanelFunctional(props: Props) {
     </div>
   );
 }
-
-export const ClockPanel = withTheme2(ClockPanelFunctional);
