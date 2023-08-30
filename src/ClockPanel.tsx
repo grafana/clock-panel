@@ -184,6 +184,7 @@ export function ClockPanelFunctional(props: Props) {
       font-size: ${timezoneSettings.fontSize};
       font-weight: ${timezoneSettings.fontWeight};
       line-height: 1.4;
+      margin: 0;
     `;
 
     let zone = props.options.timezone || '';
@@ -224,6 +225,7 @@ export function ClockPanelFunctional(props: Props) {
     const className = css`
       font-size: ${dateSettings.fontSize};
       font-weight: ${dateSettings.fontWeight};
+      margin: 0;
     `;
 
     const display = now.locale(dateSettings.locale || '').format(dateSettings.dateFormat);
@@ -241,6 +243,7 @@ export function ClockPanelFunctional(props: Props) {
     const className = css`
       font-size: ${timeSettings.fontSize};
       font-weight: ${timeSettings.fontWeight};
+      margin: 0;
     `;
 
     let display = '';
