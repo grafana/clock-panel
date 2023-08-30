@@ -15,7 +15,7 @@ export function getTimeZoneNames(): string[] {
   return (moment as any).tz.names();
 }
 
-function getTZ(tz?: string): Moment {
+function getMoment(tz?: string): Moment {
   if (!tz) {
     tz = (moment as any).tz.guess();
   } else {
@@ -36,8 +36,8 @@ function getTimeFormat(clockType: ClockType, timeSettings: TimeSettings): string
   return 'HH:mm:ss';
 }
 
-export function UnthemedClockPanelFunctional(props: Props) {
-  const [now, setNow] = useState<Moment>(getTZ());
+export function ClockPanelFunctional(props: Props) {
+  const [now, setNow] = useState<Moment>(getMoment(props.options.timezone));
   const { options, width, height, theme } = props;
   const { timezone, dateSettings, timezoneSettings, bgColor } = options;
 
@@ -53,14 +53,14 @@ export function UnthemedClockPanelFunctional(props: Props) {
   // Clock refresh only on dashboard refresh
   useEffect(() => {
     if (props.options.refresh === ClockRefresh.dashboard) {
-      setNow(getTZ(props.options.timezone));
+      setNow(getMoment(props.options.timezone));
     }
   }, [props]);
 
   // Clock refresh every second
   useEffect(() => {
     if (props.options.refresh === ClockRefresh.sec) {
-      const timer = setInterval(() => setNow(getTZ(timezone)), 1000);
+      const timer = setInterval(() => setNow(getMoment(timezone)), 1000);
       return () => clearInterval(timer);
     }
     return;
@@ -75,7 +75,7 @@ export function UnthemedClockPanelFunctional(props: Props) {
 
     const timeLeft = moment.duration(
       moment(props.replaceVariables(countdownSettings.endCountdownTime))
-        .utcOffset(getTZ(timezone).format('Z'), true)
+        .utcOffset(getMoment(timezone).format('Z'), true)
         .diff(now)
     );
     let formattedTimeLeft = '';
@@ -128,7 +128,10 @@ export function UnthemedClockPanelFunctional(props: Props) {
 
     const timePassed = moment.duration(
       moment(now).diff(
-        moment(props.replaceVariables(countupSettings.beginCountupTime)).utcOffset(getTZ(timezone).format('Z'), true)
+        moment(props.replaceVariables(countupSettings.beginCountupTime)).utcOffset(
+          getMoment(timezone).format('Z'),
+          true
+        )
       )
     );
 
@@ -197,7 +200,7 @@ export function UnthemedClockPanelFunctional(props: Props) {
         break;
       default:
         try {
-          zone = (getTZ(zone) as any)._z.name;
+          zone = (getMoment(zone) as any)._z.name;
         } catch (e) {
           console.error('Error getting timezone', e);
         }
@@ -271,4 +274,4 @@ export function UnthemedClockPanelFunctional(props: Props) {
   );
 }
 
-export const ClockPanel = withTheme2(UnthemedClockPanelFunctional);
+export const ClockPanel = withTheme2(ClockPanelFunctional);
