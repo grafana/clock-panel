@@ -39,7 +39,6 @@ function getTimeFormat(clockType: ClockType, timeSettings: TimeSettings): string
 export function ClockPanel(props: Props) {
   const [now, setNow] = useState<Moment>(getMoment(props.options.timezone));
   const { options, width, height } = props;
-  console.log(options);
   const theme = useTheme2();
   const { timezone, dateSettings, timezoneSettings, bgColor } = options;
 
@@ -54,7 +53,6 @@ export function ClockPanel(props: Props) {
 
   // Clock refresh only on dashboard refresh
   useEffect(() => {
-    console.log('useEffect');
     if (props.options.refresh === ClockRefresh.dashboard) {
       setNow(getMoment(props.options.timezone));
     }
