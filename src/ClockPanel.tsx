@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { PanelProps } from '@grafana/data';
 import { useTheme2 } from '@grafana/ui';
 import { ClockOptions, ClockType, ZoneFormat, ClockMode, ClockRefresh, TimeSettings } from './types';
@@ -40,16 +40,20 @@ export function ClockPanel(props: Props) {
   const [now, setNow] = useState<Moment>(getMoment(props.options.timezone));
   const { options, width, height } = props;
   const theme = useTheme2();
-  const { timezone, dateSettings, timezoneSettings, bgColor } = options;
+  const { timezone, dateSettings, timezoneSettings } = options;
 
-  const className = css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-flow: column wrap;
-    text-align: center;
-    background-color: ${!bgColor ? theme.colors.background.primary : theme.v1.visualization.getColorByName(bgColor)};
-  `;
+  const className = useMemo(() => {
+    return css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-flow: column wrap;
+      text-align: center;
+      background-color: ${!options.bgColor
+        ? theme.colors.background.primary
+        : theme.v1.visualization.getColorByName(options.bgColor)};
+    `;
+  }, [options.bgColor, theme]);
 
   // Clock refresh only on dashboard refresh
   useEffect(() => {
@@ -220,14 +224,16 @@ export function ClockPanel(props: Props) {
     );
   }
 
-  function renderDate() {
+  function RenderDate() {
     const { dateSettings } = props.options;
 
-    const className = css`
-      font-size: ${dateSettings.fontSize};
-      font-weight: ${dateSettings.fontWeight};
-      margin: 0;
-    `;
+    const className = useMemo(() => {
+      return css`
+        font-size: ${dateSettings.fontSize};
+        font-weight: ${dateSettings.fontWeight};
+        margin: 0;
+      `;
+    }, [dateSettings]);
 
     const display = now.locale(dateSettings.locale || '').format(dateSettings.dateFormat);
 
@@ -238,14 +244,16 @@ export function ClockPanel(props: Props) {
     );
   }
 
-  function renderTime() {
+  function RenderTime() {
     const { timeSettings, clockType, mode } = props.options;
 
-    const className = css`
-      font-size: ${timeSettings.fontSize};
-      font-weight: ${timeSettings.fontWeight};
-      margin: 0;
-    `;
+    const className = useMemo(() => {
+      return css`
+        font-size: ${timeSettings.fontSize};
+        font-weight: ${timeSettings.fontWeight};
+        margin: 0;
+      `;
+    }, [timeSettings]);
 
     let display = '';
     switch (mode) {
@@ -271,8 +279,8 @@ export function ClockPanel(props: Props) {
         height,
       }}
     >
-      {dateSettings.showDate && renderDate()}
-      {renderTime()}
+      {dateSettings.showDate && RenderDate()}
+      {RenderTime()}
       {timezoneSettings.showTimezone && renderZone()}
     </div>
   );
