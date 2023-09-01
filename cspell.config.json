@@ -13,9 +13,10 @@
         "rgba",
         "countup",
         "Themeable",
-        "Unthemed"
+        "Unthemed",
+        "testid"
     ],
-    "ignoreRegExpList": [        
+    "ignoreRegExpList": [
         "@[\\w]+"
     ]
 }

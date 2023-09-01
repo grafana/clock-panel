@@ -1,65 +1,101 @@
-import { ClockPanel } from "ClockPanel";
-import {render} from '@testing-library/react'
-import { FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange } from "@grafana/data";
-import { ClockMode, ClockRefresh, ClockType, FontWeight, ZoneFormat } from "types";
-import React from "react";
+import { ClockPanel } from 'ClockPanel';
+import { act, render } from '@testing-library/react';
+import { FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange } from '@grafana/data';
+import { ClockMode, ClockRefresh, ClockType, FontWeight, ZoneFormat } from 'types';
+import React from 'react';
 
 describe('ClockPanel', () => {
   beforeAll(() => {
     jest.useFakeTimers();
-    jest.setSystemTime(new Date('20 Aug 2020 02:12:00 GMT').getTime())
+  });
+
+  beforeEach(() => {
+    jest.setSystemTime(new Date('20 Aug 2020 02:12:00 GMT').getTime());
   });
 
   afterAll(() => {
     jest.useRealTimers();
   });
 
-  test('renders with default settings without error', () => {
-    // ARRANGE
+  test('renders with default settings without error (24H format)', () => {
     const props = getDefaultProps();
-    const { container } = render(<ClockPanel {...props} />)
-    // ACT
+    const { container } = render(<ClockPanel {...props} />);
 
-    // ASSERT
-    expect(container).toHaveTextContent('02:12:00')
+    expect(container).toHaveTextContent('02:12:00');
+    // no timezone by default
+    expect(container.querySelector('[data-testid="time-zone"]')).not.toBeInTheDocument();
   });
 
   test('renders properly in 12H format', () => {
-    // ARRANGE
     const props = getDefaultProps();
     props.options.clockType = ClockType.H12;
-    const { container } = render(<ClockPanel {...props} />)
-    // ACT
+    const { container } = render(<ClockPanel {...props} />);
 
-    // ASSERT
-    expect(container).toHaveTextContent('2:12:00 AM')
+    expect(container).toHaveTextContent('2:12:00 AM');
+    // no timezone by default
+    expect(container.querySelector('[data-testid="time-zone"]')).not.toBeInTheDocument();
   });
 
   test('renders properly with date', () => {
     // ARRANGE
     const props = getDefaultProps();
     props.options.dateSettings.showDate = true;
-    const { container } = render(<ClockPanel {...props} />)
-    // ACT
+    const { container } = render(<ClockPanel {...props} />);
 
-    // ASSERT
-    expect(container).toHaveTextContent('2020-08-2002:12:00')
+    expect(container).toHaveTextContent('2020-08-2002:12:00');
+    // no timezone by default
+    expect(container.querySelector('[data-testid="time-zone"]')).not.toBeInTheDocument();
   });
 
   test('renders properly in DE locale', () => {
-    // ARRANGE
     const props = getDefaultProps();
-    props.options.dateSettings.showDate = true;    
+    props.options.dateSettings.showDate = true;
     props.options.dateSettings.locale = 'de';
     props.options.dateSettings.dateFormat = 'L';
-    const { container } = render(<ClockPanel {...props} />)
-    // ACT
+    const { container } = render(<ClockPanel {...props} />);
 
-    // ASSERT
-    expect(container).toHaveTextContent('20.08.202002:12:00')
+    expect(container).toHaveTextContent('20.08.202002:12:00');
+    // no timezone by default
+    expect(container.querySelector('[data-testid="time-zone"]')).not.toBeInTheDocument();
+  });
+
+  test('renders properly with timezone', () => {
+    const props = getDefaultProps();
+    props.options.timezoneSettings.showTimezone = true;
+    const { container } = render(<ClockPanel {...props} />);
+
+    expect(container).toHaveTextContent('02:12:00');
+    expect(container.querySelector('[data-testid="time-zone"]')).toBeInTheDocument();
+  });
+
+  test('Updates the clock every second', () => {
+    const props = getDefaultProps();
+    props.options.refresh = ClockRefresh.sec;
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('02:12:00');
+
+    // should trigger an update
+    act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expect(container).toHaveTextContent('02:12:01');
+  });
+
+  test('Updates only when the dashboard refreshes manually', () => {
+    const props = getDefaultProps();
+    props.options.refresh = ClockRefresh.dashboard;
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('02:12:00');
+
+    // should not trigger an update
+    act(() => {
+      jest.runOnlyPendingTimers();
+    });
+
+    expect(container).toHaveTextContent('02:12:00');
   });
 });
-
 
 const getDefaultProps = () => {
   const props = {
@@ -69,18 +105,18 @@ const getDefaultProps = () => {
       timeRange: getDefaultTimeRange(),
     },
     timeRange: getDefaultTimeRange(),
-    timeZone: 'utc',
+    timeZone: 'UTC',
     options: {
       clockType: ClockType.H24,
       mode: ClockMode.time,
       refresh: ClockRefresh.sec,
       countdownSettings: {
         endText: '00:00:00',
-        endCountdownTime: undefined
+        endCountdownTime: undefined,
       },
       countupSettings: {
         beginCountupTime: undefined,
-        beginText: '00:00:00'
+        beginText: '00:00:00',
       },
       dateSettings: {
         showDate: false,
@@ -114,6 +150,6 @@ const getDefaultProps = () => {
     onFieldConfigChange: jest.fn(),
     onPanelConfigChange: jest.fn(),
     onChangeTimeRange: jest.fn(),
-  }
+  };
   return props;
 };

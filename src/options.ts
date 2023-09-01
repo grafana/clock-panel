@@ -1,9 +1,9 @@
 import { PanelOptionsEditorBuilder, dateTime, SelectableValue } from '@grafana/data';
 
 import { ClockOptions, ClockMode, ClockType, FontWeight, ZoneFormat, ClockRefresh } from './types';
-import { getTimeZoneNames } from './ClockPanel';
 import { ColorEditor } from './ColorEditor';
 import { getTemplateSrv } from '@grafana/runtime';
+import { getTimeZoneNames } from 'utils';
 
 export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>) => {
   // Global options
