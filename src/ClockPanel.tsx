@@ -30,7 +30,7 @@ export function ClockPanel(props: Props) {
       text-align: center;
       background-color: ${!options.bgColor
         ? theme.colors.background.primary
-        : theme.v1.visualization.getColorByName(options.bgColor)};
+        : theme.visualization.getColorByName(options.bgColor)};
     `;
   }, [options.bgColor, options.fontMono, theme]);
 
