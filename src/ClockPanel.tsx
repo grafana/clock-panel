@@ -2,13 +2,15 @@ import { css } from '@emotion/css';
 import { PanelProps } from '@grafana/data';
 import { useTheme2 } from '@grafana/ui';
 import React, { useEffect, useMemo, useState } from 'react';
-import { ClockOptions, ClockRefresh, ZoneFormat } from './types';
+import { ClockOptions, ClockRefresh } from './types';
 
 // eslint-disable-next-line
+import { RenderDate } from 'components/RenderDate';
 import { RenderTime } from 'components/RenderTime';
+import { RenderZone } from 'components/RenderZone';
 import { Moment } from 'moment-timezone';
-import './external/moment-duration-format';
 import { getMoment } from 'utils';
+import './external/moment-duration-format';
 
 interface Props extends PanelProps<ClockOptions> {}
 
@@ -47,69 +49,6 @@ export function ClockPanel(props: Props) {
     return;
   }, [props.options.refresh, timezone]);
 
-  function renderZone() {
-    const { timezoneSettings } = props.options;
-    const { zoneFormat } = timezoneSettings;
-
-    const className = css`
-      font-size: ${timezoneSettings.fontSize};
-      font-weight: ${timezoneSettings.fontWeight};
-      line-height: 1.4;
-      margin: 0;
-    `;
-
-    let zone = props.options.timezone || '';
-
-    switch (zoneFormat) {
-      case ZoneFormat.offsetAbbv:
-        zone = now.format('Z z');
-        break;
-      case ZoneFormat.offset:
-        zone = now.format('Z');
-        break;
-      case ZoneFormat.abbv:
-        zone = now.format('z');
-        break;
-      default:
-        try {
-          zone = (getMoment(zone) as any)._z.name;
-        } catch (e) {
-          console.error('Error getting timezone', e);
-        }
-    }
-
-    return (
-      <h4 className={className}>
-        {zone}
-        {zoneFormat === ZoneFormat.nameOffset && (
-          <>
-            <br />({now.format('Z z')})
-          </>
-        )}
-      </h4>
-    );
-  }
-
-  function RenderDate() {
-    const { dateSettings } = props.options;
-
-    const className = useMemo(() => {
-      return css`
-        font-size: ${dateSettings.fontSize};
-        font-weight: ${dateSettings.fontWeight};
-        margin: 0;
-      `;
-    }, [dateSettings]);
-
-    const display = now.locale(dateSettings.locale || '').format(dateSettings.dateFormat);
-
-    return (
-      <span>
-        <h3 className={className}>{display}</h3>
-      </span>
-    );
-  }
-
   return (
     <div
       className={className}
@@ -118,9 +57,9 @@ export function ClockPanel(props: Props) {
         height,
       }}
     >
-      {dateSettings.showDate && RenderDate()}
+      {dateSettings.showDate ? <RenderDate now={now} options={props.options} /> : null}
       <RenderTime now={now} replaceVariables={props.replaceVariables} options={props.options} />
-      {timezoneSettings.showTimezone && renderZone()}
+      {timezoneSettings.showTimezone ? <RenderZone now={now} options={props.options} /> : null}
     </div>
   );
 }
