@@ -36,7 +36,7 @@ export function RenderZone({ options, now }: { options: ClockOptions; now: Momen
   }
 
   return (
-    <h4 className={className}>
+    <h4 className={className} data-testid="time-zone">
       {zone}
       {zoneFormat === ZoneFormat.nameOffset && (
         <>
