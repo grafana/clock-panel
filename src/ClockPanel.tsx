@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { PanelProps } from '@grafana/data';
-import { withTheme2, Themeable2 } from '@grafana/ui';
-import { ClockOptions, ClockType, ZoneFormat, ClockMode, ClockRefresh } from './types';
+import { useTheme2 } from '@grafana/ui';
+import { ClockOptions, ClockType, ZoneFormat, ClockMode, ClockRefresh, TimeSettings } from './types';
 import { css } from '@emotion/css';
 
 // eslint-disable-next-line
@@ -9,111 +9,78 @@ import moment, { Moment } from 'moment-timezone';
 import './external/moment-duration-format';
 import { getTemplateSrv } from '@grafana/runtime';
 
-interface Props extends Themeable2, PanelProps<ClockOptions> {}
-interface State {
-  // eslint-disable-next-line
-  now: Moment;
-}
+interface Props extends PanelProps<ClockOptions> {}
 
 export function getTimeZoneNames(): string[] {
   return (moment as any).tz.names();
 }
 
-class UnthemedClockPanel extends PureComponent<Props, State> {
-  timerID?: any = 0;
-  state = { now: this.getTZ(), timezone: '' };
+function getMoment(tz?: string): Moment {
+  if (!tz) {
+    tz = (moment as any).tz.guess();
+  } else {
+    tz = getTemplateSrv().replace(tz);
+  }
+  return (moment() as any).tz(tz);
+}
 
-  componentDidMount() {
-    this.initTimers();
+function getTimeFormat(clockType: ClockType, timeSettings: TimeSettings): string {
+  if (clockType === ClockType.Custom && timeSettings.customFormat) {
+    return timeSettings.customFormat;
   }
 
-  componentDidUpdate(prevProps: Props) {
-    const { options, data } = this.props;
-    const { options: prevOptions, data: prevData } = prevProps;
-
-    if (options.refresh !== prevOptions.refresh) {
-      this.initTimers();
-    }
-
-    if (prevData !== data) {
-      this.onPanelRefresh();
-    }
+  if (clockType === ClockType.H12) {
+    return 'h:mm:ss A';
   }
 
-  initTimers = () => {
-    const { refresh } = this.props.options;
+  return 'HH:mm:ss';
+}
 
-    if (this.timerID) {
-      clearInterval(this.timerID);
-      this.timerID = 0;
+export function ClockPanel(props: Props) {
+  const [now, setNow] = useState<Moment>(getMoment(props.options.timezone));
+  const { options, width, height } = props;
+  const theme = useTheme2();
+  const { timezone, dateSettings, timezoneSettings } = options;
+
+  const className = useMemo(() => {
+    return css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-flow: column wrap;
+      text-align: center;
+      background-color: ${!options.bgColor
+        ? theme.colors.background.primary
+        : theme.v1.visualization.getColorByName(options.bgColor)};
+    `;
+  }, [options.bgColor, theme]);
+
+  // Clock refresh only on dashboard refresh
+  useEffect(() => {
+    if (props.options.refresh === ClockRefresh.dashboard) {
+      setNow(getMoment(props.options.timezone));
     }
+  }, [props]);
 
-    if (refresh === ClockRefresh.dashboard) {
-      return this.tick();
+  // Clock refresh every second
+  useEffect(() => {
+    if (props.options.refresh === ClockRefresh.sec) {
+      const timer = setInterval(() => setNow(getMoment(timezone)), 1000);
+      return () => clearInterval(timer);
     }
+    return;
+  }, [props.options.refresh, timezone]);
 
-    const delay = 1000; // 1sec
-    this.timerID = setInterval(
-      () => this.tick(),
-      delay // 1 second or 1 min
-    );
-  };
-
-  onPanelRefresh = () => {
-    const { refresh } = this.props.options;
-    if (refresh === ClockRefresh.dashboard) {
-      this.tick();
-    }
-  };
-
-  componentWillUnmount() {
-    if (this.timerID) {
-      clearInterval(this.timerID);
-      this.timerID = 0;
-    }
-  }
-
-  tick() {
-    const { timezone } = this.props.options;
-    this.setState({ now: this.getTZ(timezone) });
-  }
-
-  getTimeFormat() {
-    const { clockType, timeSettings } = this.props.options;
-
-    if (clockType === ClockType.Custom && timeSettings.customFormat) {
-      return timeSettings.customFormat;
-    }
-
-    if (clockType === ClockType.H12) {
-      return 'h:mm:ss A';
-    }
-
-    return 'HH:mm:ss';
-  }
-
-  // Return a new moment instance in the selected timezone
-  // eslint-disable-next-line
-  getTZ(tz?: string): Moment {
-    if (!tz) {
-      tz = (moment as any).tz.guess();
-    } else {
-      tz = getTemplateSrv().replace(tz);
-    }
-    return (moment() as any).tz(tz);
-  }
-
-  getCountdownText(): string {
-    const { now } = this.state;
-    const { countdownSettings, timezone } = this.props.options;
+  function getCountdownText(): string {
+    const { countdownSettings, timezone } = props.options;
 
     if (!countdownSettings.endCountdownTime) {
       return countdownSettings.endText;
     }
 
     const timeLeft = moment.duration(
-      moment(this.props.replaceVariables(countdownSettings.endCountdownTime))
-        .utcOffset(this.getTZ(timezone).format('Z'), true)
+      moment(props.replaceVariables(countdownSettings.endCountdownTime))
+        .utcOffset(getMoment(timezone).format('Z'), true)
         .diff(now)
     );
     let formattedTimeLeft = '';
@@ -157,9 +124,8 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     return formattedTimeLeft;
   }
 
-  getCountupText(): string {
-    const { now } = this.state;
-    const { countupSettings, timezone } = this.props.options;
+  function getCountupText(): string {
+    const { countupSettings, timezone } = props.options;
 
     if (!countupSettings.beginCountupTime) {
       return countupSettings.beginText;
@@ -167,8 +133,8 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
 
     const timePassed = moment.duration(
       moment(now).diff(
-        moment(this.props.replaceVariables(countupSettings.beginCountupTime)).utcOffset(
-          this.getTZ(timezone).format('Z'),
+        moment(props.replaceVariables(countupSettings.beginCountupTime)).utcOffset(
+          getMoment(timezone).format('Z'),
           true
         )
       )
@@ -215,9 +181,8 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     return formattedTimePassed;
   }
 
-  renderZone() {
-    const { now } = this.state;
-    const { timezoneSettings } = this.props.options;
+  function renderZone() {
+    const { timezoneSettings } = props.options;
     const { zoneFormat } = timezoneSettings;
 
     const className = css`
@@ -227,7 +192,7 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
       margin: 0;
     `;
 
-    let zone = this.props.options.timezone || '';
+    let zone = props.options.timezone || '';
 
     switch (zoneFormat) {
       case ZoneFormat.offsetAbbv:
@@ -241,9 +206,9 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
         break;
       default:
         try {
-          zone = (this.getTZ(zone) as any)._z.name;
+          zone = (getMoment(zone) as any)._z.name;
         } catch (e) {
-          console.log('Error getting timezone', e);
+          console.error('Error getting timezone', e);
         }
     }
 
@@ -259,18 +224,19 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     );
   }
 
-  renderDate() {
-    const { now } = this.state;
-    const { dateSettings } = this.props.options;
+  function RenderDate() {
+    const { dateSettings } = props.options;
 
-    const className = css`
-      font-size: ${dateSettings.fontSize};
-      font-weight: ${dateSettings.fontWeight};
-      margin: 0;
-    `;
+    const className = useMemo(() => {
+      return css`
+        font-size: ${dateSettings.fontSize};
+        font-weight: ${dateSettings.fontWeight};
+        margin: 0;
+      `;
+    }, [dateSettings]);
 
     const display = now.locale(dateSettings.locale || '').format(dateSettings.dateFormat);
-    
+
     return (
       <span>
         <h3 className={className}>{display}</h3>
@@ -278,54 +244,44 @@ class UnthemedClockPanel extends PureComponent<Props, State> {
     );
   }
 
-  renderTime() {
-    const { now } = this.state;
-    const { options } = this.props;
-    const { timeSettings, mode } = options;
+  function RenderTime() {
+    const { timeSettings, clockType, mode } = props.options;
 
-    const className = css`
-      font-size: ${timeSettings.fontSize};
-      font-weight: ${timeSettings.fontWeight};
-      margin: 0;
-    `;
+    const className = useMemo(() => {
+      return css`
+        font-size: ${timeSettings.fontSize};
+        font-weight: ${timeSettings.fontWeight};
+        margin: 0;
+      `;
+    }, [timeSettings]);
 
-    let display = now.format(this.getTimeFormat());
-    if (mode === ClockMode.countdown) {
-      display = this.getCountdownText();
-    } else if (mode === ClockMode.countup) {
-      display = this.getCountupText();
+    let display = '';
+    switch (mode) {
+      case ClockMode.countdown:
+        display = getCountdownText();
+        break;
+      case ClockMode.countup:
+        display = getCountupText();
+        break;
+      default:
+        display = now.format(getTimeFormat(clockType, timeSettings));
+        break;
     }
 
     return <h2 className={className}>{display}</h2>;
   }
 
-  render() {
-    const { options, width, height, theme } = this.props;
-    const { dateSettings, timezoneSettings, bgColor } = options;
-
-    const className = css`
-      display: flex;
-      align-items: center;
-      justify-content: center;      
-      flex-flow: column wrap;
-      text-align: center;
-      background-color: ${!bgColor ? theme.colors.background.primary : theme.v1.visualization.getColorByName(bgColor)};
-    `;
-
-    return (
-      <div
-        className={className}
-        style={{
-          width,
-          height,
-        }}
-      >
-        {dateSettings.showDate && this.renderDate()}
-        {this.renderTime()}
-        {timezoneSettings.showTimezone && this.renderZone()}
-      </div>
-    );
-  }
+  return (
+    <div
+      className={className}
+      style={{
+        width,
+        height,
+      }}
+    >
+      {dateSettings.showDate && RenderDate()}
+      {RenderTime()}
+      {timezoneSettings.showTimezone && renderZone()}
+    </div>
+  );
 }
-
-export const ClockPanel = withTheme2(UnthemedClockPanel);

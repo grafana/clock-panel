@@ -61,7 +61,7 @@ interface DateSettings {
   fontWeight: FontWeight;
 }
 
-interface TimeSettings {
+export interface TimeSettings {
   customFormat?: string;
   fontSize: string;
   fontWeight: FontWeight;

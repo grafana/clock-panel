@@ -26,15 +26,7 @@ export function ColorEditor(props: any) {
 
   return (
     <div>
-      <Input        
-        type="text"
-        value={props.value || 'Pick Color'}
-        onBlur={(v: any) => {
-          console.log('CLICK');
-        }}
-        prefix={prefix}
-        suffix={suffix}
-      />
+      <Input type="text" value={props.value || 'Pick Color'} prefix={prefix} suffix={suffix} />
     </div>
   );
 }
