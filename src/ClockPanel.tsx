@@ -26,12 +26,13 @@ export function ClockPanel(props: Props) {
       align-items: center;
       justify-content: center;
       flex-flow: column wrap;
+      font-family: ${options.fontMono ? 'monospace' : ''};
       text-align: center;
       background-color: ${!options.bgColor
         ? theme.colors.background.primary
         : theme.v1.visualization.getColorByName(options.bgColor)};
     `;
-  }, [options.bgColor, theme]);
+  }, [options.bgColor, options.fontMono, theme]);
 
   // Clock refresh only on dashboard refresh
   useEffect(() => {

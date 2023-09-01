@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 import { Moment } from 'moment-timezone';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ClockOptions, ZoneFormat } from 'types';
 import { getMoment } from 'utils';
 
@@ -8,12 +8,15 @@ export function RenderZone({ options, now }: { options: ClockOptions; now: Momen
   const { timezoneSettings } = options;
   const { zoneFormat } = timezoneSettings;
 
-  const className = css`
-    font-size: ${timezoneSettings.fontSize};
-    font-weight: ${timezoneSettings.fontWeight};
-    line-height: 1.4;
-    margin: 0;
-  `;
+  const className = useMemo(() => {
+    return css`
+      font-size: ${timezoneSettings.fontSize};
+      font-weight: ${timezoneSettings.fontWeight};
+      font-family: ${options.fontMono ? 'monospace' : ''};
+      line-height: 1.4;
+      margin: 0;
+    `;
+  }, [options.fontMono, timezoneSettings.fontSize, timezoneSettings.fontWeight]);
 
   let zone = options.timezone || '';
 

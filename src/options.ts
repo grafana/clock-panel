@@ -37,6 +37,11 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
       name: 'Background Color',
       editor: ColorEditor,
       defaultValue: '',
+    })
+    .addBooleanSwitch({
+      path: 'fontMono',
+      name: 'Font monospace',
+      defaultValue: false,
     });
 
   addCountdown(builder);

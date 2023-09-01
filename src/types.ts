@@ -4,6 +4,7 @@ export interface ClockOptions {
   clockType: ClockType;
   timezone?: string;
   bgColor?: string;
+  fontMono?: boolean;
   countdownSettings: CountdownSettings;
   countupSettings: CountupSettings;
   dateSettings: DateSettings;
