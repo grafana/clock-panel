@@ -153,10 +153,11 @@ export function RenderTime({
   const className = useMemo(() => {
     return css`
       font-size: ${timeSettings.fontSize};
+      font-family: ${options.fontMono ? 'monospace' : ''};
       font-weight: ${timeSettings.fontWeight};
       margin: 0;
     `;
-  }, [timeSettings]);
+  }, [options.fontMono, timeSettings.fontSize, timeSettings.fontWeight]);
 
   let display = '';
   switch (mode) {

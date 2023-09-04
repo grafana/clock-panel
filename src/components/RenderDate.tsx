@@ -10,9 +10,10 @@ export function RenderDate({ options, now }: { options: ClockOptions; now: Momen
     return css`
       font-size: ${dateSettings.fontSize};
       font-weight: ${dateSettings.fontWeight};
+      font-family: ${options.fontMono ? 'monospace' : ''};
       margin: 0;
     `;
-  }, [dateSettings]);
+  }, [dateSettings.fontSize, dateSettings.fontWeight, options.fontMono]);
 
   const display = now.locale(dateSettings.locale || '').format(dateSettings.dateFormat);
 
