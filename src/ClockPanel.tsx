@@ -15,10 +15,13 @@ import './external/moment-duration-format';
 interface Props extends PanelProps<ClockOptions> {}
 
 export function ClockPanel(props: Props) {
-  const [now, setNow] = useState<Moment>(getMoment(props.options.timezone));
   const { options, width, height } = props;
   const theme = useTheme2();
-  const { timezone, dateSettings, timezoneSettings } = options;
+  const { timezone: optionsTimezone, dateSettings, timezoneSettings } = options;
+  // notice the upercase Z.
+  const { timeZone: dashboardTimezone } = props;
+  const timezoneToUse = optionsTimezone === 'dashboard' ? dashboardTimezone : optionsTimezone ?? '';
+  const [now, setNow] = useState<Moment>(getMoment(timezoneToUse));
 
   const className = useMemo(() => {
     return css`
@@ -37,18 +40,18 @@ export function ClockPanel(props: Props) {
   // Clock refresh only on dashboard refresh
   useEffect(() => {
     if (props.options.refresh === ClockRefresh.dashboard) {
-      setNow(getMoment(props.options.timezone));
+      setNow(getMoment(timezoneToUse));
     }
-  }, [props]);
+  }, [props, timezoneToUse]);
 
   // Clock refresh every second
   useEffect(() => {
     if (props.options.refresh === ClockRefresh.sec) {
-      const timer = setInterval(() => setNow(getMoment(timezone)), 1000);
+      const timer = setInterval(() => setNow(getMoment(timezoneToUse)), 1000);
       return () => clearInterval(timer);
     }
     return;
-  }, [props.options.refresh, timezone]);
+  }, [props.options.refresh, timezoneToUse]);
 
   return (
     <div
@@ -59,8 +62,13 @@ export function ClockPanel(props: Props) {
       }}
     >
       {dateSettings.showDate ? <RenderDate now={now} options={props.options} /> : null}
-      <RenderTime now={now} replaceVariables={props.replaceVariables} options={props.options} />
-      {timezoneSettings.showTimezone ? <RenderZone now={now} options={props.options} /> : null}
+      <RenderTime
+        now={now}
+        replaceVariables={props.replaceVariables}
+        options={props.options}
+        timezone={timezoneToUse}
+      />
+      {timezoneSettings.showTimezone ? <RenderZone now={now} options={props.options} timezone={timezoneToUse} /> : null}
     </div>
   );
 }

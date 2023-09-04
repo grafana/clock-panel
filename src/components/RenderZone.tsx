@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import { ClockOptions, ZoneFormat } from 'types';
 import { getMoment } from 'utils';
 
-export function RenderZone({ options, now }: { options: ClockOptions; now: Moment }) {
+export function RenderZone({ options, now, timezone }: { options: ClockOptions; now: Moment; timezone: string }) {
   const { timezoneSettings } = options;
   const { zoneFormat } = timezoneSettings;
 
@@ -18,7 +18,7 @@ export function RenderZone({ options, now }: { options: ClockOptions; now: Momen
     `;
   }, [options.fontMono, timezoneSettings.fontSize, timezoneSettings.fontWeight]);
 
-  let zone = options.timezone || '';
+  let zone = timezone;
 
   switch (zoneFormat) {
     case ZoneFormat.offsetAbbv:

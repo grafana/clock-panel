@@ -143,9 +143,11 @@ function getTimeFormat(clockType: ClockType, timeSettings: TimeSettings): string
 export function RenderTime({
   now,
   replaceVariables,
+  timezone,
   options,
 }: {
   now: Moment;
+  timezone: ClockOptions['timezone'];
   replaceVariables: PanelProps['replaceVariables'];
   options: ClockOptions;
 }) {
@@ -164,7 +166,7 @@ export function RenderTime({
     case ClockMode.countdown:
       display = getCountdownText({
         countdownSettings: options.countdownSettings,
-        timezone: options.timezone,
+        timezone: timezone,
         replaceVariables,
         now,
       });
@@ -172,7 +174,7 @@ export function RenderTime({
     case ClockMode.countup:
       display = getCountupText({
         countupSettings: options.countupSettings,
-        timezone: options.timezone,
+        timezone: timezone,
         replaceVariables,
         now,
       });
