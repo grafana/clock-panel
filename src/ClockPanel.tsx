@@ -18,7 +18,7 @@ export function ClockPanel(props: Props) {
   const { options, width, height } = props;
   const theme = useTheme2();
   const { timezone: optionsTimezone, dateSettings, timezoneSettings } = options;
-  // notice the upercase Z.
+  // notice the uppercase Z.
   const { timeZone: dashboardTimezone } = props;
   const timezoneToUse = optionsTimezone === 'dashboard' ? dashboardTimezone : optionsTimezone ?? '';
   const [now, setNow] = useState<Moment>(getMoment(timezoneToUse));
