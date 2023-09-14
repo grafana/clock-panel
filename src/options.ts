@@ -200,7 +200,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
   const category = ['Timezone'];
 
   const timezones = [
-    { label: 'Default (Browser)', value: '' },
+    { label: 'Browser Time', value: '' },
     { label: 'Same as Dashboard', value: 'dashboard' },
     ...getTimeZoneNames().map((n) => {
       return { label: n, value: n };
