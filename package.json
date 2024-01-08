@@ -35,7 +35,7 @@
     "@swc/jest": "^0.2.29",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
-    "@types/glob": "^8.0.0",
+    "@types/glob": "^8.1.0",
     "@types/jest": "^29.2.2",
     "@types/lodash": "^4.14.188",
     "@types/node": "^18.11.9",
