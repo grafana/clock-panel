@@ -1,7 +1,16 @@
 import { ClockPanel } from 'ClockPanel';
 import { act, render } from '@testing-library/react';
 import { FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange } from '@grafana/data';
-import { ClockMode, ClockRefresh, ClockType, FontWeight, ZoneFormat } from 'types';
+import {
+  ClockMode,
+  ClockRefresh,
+  ClockSource,
+  ClockType,
+  CountdownQueryCalculation,
+  CountupQueryCalculation,
+  FontWeight,
+  ZoneFormat,
+} from 'types';
 import React from 'react';
 
 describe('ClockPanel', () => {
@@ -111,10 +120,16 @@ const getDefaultProps = () => {
       mode: ClockMode.time,
       refresh: ClockRefresh.sec,
       countdownSettings: {
-        endText: '00:00:00',
+        source: ClockSource.input,
+        queryCalculation: CountdownQueryCalculation.lastNotNull,
+        queryField: '',
         endCountdownTime: undefined,
+        endText: '00:00:00',
       },
       countupSettings: {
+        source: ClockSource.input,
+        queryCalculation: CountupQueryCalculation.lastNotNull,
+        queryField: '',
         beginCountupTime: undefined,
         beginText: '00:00:00',
       },
