@@ -15,7 +15,7 @@ import './external/moment-duration-format';
 interface Props extends PanelProps<ClockOptions> {}
 
 export function ClockPanel(props: Props) {
-  const { options, width, height } = props;
+  const { options, width, height, data } = props;
   const theme = useTheme2();
   const { timezone: optionsTimezone, dateSettings, timezoneSettings } = options;
   // notice the uppercase Z.
@@ -66,6 +66,7 @@ export function ClockPanel(props: Props) {
         now={now}
         replaceVariables={props.replaceVariables}
         options={props.options}
+        data={data}
         timezone={timezoneToUse}
       />
       {timezoneSettings.showTimezone ? <RenderZone now={now} options={props.options} timezone={timezoneToUse} /> : null}

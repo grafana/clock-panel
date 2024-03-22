@@ -12,6 +12,31 @@ export interface ClockOptions {
   timezoneSettings: TimezoneSettings;
 }
 
+export enum ClockSource {
+  input = 'input',
+  query = 'query',
+}
+
+export enum CountdownQueryCalculation {
+  lastNotNull = 'lastNotNull',
+  last = 'last',
+  firstNotNull = 'firstNotNull',
+  first = 'first',
+  min = 'min',
+  minFuture = 'minFuture',
+  max = 'max',
+}
+
+export enum CountupQueryCalculation {
+  first = 'first',
+  firstNotNull = 'firstNotNull',
+  last = 'last',
+  lastNotNull = 'lastNotNull',
+  min = 'min',
+  max = 'max',
+  maxPast = 'maxPast',
+}
+
 export enum ClockMode {
   time = 'time',
   countdown = 'countdown',
@@ -43,13 +68,19 @@ export enum FontWeight {
 }
 
 interface CountdownSettings {
+  source: ClockSource;
   endCountdownTime: any;
+  queryCalculation: CountdownQueryCalculation;
+  queryField: string;
   endText: string;
   customFormat?: string;
 }
 
 interface CountupSettings {
+  source: ClockSource;
   beginCountupTime: any;
+  queryCalculation: CountupQueryCalculation;
+  queryField: string;
   beginText: string;
   customFormat?: string;
 }

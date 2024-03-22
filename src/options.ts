@@ -1,11 +1,26 @@
-import { PanelOptionsEditorBuilder, dateTime, SelectableValue } from '@grafana/data';
+import { PanelOptionsEditorBuilder, dateTime, SelectableValue, StandardEditorContext } from '@grafana/data';
 
-import { ClockOptions, ClockMode, ClockType, FontWeight, ZoneFormat, ClockRefresh } from './types';
+import {
+  ClockOptions,
+  ClockMode,
+  ClockType,
+  FontWeight,
+  ZoneFormat,
+  ClockRefresh,
+  ClockSource,
+  CountdownQueryCalculation,
+  CountupQueryCalculation,
+} from './types';
 import { ColorEditor } from './ColorEditor';
 import { getTemplateSrv } from '@grafana/runtime';
 import { getTimeZoneNames } from 'utils';
 
-export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>) => {
+export const optionsBuilder = (
+  builder: PanelOptionsEditorBuilder<ClockOptions>,
+  context: StandardEditorContext<ClockOptions>
+) => {
+  const data = context.data;
+
   // Global options
   builder
     .addRadio({
@@ -44,8 +59,8 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
       defaultValue: false,
     });
 
-  addCountdown(builder);
-  addCountup(builder);
+  addCountdown(builder, data);
+  addCountup(builder, data);
   addTimeFormat(builder);
   addTimeZone(builder);
   addDateFormat(builder);
@@ -54,10 +69,23 @@ export const optionsBuilder = (builder: PanelOptionsEditorBuilder<ClockOptions>)
 //---------------------------------------------------------------------
 // COUNTDOWN
 //---------------------------------------------------------------------
-function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
+function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>, data: any) {
   const category = ['Countdown'];
 
   builder
+    .addRadio({
+      category,
+      path: 'countdownSettings.source',
+      name: 'Source',
+      settings: {
+        options: [
+          { value: ClockSource.input, label: 'Input' },
+          { value: ClockSource.query, label: 'Query' },
+        ],
+      },
+      defaultValue: ClockSource.input,
+      showIf: (o) => o.mode === ClockMode.countdown,
+    })
     .addTextInput({
       category,
       path: 'countdownSettings.endCountdownTime',
@@ -66,7 +94,48 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'ISO 8601 or RFC 2822 Date time',
       },
       defaultValue: dateTime(Date.now()).add(6, 'h').format(),
-      showIf: (o) => o.mode === ClockMode.countdown,
+      showIf: (o) => o.mode === ClockMode.countdown && o.countdownSettings.source === ClockSource.input,
+    })
+    .addSelect({
+      category,
+      path: 'countdownSettings.queryCalculation',
+      name: 'Calculation',
+      description: 'How to calculate the countdown time',
+      settings: {
+        options: [
+          {
+            value: CountdownQueryCalculation.lastNotNull,
+            label: 'Last *',
+            description: 'Last non-null value (also excludes NaNs)',
+          },
+          { value: CountdownQueryCalculation.last, label: 'Last', description: 'Last value' },
+          {
+            value: CountdownQueryCalculation.firstNotNull,
+            label: 'First *',
+            description: 'First non-null value (also excludes NaNs)',
+          },
+          { value: CountdownQueryCalculation.first, label: 'First', description: 'First value' },
+          { value: CountdownQueryCalculation.min, label: 'Min', description: 'Minimum value' },
+          {
+            value: CountdownQueryCalculation.minFuture,
+            label: 'Min Future',
+            description: 'Minimum value that is in the future',
+          },
+          { value: CountdownQueryCalculation.max, label: 'Max', description: 'Maximum value' },
+        ],
+      },
+      defaultValue: CountdownQueryCalculation.last,
+      showIf: (o) => o.mode === ClockMode.countdown && o.countdownSettings.source === ClockSource.query,
+    })
+    .addSelect({
+      category,
+      path: 'countdownSettings.queryField',
+      name: 'Field',
+      settings: {
+        options: data?.[0]?.fields?.map((f: any) => ({ label: f.name, value: f.name })) ?? [],
+      },
+      defaultValue: data?.[0]?.fields?.[0]?.name || '',
+      showIf: (o) => o.mode === ClockMode.countdown && o.countdownSettings.source === ClockSource.query,
     })
     .addTextInput({
       category,
@@ -75,7 +144,6 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       defaultValue: '00:00:00',
       showIf: (o) => o.mode === ClockMode.countdown,
     })
-
     .addTextInput({
       category,
       path: 'countdownSettings.customFormat',
@@ -91,10 +159,23 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
 //---------------------------------------------------------------------
 // COUNTUP
 //---------------------------------------------------------------------
-function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>) {
+function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>, data: any) {
   const category = ['Countup'];
 
   builder
+    .addRadio({
+      category,
+      path: 'countupSettings.source',
+      name: 'Source',
+      settings: {
+        options: [
+          { value: ClockSource.input, label: 'Input' },
+          { value: ClockSource.query, label: 'Query' },
+        ],
+      },
+      defaultValue: ClockSource.input,
+      showIf: (o) => o.mode === ClockMode.countup,
+    })
     .addTextInput({
       category,
       path: 'countupSettings.beginCountupTime',
@@ -103,7 +184,48 @@ function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: 'ISO 8601 or RFC 2822 Date time',
       },
       defaultValue: dateTime(Date.now()).add(6, 'h').format(),
-      showIf: (o) => o.mode === ClockMode.countup,
+      showIf: (o) => o.mode === ClockMode.countup && o.countupSettings.source === ClockSource.input,
+    })
+    .addSelect({
+      category,
+      path: 'countupSettings.queryCalculation',
+      name: 'Calculation',
+      description: 'How to calculate the countup time',
+      settings: {
+        options: [
+          {
+            value: CountupQueryCalculation.lastNotNull,
+            label: 'Last *',
+            description: 'Last non-null value (also excludes NaNs)',
+          },
+          { value: CountupQueryCalculation.last, label: 'Last', description: 'Last value' },
+          {
+            value: CountupQueryCalculation.firstNotNull,
+            label: 'First *',
+            description: 'First non-null value (also excludes NaNs)',
+          },
+          { value: CountupQueryCalculation.first, label: 'First', description: 'First value' },
+          { value: CountupQueryCalculation.min, label: 'Min', description: 'Minimum value' },
+          { value: CountupQueryCalculation.max, label: 'Max', description: 'Maximum value' },
+          {
+            value: CountupQueryCalculation.maxPast,
+            label: 'Max Past',
+            description: 'Maximum value that is in the past',
+          },
+        ],
+      },
+      defaultValue: CountupQueryCalculation.last,
+      showIf: (o) => o.mode === ClockMode.countup && o.countupSettings.source === ClockSource.query,
+    })
+    .addSelect({
+      category,
+      path: 'countupSettings.queryField',
+      name: 'Field',
+      settings: {
+        options: data?.[0]?.fields?.map((f: any) => ({ label: f.name, value: f.name })) ?? [],
+      },
+      defaultValue: data?.[0]?.fields?.[0]?.name || '',
+      showIf: (o) => o.mode === ClockMode.countup && o.countupSettings.source === ClockSource.query,
     })
     .addTextInput({
       category,
