@@ -79,6 +79,7 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addTextInput({
       category,
       path: 'countdownSettings.customFormat',
+      description: 'Use momentjs `.format()` syntax',
       name: 'Custom format',
       settings: {
         placeholder: 'optional',
@@ -117,6 +118,7 @@ function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       category,
       path: 'countupSettings.customFormat',
       name: 'Custom format',
+      description: 'Use momentjs `.format()` syntax',
       settings: {
         placeholder: 'optional',
       },
@@ -149,7 +151,7 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       category,
       path: 'timeSettings.customFormat',
       name: 'Time Format',
-      description: 'the date formatting pattern',
+      description: 'The date formatting pattern. Use momentjs `.format()` syntax',
       settings: {
         placeholder: 'date format',
       },
