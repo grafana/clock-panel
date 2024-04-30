@@ -125,6 +125,8 @@ const getDefaultProps = () => {
         queryField: '',
         endCountdownTime: undefined,
         endText: '00:00:00',
+        invalidValueText: 'invalid value',
+        noValueText: 'no value',
       },
       countupSettings: {
         source: ClockSource.input,
@@ -132,6 +134,8 @@ const getDefaultProps = () => {
         queryField: '',
         beginCountupTime: undefined,
         beginText: '00:00:00',
+        invalidValueText: 'invalid value',
+        noValueText: 'no value',
       },
       dateSettings: {
         showDate: false,

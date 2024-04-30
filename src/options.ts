@@ -19,8 +19,6 @@ export const optionsBuilder = (
   builder: PanelOptionsEditorBuilder<ClockOptions>,
   context: StandardEditorContext<ClockOptions>
 ) => {
-  const data = context.data;
-
   // Global options
   builder
     .addRadio({
@@ -59,8 +57,8 @@ export const optionsBuilder = (
       defaultValue: false,
     });
 
-  addCountdown(builder, data);
-  addCountup(builder, data);
+  addCountdown(builder);
+  addCountup(builder);
   addTimeFormat(builder);
   addTimeZone(builder);
   addDateFormat(builder);
@@ -69,7 +67,7 @@ export const optionsBuilder = (
 //---------------------------------------------------------------------
 // COUNTDOWN
 //---------------------------------------------------------------------
-function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>, data: any) {
+function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
   const category = ['Countdown'];
 
   builder
@@ -127,14 +125,13 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>, data: an
       defaultValue: CountdownQueryCalculation.last,
       showIf: (o) => o.mode === ClockMode.countdown && o.countdownSettings.source === ClockSource.query,
     })
-    .addSelect({
+    .addFieldNamePicker({
       category,
       path: 'countdownSettings.queryField',
       name: 'Field',
       settings: {
-        options: data?.[0]?.fields?.map((f: any) => ({ label: f.name, value: f.name })) ?? [],
+        noFieldsMessage: 'No fields found',
       },
-      defaultValue: data?.[0]?.fields?.[0]?.name || '',
       showIf: (o) => o.mode === ClockMode.countdown && o.countdownSettings.source === ClockSource.query,
     })
     .addTextInput({
@@ -142,6 +139,20 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>, data: an
       path: 'countdownSettings.endText',
       name: 'End Text',
       defaultValue: '00:00:00',
+      showIf: (o) => o.mode === ClockMode.countdown,
+    })
+    .addTextInput({
+      category,
+      path: 'countdownSettings.noValueText',
+      name: 'No Value Text',
+      defaultValue: 'no value',
+      showIf: (o) => o.mode === ClockMode.countdown,
+    })
+    .addTextInput({
+      category,
+      path: 'countdownSettings.invalidValueText',
+      name: 'Invalid Value Text',
+      defaultValue: 'invalid value',
       showIf: (o) => o.mode === ClockMode.countdown,
     })
     .addTextInput({
@@ -159,7 +170,7 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>, data: an
 //---------------------------------------------------------------------
 // COUNTUP
 //---------------------------------------------------------------------
-function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>, data: any) {
+function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>) {
   const category = ['Countup'];
 
   builder
@@ -217,14 +228,13 @@ function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>, data: any)
       defaultValue: CountupQueryCalculation.last,
       showIf: (o) => o.mode === ClockMode.countup && o.countupSettings.source === ClockSource.query,
     })
-    .addSelect({
+    .addFieldNamePicker({
       category,
       path: 'countupSettings.queryField',
       name: 'Field',
       settings: {
-        options: data?.[0]?.fields?.map((f: any) => ({ label: f.name, value: f.name })) ?? [],
+        noFieldsMessage: 'No fields found',
       },
-      defaultValue: data?.[0]?.fields?.[0]?.name || '',
       showIf: (o) => o.mode === ClockMode.countup && o.countupSettings.source === ClockSource.query,
     })
     .addTextInput({
@@ -234,7 +244,20 @@ function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>, data: any)
       defaultValue: '00:00:00',
       showIf: (o) => o.mode === ClockMode.countup,
     })
-
+    .addTextInput({
+      category,
+      path: 'countupSettings.noValueText',
+      name: 'No Value Text',
+      defaultValue: 'no value',
+      showIf: (o) => o.mode === ClockMode.countup,
+    })
+    .addTextInput({
+      category,
+      path: 'countupSettings.invalidValueText',
+      name: 'Invalid Value Text',
+      defaultValue: 'invalid value',
+      showIf: (o) => o.mode === ClockMode.countup,
+    })
     .addTextInput({
       category,
       path: 'countupSettings.customFormat',

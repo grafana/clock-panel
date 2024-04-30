@@ -17,25 +17,26 @@ export enum ClockSource {
   query = 'query',
 }
 
-export enum CountdownQueryCalculation {
-  lastNotNull = 'lastNotNull',
-  last = 'last',
-  firstNotNull = 'firstNotNull',
-  first = 'first',
-  min = 'min',
-  minFuture = 'minFuture',
-  max = 'max',
-}
+export const QueryCalculation = {
+  lastNotNull: 'lastNotNull',
+  last: 'last',
+  firstNotNull: 'firstNotNull',
+  first: 'first',
+  min: 'min',
+  max: 'max',
+};
 
-export enum CountupQueryCalculation {
-  first = 'first',
-  firstNotNull = 'firstNotNull',
-  last = 'last',
-  lastNotNull = 'lastNotNull',
-  min = 'min',
-  max = 'max',
-  maxPast = 'maxPast',
-}
+export const CountdownQueryCalculation = {
+  ...QueryCalculation,
+  minFuture: 'minFuture',
+} as const;
+export type CountdownQueryCalculation = (typeof CountdownQueryCalculation)[keyof typeof CountdownQueryCalculation];
+
+export const CountupQueryCalculation = {
+  ...QueryCalculation,
+  maxPast: 'maxPast',
+} as const;
+export type CountupQueryCalculation = (typeof CountupQueryCalculation)[keyof typeof CountupQueryCalculation];
 
 export enum ClockMode {
   time = 'time',
@@ -73,6 +74,8 @@ interface CountdownSettings {
   queryCalculation: CountdownQueryCalculation;
   queryField: string;
   endText: string;
+  noValueText: string;
+  invalidValueText: string;
   customFormat?: string;
 }
 
@@ -82,6 +85,8 @@ interface CountupSettings {
   queryCalculation: CountupQueryCalculation;
   queryField: string;
   beginText: string;
+  noValueText: string;
+  invalidValueText: string;
   customFormat?: string;
 }
 

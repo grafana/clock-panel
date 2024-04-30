@@ -15,6 +15,7 @@
       "plugins": ["deprecation"],
       "files": ["src/**/*.{ts,tsx}"],
       "rules": {
+        "no-redeclare": "warn",
         "deprecation/deprecation": "warn"
       },
       "parserOptions": {
