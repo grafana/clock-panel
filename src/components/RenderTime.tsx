@@ -1,188 +1,105 @@
 import { css } from '@emotion/css';
-import { PanelData, PanelProps } from '@grafana/data';
-import moment, { Moment, Duration } from 'moment-timezone';
+import moment, { Moment } from 'moment-timezone';
 import React, { useMemo } from 'react';
-import { ClockMode, ClockOptions, ClockSource, ClockType, TimeSettings } from 'types';
-import { getMoment } from 'utils';
-import { getValueFromQuery } from './ComputeTime';
+import { ClockMode, ClockOptions, ClockType, TimeSettings } from 'types';
 
 function getCountdownText({
   countdownSettings,
-  timezone,
-  data,
-  replaceVariables,
+  time,
   now,
 }: {
   countdownSettings: ClockOptions['countdownSettings'];
-  timezone: ClockOptions['timezone'];
-  data: PanelData;
-  replaceVariables: PanelProps['replaceVariables'];
+  time: Moment;
   now: Moment;
 }): string {
-  let timeLeft = moment.duration(0);
-
-  switch (countdownSettings.source) {
-    case ClockSource.input:
-      if (!countdownSettings.endCountdownTime) {
-        return countdownSettings.noValueText;
-      }
-
-      let value = moment(replaceVariables(countdownSettings.endCountdownTime)).utcOffset(
-        getMoment(timezone).format('Z'),
-        true
-      );
-
-      if (!value.isValid()) {
-        return countdownSettings.invalidValueText;
-      }
-
-      timeLeft = moment.duration(value.diff(now));
-      break;
-    case ClockSource.query:
-      let [_timeLeft, text] = getValueFromQuery(
-        data,
-        countdownSettings.queryField,
-        countdownSettings.endText,
-        countdownSettings.noValueText,
-        countdownSettings.invalidValueText,
-        countdownSettings.queryCalculation,
-        ClockMode.countdown,
-        now
-      );
-
-      if (_timeLeft === undefined) {
-        return text;
-      }
-      timeLeft = _timeLeft as Duration;
-      break;
-  }
-
-  let formattedTimeLeft = '';
-
-  if (timeLeft.asSeconds() <= 0) {
+  let timeDiff = moment.duration(time.diff(now));
+  if (timeDiff.asSeconds() <= 0) {
     return countdownSettings.endText;
   }
 
   if (countdownSettings.customFormat === 'auto') {
-    return (timeLeft as any).format();
+    return (timeDiff as any).format();
   }
 
   if (countdownSettings.customFormat) {
-    return (timeLeft as any).format(countdownSettings.customFormat);
+    return (timeDiff as any).format(countdownSettings.customFormat);
   }
 
+  let formattedTimeLeft = '';
   let previous = '';
 
-  if (timeLeft.years() > 0) {
-    formattedTimeLeft = timeLeft.years() === 1 ? '1 year, ' : timeLeft.years() + ' years, ';
+  if (timeDiff.years() > 0) {
+    formattedTimeLeft = timeDiff.years() === 1 ? '1 year, ' : timeDiff.years() + ' years, ';
     previous = 'years';
   }
-  if (timeLeft.months() > 0 || previous === 'years') {
-    formattedTimeLeft += timeLeft.months() === 1 ? '1 month, ' : timeLeft.months() + ' months, ';
+  if (timeDiff.months() > 0 || previous === 'years') {
+    formattedTimeLeft += timeDiff.months() === 1 ? '1 month, ' : timeDiff.months() + ' months, ';
     previous = 'months';
   }
-  if (timeLeft.days() > 0 || previous === 'months') {
-    formattedTimeLeft += timeLeft.days() === 1 ? '1 day, ' : timeLeft.days() + ' days, ';
+  if (timeDiff.days() > 0 || previous === 'months') {
+    formattedTimeLeft += timeDiff.days() === 1 ? '1 day, ' : timeDiff.days() + ' days, ';
     previous = 'days';
   }
-  if (timeLeft.hours() > 0 || previous === 'days') {
-    formattedTimeLeft += timeLeft.hours() === 1 ? '1 hour, ' : timeLeft.hours() + ' hours, ';
+  if (timeDiff.hours() > 0 || previous === 'days') {
+    formattedTimeLeft += timeDiff.hours() === 1 ? '1 hour, ' : timeDiff.hours() + ' hours, ';
     previous = 'hours';
   }
 
-  if (timeLeft.minutes() > 0 || previous === 'hours') {
-    formattedTimeLeft += timeLeft.minutes() === 1 ? '1 minute, ' : timeLeft.minutes() + ' minutes, ';
+  if (timeDiff.minutes() > 0 || previous === 'hours') {
+    formattedTimeLeft += timeDiff.minutes() === 1 ? '1 minute, ' : timeDiff.minutes() + ' minutes, ';
   }
 
-  formattedTimeLeft += timeLeft.seconds() === 1 ? '1 second ' : timeLeft.seconds() + ' seconds';
+  formattedTimeLeft += timeDiff.seconds() === 1 ? '1 second ' : timeDiff.seconds() + ' seconds';
   return formattedTimeLeft;
 }
 
 function getCountupText({
   countupSettings,
-  timezone,
-  data,
-  replaceVariables,
+  time,
   now,
 }: {
   countupSettings: ClockOptions['countupSettings'];
-  timezone: ClockOptions['timezone'];
-  replaceVariables: PanelProps['replaceVariables'];
-  data: PanelData;
+  time: Moment;
   now: Moment;
 }): string {
-  let timePassed = moment.duration(0);
-
-  switch (countupSettings.source) {
-    case ClockSource.input:
-      if (!countupSettings.beginCountupTime) {
-        return countupSettings.noValueText;
-      }
-
-      let value = moment(replaceVariables(countupSettings.beginCountupTime)).utcOffset(
-        getMoment(timezone).format('Z'),
-        true
-      );
-
-      if (!value.isValid()) {
-        return countupSettings.invalidValueText;
-      }
-
-      timePassed = moment.duration(moment(now).diff(value));
-      break;
-    case ClockSource.query:
-      let [_timePassed, text] = getValueFromQuery(
-        data,
-        countupSettings.queryField,
-        countupSettings.beginText,
-        countupSettings.noValueText,
-        countupSettings.invalidValueText,
-        countupSettings.queryCalculation,
-        ClockMode.countup,
-        now
-      );
-
-      if (_timePassed === undefined) {
-        return text;
-      }
-      timePassed = _timePassed as Duration;
-      break;
+  let timeDiff = moment.duration(now.diff(time));
+  if (timeDiff.asSeconds() <= 0) {
+    return countupSettings.beginText;
   }
 
-  let formattedTimePassed = '';
-
   if (countupSettings.customFormat === 'auto') {
-    return (timePassed as any).format();
+    return (timeDiff as any).format();
   }
 
   if (countupSettings.customFormat) {
-    return (timePassed as any).format(countupSettings.customFormat);
+    return (timeDiff as any).format(countupSettings.customFormat);
   }
 
+  let formattedTimePassed = '';
   let previous = '';
 
-  if (timePassed.years() > 0) {
-    formattedTimePassed = timePassed.years() === 1 ? '1 year, ' : timePassed.years() + ' years, ';
+  if (timeDiff.years() > 0) {
+    formattedTimePassed = timeDiff.years() === 1 ? '1 year, ' : timeDiff.years() + ' years, ';
     previous = 'years';
   }
-  if (timePassed.months() > 0 || previous === 'years') {
-    formattedTimePassed += timePassed.months() === 1 ? '1 month, ' : timePassed.months() + ' months, ';
+  if (timeDiff.months() > 0 || previous === 'years') {
+    formattedTimePassed += timeDiff.months() === 1 ? '1 month, ' : timeDiff.months() + ' months, ';
     previous = 'months';
   }
-  if (timePassed.days() > 0 || previous === 'months') {
-    formattedTimePassed += timePassed.days() === 1 ? '1 day, ' : timePassed.days() + ' days, ';
+  if (timeDiff.days() > 0 || previous === 'months') {
+    formattedTimePassed += timeDiff.days() === 1 ? '1 day, ' : timeDiff.days() + ' days, ';
     previous = 'days';
   }
-  if (timePassed.hours() > 0 || previous === 'days') {
-    formattedTimePassed += timePassed.hours() === 1 ? '1 hour, ' : timePassed.hours() + ' hours, ';
+  if (timeDiff.hours() > 0 || previous === 'days') {
+    formattedTimePassed += timeDiff.hours() === 1 ? '1 hour, ' : timeDiff.hours() + ' hours, ';
     previous = 'hours';
   }
 
-  if (timePassed.minutes() > 0 || previous === 'hours') {
-    formattedTimePassed += timePassed.minutes() === 1 ? '1 minute, ' : timePassed.minutes() + ' minutes, ';
+  if (timeDiff.minutes() > 0 || previous === 'hours') {
+    formattedTimePassed += timeDiff.minutes() === 1 ? '1 minute, ' : timeDiff.minutes() + ' minutes, ';
   }
 
-  formattedTimePassed += timePassed.seconds() === 1 ? '1 second ' : timePassed.seconds() + ' seconds';
+  formattedTimePassed += timeDiff.seconds() === 1 ? '1 second ' : timeDiff.seconds() + ' seconds';
   return formattedTimePassed;
 }
 
@@ -200,15 +117,13 @@ function getTimeFormat(clockType: ClockType, timeSettings: TimeSettings): string
 
 export function RenderTime({
   now,
-  replaceVariables,
-  timezone,
-  data,
   options,
+  time,
+  err,
 }: {
-  now: Moment;
-  timezone: ClockOptions['timezone'];
-  replaceVariables: PanelProps['replaceVariables'];
-  data: PanelData;
+  now: moment.Moment;
+  time: moment.Moment;
+  err: string | undefined;
   options: ClockOptions;
 }) {
   const { clockType, timeSettings, mode } = options;
@@ -222,27 +137,27 @@ export function RenderTime({
   }, [options.fontMono, timeSettings.fontSize, timeSettings.fontWeight]);
 
   let display = '';
+  if (err !== undefined) {
+    return <h2 className={className}>{display}</h2>;
+  }
+
   switch (mode) {
     case ClockMode.countdown:
       display = getCountdownText({
         countdownSettings: options.countdownSettings,
-        data: data,
-        timezone: timezone,
-        replaceVariables,
-        now,
+        time: time,
+        now: now,
       });
       break;
     case ClockMode.countup:
       display = getCountupText({
         countupSettings: options.countupSettings,
-        data: data,
-        timezone: timezone,
-        replaceVariables,
-        now,
+        time: time,
+        now: now,
       });
       break;
     default:
-      display = now.format(getTimeFormat(clockType, timeSettings));
+      display = time.format(getTimeFormat(clockType, timeSettings));
       break;
   }
 
