@@ -65,7 +65,6 @@ export function ClockPanel(props: Props) {
     });
   }, [props.options, timezoneToUse, data, props.replaceVariables, now]);
 
-  console.log(time, description, err);
   return (
     <div
       className={className}

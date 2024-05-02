@@ -24,7 +24,11 @@ export function getTime({
   replaceVariables: PanelProps['replaceVariables'];
   now: Moment;
 }): [Moment, string, string | undefined] {
-  let description = options.descriptionSettings.description;
+  let descriptionNoValueText = options.descriptionSettings.noValueText ?? '';
+  let description =
+    options.descriptionSettings.source === DescriptionSource.query
+      ? descriptionNoValueText
+      : options.descriptionSettings.description;
   if (options.mode !== ClockMode.countdown && options.mode !== ClockMode.countup) {
     return [now, description, undefined];
   }
@@ -42,14 +46,16 @@ export function getTime({
       break;
   }
 
+  let clockNoValueText = clockSettings.noValueText ?? '';
+  let clockInvalidValueText = clockSettings.invalidValueText ?? '';
   let time: Moment | undefined = undefined;
-  console.log('hi');
   switch (clockSettings.source) {
     case ClockSource.input:
       if (!input) {
-        return [now, description, clockSettings.noValueText];
+        return [now, description, clockNoValueText];
       }
       time = moment(replaceVariables(input)).utcOffset(getMoment(timezone).format('Z'), true);
+      break;
     case ClockSource.query:
       if (
         (data.state !== 'Done' || data.series.length === 0,
@@ -59,33 +65,22 @@ export function getTime({
           !data.series[0].fields ||
           data.series[0].fields.length === 0)
       ) {
-        return [now, description, clockSettings.noValueText];
+        return [now, description, clockNoValueText];
       }
-
       let clockField: Field | undefined =
         data.series[0].fields.find((field: Field) => field.name === clockSettings.queryField) ?? undefined;
 
       let descriptionField: Field | undefined =
         data.series[0].fields.find((field: Field) => field.name === options.descriptionSettings.queryField) ??
         undefined;
-      if (!descriptionField || !clockField) {
-        return [now, options.descriptionSettings.noValueText, clockSettings.noValueText];
+
+      if (!clockField || !clockField.values || clockField.values.length === 0) {
+        return [now, description, clockNoValueText];
       }
 
-      let clockFieldValues = clockField.values;
-      let descriptionFieldValues = descriptionField.values;
-
-      if (
-        !clockFieldValues ||
-        clockFieldValues.length === 0 ||
-        !descriptionFieldValues ||
-        clockFieldValues.length !== descriptionFieldValues.length
-      ) {
-        return [now, options.descriptionSettings.noValueText, clockSettings.noValueText];
-      }
-
-      let fieldValues: Array<{ time: MomentInput; description: any }> = clockFieldValues.map((value, index) => {
-        return { time: value as MomentInput, description: descriptionFieldValues[index] };
+      let descriptionFieldValues = descriptionField?.values ?? new Array(clockField.values.length);
+      let fieldValues: Array<{ time: MomentInput; description: string }> = clockField.values.map((value, index) => {
+        return { time: value, description: descriptionFieldValues[index] };
       });
 
       let values: Array<{ time: Moment; description: string }> = fieldValues
@@ -94,17 +89,22 @@ export function getTime({
           return { time: moment(v.time), description: v.description };
         });
 
-      let sort_values = (v: Array<{ time: Moment; description: any }>): Array<{ time: Moment; description: any }> => {
+      let sort_values = (
+        v: Array<{ time: Moment; description: string }>
+      ): Array<{ time: Moment; description: string }> => {
         return v.sort((a, b) => a.time.diff(b.time));
       };
 
-      let _value: { time: Moment; description: any } | undefined = undefined;
+      let _value: { time: Moment; description: string } | undefined = undefined;
       switch (clockSettings.queryCalculation) {
         case QueryCalculation.lastNotNull:
           _value = values.length > 0 ? values.at(-1) : undefined;
           break;
         case QueryCalculation.last:
-          _value = fieldValues.length > 0 ? { ...fieldValues[0], time: moment(fieldValues.at(-1)?.time) } : undefined;
+          _value =
+            fieldValues.length > 0
+              ? { ...fieldValues[fieldValues.length - 1], time: moment(fieldValues[fieldValues.length - 1]?.time) }
+              : undefined;
           break;
         case QueryCalculation.firstNotNull:
           _value = values.length > 0 ? values[0] : undefined;
@@ -116,33 +116,33 @@ export function getTime({
           _value = values.length > 0 ? sort_values(values)[0] : undefined;
           break;
         case CountdownQueryCalculation.minFuture:
-          values = values.filter((v: { time: Moment; description: any }) => v.time.isAfter(now));
+          values = values.filter((v: { time: Moment; description: string }) => v.time.isAfter(now));
           _value = values.length > 0 ? sort_values(values)[0] : undefined;
           break;
         case QueryCalculation.max:
           _value = values.length > 0 ? sort_values(values).at(-1) : undefined;
           break;
         case CountupQueryCalculation.maxPast:
-          values = values.filter((v: { time: Moment; description: any }) => v.time.isBefore(now));
+          values = values.filter((v: { time: Moment; description: string }) => v.time.isBefore(now));
           _value = values.length > 0 ? sort_values(values).at(-1) : undefined;
           break;
         default:
-          console.error('Invalid query calculation');
-          return [now, options.descriptionSettings.noValueText, clockSettings.noValueText];
+          console.error('Invalid query calculation', clockSettings.queryCalculation);
+          return [now, description, clockNoValueText];
       }
 
       time = _value?.time;
       if (options.descriptionSettings.source === DescriptionSource.query) {
-        description = _value?.description ?? options.descriptionSettings.noValueText;
+        description = _value?.description ?? descriptionNoValueText;
       }
       break;
   }
 
   if (!time) {
-    return [now, description, clockSettings.noValueText];
+    return [now, description, clockNoValueText];
   }
   if (!time.isValid()) {
-    return [now, description, clockSettings.invalidValueText];
+    return [now, description, clockInvalidValueText];
   }
 
   return [time, description, undefined];

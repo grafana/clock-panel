@@ -1,4 +1,4 @@
-import { PanelOptionsEditorBuilder, dateTime, SelectableValue, StandardEditorContext } from '@grafana/data';
+import { PanelOptionsEditorBuilder, dateTime, SelectableValue, StandardEditorContext, Field } from '@grafana/data';
 
 import {
   ClockOptions,
@@ -333,6 +333,7 @@ function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       path: 'descriptionSettings.queryField',
       name: 'Field',
       settings: {
+        filter: (f: Field) => f.type === 'string',
         noFieldsMessage: 'No fields found',
       },
       showIf: (o) => o.descriptionSettings.source === DescriptionSource.query,
