@@ -10,6 +10,7 @@ import {
   ClockSource,
   CountdownQueryCalculation,
   CountupQueryCalculation,
+  DescriptionSource,
 } from './types';
 import { ColorEditor } from './ColorEditor';
 import { getTemplateSrv } from '@grafana/runtime';
@@ -59,6 +60,7 @@ export const optionsBuilder = (
 
   addCountdown(builder);
   addCountup(builder);
+  addDescription(builder);
   addTimeFormat(builder);
   addTimeZone(builder);
   addDateFormat(builder);
@@ -267,6 +269,80 @@ function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       },
       defaultValue: undefined,
       showIf: (o) => o.mode === ClockMode.countup,
+    });
+}
+
+//---------------------------------------------------------------------
+// DESCRIPTION
+//---------------------------------------------------------------------
+function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
+  const category = ['Description'];
+
+  builder
+    .addRadio({
+      category,
+      path: 'descriptionSettings.source',
+      name: 'Source',
+      settings: {
+        options: [
+          { value: DescriptionSource.none, label: 'None' },
+          { value: DescriptionSource.input, label: 'Input' },
+        ],
+      },
+      defaultValue: DescriptionSource.none,
+      showIf: (o) => {
+        let show =
+          (o.mode === ClockMode.countup && o.countupSettings.source !== ClockSource.query) ||
+          (o.mode === ClockMode.countdown && o.countdownSettings.source !== ClockSource.query);
+
+        if (show && o.descriptionSettings.source === DescriptionSource.query) {
+          o.descriptionSettings.source = DescriptionSource.none;
+        }
+
+        return show;
+      },
+    })
+    .addRadio({
+      category,
+      path: 'descriptionSettings.source',
+      name: 'Source',
+      settings: {
+        options: [
+          { value: DescriptionSource.none, label: 'None' },
+          { value: DescriptionSource.input, label: 'Input' },
+          { value: DescriptionSource.query, label: 'Query' },
+        ],
+      },
+      defaultValue: DescriptionSource.none,
+      showIf: (o) =>
+        (o.mode === ClockMode.countup && o.countupSettings.source === ClockSource.query) ||
+        (o.mode === ClockMode.countdown && o.countdownSettings.source === ClockSource.query),
+    })
+    .addTextInput({
+      category,
+      path: 'descriptionSettings.description',
+      name: 'Description',
+      settings: {
+        placeholder: 'Enter description',
+      },
+      defaultValue: '',
+      showIf: (o) => o.descriptionSettings.source === DescriptionSource.input,
+    })
+    .addFieldNamePicker({
+      category,
+      path: 'descriptionSettings.queryField',
+      name: 'Field',
+      settings: {
+        noFieldsMessage: 'No fields found',
+      },
+      showIf: (o) => o.descriptionSettings.source === DescriptionSource.query,
+    })
+    .addTextInput({
+      category,
+      path: 'descriptionSettings.noValueText',
+      name: 'No Value Text',
+      defaultValue: 'no value',
+      showIf: (o) => o.descriptionSettings.source === DescriptionSource.query,
     });
 }
 

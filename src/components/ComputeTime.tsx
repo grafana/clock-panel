@@ -6,6 +6,7 @@ import {
   ClockSource,
   CountdownQueryCalculation,
   CountupQueryCalculation,
+  DescriptionSource,
   QueryCalculation,
 } from 'types';
 import { getMoment } from 'utils';
@@ -22,9 +23,10 @@ export function getTime({
   data: PanelData;
   replaceVariables: PanelProps['replaceVariables'];
   now: Moment;
-}): [Moment, string | undefined] {
+}): [Moment, string, string | undefined] {
+  let description = options.descriptionSettings.description;
   if (options.mode !== ClockMode.countdown && options.mode !== ClockMode.countup) {
-    return [now, undefined];
+    return [now, description, undefined];
   }
 
   let input: string | undefined = '';
@@ -40,14 +42,14 @@ export function getTime({
       break;
   }
 
-  let value: Moment | undefined = undefined;
-
+  let time: Moment | undefined = undefined;
+  console.log('hi');
   switch (clockSettings.source) {
     case ClockSource.input:
       if (!input) {
-        return [now, clockSettings.noValueText];
+        return [now, description, clockSettings.noValueText];
       }
-      value = moment(replaceVariables(input)).utcOffset(getMoment(timezone).format('Z'), true);
+      time = moment(replaceVariables(input)).utcOffset(getMoment(timezone).format('Z'), true);
     case ClockSource.query:
       if (
         (data.state !== 'Done' || data.series.length === 0,
@@ -57,68 +59,91 @@ export function getTime({
           !data.series[0].fields ||
           data.series[0].fields.length === 0)
       ) {
-        return [now, clockSettings.noValueText];
+        return [now, description, clockSettings.noValueText];
       }
 
-      let field: Field | undefined =
+      let clockField: Field | undefined =
         data.series[0].fields.find((field: Field) => field.name === clockSettings.queryField) ?? undefined;
-      if (!field) {
-        return [now, clockSettings.noValueText];
+
+      let descriptionField: Field | undefined =
+        data.series[0].fields.find((field: Field) => field.name === options.descriptionSettings.queryField) ??
+        undefined;
+      if (!descriptionField || !clockField) {
+        return [now, options.descriptionSettings.noValueText, clockSettings.noValueText];
       }
 
-      let fieldValues = field.values;
-      if (!fieldValues || fieldValues.length === 0) {
-        return [now, clockSettings.noValueText];
+      let clockFieldValues = clockField.values;
+      let descriptionFieldValues = descriptionField.values;
+
+      if (
+        !clockFieldValues ||
+        clockFieldValues.length === 0 ||
+        !descriptionFieldValues ||
+        clockFieldValues.length !== descriptionFieldValues.length
+      ) {
+        return [now, options.descriptionSettings.noValueText, clockSettings.noValueText];
       }
 
-      let values: Moment[] = fieldValues
-        .filter((v: MomentInput) => v !== null && v !== undefined && !Number.isNaN(v))
-        .map((v: MomentInput) => moment(v));
+      let fieldValues: Array<{ time: MomentInput; description: any }> = clockFieldValues.map((value, index) => {
+        return { time: value as MomentInput, description: descriptionFieldValues[index] };
+      });
 
-      let sort_values = (v: Moment[]): Moment[] => {
-        return v.sort((a: Moment, b: Moment) => a.diff(b));
+      let values: Array<{ time: Moment; description: string }> = fieldValues
+        .filter((v) => v.time !== null && v.time !== undefined && !Number.isNaN(v.time))
+        .map((v) => {
+          return { time: moment(v.time), description: v.description };
+        });
+
+      let sort_values = (v: Array<{ time: Moment; description: any }>): Array<{ time: Moment; description: any }> => {
+        return v.sort((a, b) => a.time.diff(b.time));
       };
 
+      let _value: { time: Moment; description: any } | undefined = undefined;
       switch (clockSettings.queryCalculation) {
         case QueryCalculation.lastNotNull:
-          value = values.length > 0 ? values.at(-1) : undefined;
+          _value = values.length > 0 ? values.at(-1) : undefined;
           break;
         case QueryCalculation.last:
-          value = moment(fieldValues.at(-1));
+          _value = fieldValues.length > 0 ? { ...fieldValues[0], time: moment(fieldValues.at(-1)?.time) } : undefined;
           break;
         case QueryCalculation.firstNotNull:
-          value = values.length > 0 ? values[0] : undefined;
+          _value = values.length > 0 ? values[0] : undefined;
           break;
         case QueryCalculation.first:
-          value = moment(fieldValues[0]);
+          _value = fieldValues.length > 0 ? { ...fieldValues[0], time: moment(fieldValues[0].time) } : undefined;
           break;
         case QueryCalculation.min:
-          value = values.length > 0 ? sort_values(values)[0] : undefined;
+          _value = values.length > 0 ? sort_values(values)[0] : undefined;
           break;
         case CountdownQueryCalculation.minFuture:
-          values = values.filter((v: Moment) => v.isAfter(now));
-          value = values.length > 0 ? sort_values(values)[0] : undefined;
+          values = values.filter((v: { time: Moment; description: any }) => v.time.isAfter(now));
+          _value = values.length > 0 ? sort_values(values)[0] : undefined;
           break;
         case QueryCalculation.max:
-          value = values.length > 0 ? sort_values(values).at(-1) : undefined;
+          _value = values.length > 0 ? sort_values(values).at(-1) : undefined;
           break;
         case CountupQueryCalculation.maxPast:
-          values = values.filter((v: Moment) => v.isBefore(now));
-          value = values.length > 0 ? sort_values(values).at(-1) : undefined;
+          values = values.filter((v: { time: Moment; description: any }) => v.time.isBefore(now));
+          _value = values.length > 0 ? sort_values(values).at(-1) : undefined;
           break;
         default:
           console.error('Invalid query calculation');
-          return [now, clockSettings.noValueText];
+          return [now, options.descriptionSettings.noValueText, clockSettings.noValueText];
+      }
+
+      time = _value?.time;
+      if (options.descriptionSettings.source === DescriptionSource.query) {
+        description = _value?.description ?? options.descriptionSettings.noValueText;
       }
       break;
   }
 
-  if (!value) {
-    return [now, clockSettings.noValueText];
+  if (!time) {
+    return [now, description, clockSettings.noValueText];
   }
-  if (!value.isValid()) {
-    return [now, clockSettings.invalidValueText];
+  if (!time.isValid()) {
+    return [now, description, clockSettings.invalidValueText];
   }
 
-  return [value, undefined];
+  return [time, description, undefined];
 }

@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import { PanelProps } from '@grafana/data';
 import { useTheme2 } from '@grafana/ui';
 import React, { useEffect, useMemo, useState } from 'react';
-import { ClockOptions, ClockRefresh } from './types';
+import { ClockOptions, ClockRefresh, DescriptionSource } from './types';
 
 // eslint-disable-next-line
 import { RenderDate } from 'components/RenderDate';
@@ -55,7 +55,7 @@ export function ClockPanel(props: Props) {
   }, [props.options.refresh, timezoneToUse]);
 
   //refresh the time
-  let [time, err]: [moment.Moment, string | undefined] = useMemo(() => {
+  let [time, description, err]: [moment.Moment, string, string | undefined] = useMemo(() => {
     return getTime({
       options: props.options,
       timezone: timezoneToUse,
@@ -65,6 +65,7 @@ export function ClockPanel(props: Props) {
     });
   }, [props.options, timezoneToUse, data, props.replaceVariables, now]);
 
+  console.log(time, description, err);
   return (
     <div
       className={className}
@@ -76,6 +77,7 @@ export function ClockPanel(props: Props) {
       {dateSettings.showDate ? <RenderDate now={now} options={props.options} /> : null}
       <RenderTime options={props.options} time={time} err={err} now={now} />
       {timezoneSettings.showTimezone ? <RenderZone now={now} options={props.options} timezone={timezoneToUse} /> : null}
+      {props.options.descriptionSettings.source !== DescriptionSource.none ? description : null}
     </div>
   );
 }

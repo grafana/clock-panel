@@ -8,6 +8,7 @@ import {
   ClockType,
   CountdownQueryCalculation,
   CountupQueryCalculation,
+  DescriptionSource,
   FontWeight,
   ZoneFormat,
 } from 'types';
@@ -135,6 +136,12 @@ const getDefaultProps = () => {
         beginCountupTime: undefined,
         beginText: '00:00:00',
         invalidValueText: 'invalid value',
+        noValueText: 'no value',
+      },
+      descriptionSettings: {
+        source: DescriptionSource.input,
+        description: '',
+        queryField: '',
         noValueText: 'no value',
       },
       dateSettings: {

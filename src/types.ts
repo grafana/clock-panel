@@ -7,12 +7,19 @@ export interface ClockOptions {
   fontMono?: boolean;
   countdownSettings: CountdownSettings;
   countupSettings: CountupSettings;
+  descriptionSettings: DescriptionSettings;
   dateSettings: DateSettings;
   timeSettings: TimeSettings;
   timezoneSettings: TimezoneSettings;
 }
 
 export enum ClockSource {
+  input = 'input',
+  query = 'query',
+}
+
+export enum DescriptionSource {
+  none = 'none',
   input = 'input',
   query = 'query',
 }
@@ -88,6 +95,13 @@ interface CountupSettings {
   noValueText: string;
   invalidValueText: string;
   customFormat?: string;
+}
+
+interface DescriptionSettings {
+  source: DescriptionSource;
+  description: string;
+  queryField: string;
+  noValueText: string;
 }
 
 interface DateSettings {

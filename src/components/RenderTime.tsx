@@ -122,9 +122,9 @@ export function RenderTime({
   err,
 }: {
   now: moment.Moment;
+  options: ClockOptions;
   time: moment.Moment;
   err: string | undefined;
-  options: ClockOptions;
 }) {
   const { clockType, timeSettings, mode } = options;
   const className = useMemo(() => {
@@ -138,7 +138,7 @@ export function RenderTime({
 
   let display = '';
   if (err !== undefined) {
-    return <h2 className={className}>{display}</h2>;
+    return <h2 className={className}>{err}</h2>;
   }
 
   switch (mode) {
