@@ -37,13 +37,13 @@ export const CountdownQueryCalculation = {
   ...QueryCalculation,
   minFuture: 'minFuture',
 } as const;
-export type CountdownQueryCalculation = (typeof CountdownQueryCalculation)[keyof typeof CountdownQueryCalculation];
+export type CountdownQueryCalculation = (typeof CountdownQueryCalculation)[keyof typeof CountdownQueryCalculation]; // eslint-disable-line no-redeclare
 
 export const CountupQueryCalculation = {
   ...QueryCalculation,
   maxPast: 'maxPast',
 } as const;
-export type CountupQueryCalculation = (typeof CountupQueryCalculation)[keyof typeof CountupQueryCalculation];
+export type CountupQueryCalculation = (typeof CountupQueryCalculation)[keyof typeof CountupQueryCalculation]; // eslint-disable-line no-redeclare
 
 export enum ClockMode {
   time = 'time',
