@@ -96,11 +96,12 @@ export function CalculateClockOptions({
         return { time: value, description: descriptionFieldValues[index] };
       });
 
-      let values: QueryRow[] = fieldValues
-        .filter((v) => v.time !== null && v.time !== undefined && !Number.isNaN(v.time))
-        .map((v) => {
-          return { time: moment(v.time), description: v.description };
-        });
+      let values: QueryRow[] = fieldValues.reduce((acc: QueryRow[], row) => {
+        if (row.time !== null && row.time !== undefined && !Number.isNaN(row.time)) {
+          acc.push({ time: moment(row.time), description: row.description });
+        }
+        return acc;
+      }, []);
 
       let sortedValues = (v: QueryRow[]): QueryRow[] => {
         return v.sort((a, b) => a.time.diff(b.time));
