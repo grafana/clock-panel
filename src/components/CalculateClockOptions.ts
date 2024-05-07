@@ -11,6 +11,11 @@ import {
 } from 'types';
 import { getMoment } from 'utils';
 
+type QueryRow = {
+  time: Moment;
+  description: string;
+};
+
 export function CalculateClockOptions({
   options,
   timezone,
@@ -83,19 +88,17 @@ export function CalculateClockOptions({
         return { time: value, description: descriptionFieldValues[index] };
       });
 
-      let values: Array<{ time: Moment; description: string }> = fieldValues
+      let values: QueryRow[] = fieldValues
         .filter((v) => v.time !== null && v.time !== undefined && !Number.isNaN(v.time))
         .map((v) => {
           return { time: moment(v.time), description: v.description };
         });
 
-      let sortedValues = (
-        v: Array<{ time: Moment; description: string }>
-      ): Array<{ time: Moment; description: string }> => {
+      let sortedValues = (v: QueryRow[]): QueryRow[] => {
         return v.sort((a, b) => a.time.diff(b.time));
       };
 
-      let finalValue: { time: Moment; description: string } | undefined = undefined;
+      let finalValue: QueryRow | undefined = undefined;
       switch (clockSettings.queryCalculation) {
         case QueryCalculation.lastNotNull:
           finalValue = values.length > 0 ? values.at(-1) : undefined;
@@ -116,14 +119,14 @@ export function CalculateClockOptions({
           finalValue = values.length > 0 ? sortedValues(values)[0] : undefined;
           break;
         case CountdownQueryCalculation.minFuture:
-          values = values.filter((v: { time: Moment; description: string }) => v.time.isAfter(now));
+          values = values.filter((v: QueryRow) => v.time.isAfter(now));
           finalValue = values.length > 0 ? sortedValues(values)[0] : undefined;
           break;
         case QueryCalculation.max:
           finalValue = values.length > 0 ? sortedValues(values).at(-1) : undefined;
           break;
         case CountupQueryCalculation.maxPast:
-          values = values.filter((v: { time: Moment; description: string }) => v.time.isBefore(now));
+          values = values.filter((v: QueryRow) => v.time.isBefore(now));
           finalValue = values.length > 0 ? sortedValues(values).at(-1) : undefined;
           break;
         default:
