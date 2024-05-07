@@ -64,8 +64,7 @@ export function CalculateClockOptions({
     case ClockSource.query:
       const isDataReady = data.state === 'Done' && data.series.length !== 0;
       const isQueryFieldSelected = clockSettings.queryField && clockSettings.queryField.length !== 0;
-      const isDataSeriesPopulated = data.series && data.series[0].fields && data.series[0].fields.length !== 0;
-      if (!isDataReady || !isQueryFieldSelected || !isDataSeriesPopulated) {
+      if (!isDataReady || !isQueryFieldSelected) {
         return [now, descriptionText, clockNoValueText];
       }
 
