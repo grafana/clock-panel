@@ -11,7 +11,7 @@ import { RenderZone } from 'components/RenderZone';
 import moment, { Moment } from 'moment-timezone';
 import { getMoment } from 'utils';
 import './external/moment-duration-format';
-import { getTime } from 'components/ComputeTime';
+import { CalculateClockOptions } from 'components/CalculateClockOptions';
 
 interface Props extends PanelProps<ClockOptions> {}
 
@@ -55,8 +55,8 @@ export function ClockPanel(props: Props) {
   }, [props.options.refresh, timezoneToUse]);
 
   //refresh the time
-  let [time, description, err]: [moment.Moment, string, string | undefined] = useMemo(() => {
-    return getTime({
+  let [targetTime, descriptionText, err]: [moment.Moment, string, string | null] = useMemo(() => {
+    return CalculateClockOptions({
       options: props.options,
       timezone: timezoneToUse,
       data,
@@ -74,9 +74,9 @@ export function ClockPanel(props: Props) {
       }}
     >
       {dateSettings.showDate ? <RenderDate now={now} options={props.options} /> : null}
-      <RenderTime options={props.options} time={time} err={err} now={now} />
+      <RenderTime options={props.options} targetTime={targetTime} err={err} now={now} />
       {timezoneSettings.showTimezone ? <RenderZone now={now} options={props.options} timezone={timezoneToUse} /> : null}
-      {props.options.descriptionSettings.source !== DescriptionSource.none ? description : null}
+      {props.options.descriptionSettings.source !== DescriptionSource.none ? descriptionText : null}
     </div>
   );
 }

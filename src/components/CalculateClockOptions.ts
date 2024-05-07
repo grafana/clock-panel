@@ -11,7 +11,7 @@ import {
 } from 'types';
 import { getMoment } from 'utils';
 
-export function getTime({
+export function CalculateClockOptions({
   options,
   timezone,
   data,
@@ -23,38 +23,38 @@ export function getTime({
   data: PanelData;
   replaceVariables: PanelProps['replaceVariables'];
   now: Moment;
-}): [Moment, string, string | undefined] {
+}): [Moment, string, string | null] {
   let descriptionNoValueText = options.descriptionSettings.noValueText ?? '';
-  let description =
+  let descriptionText =
     options.descriptionSettings.source === DescriptionSource.query
       ? descriptionNoValueText
       : options.descriptionSettings.description;
   if (options.mode !== ClockMode.countdown && options.mode !== ClockMode.countup) {
-    return [now, description, undefined];
+    return [now, descriptionText, null];
   }
 
-  let input: string | undefined = '';
+  let userInputTime: string | undefined = '';
   let clockSettings: ClockOptions['countdownSettings'] | ClockOptions['countupSettings'];
   switch (options.mode) {
     case ClockMode.countdown:
-      input = options.countdownSettings.endCountdownTime || '';
+      userInputTime = options.countdownSettings.endCountdownTime || '';
       clockSettings = options.countdownSettings;
       break;
     case ClockMode.countup:
-      input = options.countupSettings.beginCountupTime || '';
+      userInputTime = options.countupSettings.beginCountupTime || '';
       clockSettings = options.countupSettings;
       break;
   }
 
   let clockNoValueText = clockSettings.noValueText ?? '';
   let clockInvalidValueText = clockSettings.invalidValueText ?? '';
-  let time: Moment | undefined = undefined;
+  let targetTime: Moment | undefined = undefined;
   switch (clockSettings.source) {
     case ClockSource.input:
-      if (!input) {
-        return [now, description, clockNoValueText];
+      if (!userInputTime) {
+        return [now, descriptionText, clockNoValueText];
       }
-      time = moment(replaceVariables(input)).utcOffset(getMoment(timezone).format('Z'), true);
+      targetTime = moment(replaceVariables(userInputTime)).utcOffset(getMoment(timezone).format('Z'), true);
       break;
     case ClockSource.query:
       if (
@@ -65,7 +65,7 @@ export function getTime({
           !data.series[0].fields ||
           data.series[0].fields.length === 0)
       ) {
-        return [now, description, clockNoValueText];
+        return [now, descriptionText, clockNoValueText];
       }
       let clockField: Field | undefined =
         data.series[0].fields.find((field: Field) => field.name === clockSettings.queryField) ?? undefined;
@@ -75,7 +75,7 @@ export function getTime({
         undefined;
 
       if (!clockField || !clockField.values || clockField.values.length === 0) {
-        return [now, description, clockNoValueText];
+        return [now, descriptionText, clockNoValueText];
       }
 
       let descriptionFieldValues = descriptionField?.values ?? new Array(clockField.values.length);
@@ -128,22 +128,22 @@ export function getTime({
           break;
         default:
           console.error('Invalid query calculation', clockSettings.queryCalculation);
-          return [now, description, clockNoValueText];
+          return [now, descriptionText, clockNoValueText];
       }
 
-      time = _value?.time;
+      targetTime = _value?.time;
       if (options.descriptionSettings.source === DescriptionSource.query) {
-        description = _value?.description ?? descriptionNoValueText;
+        descriptionText = _value?.description ?? descriptionNoValueText;
       }
       break;
   }
 
-  if (!time) {
-    return [now, description, clockNoValueText];
+  if (!targetTime) {
+    return [now, descriptionText, clockNoValueText];
   }
-  if (!time.isValid()) {
-    return [now, description, clockInvalidValueText];
+  if (!targetTime.isValid()) {
+    return [now, descriptionText, clockInvalidValueText];
   }
 
-  return [time, description, undefined];
+  return [targetTime, descriptionText, null];
 }

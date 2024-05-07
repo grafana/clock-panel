@@ -5,14 +5,14 @@ import { ClockMode, ClockOptions, ClockType, TimeSettings } from 'types';
 
 function getCountdownText({
   countdownSettings,
-  time,
+  targetTime,
   now,
 }: {
   countdownSettings: ClockOptions['countdownSettings'];
-  time: Moment;
+  targetTime: Moment;
   now: Moment;
 }): string {
-  let timeDiff = moment.duration(time.diff(now));
+  let timeDiff = moment.duration(targetTime.diff(now));
   if (timeDiff.asSeconds() <= 0) {
     return countdownSettings.endText;
   }
@@ -55,14 +55,14 @@ function getCountdownText({
 
 function getCountupText({
   countupSettings,
-  time,
+  targetTime,
   now,
 }: {
   countupSettings: ClockOptions['countupSettings'];
-  time: Moment;
+  targetTime: Moment;
   now: Moment;
 }): string {
-  let timeDiff = moment.duration(now.diff(time));
+  let timeDiff = moment.duration(now.diff(targetTime));
   if (timeDiff.asSeconds() <= 0) {
     return countupSettings.beginText;
   }
@@ -118,13 +118,13 @@ function getTimeFormat(clockType: ClockType, timeSettings: TimeSettings): string
 export function RenderTime({
   now,
   options,
-  time,
+  targetTime,
   err,
 }: {
   now: moment.Moment;
   options: ClockOptions;
-  time: moment.Moment;
-  err: string | undefined;
+  targetTime: moment.Moment;
+  err: string | null;
 }) {
   const { clockType, timeSettings, mode } = options;
   const className = useMemo(() => {
@@ -137,7 +137,7 @@ export function RenderTime({
   }, [options.fontMono, timeSettings.fontSize, timeSettings.fontWeight]);
 
   let display = '';
-  if (err !== undefined) {
+  if (err !== null) {
     return <h2 className={className}>{err}</h2>;
   }
 
@@ -145,19 +145,19 @@ export function RenderTime({
     case ClockMode.countdown:
       display = getCountdownText({
         countdownSettings: options.countdownSettings,
-        time: time,
+        targetTime: targetTime,
         now: now,
       });
       break;
     case ClockMode.countup:
       display = getCountupText({
         countupSettings: options.countupSettings,
-        time: time,
+        targetTime: targetTime,
         now: now,
       });
       break;
     default:
-      display = time.format(getTimeFormat(clockType, timeSettings));
+      display = targetTime.format(getTimeFormat(clockType, timeSettings));
       break;
   }
 
