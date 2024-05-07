@@ -1,4 +1,4 @@
-import { Field, PanelData, PanelProps } from '@grafana/data';
+import { DataFrame, Field, PanelData, PanelProps } from '@grafana/data';
 import moment, { Moment, MomentInput } from 'moment-timezone';
 import {
   ClockMode,
@@ -62,29 +62,37 @@ export function CalculateClockOptions({
       targetTime = moment(replaceVariables(userInputTime)).utcOffset(getMoment(timezone).format('Z'), true);
       break;
     case ClockSource.query:
-      if (
-        (data.state !== 'Done' || data.series.length === 0,
-        !clockSettings.queryField ||
-          clockSettings.queryField.length === 0 ||
-          !data.series ||
-          !data.series[0].fields ||
-          data.series[0].fields.length === 0)
-      ) {
-        return [now, descriptionText, clockNoValueText];
-      }
-      let clockField: Field | undefined =
-        data.series[0].fields.find((field: Field) => field.name === clockSettings.queryField) ?? undefined;
-
-      let descriptionField: Field | undefined =
-        data.series[0].fields.find((field: Field) => field.name === options.descriptionSettings.queryField) ??
-        undefined;
-
-      if (!clockField || !clockField.values || clockField.values.length === 0) {
+      const isDataReady = data.state === 'Done' && data.series.length !== 0;
+      const isQueryFieldSelected = clockSettings.queryField && clockSettings.queryField.length !== 0;
+      const isDataSeriesPopulated = data.series && data.series[0].fields && data.series[0].fields.length !== 0;
+      if (!isDataReady || !isQueryFieldSelected || !isDataSeriesPopulated) {
         return [now, descriptionText, clockNoValueText];
       }
 
-      let descriptionFieldValues = descriptionField?.values ?? new Array(clockField.values.length);
-      let fieldValues: Array<{ time: MomentInput; description: string }> = clockField.values.map((value, index) => {
+      let timeField: Field | undefined = data.series.reduce((foundField: Field | undefined, series: DataFrame) => {
+        if (foundField) {
+          return foundField;
+        }
+        return series.fields.find((field: Field) => field.name === clockSettings.queryField) ?? undefined;
+      }, undefined);
+      let descriptionField: Field | undefined = data.series.reduce(
+        (foundField: Field | undefined, series: DataFrame) => {
+          if (foundField) {
+            return foundField;
+          }
+          return (
+            series.fields.find((field: Field) => field.name === options.descriptionSettings.queryField) ?? undefined
+          );
+        },
+        undefined
+      );
+
+      if (!timeField || !timeField.values || timeField.values.length === 0) {
+        return [now, descriptionText, clockNoValueText];
+      }
+
+      let descriptionFieldValues = descriptionField?.values ?? new Array(timeField.values.length);
+      let fieldValues: Array<{ time: MomentInput; description: string }> = timeField.values.map((value, index) => {
         return { time: value, description: descriptionFieldValues[index] };
       });
 
