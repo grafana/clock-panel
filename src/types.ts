@@ -99,7 +99,7 @@ interface CountupSettings {
 
 interface DescriptionSettings {
   source: DescriptionSource;
-  description: string;
+  descriptionText: string;
   queryField: string;
   noValueText: string;
 }

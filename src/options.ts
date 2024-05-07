@@ -320,7 +320,7 @@ function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     })
     .addTextInput({
       category,
-      path: 'descriptionSettings.description',
+      path: 'descriptionSettings.descriptionText',
       name: 'Description',
       settings: {
         placeholder: 'Enter description',

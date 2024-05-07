@@ -140,7 +140,7 @@ const getDefaultProps = () => {
       },
       descriptionSettings: {
         source: DescriptionSource.input,
-        description: '',
+        descriptionText: '',
         queryField: '',
         noValueText: 'no value',
       },

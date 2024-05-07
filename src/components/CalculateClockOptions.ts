@@ -28,7 +28,7 @@ export function CalculateClockOptions({
   let descriptionText =
     options.descriptionSettings.source === DescriptionSource.query
       ? descriptionNoValueText
-      : options.descriptionSettings.description;
+      : options.descriptionSettings.descriptionText;
   if (options.mode !== ClockMode.countdown && options.mode !== ClockMode.countup) {
     return [now, descriptionText, null];
   }
@@ -89,51 +89,51 @@ export function CalculateClockOptions({
           return { time: moment(v.time), description: v.description };
         });
 
-      let sort_values = (
+      let sortedValues = (
         v: Array<{ time: Moment; description: string }>
       ): Array<{ time: Moment; description: string }> => {
         return v.sort((a, b) => a.time.diff(b.time));
       };
 
-      let _value: { time: Moment; description: string } | undefined = undefined;
+      let finalValue: { time: Moment; description: string } | undefined = undefined;
       switch (clockSettings.queryCalculation) {
         case QueryCalculation.lastNotNull:
-          _value = values.length > 0 ? values.at(-1) : undefined;
+          finalValue = values.length > 0 ? values.at(-1) : undefined;
           break;
         case QueryCalculation.last:
-          _value =
+          finalValue =
             fieldValues.length > 0
               ? { ...fieldValues[fieldValues.length - 1], time: moment(fieldValues[fieldValues.length - 1]?.time) }
               : undefined;
           break;
         case QueryCalculation.firstNotNull:
-          _value = values.length > 0 ? values[0] : undefined;
+          finalValue = values.length > 0 ? values[0] : undefined;
           break;
         case QueryCalculation.first:
-          _value = fieldValues.length > 0 ? { ...fieldValues[0], time: moment(fieldValues[0].time) } : undefined;
+          finalValue = fieldValues.length > 0 ? { ...fieldValues[0], time: moment(fieldValues[0].time) } : undefined;
           break;
         case QueryCalculation.min:
-          _value = values.length > 0 ? sort_values(values)[0] : undefined;
+          finalValue = values.length > 0 ? sortedValues(values)[0] : undefined;
           break;
         case CountdownQueryCalculation.minFuture:
           values = values.filter((v: { time: Moment; description: string }) => v.time.isAfter(now));
-          _value = values.length > 0 ? sort_values(values)[0] : undefined;
+          finalValue = values.length > 0 ? sortedValues(values)[0] : undefined;
           break;
         case QueryCalculation.max:
-          _value = values.length > 0 ? sort_values(values).at(-1) : undefined;
+          finalValue = values.length > 0 ? sortedValues(values).at(-1) : undefined;
           break;
         case CountupQueryCalculation.maxPast:
           values = values.filter((v: { time: Moment; description: string }) => v.time.isBefore(now));
-          _value = values.length > 0 ? sort_values(values).at(-1) : undefined;
+          finalValue = values.length > 0 ? sortedValues(values).at(-1) : undefined;
           break;
         default:
           console.error('Invalid query calculation', clockSettings.queryCalculation);
           return [now, descriptionText, clockNoValueText];
       }
 
-      targetTime = _value?.time;
+      targetTime = finalValue?.time;
       if (options.descriptionSettings.source === DescriptionSource.query) {
-        descriptionText = _value?.description ?? descriptionNoValueText;
+        descriptionText = finalValue?.description ?? descriptionNoValueText;
       }
       break;
   }
