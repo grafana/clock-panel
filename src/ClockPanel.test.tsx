@@ -1,6 +1,6 @@
 import { ClockPanel } from 'ClockPanel';
 import { act, render } from '@testing-library/react';
-import { FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange } from '@grafana/data';
+import { FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange, DataFrame, FieldType } from '@grafana/data';
 import {
   ClockMode,
   ClockRefresh,
@@ -105,13 +105,157 @@ describe('ClockPanel', () => {
 
     expect(container).toHaveTextContent('02:12:00');
   });
+
+  test('countup from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countup;
+    props.options.countupSettings.source = ClockSource.query;
+    props.options.countupSettings.queryField = 'datetime';
+    props.options.countupSettings.queryCalculation = CountupQueryCalculation.maxPast;
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('7 months, 18 days, 2 hours, 12 minutes, 0 seconds');
+  });
+
+  test('countdown from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.minFuture;
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('4 months, 11 days, 21 hours, 48 minutes, 0 seconds');
+  });
+
+  test('before countup from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countup;
+    props.options.countupSettings.source = ClockSource.query;
+    props.options.countupSettings.queryField = 'datetime';
+    props.options.countupSettings.queryCalculation = CountupQueryCalculation.max;
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('00:00:00');
+  });
+
+  test('after countdown from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.min;
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('00:00:00');
+  });
+
+  test('no value error for countup from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countup;
+    props.options.countupSettings.source = ClockSource.query;
+    props.options.countupSettings.queryField = 'datetime';
+    props.options.countupSettings.queryCalculation = CountupQueryCalculation.first;
+    props.data.series[0].fields[0].values = [];
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('no value');
+  });
+
+  test('no value error for countdown from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.first;
+    props.data.series[0].fields[0].values = [];
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('no value');
+  });
+
+  test('invalid value error for countup from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countup;
+    props.options.countupSettings.source = ClockSource.query;
+    props.options.countupSettings.queryField = 'datetime';
+    props.options.countupSettings.queryCalculation = CountupQueryCalculation.first;
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('invalid value');
+  });
+
+  test('invalid value error for countdown from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.first;
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('invalid value');
+  });
+
+  test('description with static text', () => {
+    const props = getDefaultProps();
+    props.options.descriptionSettings.source = DescriptionSource.input;
+    props.options.descriptionSettings.descriptionText = 'Static description';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('Static description');
+  });
+
+  test('description from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.minFuture;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('Next New Year');
+  });
+
+  test('no value for description from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.minFuture;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+    props.data.series[0].fields[1].values = [];
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('no description found');
+  });
 });
 
 const getDefaultProps = () => {
   const props = {
     data: {
       state: LoadingState.Done,
-      series: [],
+      series: [
+        {
+          fields: [
+            {
+              name: 'datetime',
+              values: [undefined, null, NaN, new Date('01-01-2021'), new Date('01-01-2020'), new Date('01-01-2022')],
+              type: FieldType.time,
+              config: {},
+            },
+            {
+              name: 'label',
+              values: ['Undefined', 'Null', 'NaN', 'Next New Year', 'Last New Year', 'Year After Next Year'],
+              type: FieldType.string,
+              config: {},
+            },
+          ],
+          length: 6,
+        },
+      ] as DataFrame[],
       timeRange: getDefaultTimeRange(),
     },
     timeRange: getDefaultTimeRange(),
@@ -127,7 +271,7 @@ const getDefaultProps = () => {
         endCountdownTime: undefined,
         endText: '00:00:00',
         invalidValueText: 'invalid value',
-        noValueText: 'no value',
+        noValueText: 'no value found',
       },
       countupSettings: {
         source: ClockSource.input,
@@ -136,13 +280,15 @@ const getDefaultProps = () => {
         beginCountupTime: undefined,
         beginText: '00:00:00',
         invalidValueText: 'invalid value',
-        noValueText: 'no value',
+        noValueText: 'no value found',
       },
       descriptionSettings: {
         source: DescriptionSource.input,
         descriptionText: '',
         queryField: '',
-        noValueText: 'no value',
+        noValueText: 'no description found',
+        fontSize: '20px',
+        fontWeight: FontWeight.normal,
       },
       dateSettings: {
         showDate: false,

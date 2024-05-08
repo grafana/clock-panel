@@ -147,7 +147,7 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       category,
       path: 'countdownSettings.noValueText',
       name: 'No Value Text',
-      defaultValue: 'no value',
+      defaultValue: 'no value found',
       showIf: (o) => o.mode === ClockMode.countdown,
     })
     .addTextInput({
@@ -250,7 +250,7 @@ function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       category,
       path: 'countupSettings.noValueText',
       name: 'No Value Text',
-      defaultValue: 'no value',
+      defaultValue: 'no value found',
       showIf: (o) => o.mode === ClockMode.countup,
     })
     .addTextInput({
@@ -342,7 +342,7 @@ function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       category,
       path: 'descriptionSettings.noValueText',
       name: 'No Value Text',
-      defaultValue: 'no value',
+      defaultValue: 'no description found',
       showIf: (o) => o.descriptionSettings.source === DescriptionSource.query,
     })
     .addTextInput({

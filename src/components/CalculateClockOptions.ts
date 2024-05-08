@@ -112,6 +112,9 @@ export function CalculateClockOptions({
           finalValue = values.length > 0 ? values.at(-1) : undefined;
           break;
         case QueryCalculation.last:
+          if (fieldValues.length > 0 && !fieldValues[fieldValues.length - 1]?.time) {
+            return [now, descriptionText, clockInvalidValueText];
+          }
           finalValue =
             fieldValues.length > 0
               ? { ...fieldValues[fieldValues.length - 1], time: moment(fieldValues[fieldValues.length - 1]?.time) }
@@ -121,6 +124,9 @@ export function CalculateClockOptions({
           finalValue = values.length > 0 ? values[0] : undefined;
           break;
         case QueryCalculation.first:
+          if (fieldValues.length > 0 && !fieldValues[0]?.time) {
+            return [now, descriptionText, clockInvalidValueText];
+          }
           finalValue = fieldValues.length > 0 ? { ...fieldValues[0], time: moment(fieldValues[0].time) } : undefined;
           break;
         case QueryCalculation.min:
