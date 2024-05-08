@@ -344,6 +344,27 @@ function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       name: 'No Value Text',
       defaultValue: 'no value',
       showIf: (o) => o.descriptionSettings.source === DescriptionSource.query,
+    })
+    .addTextInput({
+      category,
+      path: 'descriptionSettings.fontSize',
+      name: 'Font size',
+      settings: {
+        placeholder: 'Font size (e.g. 12px)',
+      },
+      defaultValue: '12px',
+    })
+    .addRadio({
+      category,
+      path: 'descriptionSettings.fontWeight',
+      name: 'Font weight',
+      settings: {
+        options: [
+          { value: FontWeight.normal, label: 'Normal' },
+          { value: FontWeight.bold, label: 'Bold' },
+        ],
+      },
+      defaultValue: FontWeight.normal,
     });
 }
 

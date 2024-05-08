@@ -12,6 +12,7 @@ import moment, { Moment } from 'moment-timezone';
 import { getMoment } from 'utils';
 import './external/moment-duration-format';
 import { CalculateClockOptions } from 'components/CalculateClockOptions';
+import { RenderDescription } from 'components/RenderDescription';
 
 interface Props extends PanelProps<ClockOptions> {}
 
@@ -76,7 +77,9 @@ export function ClockPanel(props: Props) {
       {dateSettings.showDate ? <RenderDate now={now} options={props.options} /> : null}
       <RenderTime options={props.options} targetTime={targetTime} err={err} now={now} />
       {timezoneSettings.showTimezone ? <RenderZone now={now} options={props.options} timezone={timezoneToUse} /> : null}
-      {props.options.descriptionSettings.source !== DescriptionSource.none ? descriptionText : null}
+      {props.options.descriptionSettings.source !== DescriptionSource.none ? (
+        <RenderDescription options={props.options} descriptionText={descriptionText} />
+      ) : null}
     </div>
   );
 }

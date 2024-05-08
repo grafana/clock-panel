@@ -102,6 +102,8 @@ interface DescriptionSettings {
   descriptionText: string;
   queryField: string;
   noValueText: string;
+  fontSize: string;
+  fontWeight: FontWeight;
 }
 
 interface DateSettings {
