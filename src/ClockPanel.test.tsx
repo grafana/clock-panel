@@ -150,7 +150,7 @@ describe('ClockPanel', () => {
     expect(container).toHaveTextContent('00:00:00');
   });
 
-  test('no value error for countup from query field', () => {
+  test('no countup value from query field', () => {
     const props = getDefaultProps();
     props.options.mode = ClockMode.countup;
     props.options.countupSettings.source = ClockSource.query;
@@ -162,7 +162,7 @@ describe('ClockPanel', () => {
     expect(container).toHaveTextContent('no value');
   });
 
-  test('no value error for countdown from query field', () => {
+  test('no countdown value from query field', () => {
     const props = getDefaultProps();
     props.options.mode = ClockMode.countdown;
     props.options.countdownSettings.source = ClockSource.query;
@@ -174,7 +174,7 @@ describe('ClockPanel', () => {
     expect(container).toHaveTextContent('no value');
   });
 
-  test('invalid value error for countup from query field', () => {
+  test('invalid countup value from query field', () => {
     const props = getDefaultProps();
     props.options.mode = ClockMode.countup;
     props.options.countupSettings.source = ClockSource.query;
@@ -185,7 +185,7 @@ describe('ClockPanel', () => {
     expect(container).toHaveTextContent('invalid value');
   });
 
-  test('invalid value error for countdown from query field', () => {
+  test('invalid countdown value from query field', () => {
     const props = getDefaultProps();
     props.options.mode = ClockMode.countdown;
     props.options.countdownSettings.source = ClockSource.query;
@@ -194,6 +194,79 @@ describe('ClockPanel', () => {
 
     const { container } = render(<ClockPanel {...props} />);
     expect(container).toHaveTextContent('invalid value');
+  });
+
+  test('undefined as input from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.first;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+    props.data.series[0].fields[0].values[0] = undefined;
+    props.data.series[0].fields[1].values[0] = 'Undefined';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('invalid value');
+    expect(container).toHaveTextContent('Undefined');
+  });
+
+  test('null as input from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.first;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+    props.data.series[0].fields[0].values[0] = null;
+    props.data.series[0].fields[1].values[0] = 'Null';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('invalid value');
+    expect(container).toHaveTextContent('Null');
+  });
+
+  test('NaN as input from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.first;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+    props.data.series[0].fields[0].values[0] = NaN;
+    props.data.series[0].fields[1].values[0] = 'NaN';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('invalid value');
+    expect(container).toHaveTextContent('NaN');
+  });
+
+  test('time from different query series', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime series b';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.first;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+    props.data.series.push({
+      fields: [
+        {
+          name: 'datetime series b',
+          values: [new Date('01-01-2021')],
+          type: FieldType.time,
+          config: {},
+        },
+      ],
+      length: 1,
+    });
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('4 months, 11 days, 21 hours, 48 minutes, 0 seconds');
+    expect(container).toHaveTextContent('Undefined');
   });
 
   test('description with static text', () => {
@@ -223,13 +296,37 @@ describe('ClockPanel', () => {
     props.options.mode = ClockMode.countdown;
     props.options.countdownSettings.source = ClockSource.query;
     props.options.countdownSettings.queryField = 'datetime';
-    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.minFuture;
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.first;
     props.options.descriptionSettings.source = DescriptionSource.query;
     props.options.descriptionSettings.queryField = 'label';
     props.data.series[0].fields[1].values = [];
 
     const { container } = render(<ClockPanel {...props} />);
     expect(container).toHaveTextContent('no description found');
+  });
+
+  test('description from different query series', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.first;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label series b';
+    props.data.series.push({
+      fields: [
+        {
+          name: 'label series b',
+          values: ['Undefined from series b'],
+          type: FieldType.string,
+          config: {},
+        },
+      ],
+      length: 1,
+    });
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('Undefined from series b');
   });
 });
 

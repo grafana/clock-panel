@@ -53,7 +53,7 @@ export function CalculateClockOptions({
 
   let clockNoValueText = clockSettings.noValueText ?? '';
   let clockInvalidValueText = clockSettings.invalidValueText ?? '';
-  let targetTime: Moment | undefined = undefined;
+  let targetTime: Moment | undefined | null = undefined;
   switch (clockSettings.source) {
     case ClockSource.input:
       if (!userInputTime) {
@@ -106,28 +106,35 @@ export function CalculateClockOptions({
         return v.sort((a, b) => a.time.diff(b.time));
       };
 
-      let finalValue: QueryRow | undefined = undefined;
+      let finalValue:
+        | {
+            time: moment.Moment | null;
+            description: string;
+          }
+        | undefined = undefined;
       switch (clockSettings.queryCalculation) {
         case QueryCalculation.lastNotNull:
           finalValue = values.length > 0 ? values.at(-1) : undefined;
           break;
         case QueryCalculation.last:
-          if (fieldValues.length > 0 && !fieldValues[fieldValues.length - 1]?.time) {
-            return [now, descriptionText, clockInvalidValueText];
-          }
           finalValue =
             fieldValues.length > 0
-              ? { ...fieldValues[fieldValues.length - 1], time: moment(fieldValues[fieldValues.length - 1]?.time) }
+              ? {
+                  ...fieldValues[fieldValues.length - 1],
+                  time: fieldValues[fieldValues.length - 1]?.time
+                    ? moment(fieldValues[fieldValues.length - 1]?.time)
+                    : null,
+                }
               : undefined;
           break;
         case QueryCalculation.firstNotNull:
           finalValue = values.length > 0 ? values[0] : undefined;
           break;
         case QueryCalculation.first:
-          if (fieldValues.length > 0 && !fieldValues[0]?.time) {
-            return [now, descriptionText, clockInvalidValueText];
-          }
-          finalValue = fieldValues.length > 0 ? { ...fieldValues[0], time: moment(fieldValues[0].time) } : undefined;
+          finalValue =
+            fieldValues.length > 0
+              ? { ...fieldValues[0], time: fieldValues[0].time ? moment(fieldValues[0].time) : null }
+              : undefined;
           break;
         case QueryCalculation.min:
           finalValue = values.length > 0 ? sortedValues(values)[0] : undefined;
@@ -155,12 +162,11 @@ export function CalculateClockOptions({
       break;
   }
 
-  if (!targetTime) {
+  if (targetTime === undefined) {
     return [now, descriptionText, clockNoValueText];
   }
-  if (!targetTime.isValid()) {
+  if (targetTime === null || !targetTime.isValid()) {
     return [now, descriptionText, clockInvalidValueText];
   }
-
   return [targetTime, descriptionText, null];
 }
