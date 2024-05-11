@@ -244,6 +244,118 @@ describe('ClockPanel', () => {
     expect(container).toHaveTextContent('NaN');
   });
 
+  test('first QueryCalculation from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.first;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('invalid value');
+    expect(container).toHaveTextContent('Undefined');
+  });
+
+  test('firstNotNull QueryCalculation from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.firstNotNull;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('4 months, 11 days, 21 hours, 48 minutes, 0 seconds');
+    expect(container).toHaveTextContent('Next New Year');
+  });
+
+  test('last QueryCalculation from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countup;
+    props.options.countupSettings.source = ClockSource.query;
+    props.options.countupSettings.queryField = 'datetime';
+    props.options.countupSettings.queryCalculation = CountupQueryCalculation.last;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('invalid value');
+    expect(container).toHaveTextContent('NaN');
+  });
+
+  test('lastNotNull QueryCalculation from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countup;
+    props.options.countupSettings.source = ClockSource.query;
+    props.options.countupSettings.queryField = 'datetime';
+    props.options.countupSettings.queryCalculation = CountupQueryCalculation.lastNotNull;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('1 year, 7 months, 18 days, 2 hours, 12 minutes, 0 seconds');
+    expect(container).toHaveTextContent('Penultimate New Year');
+  });
+
+  test('min QueryCalculation from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countup;
+    props.options.countupSettings.source = ClockSource.query;
+    props.options.countupSettings.queryField = 'datetime';
+    props.options.countupSettings.queryCalculation = CountupQueryCalculation.min;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('1 year, 7 months, 18 days, 2 hours, 12 minutes, 0 seconds');
+    expect(container).toHaveTextContent('Penultimate New Year');
+  });
+
+  test('minFuture QueryCalculation from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountdownQueryCalculation.minFuture;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('4 months, 11 days, 21 hours, 48 minutes, 0 seconds');
+    expect(container).toHaveTextContent('Next New Year');
+  });
+
+  test('max QueryCalculation from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countdown;
+    props.options.countdownSettings.source = ClockSource.query;
+    props.options.countdownSettings.queryField = 'datetime';
+    props.options.countdownSettings.queryCalculation = CountupQueryCalculation.max;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('1 year, 4 months, 11 days, 21 hours, 48 minutes, 0 seconds');
+    expect(container).toHaveTextContent('New Year After Next');
+  });
+
+  test('maxPast QueryCalculation from query field', () => {
+    const props = getDefaultProps();
+    props.options.mode = ClockMode.countup;
+    props.options.countupSettings.source = ClockSource.query;
+    props.options.countupSettings.queryField = 'datetime';
+    props.options.countupSettings.queryCalculation = CountupQueryCalculation.maxPast;
+    props.options.descriptionSettings.source = DescriptionSource.query;
+    props.options.descriptionSettings.queryField = 'label';
+
+    const { container } = render(<ClockPanel {...props} />);
+    expect(container).toHaveTextContent('7 months, 18 days, 2 hours, 12 minutes, 0 seconds');
+    expect(container).toHaveTextContent('Last New Year');
+  });
+
   test('time from different query series', () => {
     const props = getDefaultProps();
     props.options.mode = ClockMode.countdown;
@@ -339,13 +451,29 @@ const getDefaultProps = () => {
           fields: [
             {
               name: 'datetime',
-              values: [undefined, null, NaN, new Date('01-01-2021'), new Date('01-01-2020'), new Date('01-01-2022')],
+              values: [
+                undefined,
+                null,
+                new Date('01-01-2021'),
+                new Date('01-01-2020'),
+                new Date('01-01-2022'),
+                new Date('01-01-2019'),
+                NaN,
+              ],
               type: FieldType.time,
               config: {},
             },
             {
               name: 'label',
-              values: ['Undefined', 'Null', 'NaN', 'Next New Year', 'Last New Year', 'Year After Next Year'],
+              values: [
+                'Undefined',
+                'Null',
+                'Next New Year',
+                'Last New Year',
+                'New Year After Next',
+                'Penultimate New Year',
+                'NaN',
+              ],
               type: FieldType.string,
               config: {},
             },
