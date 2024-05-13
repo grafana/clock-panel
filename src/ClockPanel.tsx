@@ -8,7 +8,7 @@ import { ClockOptions, ClockRefresh, DescriptionSource } from './types';
 import { RenderDate } from 'components/RenderDate';
 import { RenderTime } from 'components/RenderTime';
 import { RenderZone } from 'components/RenderZone';
-import moment, { Moment } from 'moment-timezone';
+import { Moment } from 'moment-timezone';
 import { getMoment } from 'utils';
 import './external/moment-duration-format';
 import { CalculateClockOptions } from 'components/CalculateClockOptions';
@@ -56,7 +56,7 @@ export function ClockPanel(props: Props) {
   }, [props.options.refresh, timezoneToUse]);
 
   //refresh the time
-  let [targetTime, descriptionText, err]: [moment.Moment, string, string | null] = useMemo(() => {
+  let [targetTime, descriptionText, err]: [Moment, string, string | null] = useMemo(() => {
     return CalculateClockOptions({
       options: props.options,
       timezone: timezoneToUse,
