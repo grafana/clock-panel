@@ -293,7 +293,8 @@ function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       showIf: (o) => {
         let show =
           (o.mode === ClockMode.countup && o.countupSettings.source !== ClockSource.query) ||
-          (o.mode === ClockMode.countdown && o.countdownSettings.source !== ClockSource.query);
+          (o.mode === ClockMode.countdown && o.countdownSettings.source !== ClockSource.query) ||
+          o.mode === ClockMode.time;
 
         if (show && o.descriptionSettings.source === DescriptionSource.query) {
           o.descriptionSettings.source = DescriptionSource.none;
