@@ -90,7 +90,9 @@ export function CalculateClockOptions({
         return [now, descriptionText, clockNoValueText];
       }
 
-      let descriptionFieldValues = descriptionField?.values ?? new Array(timeField.values.length);
+      let descriptionFieldValues = descriptionField?.values
+        ? [...descriptionField?.values]
+        : new Array(timeField.values.length);
       let fieldValues: Array<{ time: MomentInput; description: string }> = timeField.values.map((value, index) => {
         return { time: value, description: descriptionFieldValues[index] };
       });

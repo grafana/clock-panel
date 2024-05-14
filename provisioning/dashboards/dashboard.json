@@ -44,11 +44,19 @@
         "clockType": "24 hour",
         "countdownSettings": {
           "endCountdownTime": "2022-11-18T01:26:50+01:00",
-          "endText": "00:00:00"
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "countupSettings": {
           "beginCountupTime": "2022-11-18T01:26:50+01:00",
-          "beginText": "00:00:00"
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "dateSettings": {
           "dateFormat": "YYYY-MM-DD",
@@ -57,6 +65,14 @@
           "locale": "",
           "showDate": false
         },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "fontMono": false,
         "mode": "time",
         "refresh": "sec",
         "timeSettings": {
@@ -71,7 +87,7 @@
           "zoneFormat": "offsetAbbv"
         }
       },
-      "pluginVersion": "2.1.1",
+      "pluginVersion": "2.1.5",
       "title": "Time in local timezone",
       "type": "grafana-clock-panel"
     },
@@ -92,11 +108,19 @@
         "clockType": "24 hour",
         "countdownSettings": {
           "endCountdownTime": "2022-11-23T16:09:41+01:00",
-          "endText": "00:00:00"
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "countupSettings": {
           "beginCountupTime": "2022-11-23T16:09:41+01:00",
-          "beginText": "00:00:00"
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "dateSettings": {
           "dateFormat": "YYYY-MM-DD",
@@ -105,6 +129,14 @@
           "locale": "",
           "showDate": false
         },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "fontMono": false,
         "mode": "time",
         "refresh": "sec",
         "timeSettings": {
@@ -119,57 +151,7 @@
           "zoneFormat": "abbv"
         }
       },
-      "pluginVersion": "2.1.1",
-      "targets": [
-        {
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "itemTag": {
-            "filter": ""
-          },
-          "options": {
-            "disableDataAlignment": false,
-            "showDisabledItems": false,
-            "skipEmptyValues": false,
-            "useZabbixValueMapping": false
-          },
-          "proxy": {
-            "filter": ""
-          },
-          "queryType": "0",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "table": {
-            "skipEmptyValues": false
-          },
-          "tags": {
-            "filter": ""
-          },
-          "trigger": {
-            "filter": ""
-          },
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          }
-        }
-      ],
+      "pluginVersion": "2.1.5",
       "title": "Time in PST timezone",
       "type": "grafana-clock-panel"
     },
@@ -190,11 +172,19 @@
         "clockType": "24 hour",
         "countdownSettings": {
           "endCountdownTime": "2023-12-31T00:00:00+01:00",
-          "endText": "Happy new year 2024!!"
+          "endText": "Happy new year 2024!!",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "countupSettings": {
           "beginCountupTime": "2022-11-23T16:11:28+01:00",
-          "beginText": "00:00:00"
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "dateSettings": {
           "dateFormat": "YYYY-MM-DD",
@@ -203,6 +193,14 @@
           "locale": "",
           "showDate": false
         },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "fontMono": false,
         "mode": "countdown",
         "refresh": "sec",
         "timeSettings": {
@@ -217,57 +215,7 @@
           "zoneFormat": "abbv"
         }
       },
-      "pluginVersion": "2.1.1",
-      "targets": [
-        {
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "itemTag": {
-            "filter": ""
-          },
-          "options": {
-            "disableDataAlignment": false,
-            "showDisabledItems": false,
-            "skipEmptyValues": false,
-            "useZabbixValueMapping": false
-          },
-          "proxy": {
-            "filter": ""
-          },
-          "queryType": "0",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "table": {
-            "skipEmptyValues": false
-          },
-          "tags": {
-            "filter": ""
-          },
-          "trigger": {
-            "filter": ""
-          },
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          }
-        }
-      ],
+      "pluginVersion": "2.1.5",
       "title": "Time until new years celebration 2024",
       "type": "grafana-clock-panel"
     },
@@ -288,11 +236,19 @@
         "clockType": "24 hour",
         "countdownSettings": {
           "endCountdownTime": "2022-11-23T16:15:49+01:00",
-          "endText": "00:00:00"
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "countupSettings": {
           "beginCountupTime": "2022-10-30T03:00:01+01:00",
-          "beginText": "00:00:00"
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "dateSettings": {
           "dateFormat": "YYYY-MM-DD",
@@ -301,6 +257,14 @@
           "locale": "",
           "showDate": false
         },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "fontMono": false,
         "mode": "countup",
         "refresh": "sec",
         "timeSettings": {
@@ -315,57 +279,7 @@
           "zoneFormat": "offsetAbbv"
         }
       },
-      "pluginVersion": "2.1.1",
-      "targets": [
-        {
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "itemTag": {
-            "filter": ""
-          },
-          "options": {
-            "disableDataAlignment": false,
-            "showDisabledItems": false,
-            "skipEmptyValues": false,
-            "useZabbixValueMapping": false
-          },
-          "proxy": {
-            "filter": ""
-          },
-          "queryType": "0",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "table": {
-            "skipEmptyValues": false
-          },
-          "tags": {
-            "filter": ""
-          },
-          "trigger": {
-            "filter": ""
-          },
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          }
-        }
-      ],
+      "pluginVersion": "2.1.5",
       "title": "Time since day light saving ended in Sweden",
       "type": "grafana-clock-panel"
     },
@@ -386,11 +300,19 @@
         "clockType": "24 hour",
         "countdownSettings": {
           "endCountdownTime": "2022-11-23T16:19:54+01:00",
-          "endText": "00:00:00"
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "countupSettings": {
           "beginCountupTime": "2022-11-23T16:19:54+01:00",
-          "beginText": "00:00:00"
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "dateSettings": {
           "dateFormat": "YYYY-MM-DD",
@@ -399,6 +321,14 @@
           "locale": "",
           "showDate": false
         },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "fontMono": false,
         "mode": "time",
         "refresh": "dashboard",
         "timeSettings": {
@@ -413,57 +343,7 @@
           "zoneFormat": "offsetAbbv"
         }
       },
-      "pluginVersion": "2.1.1",
-      "targets": [
-        {
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "itemTag": {
-            "filter": ""
-          },
-          "options": {
-            "disableDataAlignment": false,
-            "showDisabledItems": false,
-            "skipEmptyValues": false,
-            "useZabbixValueMapping": false
-          },
-          "proxy": {
-            "filter": ""
-          },
-          "queryType": "0",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "table": {
-            "skipEmptyValues": false
-          },
-          "tags": {
-            "filter": ""
-          },
-          "trigger": {
-            "filter": ""
-          },
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          }
-        }
-      ],
+      "pluginVersion": "2.1.5",
       "title": "Refresh: with dashboard",
       "type": "grafana-clock-panel"
     },
@@ -484,11 +364,19 @@
         "clockType": "12 hour",
         "countdownSettings": {
           "endCountdownTime": "2022-11-23T16:21:45+01:00",
-          "endText": "00:00:00"
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "countupSettings": {
           "beginCountupTime": "2022-11-23T16:21:45+01:00",
-          "beginText": "00:00:00"
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "dateSettings": {
           "dateFormat": "YYYY-MM-DD",
@@ -497,6 +385,14 @@
           "locale": "",
           "showDate": false
         },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "fontMono": false,
         "mode": "time",
         "refresh": "sec",
         "timeSettings": {
@@ -511,57 +407,7 @@
           "zoneFormat": "offsetAbbv"
         }
       },
-      "pluginVersion": "2.1.1",
-      "targets": [
-        {
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "itemTag": {
-            "filter": ""
-          },
-          "options": {
-            "disableDataAlignment": false,
-            "showDisabledItems": false,
-            "skipEmptyValues": false,
-            "useZabbixValueMapping": false
-          },
-          "proxy": {
-            "filter": ""
-          },
-          "queryType": "0",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "table": {
-            "skipEmptyValues": false
-          },
-          "tags": {
-            "filter": ""
-          },
-          "trigger": {
-            "filter": ""
-          },
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          }
-        }
-      ],
+      "pluginVersion": "2.1.5",
       "title": "Time format: 12 hours",
       "type": "grafana-clock-panel"
     },
@@ -582,11 +428,19 @@
         "clockType": "custom",
         "countdownSettings": {
           "endCountdownTime": "2022-11-23T16:22:42+01:00",
-          "endText": "00:00:00"
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "countupSettings": {
           "beginCountupTime": "2022-11-23T16:22:42+01:00",
-          "beginText": "00:00:00"
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "dateSettings": {
           "dateFormat": "YYYY-MM-DD",
@@ -595,6 +449,14 @@
           "locale": "",
           "showDate": false
         },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "fontMono": false,
         "mode": "time",
         "refresh": "sec",
         "timeSettings": {
@@ -610,57 +472,7 @@
           "zoneFormat": "offsetAbbv"
         }
       },
-      "pluginVersion": "2.1.1",
-      "targets": [
-        {
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "itemTag": {
-            "filter": ""
-          },
-          "options": {
-            "disableDataAlignment": false,
-            "showDisabledItems": false,
-            "skipEmptyValues": false,
-            "useZabbixValueMapping": false
-          },
-          "proxy": {
-            "filter": ""
-          },
-          "queryType": "0",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "table": {
-            "skipEmptyValues": false
-          },
-          "tags": {
-            "filter": ""
-          },
-          "trigger": {
-            "filter": ""
-          },
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          }
-        }
-      ],
+      "pluginVersion": "2.1.5",
       "title": "Time Format: Custom (only year)",
       "type": "grafana-clock-panel"
     },
@@ -681,11 +493,19 @@
         "clockType": "custom",
         "countdownSettings": {
           "endCountdownTime": "2022-11-23T16:22:42+01:00",
-          "endText": "00:00:00"
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "countupSettings": {
           "beginCountupTime": "2022-11-23T16:22:42+01:00",
-          "beginText": "00:00:00"
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "dateSettings": {
           "dateFormat": "YYYY-MM-DD",
@@ -694,6 +514,14 @@
           "locale": "",
           "showDate": false
         },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "fontMono": false,
         "mode": "time",
         "refresh": "sec",
         "timeSettings": {
@@ -709,57 +537,7 @@
           "zoneFormat": "offsetAbbv"
         }
       },
-      "pluginVersion": "2.1.1",
-      "targets": [
-        {
-          "application": {
-            "filter": ""
-          },
-          "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
-          },
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "itemTag": {
-            "filter": ""
-          },
-          "options": {
-            "disableDataAlignment": false,
-            "showDisabledItems": false,
-            "skipEmptyValues": false,
-            "useZabbixValueMapping": false
-          },
-          "proxy": {
-            "filter": ""
-          },
-          "queryType": "0",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "table": {
-            "skipEmptyValues": false
-          },
-          "tags": {
-            "filter": ""
-          },
-          "trigger": {
-            "filter": ""
-          },
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          }
-        }
-      ],
+      "pluginVersion": "2.1.5",
       "title": "Time Format: Custom",
       "type": "grafana-clock-panel"
     },
@@ -780,11 +558,19 @@
         "clockType": "custom",
         "countdownSettings": {
           "endCountdownTime": "2022-11-23T16:22:42+01:00",
-          "endText": "00:00:00"
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "countupSettings": {
           "beginCountupTime": "${__from:date}",
-          "beginText": "00:00:00"
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "dateSettings": {
           "dateFormat": "YYYY-MM-DD",
@@ -793,6 +579,14 @@
           "locale": "",
           "showDate": false
         },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "fontMono": false,
         "mode": "countup",
         "refresh": "sec",
         "timeSettings": {
@@ -808,58 +602,706 @@
           "zoneFormat": "offsetAbbv"
         }
       },
-      "pluginVersion": "2.1.1",
+      "pluginVersion": "2.1.5",
+      "title": "Template variable: countup since ${__from:date}",
+      "type": "grafana-clock-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P11BF8370885DF93A"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 17
+      },
+      "id": 21,
+      "options": {
+        "bgColor": "",
+        "clockType": "24 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2024-05-14T19:31:20+02:00",
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2024-05-14T19:31:20+02:00",
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "first",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "20px",
+          "fontWeight": "normal",
+          "locale": "",
+          "showDate": false
+        },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "queryField": "label",
+          "source": "query"
+        },
+        "fontMono": false,
+        "mode": "countup",
+        "refresh": "sec",
+        "timeSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal"
+        },
+        "timezone": "",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": false,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "2.1.5",
       "targets": [
         {
-          "application": {
-            "filter": ""
-          },
+          "csvContent": "datetime,label\n2021-01-01,New Year 2021\n2023-01-01,New Year 2023\n2020-01-01,New Year 2020\n2025-01-01,New Year 2025\n2022-01-01,New Year 2022\n2028-01-01,New Year 2028\n2024-01-01,New Year 2024\n2027-01-01,New Year 2027\n2030-01-01,New Year 2030\n2029-01-01,New Year 2029\n2026-01-01,New Year 2026",
           "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
+            "type": "testdata",
+            "uid": "P11BF8370885DF93A"
           },
-          "functions": [],
-          "group": {
-            "filter": ""
-          },
-          "host": {
-            "filter": ""
-          },
-          "item": {
-            "filter": ""
-          },
-          "itemTag": {
-            "filter": ""
-          },
-          "options": {
-            "disableDataAlignment": false,
-            "showDisabledItems": false,
-            "skipEmptyValues": false,
-            "useZabbixValueMapping": false
-          },
-          "proxy": {
-            "filter": ""
-          },
-          "queryType": "0",
           "refId": "A",
-          "resultFormat": "time_series",
-          "table": {
-            "skipEmptyValues": false
-          },
-          "tags": {
-            "filter": ""
-          },
-          "trigger": {
-            "filter": ""
-          },
-          "triggers": {
-            "acknowledged": 2,
-            "count": true,
-            "minSeverity": 3
-          }
+          "scenarioId": "csv_content"
         }
       ],
-      "title": "Template variable: countup since ${__from:date}",
+      "title": "Query first countup",
+      "type": "grafana-clock-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P11BF8370885DF93A"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 17
+      },
+      "id": 20,
+      "options": {
+        "bgColor": "",
+        "clockType": "24 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2024-05-14T19:31:20+02:00",
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2024-05-14T19:31:20+02:00",
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "20px",
+          "fontWeight": "normal",
+          "locale": "",
+          "showDate": false
+        },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "queryField": "label",
+          "source": "query"
+        },
+        "fontMono": false,
+        "mode": "countdown",
+        "refresh": "sec",
+        "timeSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal"
+        },
+        "timezone": "",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": false,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "2.1.5",
+      "targets": [
+        {
+          "csvContent": "datetime,label\n2021-01-01,New Year 2021\n2023-01-01,New Year 2023\n2020-01-01,New Year 2020\n2025-01-01,New Year 2025\n2022-01-01,New Year 2022\n2028-01-01,New Year 2028\n2024-01-01,New Year 2024\n2027-01-01,New Year 2027\n2030-01-01,New Year 2030\n2029-01-01,New Year 2029\n2026-01-01,New Year 2026",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P11BF8370885DF93A"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Query last countdown",
+      "type": "grafana-clock-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P11BF8370885DF93A"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 21
+      },
+      "id": 22,
+      "options": {
+        "bgColor": "",
+        "clockType": "24 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2024-05-14T19:31:20+02:00",
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "minFuture",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2024-05-14T19:31:20+02:00",
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "min",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "20px",
+          "fontWeight": "normal",
+          "locale": "",
+          "showDate": false
+        },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "queryField": "label",
+          "source": "query"
+        },
+        "fontMono": false,
+        "mode": "countup",
+        "refresh": "sec",
+        "timeSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal"
+        },
+        "timezone": "",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": false,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "2.1.5",
+      "targets": [
+        {
+          "csvContent": "datetime,label\n2021-01-01,New Year 2021\n2023-01-01,New Year 2023\n2020-01-01,New Year 2020\n2025-01-01,New Year 2025\n2022-01-01,New Year 2022\n2028-01-01,New Year 2028\n2024-01-01,New Year 2024\n2027-01-01,New Year 2027\n2030-01-01,New Year 2030\n2029-01-01,New Year 2029\n2026-01-01,New Year 2026",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P11BF8370885DF93A"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Query min countup",
+      "type": "grafana-clock-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P11BF8370885DF93A"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 21
+      },
+      "id": 23,
+      "options": {
+        "bgColor": "",
+        "clockType": "24 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2024-05-14T19:31:20+02:00",
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "minFuture",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2024-05-14T19:31:20+02:00",
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "20px",
+          "fontWeight": "normal",
+          "locale": "",
+          "showDate": false
+        },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "queryField": "label",
+          "source": "query"
+        },
+        "fontMono": false,
+        "mode": "countdown",
+        "refresh": "sec",
+        "timeSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal"
+        },
+        "timezone": "",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": false,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "2.1.5",
+      "targets": [
+        {
+          "csvContent": "datetime,label\n2021-01-01,New Year 2021\n2023-01-01,New Year 2023\n2020-01-01,New Year 2020\n2025-01-01,New Year 2025\n2022-01-01,New Year 2022\n2028-01-01,New Year 2028\n2024-01-01,New Year 2024\n2027-01-01,New Year 2027\n2030-01-01,New Year 2030\n2029-01-01,New Year 2029\n2026-01-01,New Year 2026",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P11BF8370885DF93A"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Query min future countdown",
+      "type": "grafana-clock-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P11BF8370885DF93A"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 25
+      },
+      "id": 24,
+      "options": {
+        "bgColor": "",
+        "clockType": "24 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2024-05-14T19:31:20+02:00",
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "max",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2024-05-14T19:31:20+02:00",
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "20px",
+          "fontWeight": "normal",
+          "locale": "",
+          "showDate": false
+        },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "queryField": "label",
+          "source": "query"
+        },
+        "fontMono": false,
+        "mode": "countdown",
+        "refresh": "sec",
+        "timeSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal"
+        },
+        "timezone": "",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": false,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "2.1.5",
+      "targets": [
+        {
+          "csvContent": "datetime,label\n2021-01-01,New Year 2021\n2023-01-01,New Year 2023\n2020-01-01,New Year 2020\n2025-01-01,New Year 2025\n2022-01-01,New Year 2022\n2028-01-01,New Year 2028\n2024-01-01,New Year 2024\n2027-01-01,New Year 2027\n2030-01-01,New Year 2030\n2029-01-01,New Year 2029\n2026-01-01,New Year 2026",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P11BF8370885DF93A"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Query max countdown",
+      "type": "grafana-clock-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P11BF8370885DF93A"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 25
+      },
+      "id": 25,
+      "options": {
+        "bgColor": "",
+        "clockType": "24 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2024-05-14T19:31:20+02:00",
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "minFuture",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2024-05-14T19:31:20+02:00",
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "maxPast",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "20px",
+          "fontWeight": "normal",
+          "locale": "",
+          "showDate": false
+        },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "queryField": "label",
+          "source": "query"
+        },
+        "fontMono": false,
+        "mode": "countup",
+        "refresh": "sec",
+        "timeSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal"
+        },
+        "timezone": "",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": false,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "2.1.5",
+      "targets": [
+        {
+          "csvContent": "datetime,label\n2021-01-01,New Year 2021\n2023-01-01,New Year 2023\n2020-01-01,New Year 2020\n2025-01-01,New Year 2025\n2022-01-01,New Year 2022\n2028-01-01,New Year 2028\n2024-01-01,New Year 2024\n2027-01-01,New Year 2027\n2030-01-01,New Year 2030\n2029-01-01,New Year 2029\n2026-01-01,New Year 2026",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P11BF8370885DF93A"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Query max past countup",
+      "type": "grafana-clock-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P11BF8370885DF93A"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 29
+      },
+      "id": 27,
+      "options": {
+        "bgColor": "",
+        "clockType": "24 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2024-05-14T19:31:20+02:00",
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "minFuture",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2024-05-14T19:31:20+02:00",
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "maxPast",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "20px",
+          "fontWeight": "normal",
+          "locale": "",
+          "showDate": false
+        },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "queryField": "label",
+          "source": "query"
+        },
+        "fontMono": false,
+        "mode": "countup",
+        "refresh": "sec",
+        "timeSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal"
+        },
+        "timezone": "",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": false,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "2.1.5",
+      "targets": [
+        {
+          "datasource": {
+            "type": "testdata",
+            "uid": "P11BF8370885DF93A"
+          },
+          "refId": "A",
+          "scenarioId": "no_data_points"
+        }
+      ],
+      "title": "Query with no data",
+      "type": "grafana-clock-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P11BF8370885DF93A"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 29
+      },
+      "id": 28,
+      "options": {
+        "bgColor": "",
+        "clockType": "24 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2024-05-14T19:31:20+02:00",
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "minFuture",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2024-05-14T19:31:20+02:00",
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "first",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "20px",
+          "fontWeight": "normal",
+          "locale": "",
+          "showDate": false
+        },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "queryField": "label",
+          "source": "query"
+        },
+        "fontMono": false,
+        "mode": "countup",
+        "refresh": "sec",
+        "timeSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal"
+        },
+        "timezone": "",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": false,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "2.1.5",
+      "targets": [
+        {
+          "csvContent": "datetime,label\nNaN,Description still works",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P11BF8370885DF93A"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Query with invalid data",
+      "type": "grafana-clock-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P11BF8370885DF93A"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 33
+      },
+      "id": 26,
+      "options": {
+        "bgColor": "",
+        "clockType": "24 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2024-05-14T19:31:20+02:00",
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "minFuture",
+          "queryField": "datetime",
+          "source": "query"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2024-05-14T19:31:20+02:00",
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "maxPast",
+          "queryField": "datetime",
+          "source": "input"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "20px",
+          "fontWeight": "normal",
+          "locale": "",
+          "showDate": false
+        },
+        "descriptionSettings": {
+          "descriptionText": "This is a static input",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "queryField": "label",
+          "source": "input"
+        },
+        "fontMono": false,
+        "mode": "countup",
+        "refresh": "sec",
+        "timeSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal"
+        },
+        "timezone": "",
+        "timezoneSettings": {
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "showTimezone": false,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "2.1.5",
+      "targets": [
+        {
+          "csvContent": "datetime,label\n2021-01-01,New Year 2021\n2023-01-01,New Year 2023\n2020-01-01,New Year 2020\n2025-01-01,New Year 2025\n2022-01-01,New Year 2022\n2028-01-01,New Year 2028\n2024-01-01,New Year 2024\n2027-01-01,New Year 2027\n2030-01-01,New Year 2030\n2029-01-01,New Year 2029\n2026-01-01,New Year 2026",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P11BF8370885DF93A"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Description with static input",
       "type": "grafana-clock-panel"
     },
     {
@@ -871,7 +1313,7 @@
         "h": 2,
         "w": 5,
         "x": 0,
-        "y": 17
+        "y": 37
       },
       "id": 18,
       "options": {
@@ -879,11 +1321,19 @@
         "clockType": "24 hour",
         "countdownSettings": {
           "endCountdownTime": "2022-12-31T00:28:17+01:00",
-          "endText": "00:00:00"
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "countupSettings": {
           "beginCountupTime": "2022-12-31T00:28:17+01:00",
-          "beginText": "00:00:00"
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
         },
         "dateSettings": {
           "dateFormat": "YYYY-MM-DD",
@@ -892,6 +1342,14 @@
           "locale": "",
           "showDate": true
         },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "fontMono": false,
         "mode": "time",
         "refresh": "sec",
         "timeSettings": {
@@ -906,7 +1364,7 @@
           "zoneFormat": "offsetAbbv"
         }
       },
-      "pluginVersion": "2.1.1",
+      "pluginVersion": "2.1.5",
       "title": "Should switch to one line based on height",
       "type": "grafana-clock-panel"
     }
@@ -925,6 +1383,6 @@
   "timezone": "",
   "title": "Testing",
   "uid": "bJryn4dVz",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
