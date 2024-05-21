@@ -1,130 +1,105 @@
 import { css } from '@emotion/css';
-import { PanelProps } from '@grafana/data';
 import moment, { Moment } from 'moment-timezone';
 import React, { useMemo } from 'react';
 import { ClockMode, ClockOptions, ClockType, TimeSettings } from 'types';
-import { getMoment } from 'utils';
 
 function getCountdownText({
   countdownSettings,
-  timezone,
-  replaceVariables,
+  targetTime,
   now,
 }: {
   countdownSettings: ClockOptions['countdownSettings'];
-  timezone: ClockOptions['timezone'];
-  replaceVariables: PanelProps['replaceVariables'];
+  targetTime: Moment;
   now: Moment;
 }): string {
-  if (!countdownSettings.endCountdownTime) {
-    return countdownSettings.endText;
-  }
-
-  const timeLeft = moment.duration(
-    moment(replaceVariables(countdownSettings.endCountdownTime))
-      .utcOffset(getMoment(timezone).format('Z'), true)
-      .diff(now)
-  );
-  let formattedTimeLeft = '';
-
-  if (timeLeft.asSeconds() <= 0) {
+  let timeDiff = moment.duration(targetTime.diff(now));
+  if (timeDiff.asSeconds() <= 0) {
     return countdownSettings.endText;
   }
 
   if (countdownSettings.customFormat === 'auto') {
-    return (timeLeft as any).format();
+    return (timeDiff as any).format();
   }
 
   if (countdownSettings.customFormat) {
-    return (timeLeft as any).format(countdownSettings.customFormat);
+    return (timeDiff as any).format(countdownSettings.customFormat);
   }
 
+  let formattedTimeLeft = '';
   let previous = '';
 
-  if (timeLeft.years() > 0) {
-    formattedTimeLeft = timeLeft.years() === 1 ? '1 year, ' : timeLeft.years() + ' years, ';
+  if (timeDiff.years() > 0) {
+    formattedTimeLeft = timeDiff.years() === 1 ? '1 year, ' : timeDiff.years() + ' years, ';
     previous = 'years';
   }
-  if (timeLeft.months() > 0 || previous === 'years') {
-    formattedTimeLeft += timeLeft.months() === 1 ? '1 month, ' : timeLeft.months() + ' months, ';
+  if (timeDiff.months() > 0 || previous === 'years') {
+    formattedTimeLeft += timeDiff.months() === 1 ? '1 month, ' : timeDiff.months() + ' months, ';
     previous = 'months';
   }
-  if (timeLeft.days() > 0 || previous === 'months') {
-    formattedTimeLeft += timeLeft.days() === 1 ? '1 day, ' : timeLeft.days() + ' days, ';
+  if (timeDiff.days() > 0 || previous === 'months') {
+    formattedTimeLeft += timeDiff.days() === 1 ? '1 day, ' : timeDiff.days() + ' days, ';
     previous = 'days';
   }
-  if (timeLeft.hours() > 0 || previous === 'days') {
-    formattedTimeLeft += timeLeft.hours() === 1 ? '1 hour, ' : timeLeft.hours() + ' hours, ';
+  if (timeDiff.hours() > 0 || previous === 'days') {
+    formattedTimeLeft += timeDiff.hours() === 1 ? '1 hour, ' : timeDiff.hours() + ' hours, ';
     previous = 'hours';
   }
 
-  if (timeLeft.minutes() > 0 || previous === 'hours') {
-    formattedTimeLeft += timeLeft.minutes() === 1 ? '1 minute, ' : timeLeft.minutes() + ' minutes, ';
+  if (timeDiff.minutes() > 0 || previous === 'hours') {
+    formattedTimeLeft += timeDiff.minutes() === 1 ? '1 minute, ' : timeDiff.minutes() + ' minutes, ';
   }
 
-  formattedTimeLeft += timeLeft.seconds() === 1 ? '1 second ' : timeLeft.seconds() + ' seconds';
+  formattedTimeLeft += timeDiff.seconds() === 1 ? '1 second ' : timeDiff.seconds() + ' seconds';
   return formattedTimeLeft;
 }
 
 function getCountupText({
   countupSettings,
-  timezone,
-  replaceVariables,
+  targetTime,
   now,
 }: {
   countupSettings: ClockOptions['countupSettings'];
-  timezone: ClockOptions['timezone'];
-  replaceVariables: PanelProps['replaceVariables'];
+  targetTime: Moment;
   now: Moment;
 }): string {
-  if (!countupSettings.beginCountupTime) {
-    return countupSettings.beginText;
-  }
-
-  const timePassed = moment.duration(
-    moment(now).diff(
-      moment(replaceVariables(countupSettings.beginCountupTime)).utcOffset(getMoment(timezone).format('Z'), true)
-    )
-  );
-
-  let formattedTimePassed = '';
-
-  if (timePassed.asSeconds() <= 0) {
+  let timeDiff = moment.duration(now.diff(targetTime));
+  if (timeDiff.asSeconds() <= 0) {
     return countupSettings.beginText;
   }
 
   if (countupSettings.customFormat === 'auto') {
-    return (timePassed as any).format();
+    return (timeDiff as any).format();
   }
 
   if (countupSettings.customFormat) {
-    return (timePassed as any).format(countupSettings.customFormat);
+    return (timeDiff as any).format(countupSettings.customFormat);
   }
 
+  let formattedTimePassed = '';
   let previous = '';
 
-  if (timePassed.years() > 0) {
-    formattedTimePassed = timePassed.years() === 1 ? '1 year, ' : timePassed.years() + ' years, ';
+  if (timeDiff.years() > 0) {
+    formattedTimePassed = timeDiff.years() === 1 ? '1 year, ' : timeDiff.years() + ' years, ';
     previous = 'years';
   }
-  if (timePassed.months() > 0 || previous === 'years') {
-    formattedTimePassed += timePassed.months() === 1 ? '1 month, ' : timePassed.months() + ' months, ';
+  if (timeDiff.months() > 0 || previous === 'years') {
+    formattedTimePassed += timeDiff.months() === 1 ? '1 month, ' : timeDiff.months() + ' months, ';
     previous = 'months';
   }
-  if (timePassed.days() > 0 || previous === 'months') {
-    formattedTimePassed += timePassed.days() === 1 ? '1 day, ' : timePassed.days() + ' days, ';
+  if (timeDiff.days() > 0 || previous === 'months') {
+    formattedTimePassed += timeDiff.days() === 1 ? '1 day, ' : timeDiff.days() + ' days, ';
     previous = 'days';
   }
-  if (timePassed.hours() > 0 || previous === 'days') {
-    formattedTimePassed += timePassed.hours() === 1 ? '1 hour, ' : timePassed.hours() + ' hours, ';
+  if (timeDiff.hours() > 0 || previous === 'days') {
+    formattedTimePassed += timeDiff.hours() === 1 ? '1 hour, ' : timeDiff.hours() + ' hours, ';
     previous = 'hours';
   }
 
-  if (timePassed.minutes() > 0 || previous === 'hours') {
-    formattedTimePassed += timePassed.minutes() === 1 ? '1 minute, ' : timePassed.minutes() + ' minutes, ';
+  if (timeDiff.minutes() > 0 || previous === 'hours') {
+    formattedTimePassed += timeDiff.minutes() === 1 ? '1 minute, ' : timeDiff.minutes() + ' minutes, ';
   }
 
-  formattedTimePassed += timePassed.seconds() === 1 ? '1 second ' : timePassed.seconds() + ' seconds';
+  formattedTimePassed += timeDiff.seconds() === 1 ? '1 second ' : timeDiff.seconds() + ' seconds';
   return formattedTimePassed;
 }
 
@@ -142,14 +117,14 @@ function getTimeFormat(clockType: ClockType, timeSettings: TimeSettings): string
 
 export function RenderTime({
   now,
-  replaceVariables,
-  timezone,
   options,
+  targetTime,
+  err,
 }: {
-  now: Moment;
-  timezone: ClockOptions['timezone'];
-  replaceVariables: PanelProps['replaceVariables'];
+  now: moment.Moment;
   options: ClockOptions;
+  targetTime: moment.Moment;
+  err: string | null;
 }) {
   const { clockType, timeSettings, mode } = options;
   const className = useMemo(() => {
@@ -162,25 +137,27 @@ export function RenderTime({
   }, [options.fontMono, timeSettings.fontSize, timeSettings.fontWeight]);
 
   let display = '';
+  if (err !== null) {
+    return <h2 className={className}>{err}</h2>;
+  }
+
   switch (mode) {
     case ClockMode.countdown:
       display = getCountdownText({
         countdownSettings: options.countdownSettings,
-        timezone: timezone,
-        replaceVariables,
-        now,
+        targetTime: targetTime,
+        now: now,
       });
       break;
     case ClockMode.countup:
       display = getCountupText({
         countupSettings: options.countupSettings,
-        timezone: timezone,
-        replaceVariables,
-        now,
+        targetTime: targetTime,
+        now: now,
       });
       break;
     default:
-      display = now.format(getTimeFormat(clockType, timeSettings));
+      display = targetTime.format(getTimeFormat(clockType, timeSettings));
       break;
   }
 

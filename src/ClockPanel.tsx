@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import { PanelProps } from '@grafana/data';
 import { useTheme2 } from '@grafana/ui';
 import React, { useEffect, useMemo, useState } from 'react';
-import { ClockOptions, ClockRefresh } from './types';
+import { ClockOptions, ClockRefresh, DescriptionSource } from './types';
 
 // eslint-disable-next-line
 import { RenderDate } from 'components/RenderDate';
@@ -11,11 +11,13 @@ import { RenderZone } from 'components/RenderZone';
 import { Moment } from 'moment-timezone';
 import { getMoment } from 'utils';
 import './external/moment-duration-format';
+import { CalculateClockOptions } from 'components/CalculateClockOptions';
+import { RenderDescription } from 'components/RenderDescription';
 
 interface Props extends PanelProps<ClockOptions> {}
 
 export function ClockPanel(props: Props) {
-  const { options, width, height } = props;
+  const { options, width, height, data } = props;
   const theme = useTheme2();
   const { timezone: optionsTimezone, dateSettings, timezoneSettings } = options;
   // notice the uppercase Z.
@@ -53,6 +55,17 @@ export function ClockPanel(props: Props) {
     return;
   }, [props.options.refresh, timezoneToUse]);
 
+  //refresh the time
+  let [targetTime, descriptionText, err]: [Moment, string, string | null] = useMemo(() => {
+    return CalculateClockOptions({
+      options: props.options,
+      timezone: timezoneToUse,
+      data,
+      replaceVariables: props.replaceVariables,
+      now,
+    });
+  }, [props.options, timezoneToUse, data, props.replaceVariables, now]);
+
   return (
     <div
       className={className}
@@ -62,13 +75,11 @@ export function ClockPanel(props: Props) {
       }}
     >
       {dateSettings.showDate ? <RenderDate now={now} options={props.options} /> : null}
-      <RenderTime
-        now={now}
-        replaceVariables={props.replaceVariables}
-        options={props.options}
-        timezone={timezoneToUse}
-      />
+      <RenderTime options={props.options} targetTime={targetTime} err={err} now={now} />
       {timezoneSettings.showTimezone ? <RenderZone now={now} options={props.options} timezone={timezoneToUse} /> : null}
+      {props.options.descriptionSettings.source !== DescriptionSource.none ? (
+        <RenderDescription options={props.options} descriptionText={descriptionText} />
+      ) : null}
     </div>
   );
 }

@@ -7,10 +7,43 @@ export interface ClockOptions {
   fontMono?: boolean;
   countdownSettings: CountdownSettings;
   countupSettings: CountupSettings;
+  descriptionSettings: DescriptionSettings;
   dateSettings: DateSettings;
   timeSettings: TimeSettings;
   timezoneSettings: TimezoneSettings;
 }
+
+export enum ClockSource {
+  input = 'input',
+  query = 'query',
+}
+
+export enum DescriptionSource {
+  none = 'none',
+  input = 'input',
+  query = 'query',
+}
+
+export const QueryCalculation = {
+  lastNotNull: 'lastNotNull',
+  last: 'last',
+  firstNotNull: 'firstNotNull',
+  first: 'first',
+  min: 'min',
+  max: 'max',
+};
+
+export const CountdownQueryCalculation = {
+  ...QueryCalculation,
+  minFuture: 'minFuture',
+} as const;
+export type CountdownQueryCalculation = (typeof CountdownQueryCalculation)[keyof typeof CountdownQueryCalculation]; // eslint-disable-line no-redeclare
+
+export const CountupQueryCalculation = {
+  ...QueryCalculation,
+  maxPast: 'maxPast',
+} as const;
+export type CountupQueryCalculation = (typeof CountupQueryCalculation)[keyof typeof CountupQueryCalculation]; // eslint-disable-line no-redeclare
 
 export enum ClockMode {
   time = 'time',
@@ -43,15 +76,34 @@ export enum FontWeight {
 }
 
 interface CountdownSettings {
+  source: ClockSource;
   endCountdownTime: any;
+  queryCalculation: CountdownQueryCalculation;
+  queryField: string;
   endText: string;
+  noValueText: string;
+  invalidValueText: string;
   customFormat?: string;
 }
 
 interface CountupSettings {
+  source: ClockSource;
   beginCountupTime: any;
+  queryCalculation: CountupQueryCalculation;
+  queryField: string;
   beginText: string;
+  noValueText: string;
+  invalidValueText: string;
   customFormat?: string;
+}
+
+interface DescriptionSettings {
+  source: DescriptionSource;
+  descriptionText: string;
+  queryField: string;
+  noValueText: string;
+  fontSize: string;
+  fontWeight: FontWeight;
 }
 
 interface DateSettings {
