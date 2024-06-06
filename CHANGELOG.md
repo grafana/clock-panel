@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.1.7]
+
+- Handles migration for non-query clock panels to eliminate error message display
+- Cleans up any legacy (angular) settings in top level of panel json
+- Adds tests for migrations
+
 ## [2.1.2]
 - Improving wrapping of the panel elements to be more responsive to different panel sizes https://github.com/grafana/clock-panel/pull/117
 - Fixing a placeholder for the font size field https://github.com/grafana/clock-panel/pull/116
