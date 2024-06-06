@@ -10,7 +10,7 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
   }
 
   if (detectInputOnlyPluginConfig(panel)) {
-    migrateInputOnlyPluginConfig(options);
+    migrateInputOnlyPluginConfig(panel);
   }
   // configuration options moved as the panel migrated, clean up if needed
   cleanupConfig(panel);
@@ -18,7 +18,7 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
   return options;
 };
 
-// detect clock panel before v2.1.3
+// detect clock panel that does not use a query
 const detectInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
   let isInputOnly = false;
 
@@ -27,24 +27,33 @@ const detectInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
     if (options.countdownSettings?.source === 'input') {
       isInputOnly = true;
     } else {
-      isInputOnly = false;
+      return false;
     }
+  } else {
+    // no source indicates and old config (pre 2.1.4)
+    isInputOnly = true;
   }
   // an input source does not require a datasource
   if (options.countdownSettings?.source) {
     if (options.countdownSettings?.source === 'input') {
       isInputOnly = true;
     } else {
-      isInputOnly = false;
+      return false;
     }
+  } else {
+    // no source indicates and old config (pre 2.1.4)
+    isInputOnly = true;
   }
 
   if (options.countupSettings?.source) {
     if (options.countupSettings?.source === 'input') {
       isInputOnly = true;
     } else {
-      isInputOnly = false;
+      return false;
     }
+  } else {
+    // no source indicates and old config (pre 2.1.4)
+    isInputOnly = true;
   }
 
   if (options.descriptionSettings?.source) {
@@ -55,8 +64,11 @@ const detectInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
       isInputOnly = true;
     }
     if (options.descriptionSettings?.source === 'query') {
-      isInputOnly = false;
+      return false;
     }
+  } else {
+    // no source indicates and old config (pre 2.1.4)
+    isInputOnly = true;
   }
 
   return isInputOnly;
@@ -99,9 +111,6 @@ const cleanupConfig = (panel: PanelModel<ClockOptions>) => {
   if (panel.refreshSettings) {
     // @ts-ignore
     delete panel.refreshSettings;
-  }
-  if (panel.targets) {
-    panel.targets = [];
   }
   // @ts-ignore
   if (panel.timeSettings) {
