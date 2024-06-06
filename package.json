@@ -38,14 +38,15 @@
     "@swc/helpers": "^0.5.0",
     "@swc/jest": "^0.2.29",
     "@testing-library/jest-dom": "6.4.2",
-    "@testing-library/react": "14.0.0",
+    "@testing-library/react": "12.1.5",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/glob": "^8.1.0",
     "@types/jest": "^29.5.0",
     "@types/lodash": "^4.14.194",
     "@types/node": "^20.8.7",
-    "@types/react": "18.3.3",
-    "@types/react-dom": "18.3.0",
-    "@types/react-router-dom": "^5.3.3",
+    "@types/react": "17.0.38",
+    "@types/react-dom": "17.0.11",
+    "@types/react-router-dom": "^5.2.0",
     "@types/testing-library__jest-dom": "5.14.8",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
@@ -87,8 +88,8 @@
     "@grafana/schema": "10.3.6",
     "@grafana/ui": "10.3.6",
     "moment-timezone": "0.5.38",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "tslib": "2.5.3"
   },
   "engines": {
@@ -97,6 +98,7 @@
   "packageManager": "yarn@1.22.22",
   "resolutions": {
     "moment": "2.29.4",
-    "moment-timezone": "0.5.38"
+    "moment-timezone": "0.5.38",
+    "@types/react": "17.0.30"
   }
 }
