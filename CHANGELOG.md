@@ -3,6 +3,8 @@
 ## [2.1.7]
 
 - Handles migration for non-query clock panels to eliminate error message display
+- Fixes [#186](https://github.com/grafana/clock-panel/issues/186)
+- Fixes [#189](https://github.com/grafana/clock-panel/issues/189)
 - Cleans up any legacy (angular) settings in top level of panel json
 - Adds tests for migrations
 
