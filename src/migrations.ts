@@ -83,8 +83,8 @@ const migrateInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
   let grafanaDs: (typeof datasources)[number] | undefined = undefined;
 
   // find the grafana datasource
-  for (let dskey of Object.keys(datasources)) {
-    const ds = datasources[dskey];
+  for (let datasourceKey of Object.keys(datasources)) {
+    const ds = datasources[datasourceKey];
     if (ds.uid === 'grafana' || (ds.name === '-- Grafana --' && ds.type === 'datasource')) {
       grafanaDs = ds;
       break;
