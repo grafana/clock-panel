@@ -1,24 +1,16 @@
 {
-    "ignorePaths": [
-        "node_modules/**",
-        "dist/**",
-        "src/external/**",
-        "provisioning/**",
-        "package.json"
-    ],
-    "words": [
-        "gdev",
-        "grafana",
-        "datasource",
-        "datasources",
-        "rgba",
-        "countup",
-        "Themeable",
-        "Unthemed",
-        "testdata",
-        "testid"
-    ],
-    "ignoreRegExpList": [
-        "@[\\w]+"
-    ]
+  "ignorePaths": ["node_modules/**", "dist/**", "src/external/**", "src/**/*.tsx", "provisioning/**", "package.json"],
+  "words": [
+    "gdev",
+    "grafana",
+    "datasource",
+    "datasources",
+    "rgba",
+    "countup",
+    "Themeable",
+    "Unthemed",
+    "testdata",
+    "testid"
+  ],
+  "ignoreRegExpList": ["@[\\w]+"]
 }
