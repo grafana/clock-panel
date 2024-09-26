@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.1.8
+
+- Improves migration handling for non-query panels to eliminate error message display
+
 ## [2.1.7]
 
 - Handles migration for non-query clock panels to eliminate error message display
