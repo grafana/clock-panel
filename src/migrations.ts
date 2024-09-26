@@ -1,5 +1,6 @@
 import { PanelModel } from '@grafana/data';
 import { ClockOptions, ClockRefresh } from './types';
+import { config } from '@grafana/runtime';
 
 export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<ClockOptions> => {
   const options: any = panel.options || {};
@@ -79,6 +80,36 @@ const migrateInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
   delete panel.datasource;
   // remove the targets
   panel.targets = [];
+
+  // find the grafana datasource and set it if available
+  const datasources = config.datasources || [];
+  let grafanaDs: (typeof datasources)[number] | undefined = undefined;
+
+  for (let datasourceKey of Object.keys(datasources)) {
+    const ds = datasources[datasourceKey];
+    if (ds.uid === 'grafana' || (ds.name === '-- Grafana --' && ds.type === 'datasource')) {
+      grafanaDs = ds;
+      break;
+    }
+  }
+
+  // set a default random walk
+  if (grafanaDs !== undefined) {
+    panel.targets = [
+      {
+        refId: 'A',
+        datasource: {
+          type: grafanaDs.type,
+          uid: grafanaDs.uid,
+        },
+        queryType: 'randomWalk',
+      },
+    ];
+    panel.datasource = {
+      type: grafanaDs.type,
+      uid: grafanaDs.uid,
+    };
+  }
 };
 
 const cleanupConfig = (panel: PanelModel<ClockOptions>) => {
