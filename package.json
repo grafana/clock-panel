@@ -1,6 +1,6 @@
 {
   "name": "clock-panel",
-  "version": "2.1.7",
+  "version": "2.1.8",
   "description": "Clock Panel Plugin for Grafana",
   "scripts": {
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
