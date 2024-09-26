@@ -78,11 +78,13 @@ const detectInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
 const migrateInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
   // remove the datasource
   delete panel.datasource;
+  // remove the targets
+  panel.targets = [];
 
+  // find the grafana datasource and set it if available
   const datasources = config.datasources || [];
   let grafanaDs: (typeof datasources)[number] | undefined = undefined;
 
-  // find the grafana datasource
   for (let datasourceKey of Object.keys(datasources)) {
     const ds = datasources[datasourceKey];
     if (ds.uid === 'grafana' || (ds.name === '-- Grafana --' && ds.type === 'datasource')) {
@@ -107,9 +109,6 @@ const migrateInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
       type: grafanaDs.type,
       uid: grafanaDs.uid,
     };
-  } else {
-    // remove the targets
-    panel.targets = [];
   }
 };
 
