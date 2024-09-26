@@ -103,6 +103,10 @@ const migrateInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
         queryType: 'randomWalk',
       },
     ];
+    panel.datasource = {
+      type: grafanaDs.type,
+      uid: grafanaDs.uid,
+    };
   } else {
     // remove the targets
     panel.targets = [];
