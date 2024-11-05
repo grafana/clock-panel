@@ -14,4 +14,3 @@ jobs:
     uses: grafana/plugins-shared-workflows-test/.github/workflows/plugins-ci.yml@main
     with:
       plugin-version-suffix: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || '' }}
-      run-playwright: false
