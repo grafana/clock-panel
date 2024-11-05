@@ -21,7 +21,7 @@ on:
         type: boolean
 
 jobs:
-  CD:
+  cd:
     name: cd
     uses: grafana/plugins-shared-workflows-test/.github/workflows/plugins-cd.yml@main
     with:
