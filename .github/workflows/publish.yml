@@ -23,7 +23,7 @@ on:
 jobs:
   cd:
     name: cd
-    uses: grafana/plugins-shared-workflows-test/.github/workflows/plugins-cd.yml@main
+    uses: grafana/plugin-ci-workflows/.github/workflows/plugins-cd.yml@main
     with:
       branch: ${{ github.event.inputs.branch }}
       environment: ${{ github.event.inputs.environment }}
