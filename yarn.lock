@@ -1030,10 +1030,10 @@
     tslib "2.7.0"
     typescript "5.5.4"
 
-"@grafana/e2e-selectors@^11.4.0-205692":
-  version "11.4.0-206333"
-  resolved "https://registry.yarnpkg.com/@grafana/e2e-selectors/-/e2e-selectors-11.4.0-206333.tgz#83a7f08d580885e3f3d77b3d55a118013fcea289"
-  integrity sha512-pq1QuCZFAnnFOlBxJYs8pxPMU96HRhovuoCpR52eD+MjV7JUfpTxhoxvyx2dEpZb0WpTdgCDKI3URDFgZIiUOg==
+"@grafana/e2e-selectors@^11.4.0-209710":
+  version "11.4.0-210359"
+  resolved "https://registry.yarnpkg.com/@grafana/e2e-selectors/-/e2e-selectors-11.4.0-210359.tgz#8026fd93dd65eea5d066f926698167a21a7efec3"
+  integrity sha512-kq42L+7t4Ypa5Z4K2VDg6j+sT9g4NWDeFj6LlhEXFFKm6G1awwVBFlE2+SEEP9srZgMeab/D1un0ndGP+WfZ4A==
   dependencies:
     "@grafana/tsconfig" "^2.0.0"
     semver "7.6.3"
@@ -1071,14 +1071,14 @@
     ua-parser-js "^1.0.32"
     web-vitals "^4.0.1"
 
-"@grafana/plugin-e2e@^1.11.2":
-  version "1.11.3"
-  resolved "https://registry.yarnpkg.com/@grafana/plugin-e2e/-/plugin-e2e-1.11.3.tgz#beca8864027a9e967e96862d44a2872408527d4a"
-  integrity sha512-42KbERnYxcVmO4l1bmolYQrw+LHbTgoUfBrtL7pDXQFqRldYiVMamKFXZN5xnydBGFs3wt02oOoh8nFSv5lMFA==
+"@grafana/plugin-e2e@^1.12.3":
+  version "1.12.3"
+  resolved "https://registry.yarnpkg.com/@grafana/plugin-e2e/-/plugin-e2e-1.12.3.tgz#5f3b6251cfc081a27bfc05326e3071e06e2de322"
+  integrity sha512-xSqQH1WiStc8IVE9Tu6pdPIDHM1ueoRscjU096nk09anFBdoLLwiz+vTY0TKB4KJDUaNJhYP2WVEMlFnbURw8w==
   dependencies:
-    "@grafana/e2e-selectors" "^11.4.0-205692"
+    "@grafana/e2e-selectors" "^11.4.0-209710"
     semver "^7.5.4"
-    uuid "^11.0.0"
+    uuid "^11.0.2"
     yaml "^2.3.4"
 
 "@grafana/runtime@^11.3.0":
@@ -8743,10 +8743,10 @@ uuid@9.0.1:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
   integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==
 
-uuid@^11.0.0:
-  version "11.0.2"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.0.2.tgz#a8d68ba7347d051e7ea716cc8dcbbab634d66875"
-  integrity sha512-14FfcOJmqdjbBPdDjFQyk/SdT4NySW4eM0zcG+HqbHP5jzuH56xO3J1DGhgs/cEMCfwYi3HQI1gnTO62iaG+tQ==
+uuid@^11.0.2:
+  version "11.0.3"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.0.3.tgz#248451cac9d1a4a4128033e765d137e2b2c49a3d"
+  integrity sha512-d0z310fCWv5dJwnX1Y/MncBAqGMKEzlBb1AOf7z9K8ALnd0utBX/msg/fA0+sbyN1ihbMsLhrBlnl1ak7Wa0rg==
 
 v8-compile-cache-lib@^3.0.1:
   version "3.0.1"
