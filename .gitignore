@@ -35,4 +35,5 @@ e2e-results/
 
 test-results/
 playwright/.auth/admin.json
+playwright/.auth/grafanaAPICredentials.json
 playwright-report/
