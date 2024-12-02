@@ -29,8 +29,8 @@ Show the time in another office or show a countdown/countup to an important even
 - **Countdown End Time**:
 
   Used in conjunction with the mode being set to countdown. Choose a date and time to count down to.
-  
-  This field also supports dashboard (constant) variables (e.g. ``${countdown_target}``) to dynamically set the countdown deadline for the Dashboard.
+
+  This field also supports dashboard (constant) variables (e.g. `${countdown_target}`) to dynamically set the countdown deadline for the Dashboard.
 
 - **Countdown End Text**:
 
@@ -53,7 +53,7 @@ Show the time in another office or show a countdown/countup to an important even
   Choose a background color for the clock with the color picker.
 
 #### Refresh
-  
+
 - **Sync**:
 
   The clock is paused and only updated when the dashboard refreshes - the clock will show the timestamp for the last refresh.
@@ -68,14 +68,13 @@ Show the time in another office or show a countdown/countup to an important even
 Using Docker:
 
 1. Clone the repository and `cd` to it
-1. make sure you have [yarn]( https://yarnpkg.com/) installed
+1. make sure you have [yarn](https://yarnpkg.com/) installed
 1. install project dependencies: `yarn install --pure-lockfile`
 1. Start the "watch" task: `yarn watch`
 1. Run a local Grafana instance with the development version of the plugin: `docker run -p 3000:3000 -d --name grafana-plugin-dev --env GF_AUTH_ANONYMOUS_ORG_ROLE="Admin" --env GF_AUTH_ANONYMOUS_ENABLED="true" --env GF_AUTH_BASIC_ENABLED="false" --env GF_DEFAULT_APP_MODE="development" --volume $(pwd)/dist:/var/lib/grafana/plugins/clock-panel grafana/grafana`
-2. Check the logs to see that Grafana has started up: `docker logs -f grafana-plugin-dev`
-3. Open Grafana at http://localhost:3000/
-4. Log in with username "admin" and password "admin"
-5. Create new dashboard and add the plugin
+1. Check the logs to see that Grafana has started up: `docker logs -f grafana-plugin-dev`
+1. Open Grafana at http://localhost:3000/
+1. Log in with username "admin" and password "admin"
+1. Create new dashboard and add the plugin
 
 To build a production build with minification: `yarn build`
-

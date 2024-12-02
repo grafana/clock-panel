@@ -22,7 +22,7 @@ export function ClockPanel(props: Props) {
   const { timezone: optionsTimezone, dateSettings, timezoneSettings } = options;
   // notice the uppercase Z.
   const { timeZone: dashboardTimezone } = props;
-  const timezoneToUse = optionsTimezone === 'dashboard' ? dashboardTimezone : optionsTimezone ?? '';
+  const timezoneToUse = optionsTimezone === 'dashboard' ? dashboardTimezone : (optionsTimezone ?? '');
   const [now, setNow] = useState<Moment>(getMoment(timezoneToUse));
 
   const className = useMemo(() => {

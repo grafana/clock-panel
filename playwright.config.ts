@@ -41,7 +41,6 @@ export default defineConfig<PluginOptions>({
         storageState: 'playwright/.auth/admin.json',
       },
       dependencies: ['auth'],
-    }
+    },
   ],
-
 });
