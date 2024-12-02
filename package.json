@@ -75,7 +75,8 @@
     "@grafana/ui": "^11.3.0",
     "moment-timezone": "0.5.38",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-router-dom": "5.3.3"
   },
   "engines": {
     "node": ">=20"
