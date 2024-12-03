@@ -79,7 +79,7 @@
   },
   "dependencies": {
     "@emotion/css": "^11.11.2",
-    "@grafana/data": "^11.3.0",
+    "@grafana/data": "^11.3.1",
     "@grafana/runtime": "^11.3.0",
     "@grafana/ui": "^11.3.0",
     "moment-timezone": "0.5.38",

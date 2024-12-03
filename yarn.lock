@@ -984,13 +984,43 @@
   dependencies:
     tslib "^2.4.0"
 
-"@grafana/data@11.3.0", "@grafana/data@^11.3.0":
+"@grafana/data@11.3.0":
   version "11.3.0"
   resolved "https://registry.yarnpkg.com/@grafana/data/-/data-11.3.0.tgz#18a75244aa4e22a23ac6f43f6ecc405fd0e18da8"
   integrity sha512-AH7kJQRk1G0ccfAnCPfeQ/zJJ0kdkvpfjgTe40EJbj4S3m2mJ1lawYxd0VUsPgrh0DVezBZZkybInn+PT9jv4A==
   dependencies:
     "@braintree/sanitize-url" "7.0.1"
     "@grafana/schema" "11.3.0"
+    "@types/d3-interpolate" "^3.0.0"
+    "@types/string-hash" "1.1.3"
+    d3-interpolate "3.0.1"
+    date-fns "3.6.0"
+    dompurify "^3.0.0"
+    eventemitter3 "5.0.1"
+    fast_array_intersect "1.1.0"
+    history "4.10.1"
+    lodash "4.17.21"
+    marked "12.0.2"
+    marked-mangle "1.1.9"
+    moment "2.30.1"
+    moment-timezone "0.5.46"
+    ol "7.4.0"
+    papaparse "5.4.1"
+    react-use "17.5.1"
+    rxjs "7.8.1"
+    string-hash "^1.1.3"
+    tinycolor2 "1.6.0"
+    tslib "2.7.0"
+    uplot "1.6.31"
+    xss "^1.0.14"
+
+"@grafana/data@^11.3.1":
+  version "11.3.1"
+  resolved "https://registry.yarnpkg.com/@grafana/data/-/data-11.3.1.tgz#9d1d74a4330bb9468ed865ef94867973ece86951"
+  integrity sha512-65YHLouah5gId58ov0l5ZxoRSjAFWqv4Be0Apght69Ko1rLPVdfIAlZCwREfEN+OiSJ4d4t8AFtaD8CRbawmrw==
+  dependencies:
+    "@braintree/sanitize-url" "7.0.1"
+    "@grafana/schema" "11.3.1"
     "@types/d3-interpolate" "^3.0.0"
     "@types/string-hash" "1.1.3"
     d3-interpolate "3.0.1"
@@ -1084,6 +1114,13 @@
   version "11.3.0"
   resolved "https://registry.yarnpkg.com/@grafana/schema/-/schema-11.3.0.tgz#30d57d3d696b5926f173048949bb994d72056329"
   integrity sha512-KOgk0omDs8URuhL++ksgMDPMB49di8oCKqMNI10z3zSQniECUow+3Ggz1WeenReL7ajyJVG/O3rGVEaqteDMzg==
+  dependencies:
+    tslib "2.7.0"
+
+"@grafana/schema@11.3.1":
+  version "11.3.1"
+  resolved "https://registry.yarnpkg.com/@grafana/schema/-/schema-11.3.1.tgz#e99472a441596c0d5f23c276469f9e066f6c67f6"
+  integrity sha512-/q8v4u1+/WzTRjz7Qniwfea5rF3EmkSrk5XDhM8o2n+G/z2G1VL7k/oqp151MsulM82g9hE+UvcpmmWEd4mD8Q==
   dependencies:
     tslib "2.7.0"
 
@@ -8571,12 +8608,7 @@ tslib@^1.8.1:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.1.0, tslib@^2.3.1, tslib@^2.4.0:
-  version "2.6.3"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.3.tgz#0438f810ad7a9edcde7a241c3d80db693c8cbfe0"
-  integrity sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==
-
-tslib@^2.6.2:
+tslib@^2.1.0, tslib@^2.3.1, tslib@^2.4.0, tslib@^2.6.2:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
