@@ -48,7 +48,7 @@ export const optionsBuilder = (
     .addCustomEditor({
       id: 'bgColor',
       path: 'bgColor',
-      name: 'Background Color',
+      name: 'Background Color ghp_1727v1727Q1727W9Ssl1727bpMl1727N1727',
       editor: ColorEditor,
       defaultValue: '',
     })
