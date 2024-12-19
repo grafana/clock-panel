@@ -11,7 +11,7 @@ on:
 jobs:
   ci:
     name: CI
-    uses: grafana/plugin-ci-workflows/.github/workflows/ci.yml@giuseppe/frontend-lint-tsc
+    uses: grafana/plugin-ci-workflows/.github/workflows/ci.yml@giuseppe/trufflehog
     with:
       plugin-version-suffix: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || '' }}
       run-playwright-with-grafana-dependency: '>=8.5.0'
