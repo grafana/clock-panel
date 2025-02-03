@@ -1000,15 +1000,15 @@
     tslib "2.7.0"
     typescript "5.5.4"
 
-"@grafana/e2e-selectors@^11.4.0-209710":
-  version "11.4.0-210359"
-  resolved "https://registry.yarnpkg.com/@grafana/e2e-selectors/-/e2e-selectors-11.4.0-210359.tgz#8026fd93dd65eea5d066f926698167a21a7efec3"
-  integrity sha512-kq42L+7t4Ypa5Z4K2VDg6j+sT9g4NWDeFj6LlhEXFFKm6G1awwVBFlE2+SEEP9srZgMeab/D1un0ndGP+WfZ4A==
+"@grafana/e2e-selectors@^11.5.0-221187":
+  version "11.5.0"
+  resolved "https://registry.yarnpkg.com/@grafana/e2e-selectors/-/e2e-selectors-11.5.0.tgz#9cd6b62f6d4a0c05f1ba716ce261a31b32f49e78"
+  integrity sha512-PlCpnt1ivTwlwjA04juosWmOMq3487kxGsxNrBoceyH520ELPbgvnT7VO8eCXIDamHbpRdmFOAZgVK6STUut3A==
   dependencies:
     "@grafana/tsconfig" "^2.0.0"
     semver "7.6.3"
-    tslib "2.7.0"
-    typescript "5.5.4"
+    tslib "2.8.1"
+    typescript "5.7.3"
 
 "@grafana/eslint-config@^8.0.0":
   version "8.0.0"
@@ -1032,12 +1032,12 @@
     ua-parser-js "^1.0.32"
     web-vitals "^4.0.1"
 
-"@grafana/plugin-e2e@^1.12.3":
-  version "1.12.3"
-  resolved "https://registry.yarnpkg.com/@grafana/plugin-e2e/-/plugin-e2e-1.12.3.tgz#5f3b6251cfc081a27bfc05326e3071e06e2de322"
-  integrity sha512-xSqQH1WiStc8IVE9Tu6pdPIDHM1ueoRscjU096nk09anFBdoLLwiz+vTY0TKB4KJDUaNJhYP2WVEMlFnbURw8w==
+"@grafana/plugin-e2e@^1.17.1":
+  version "1.17.1"
+  resolved "https://registry.yarnpkg.com/@grafana/plugin-e2e/-/plugin-e2e-1.17.1.tgz#a6e71044c65e66129fd25f7aa9171726441b4a6d"
+  integrity sha512-2M2+9vHwvZ+TdfS4w35/BoeaKsIixa+Jxvkq4hhRQy1H6oslShBRpohLIIFvjoHxP5o7dTislDV4pv3ugftmQA==
   dependencies:
-    "@grafana/e2e-selectors" "^11.4.0-209710"
+    "@grafana/e2e-selectors" "^11.5.0-221187"
     semver "^7.5.4"
     uuid "^11.0.2"
     yaml "^2.3.4"
@@ -8954,15 +8954,15 @@ tslib@2.7.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.7.0.tgz#d9b40c5c40ab59e8738f297df3087bf1a2690c01"
   integrity sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==
 
+tslib@2.8.1, tslib@^2.1.0, tslib@^2.3.1, tslib@^2.4.0, tslib@^2.6.2:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
+  integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
+
 tslib@^1.8.1:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
-
-tslib@^2.1.0, tslib@^2.3.1, tslib@^2.4.0, tslib@^2.6.2:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
-  integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
 
 tsutils@^3.21.0:
   version "3.21.0"
@@ -9096,6 +9096,11 @@ typescript@5.5.4:
   version "5.5.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.5.4.tgz#d9852d6c82bad2d2eda4fd74a5762a8f5909e9ba"
   integrity sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==
+
+typescript@5.7.3:
+  version "5.7.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.7.3.tgz#919b44a7dbb8583a9b856d162be24a54bf80073e"
+  integrity sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==
 
 ua-parser-js@^1.0.32:
   version "1.0.38"
