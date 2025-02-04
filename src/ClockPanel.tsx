@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 import { PanelProps } from '@grafana/data';
-import { useTheme2 } from '@grafana/ui';
+import { useTheme2, Combobox } from '@grafana/ui';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ClockOptions, ClockRefresh, DescriptionSource } from './types';
 
@@ -17,6 +17,7 @@ import { RenderDescription } from 'components/RenderDescription';
 interface Props extends PanelProps<ClockOptions> {}
 
 export function ClockPanel(props: Props) {
+  console.log(Combobox);
   const { options, width, height, data } = props;
   const theme = useTheme2();
   const { timezone: optionsTimezone, dateSettings, timezoneSettings } = options;
