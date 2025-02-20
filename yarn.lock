@@ -1031,10 +1031,10 @@
   resolved "https://registry.yarnpkg.com/@grafana/eslint-config/-/eslint-config-8.0.0.tgz#207049e69bb9fe7c007d207cd79fcfe28a781288"
   integrity sha512-2e/Zk7dEB8k4r7mPiTua9vXZIqv/nN6prWvNcr/kfglz4y9kllEagANE1loxJ7whZsIqwB++UR7s0MAOFA0Iog==
 
-"@grafana/eslint-plugin-plugins@^0.1.0":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@grafana/eslint-plugin-plugins/-/eslint-plugin-plugins-0.1.1.tgz#755f7226e8967f5504d6e22056721db765e8cccc"
-  integrity sha512-3X8RLc9S6XRrbMQO3thDJ/7MaMl98oykFnlRzHaODW1y5A7KM1NW6ccVCwrIJnrSfSAC1I+8ZsRGvG3UtDMETw==
+"@grafana/eslint-plugin-plugins@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@grafana/eslint-plugin-plugins/-/eslint-plugin-plugins-0.2.1.tgz#d933dfd0c952300235ee4bd014968bd90d707c51"
+  integrity sha512-nKAICbtt7+49ou/vSzEwcGG1q3iTBTsgWt4wHgSVfEgFnlBF2hXdbMqnWUwW4Xa2pfahIM2XdG97CrBIdhXmAg==
   dependencies:
     "@grafana/levitate" "^0.16.0"
     "@typescript-eslint/utils" "^8.23.0"
