@@ -3,6 +3,7 @@ run-name: Deploy ${{ inputs.branch }} to ${{ inputs.environment }} by @${{ githu
 
 permissions:
   contents: read
+  id-token: write
 
 on:
   workflow_dispatch:
