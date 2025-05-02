@@ -29,6 +29,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      attestations: write
     with:
       branch: ${{ github.event.inputs.branch }}
       environment: ${{ github.event.inputs.environment }}
