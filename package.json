@@ -37,7 +37,7 @@
     "@swc/core": "^1.11.16",
     "@swc/jest": "^0.2.37",
     "@testing-library/jest-dom": "6.4.2",
-    "@testing-library/react": "14.0.0",
+    "@testing-library/react": "15.0.5",
     "@types/glob": "^8.1.0",
     "@types/jest": "^29.5.0",
     "@types/node": "^20.8.7",
