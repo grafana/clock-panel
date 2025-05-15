@@ -8,10 +8,15 @@ on:
     branches:
       - main
 
+permissions: {}
+
 jobs:
   ci:
     name: CI
-    uses: grafana/plugin-ci-workflows/.github/workflows/ci.yml@giuseppe/external-forks-again
+    uses: grafana/plugin-ci-workflows/.github/workflows/ci.yml@main # zizmor: ignore[unpinned-uses]
+    permissions:
+      contents: read
+      id-token: write
     with:
       plugin-version-suffix: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || '' }}
       run-playwright-with-grafana-dependency: '>=8.5.0'
