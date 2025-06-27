@@ -48,4 +48,4 @@ jobs:
     with:
       plugin-version-suffix: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || '' }}
       run-playwright-with-grafana-dependency: '>=8.5.0'
-      playwright-secrets: ${{ fromJSON(needs.get-secrets.outputs.secrets || '{}') }}
+      playwright-secrets: ${{ needs.get-secrets.outputs.secrets || '{}' }}
