@@ -32,6 +32,11 @@ jobs:
             ACCESS_KEY=e2e:accessKey
             SECRET_KEY=e2e:secretKey
           export_env: false
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: echo ${{ needs.get-secrets.outputs.secrets }}
   ci:
     if: always()
     needs: get-secrets
