@@ -21,7 +21,7 @@ jobs:
       id-token: write
     runs-on: ubuntu-latest
     outputs:
-      secrets: ${{ steps.get-secrets.outputs.secrets }}
+      whatever: ${{ steps.get-secrets.outputs.secrets }}
     steps:
       - name: Get secrets from vault
         if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
@@ -37,9 +37,8 @@ jobs:
     needs: get-secrets
     steps:
       - name: Test
-        run: |
-          echo ${{ fromJson(needs.get-secrets.outputs.secrets).ACCESS_KEY }}
-          echo ${{ needs.get-secrets.outputs.secrets }}
+        run: |          
+          echo ${{ needs.get-secrets.outputs.whatever }}
   # ci:    
   #   needs: get-secrets
   #   name: CI
