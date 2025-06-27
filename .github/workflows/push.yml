@@ -32,6 +32,7 @@ jobs:
             SECRET_KEY=e2e:secretKey
           export_env: false
   ci:
+    if: always()
     needs: get-secrets
     name: CI
     uses: grafana/plugin-ci-workflows/.github/workflows/ci.yml@playwrightsecrets # zizmor: ignore[unpinned-uses]
@@ -41,4 +42,4 @@ jobs:
     with:
       plugin-version-suffix: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || '' }}
       run-playwright-with-grafana-dependency: '>=8.5.0'
-      playwright-secrets: ${{ needs.get-secrets.outputs.secrets }}
+      playwright-secrets: ${{ needs.get-secrets.outputs.secrets || '{}' }}
