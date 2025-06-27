@@ -37,7 +37,9 @@ jobs:
     needs: get-secrets
     steps:
       - name: Test
-        run: echo ${{ fromJson(needs.get-secrets.outputs.secrets).ACCESS_KEY }}
+        run: |
+          echo ${{ fromJson(needs.get-secrets.outputs.secrets).ACCESS_KEY }}
+          echo ${{ needs.get-secrets.outputs.secrets }}
   # ci:    
   #   needs: get-secrets
   #   name: CI
