@@ -13,6 +13,9 @@ permissions: {}
 
 jobs:
   get-secrets:
+    permissions:
+      contents: read
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - name: Get secrets from vault
@@ -23,6 +26,7 @@ jobs:
             SECRET_KEY=e2e:secretKey
           export_env: false
   ci:
+    needs: get-secrets
     name: CI
     uses: grafana/plugin-ci-workflows/.github/workflows/ci.yml@playwrightsecrets # zizmor: ignore[unpinned-uses]
     permissions:
