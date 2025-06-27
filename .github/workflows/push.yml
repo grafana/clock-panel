@@ -34,6 +34,7 @@ jobs:
           export_env: false
   test:
     runs-on: ubuntu-latest
+    needs: get-secrets
     steps:
       - name: Test
         run: echo ${{ fromJson(needs.get-secrets.outputs.secrets).ACCESS_KEY }}
