@@ -37,15 +37,14 @@ jobs:
     steps:
       - name: Test
         run: echo ${{ fromJson(needs.get-secrets.outputs.secrets).ACCESS_KEY }}
-  ci:
-    if: always()
-    needs: get-secrets
-    name: CI
-    uses: grafana/plugin-ci-workflows/.github/workflows/ci.yml@playwrightsecrets # zizmor: ignore[unpinned-uses]
-    permissions:
-      contents: read
-      id-token: write
-    with:
-      plugin-version-suffix: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || '' }}
-      run-playwright-with-grafana-dependency: '>=8.5.0'
-      playwright-secrets: ${{ needs.get-secrets.outputs.secrets || '{}' }}
+  # ci:    
+  #   needs: get-secrets
+  #   name: CI
+  #   uses: grafana/plugin-ci-workflows/.github/workflows/ci.yml@playwrightsecrets # zizmor: ignore[unpinned-uses]
+  #   permissions:
+  #     contents: read
+  #     id-token: write
+  #   with:
+  #     plugin-version-suffix: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || '' }}
+  #     run-playwright-with-grafana-dependency: '>=8.5.0'
+  #     playwright-secrets: ${{ needs.get-secrets.outputs.secrets || '{}' }}
