@@ -17,8 +17,11 @@ jobs:
       contents: read
       id-token: write
     runs-on: ubuntu-latest
+    outputs:
+      secrets: ${{ steps.get-secrets.outputs.secrets }}
     steps:
       - name: Get secrets from vault
+        id: get-secrets
         uses: grafana/shared-workflows/actions/get-vault-secrets@get-vault-secrets/v1.2.1
         with:
           repo_secrets: |
@@ -35,4 +38,4 @@ jobs:
     with:
       plugin-version-suffix: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || '' }}
       run-playwright-with-grafana-dependency: '>=8.5.0'
-      #playwright-secrets: ${{ fromJSON(needs.get-secrets.outputs.secrets).ACCESS_KEY }}
+      playwright-secrets: ${{ fromJSON(needs.get-secrets.outputs.secrets).ACCESS_KEY }}
