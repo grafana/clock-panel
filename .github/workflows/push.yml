@@ -14,39 +14,16 @@ concurrency:
   cancel-in-progress: true
 
 
-jobs:
-  get-secrets:
+jobs:  
+  ci:
+    name: CI
+    uses: grafana/plugin-ci-workflows/.github/workflows/ci.yml@playwrightsecrets # zizmor: ignore[unpinned-uses]
     permissions:
       contents: read
       id-token: write
-    runs-on: ubuntu-latest
-    outputs:
-      whatever: ${{ steps.get-secrets.outputs.secrets }}
-    steps:
-      - name: Get secrets from vault
-        if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
-        id: get-secrets
-        uses: grafana/shared-workflows/actions/get-vault-secrets@get-vault-secrets/v1.2.1
-        with:
-          repo_secrets: |
-            ACCESS_KEY=e2e:accessKey
-            SECRET_KEY=e2e:secretKey
-          export_env: false
-  test:
-    runs-on: ubuntu-latest
-    needs: get-secrets
-    steps:
-      - name: Test
-        run: |          
-          echo ${{ needs.get-secrets.outputs.whatever }}
-  # ci:    
-  #   needs: get-secrets
-  #   name: CI
-  #   uses: grafana/plugin-ci-workflows/.github/workflows/ci.yml@playwrightsecrets # zizmor: ignore[unpinned-uses]
-  #   permissions:
-  #     contents: read
-  #     id-token: write
-  #   with:
-  #     plugin-version-suffix: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || '' }}
-  #     run-playwright-with-grafana-dependency: '>=8.5.0'
-  #     playwright-secrets: ${{ needs.get-secrets.outputs.secrets || '{}' }}
+    with:
+      plugin-version-suffix: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || '' }}
+      run-playwright-with-grafana-dependency: '>=8.5.0'
+      playwright-secrets: |
+        ACCESS_KEY=e2e:accessKey
+        SECRET_KEY=e2e:secretKey
