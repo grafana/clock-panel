@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        run: echo ${{ needs.get-secrets.outputs.secrets }}
+        run: echo ${{ fromJson(needs.get-secrets.outputs.secrets).ACCESS_KEY }}
   ci:
     if: always()
     needs: get-secrets
