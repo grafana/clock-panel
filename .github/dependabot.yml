@@ -13,3 +13,50 @@ updates:
     schedule:
       interval: 'monthly'
     open-pull-requests-limit: 5
+    groups:
+      # Grafana framework dependencies
+      grafana:
+        patterns:
+          - "@grafana/*"
+        
+      # Runtime dependencies (React and date/time libraries)
+      runtime:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+          - "moment*"
+        
+      # Development tools (testing, linting, and build tools)
+      dev-tools:
+        patterns:
+          - "jest*"
+          - "@jest/*"
+          - "@testing-library/*"
+          - "@swc/jest"
+          - "@playwright/test"
+          - "@types/jest"
+          - "@types/testing-library*"
+          - "eslint*"
+          - "@typescript-eslint/*"
+          - "@stylistic/*"
+          - "prettier"
+          - "cspell"
+          - "webpack*"
+          - "*-webpack-plugin"
+          - "*-loader"
+          - "@swc/core"
+          - "swc-loader"
+          - "terser-webpack-plugin"
+        
+      # TypeScript related
+      typescript:
+        patterns:
+          - "typescript"
+          - "ts-node"
+          - "@types/*"
+                 exclude-patterns:
+           - "@types/react*"
+           - "@types/jest"
+           - "@types/testing-library*"
