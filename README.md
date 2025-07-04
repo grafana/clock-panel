@@ -11,36 +11,36 @@ Show the time in another office or show a countdown/countup to an important even
 - **Mode**:
 
   Default is time.
-  If countdown is chosen then set the Countdown End Time to start the countdown.
-  If countup is chosen then set the Countup Begin Time to start the countup.
+  If countdown is chosen then set the End Time to start the countdown.
+  If countup is chosen then set the Begin Time to start the countup.
 
-- **12 or 24 hour**:
+- **Clock Type**:
 
-  Show time in the 12/24 hour format.
+  Choose between 24 Hour, 12 Hour, or Custom format for time display.
 
 - **Timezone**:
 
-  This timezones are supplied by the moment timezone library. Timezone can be set or left to default. Default is moment's guess (whatever that is on your computer). Timezone is also used to calculate countdown deadline in countdown mode.
+  These timezones are supplied by the moment timezone library. Timezone can be set or left to default. Default is moment's guess (whatever that is on your computer). Timezone is also used to calculate countdown deadline in countdown mode.
 
 - **Locale**:
 
   Locales for date-formatting are supplied by the moment library. The locale can be set or left to default. Default is moment's guess.
 
-- **Countdown End Time**:
+- **End Time** (Countdown mode):
 
   Used in conjunction with the mode being set to countdown. Choose a date and time to count down to.
 
   This field also supports dashboard (constant) variables (e.g. `${countdown_target}`) to dynamically set the countdown deadline for the Dashboard.
 
-- **Countdown End Text**:
+- **End Text** (Countdown mode):
 
   The text to show when the countdown ends. E.g. LIFTOFF
 
-- **Countup Begin Time**:
+- **Begin Time** (Countup mode):
 
   Used in conjunction with the mode being set to countup. Choose a date and time to count up from.
 
-- **Countup End Text**:
+- **Begin Text** (Countup mode):
 
   The text to show before the countup starts. E.g. LIFTOFF
 
@@ -48,33 +48,88 @@ Show the time in another office or show a countdown/countup to an important even
 
   The font size, weight and date/time formatting can be customized here. If the seconds ticking annoys you then change the time format to HH:mm for the 24 hour clock or h:mm A for the 12 hour clock, or see the [full list of formatting options](https://momentjs.com/docs/#/displaying/).
 
-- **Bg Color**:
+- **Font Monospace**:
+
+  Enable monospace font for consistent character width and alignment.
+
+- **Description Settings**:
+
+  Configure descriptive text to display alongside the time:
+  - **Source**: Choose None, Input (manual text), or Query (from datasource)
+  - **Description Text**: Manual text input when using Input source
+  - **Font Size/Weight**: Customize description text appearance
+
+- **Date Display Options**:
+
+  Control date display alongside the time:
+  - **Show Date**: Toggle date visibility
+  - **Date Format**: Customize date formatting using moment.js patterns
+  - **Locale**: Set locale for date formatting
+  - **Font Size/Weight**: Customize date text appearance
+
+- **Timezone Display Options**:
+
+  Control timezone display:
+  - **Show Timezone**: Toggle timezone visibility
+  - **Display Format**: Choose between Normal, Name + Offset, Offset + Abbreviation, Offset, or Abbreviation
+  - **Font Size/Weight**: Customize timezone text appearance
+
+- **Query Configuration** (for Countdown/Countup modes):
+
+  When using datasource queries for target times:
+  - **Calculation Method**: Choose how to select datetime from multiple query results:
+    - **Countdown**: Last, Last*, First, First*, Min, Max, Min Future (*excludes null/NaN values)
+    - **Countup**: Last, Last*, First, First*, Min, Max, Max Past (*excludes null/NaN values)
+  - **Field Selection**: Specify which field contains datetime values
+  - **Error Handling**: Configure "No Value Text" and "Invalid Value Text" for query errors
+
+- **Background Color**:
 
   Choose a background color for the clock with the color picker.
 
 #### Refresh
 
-- **Sync**:
+- **Refresh**:
 
-  The clock is paused and only updated when the dashboard refreshes - the clock will show the timestamp for the last refresh.
+  Choose between "Every second" (default) or "With the dashboard". When set to "With the dashboard", the clock is paused and only updated when the dashboard refreshes - the clock will show the timestamp for the last refresh.
 
 ### Screenshots
 
 - [Screenshot of two clocks and a countdown](https://raw.githubusercontent.com/grafana/clock-panel/06ecf59c191db642127c6153bc3145e93a1df1f8/src/img/screenshot-clocks.png)
 - [Screenshot of the options screen](https://raw.githubusercontent.com/grafana/clock-panel/06ecf59c191db642127c6153bc3145e93a1df1f8/src/img/screenshot-clock-options.png)
 
-### Development
+### Queries Support
 
-Using Docker:
+The clock panel supports using queries to dynamically set countdown/countup target times and descriptions.
 
-1. Clone the repository and `cd` to it
-1. make sure you have [yarn](https://yarnpkg.com/) installed
-1. install project dependencies: `yarn install --pure-lockfile`
-1. Start the "watch" task: `yarn watch`
-1. Run a local Grafana instance with the development version of the plugin: `docker run -p 3000:3000 -d --name grafana-plugin-dev --env GF_AUTH_ANONYMOUS_ORG_ROLE="Admin" --env GF_AUTH_ANONYMOUS_ENABLED="true" --env GF_AUTH_BASIC_ENABLED="false" --env GF_DEFAULT_APP_MODE="development" --volume $(pwd)/dist:/var/lib/grafana/plugins/clock-panel grafana/grafana`
-1. Check the logs to see that Grafana has started up: `docker logs -f grafana-plugin-dev`
-1. Open Grafana at http://localhost:3000/
-1. Log in with username "admin" and password "admin"
-1. Create new dashboard and add the plugin
+#### Query Data Sources
 
-To build a production build with minification: `yarn build`
+In **Countdown** and **Countup** modes, instead of manually entering target times, you can:
+
+1. **Select a datasource** to query datetime values
+2. **Choose a field** containing datetime values from the query results
+3. **Pick a calculation method** to determine which datetime to use from multiple results
+
+#### Description from Query
+
+You can also use query results for the description text:
+- **Select a field** containing string values from the query results
+- The description will correspond to the same row as the selected datetime
+
+#### Example Use Cases
+
+- **System maintenance**: Query maintenance schedules, show countdown to next maintenance window
+- **Event tracking**: Query event times, display countdown with event names
+- **Uptime monitoring**: Query service start times, show elapsed uptime
+- **SLA monitoring**: Query deadline dates, track time remaining
+
+#### Troubleshooting Query Errors
+
+If you see a **red triangle error** in the top-left corner of the panel, it's likely because:
+
+- You selected a datasource but aren't actually using queries for your clock configuration
+- The selected datasource has an empty or invalid query that produces an error
+
+**Solution**: If you're not using queries, select a datasource that won't generate errors:
+- Choose **"Grafana"** or **"TestData"** datasource
+- These datasources will never produce query errors even when not actively used 
