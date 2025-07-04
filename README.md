@@ -24,7 +24,7 @@ Show the time in another office or show a countdown/countup to an important even
 
 - **Locale**:
 
-  Locales for date-formatting are supplied by the moment library. The locale can be set or left to default. Default is moment's guess.
+  Locales for date-formatting are supplied by the [moment library](https://momentjscom.readthedocs.io/en/latest/moment/01-parsing/00-intro/). The locale can be set or left to default. Default is moment's guess.
 
 - **End Time** (Countdown mode):
 
@@ -46,7 +46,7 @@ Show the time in another office or show a countdown/countup to an important even
 
 - **Date/Time formatting options**:
 
-  The font size, weight and date/time formatting can be customized here. If the seconds ticking annoys you then change the time format to HH:mm for the 24 hour clock or h:mm A for the 12 hour clock, or see the [full list of formatting options](https://momentjs.com/docs/#/displaying/).
+  The font size, weight and date/time formatting can be customized here. If the seconds ticking annoys you then change the time format to HH:mm for the 24 hour clock or h:mm A for the 12 hour clock, or see the [full list of formatting options](https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/01-format/).
 
 - **Font Monospace**:
 
@@ -55,23 +55,39 @@ Show the time in another office or show a countdown/countup to an important even
 - **Description Settings**:
 
   Configure descriptive text to display alongside the time:
-  - **Source**: Choose None, Input (manual text), or Query (from datasource)
-  - **Description Text**: Manual text input when using Input source
+  - **Source**: Choose between three options:
+    - **None**: No descriptive text will be displayed
+    - **Input**: Display static text that you enter manually
+    - **Query**: Display dynamic text retrieved from a datasource query
+  - **Description Text**: Manual text input (only available when using Input source)
   - **Font Size/Weight**: Customize description text appearance
 
-- **Date Display Options**:
+- **Show Date**:
 
-  Control date display alongside the time:
-  - **Show Date**: Toggle date visibility
-  - **Date Format**: Customize date formatting using moment.js patterns
-  - **Locale**: Set locale for date formatting
-  - **Font Size/Weight**: Customize date text appearance
+  Toggle date visibility alongside the time.
+
+- **Date Format**:
+
+  Customize date formatting using [moment.js patterns](https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/01-format/).
+
+- **Date Locale**:
+
+  Set locale for date formatting.
+
+- **Date Font Size/Weight**:
+
+  Customize date text appearance.
 
 - **Timezone Display Options**:
 
   Control timezone display:
   - **Show Timezone**: Toggle timezone visibility
-  - **Display Format**: Choose between Normal, Name + Offset, Offset + Abbreviation, Offset, or Abbreviation
+  - **Display Format**: Choose between different timezone display formats:
+    - **Normal**: Shows full timezone name (e.g., "America/New_York", "UTC")
+    - **Name + Offset**: Shows timezone name with offset and abbreviation on separate lines (e.g., "America/New_York" with "(-05:00 EST)" below)
+    - **Offset + Abbreviation**: Shows ISO 8601 offset with abbreviation (e.g., "-05:00 EST", "+00:00 UTC")
+    - **Offset**: Shows only the ISO 8601 offset (e.g., "-05:00", "+00:00")
+    - **Abbreviation**: Shows only the timezone abbreviation (e.g., "EST", "UTC", "PST")
   - **Font Size/Weight**: Customize timezone text appearance
 
 - **Query Configuration** (for Countdown/Countup modes):
@@ -98,38 +114,13 @@ Show the time in another office or show a countdown/countup to an important even
 - [Screenshot of two clocks and a countdown](https://raw.githubusercontent.com/grafana/clock-panel/06ecf59c191db642127c6153bc3145e93a1df1f8/src/img/screenshot-clocks.png)
 - [Screenshot of the options screen](https://raw.githubusercontent.com/grafana/clock-panel/06ecf59c191db642127c6153bc3145e93a1df1f8/src/img/screenshot-clock-options.png)
 
-### Queries Support
-
-The clock panel supports using queries to dynamically set countdown/countup target times and descriptions.
-
-#### Query Data Sources
-
-In **Countdown** and **Countup** modes, instead of manually entering target times, you can:
-
-1. **Select a datasource** to query datetime values
-2. **Choose a field** containing datetime values from the query results
-3. **Pick a calculation method** to determine which datetime to use from multiple results
-
-#### Description from Query
-
-You can also use query results for the description text:
-- **Select a field** containing string values from the query results
-- The description will correspond to the same row as the selected datetime
-
-#### Example Use Cases
-
-- **System maintenance**: Query maintenance schedules, show countdown to next maintenance window
-- **Event tracking**: Query event times, display countdown with event names
-- **Uptime monitoring**: Query service start times, show elapsed uptime
-- **SLA monitoring**: Query deadline dates, track time remaining
-
-#### Troubleshooting Query Errors
+### Troubleshooting Query Errors
 
 If you see a **red triangle error** in the top-left corner of the panel, it's likely because:
 
 - You selected a datasource but aren't actually using queries for your clock configuration
 - The selected datasource has an empty or invalid query that produces an error
 
-**Solution**: If you're not using queries, select a datasource that won't generate errors:
-- Choose **"Grafana"** or **"TestData"** datasource
-- These datasources will never produce query errors even when not actively used 
+**Solution**: If you're not using queries, either:
+- **Delete the query** from the Query tab to remove the error
+- **Use the "Grafana" datasource** as an alternative that won't generate errors even when not actively used 
