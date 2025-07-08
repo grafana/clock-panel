@@ -6,7 +6,7 @@ services:
       context: ./.config
       args:
         grafana_image: ${GRAFANA_IMAGE:-grafana-enterprise}
-        grafana_version: ${GRAFANA_VERSION:-10.3.3}
+        grafana_version: ${GRAFANA_VERSION:-10.2.0}
         development: ${DEVELOPMENT:-false}
     ports:
       - 3000:3000/tcp
@@ -15,3 +15,4 @@ services:
       - ./provisioning:/etc/grafana/provisioning
     environment:
       NODE_ENV: development
+      GF_FEATURE_TOGGLES_ENABLE: localizationForPlugins

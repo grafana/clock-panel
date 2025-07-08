@@ -1,5 +1,13 @@
 {
-  "ignorePaths": ["node_modules/**", "dist/**", "src/external/**", "provisioning/**", "package.json"],
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**",
+    "src/external/**",
+    "provisioning/**",
+    "package.json",
+    "src/locales/fr-FR/grafana-clock-panel.json",
+    "src/locales/sv-SE/grafana-clock-panel.json"
+  ],
   "words": [
     "gdev",
     "grafana",

@@ -1,0 +1,268 @@
+{
+  "colorEditor": {
+    "defaultValue": "Choisir la couleur"
+  },
+  "options": {
+    "optionsBuilder": {
+      "bgColor": {
+        "name": "Couleur d'arrière-plan"
+      },
+      "clockType": {
+        "name": "Type d'horloge",
+        "options": {
+          "Custom": "Personnalisé",
+          "H12": "12 heures",
+          "H24": "24 heures"
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "Format personnalisé",
+          "settings": {
+            "placeholder": "optionnel"
+          }
+        },
+        "endCountdownTime": {
+          "name": "Heure de fin",
+          "settings": {
+            "placeholder": "Date/heure ISO 8601 ou RFC 2822"
+          }
+        },
+        "endText": {
+          "name": "Texte de fin"
+        },
+        "invalidValueText": {
+          "name": "Texte de valeur invalide"
+        },
+        "noValueText": {
+          "name": "Texte sans valeur"
+        },
+        "queryCalculation": {
+          "name": "Calcul",
+          "options": {
+            "first": "Premier",
+            "firstNotNull": "Premier *",
+            "last": "Dernier",
+            "lastNotNull": "Dernier *",
+            "max": "Max",
+            "min": "Min",
+            "minFuture": "Min futur"
+          }
+        },
+        "queryField": {
+          "name": "Champ"
+        },
+        "source": {
+          "name": "Source",
+          "options": {
+            "input": "Saisie",
+            "query": "Requête"
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "Heure de début",
+          "settings": {
+            "placeholder": "Date/heure ISO 8601 ou RFC 2822"
+          }
+        },
+        "beginText": {
+          "name": "Texte de début"
+        },
+        "customFormat": {
+          "name": "Format personnalisé",
+          "settings": {
+            "placeholder": "optionnel"
+          }
+        },
+        "invalidValueText": {
+          "name": "Texte de valeur invalide"
+        },
+        "noValueText": {
+          "name": "Texte sans valeur"
+        },
+        "queryCalculation": {
+          "name": "Calcul",
+          "options": {
+            "first": "Premier",
+            "firstNotNull": "Premier *",
+            "last": "Dernier",
+            "lastNotNull": "Dernier *",
+            "max": "Max",
+            "maxPast": "Max passé",
+            "min": "Min"
+          }
+        },
+        "queryField": {
+          "name": "Champ"
+        },
+        "source": {
+          "name": "Source",
+          "options": {
+            "input": "Saisie",
+            "query": "Requête"
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "Format de date",
+          "settings": {
+            "placeholder": "Entrer le format de date"
+          }
+        },
+        "fontSize": {
+          "name": "Taille de police",
+          "settings": {
+            "placeholder": "format de date"
+          }
+        },
+        "fontWeight": {
+          "name": "Épaisseur de police",
+          "options": {
+            "bold": "Gras",
+            "normal": "Normal"
+          }
+        },
+        "locale": {
+          "name": "Locale",
+          "settings": {
+            "placeholder": "Entrer la locale: de, fr, es, ... (défaut: en)"
+          }
+        },
+        "showDate": {
+          "name": "Afficher la date"
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "Description",
+          "settings": {
+            "placeholder": "Entrer la description"
+          }
+        },
+        "fontSize": {
+          "name": "Taille de police",
+          "settings": {
+            "placeholder": "Taille de police (ex: 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Épaisseur de police",
+          "options": {
+            "bold": "Gras",
+            "normal": "Normal"
+          }
+        },
+        "noValueText": {
+          "name": "Texte sans valeur"
+        },
+        "queryField": {
+          "name": "Champ"
+        },
+        "source": {
+          "first": {
+            "name": "Source"
+          },
+          "options": {
+            "input": "Saisie",
+            "none": "Aucun",
+            "query": "Requête"
+          },
+          "second": {
+            "name": "Source"
+          }
+        }
+      },
+      "fontMono": {
+        "name": "Police monospace"
+      },
+      "mode": {
+        "name": "Mode",
+        "options": {
+          "countdown": "Compte à rebours",
+          "countup": "Compteur",
+          "time": "Heure"
+        }
+      },
+      "refresh": {
+        "name": "Actualiser",
+        "options": {
+          "dashboard": "Avec le tableau de bord",
+          "sec": "Chaque seconde"
+        }
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "Format d'heure",
+          "settings": {
+            "placeholder": "format de date"
+          }
+        },
+        "fontSize": {
+          "name": "Taille de police",
+          "settings": {
+            "placeholder": "Taille de police (ex: 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Épaisseur de police",
+          "options": {
+            "bold": "Gras",
+            "normal": "Normal"
+          }
+        }
+      },
+      "timezone": {
+        "name": "Fuseau horaire",
+        "options": {
+          "browser": "Heure du navigateur",
+          "dashboard": "Même que le tableau de bord"
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "Taille de police",
+          "settings": {
+            "placeholder": "taille de police"
+          }
+        },
+        "fontWeight": {
+          "name": "Épaisseur de police",
+          "options": {
+            "bold": "Gras",
+            "normal": "Normal"
+          }
+        },
+        "showTimezone": {
+          "name": "Afficher le fuseau horaire"
+        },
+        "zoneFormat": {
+          "name": "Format d'affichage",
+          "options": {
+            "abbv": "Abréviation",
+            "name": "Normal",
+            "nameOffset": "Nom + décalage",
+            "offset": "Décalage",
+            "offsetAbbv": "Décalage + abréviation"
+          }
+        }
+      }
+    }
+  },
+  "renderTime": {
+    "day": "1 jour, ",
+    "days": " jours, ",
+    "hour": "1 heure, ",
+    "hours": " heures, ",
+    "minute": "1 minute, ",
+    "minutes": " minutes, ",
+    "month": "1 mois, ",
+    "months": " mois, ",
+    "second": "1 seconde ",
+    "seconds": " secondes",
+    "year": "1 an, ",
+    "years": " ans, "
+  }
+}

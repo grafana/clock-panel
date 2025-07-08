@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { t } from '@grafana/i18n';
 import moment, { Moment } from 'moment-timezone';
 import React, { useMemo } from 'react';
 import { ClockMode, ClockOptions, ClockType, TimeSettings } from 'types';
@@ -29,27 +30,39 @@ function getCountdownText({
   let previous = '';
 
   if (timeDiff.years() > 0) {
-    formattedTimeLeft = timeDiff.years() === 1 ? '1 year, ' : timeDiff.years() + ' years, ';
+    formattedTimeLeft =
+      timeDiff.years() === 1 ? t('renderTime.year', '1 year, ') : timeDiff.years() + t('renderTime.years', ' years, ');
     previous = 'years';
   }
   if (timeDiff.months() > 0 || previous === 'years') {
-    formattedTimeLeft += timeDiff.months() === 1 ? '1 month, ' : timeDiff.months() + ' months, ';
+    formattedTimeLeft +=
+      timeDiff.months() === 1
+        ? t('renderTime.month', '1 month, ')
+        : timeDiff.months() + t('renderTime.months', ' months, ');
     previous = 'months';
   }
   if (timeDiff.days() > 0 || previous === 'months') {
-    formattedTimeLeft += timeDiff.days() === 1 ? '1 day, ' : timeDiff.days() + ' days, ';
+    formattedTimeLeft +=
+      timeDiff.days() === 1 ? t('renderTime.day', '1 day, ') : timeDiff.days() + t('renderTime.days', ' days, ');
     previous = 'days';
   }
   if (timeDiff.hours() > 0 || previous === 'days') {
-    formattedTimeLeft += timeDiff.hours() === 1 ? '1 hour, ' : timeDiff.hours() + ' hours, ';
+    formattedTimeLeft +=
+      timeDiff.hours() === 1 ? t('renderTime.hour', '1 hour, ') : timeDiff.hours() + t('renderTime.hours', ' hours, ');
     previous = 'hours';
   }
 
   if (timeDiff.minutes() > 0 || previous === 'hours') {
-    formattedTimeLeft += timeDiff.minutes() === 1 ? '1 minute, ' : timeDiff.minutes() + ' minutes, ';
+    formattedTimeLeft +=
+      timeDiff.minutes() === 1
+        ? t('renderTime.minute', '1 minute, ')
+        : timeDiff.minutes() + t('renderTime.minutes', ' minutes, ');
   }
 
-  formattedTimeLeft += timeDiff.seconds() === 1 ? '1 second ' : timeDiff.seconds() + ' seconds';
+  formattedTimeLeft +=
+    timeDiff.seconds() === 1
+      ? t('renderTime.second', '1 second ')
+      : timeDiff.seconds() + t('renderTime.seconds', ' seconds');
   return formattedTimeLeft;
 }
 
@@ -79,27 +92,39 @@ function getCountupText({
   let previous = '';
 
   if (timeDiff.years() > 0) {
-    formattedTimePassed = timeDiff.years() === 1 ? '1 year, ' : timeDiff.years() + ' years, ';
+    formattedTimePassed =
+      timeDiff.years() === 1 ? t('renderTime.year', '1 year, ') : timeDiff.years() + t('renderTime.years', ' years, ');
     previous = 'years';
   }
   if (timeDiff.months() > 0 || previous === 'years') {
-    formattedTimePassed += timeDiff.months() === 1 ? '1 month, ' : timeDiff.months() + ' months, ';
+    formattedTimePassed +=
+      timeDiff.months() === 1
+        ? t('renderTime.month', '1 month, ')
+        : timeDiff.months() + t('renderTime.months', ' months, ');
     previous = 'months';
   }
   if (timeDiff.days() > 0 || previous === 'months') {
-    formattedTimePassed += timeDiff.days() === 1 ? '1 day, ' : timeDiff.days() + ' days, ';
+    formattedTimePassed +=
+      timeDiff.days() === 1 ? t('renderTime.day', '1 day, ') : timeDiff.days() + t('renderTime.days', ' days, ');
     previous = 'days';
   }
   if (timeDiff.hours() > 0 || previous === 'days') {
-    formattedTimePassed += timeDiff.hours() === 1 ? '1 hour, ' : timeDiff.hours() + ' hours, ';
+    formattedTimePassed +=
+      timeDiff.hours() === 1 ? t('renderTime.hour', '1 hour, ') : timeDiff.hours() + t('renderTime.hours', ' hours, ');
     previous = 'hours';
   }
 
   if (timeDiff.minutes() > 0 || previous === 'hours') {
-    formattedTimePassed += timeDiff.minutes() === 1 ? '1 minute, ' : timeDiff.minutes() + ' minutes, ';
+    formattedTimePassed +=
+      timeDiff.minutes() === 1
+        ? t('renderTime.minute', '1 minute, ')
+        : timeDiff.minutes() + t('renderTime.minutes', ' minutes, ');
   }
 
-  formattedTimePassed += timeDiff.seconds() === 1 ? '1 second ' : timeDiff.seconds() + ' seconds';
+  formattedTimePassed +=
+    timeDiff.seconds() === 1
+      ? t('renderTime.second', '1 second ')
+      : timeDiff.seconds() + t('renderTime.seconds', ' seconds');
   return formattedTimePassed;
 }
 

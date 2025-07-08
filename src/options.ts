@@ -15,6 +15,7 @@ import {
 import { ColorEditor } from './ColorEditor';
 import { getTemplateSrv } from '@grafana/runtime';
 import { getTimeZoneNames } from 'utils';
+import { t } from '@grafana/i18n';
 
 export const optionsBuilder = (
   builder: PanelOptionsEditorBuilder<ClockOptions>,
@@ -24,23 +25,26 @@ export const optionsBuilder = (
   builder
     .addRadio({
       path: 'mode',
-      name: 'Mode',
+      name: t('options.optionsBuilder.mode.name', 'Mode'),
       settings: {
         options: [
-          { value: ClockMode.time, label: 'Time' },
-          { value: ClockMode.countdown, label: 'Countdown' },
-          { value: ClockMode.countup, label: 'Countup' },
+          { value: ClockMode.time, label: t('options.optionsBuilder.mode.options.time', 'Time') },
+          { value: ClockMode.countdown, label: t('options.optionsBuilder.mode.options.countdown', 'Countdown') },
+          { value: ClockMode.countup, label: t('options.optionsBuilder.mode.options.countup', 'Countup') },
         ],
       },
       defaultValue: ClockMode.time,
     })
     .addRadio({
       path: 'refresh',
-      name: 'Refresh',
+      name: t('options.optionsBuilder.refresh.name', 'Refresh'),
       settings: {
         options: [
-          { value: ClockRefresh.sec, label: 'Every second' },
-          { value: ClockRefresh.dashboard, label: 'With the dashboard' },
+          { value: ClockRefresh.sec, label: t('options.optionsBuilder.refresh.options.sec', 'Every second') },
+          {
+            value: ClockRefresh.dashboard,
+            label: t('options.optionsBuilder.refresh.options.dashboard', 'With the dashboard'),
+          },
         ],
       },
       defaultValue: ClockRefresh.sec,
@@ -48,13 +52,13 @@ export const optionsBuilder = (
     .addCustomEditor({
       id: 'bgColor',
       path: 'bgColor',
-      name: 'Background Color',
+      name: t('options.optionsBuilder.bgColor.name', 'Background Color'),
       editor: ColorEditor,
       defaultValue: '',
     })
     .addBooleanSwitch({
       path: 'fontMono',
-      name: 'Font monospace',
+      name: t('options.optionsBuilder.fontMono.name', 'Font monospace'),
       defaultValue: false,
     });
 
@@ -76,11 +80,17 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addRadio({
       category,
       path: 'countdownSettings.source',
-      name: 'Source',
+      name: t('options.optionsBuilder.countdownSettings.source.name', 'Source'),
       settings: {
         options: [
-          { value: ClockSource.input, label: 'Input' },
-          { value: ClockSource.query, label: 'Query' },
+          {
+            value: ClockSource.input,
+            label: t('options.optionsBuilder.countdownSettings.source.options.input', 'Input'),
+          },
+          {
+            value: ClockSource.query,
+            label: t('options.optionsBuilder.countdownSettings.source.options.query', 'Query'),
+          },
         ],
       },
       defaultValue: ClockSource.input,
@@ -89,9 +99,12 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addTextInput({
       category,
       path: 'countdownSettings.endCountdownTime',
-      name: 'End Time',
+      name: t('options.optionsBuilder.countdownSettings.endCountdownTime.name', 'End Time'),
       settings: {
-        placeholder: 'ISO 8601 or RFC 2822 Date time',
+        placeholder: t(
+          'options.optionsBuilder.countdownSettings.endCountdownTime.settings.placeholder',
+          'ISO 8601 or RFC 2822 Date time'
+        ),
       },
       defaultValue: dateTime(Date.now()).add(6, 'h').format(),
       showIf: (o) => o.mode === ClockMode.countdown && o.countdownSettings.source === ClockSource.input,
@@ -99,29 +112,45 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addSelect({
       category,
       path: 'countdownSettings.queryCalculation',
-      name: 'Calculation',
+      name: t('options.optionsBuilder.countdownSettings.queryCalculation.name', 'Calculation'),
       description: 'How to calculate the countdown time',
       settings: {
         options: [
           {
             value: CountdownQueryCalculation.lastNotNull,
-            label: 'Last *',
+            label: t('options.optionsBuilder.countdownSettings.queryCalculation.options.lastNotNull', 'Last *'),
             description: 'Last non-null value (also excludes NaNs)',
           },
-          { value: CountdownQueryCalculation.last, label: 'Last', description: 'Last value' },
+          {
+            value: CountdownQueryCalculation.last,
+            label: t('options.optionsBuilder.countdownSettings.queryCalculation.options.last', 'Last'),
+            description: 'Last value',
+          },
           {
             value: CountdownQueryCalculation.firstNotNull,
-            label: 'First *',
+            label: t('options.optionsBuilder.countdownSettings.queryCalculation.options.firstNotNull', 'First *'),
             description: 'First non-null value (also excludes NaNs)',
           },
-          { value: CountdownQueryCalculation.first, label: 'First', description: 'First value' },
-          { value: CountdownQueryCalculation.min, label: 'Min', description: 'Minimum value' },
+          {
+            value: CountdownQueryCalculation.first,
+            label: t('options.optionsBuilder.countdownSettings.queryCalculation.options.first', 'First'),
+            description: 'First value',
+          },
+          {
+            value: CountdownQueryCalculation.min,
+            label: t('options.optionsBuilder.countdownSettings.queryCalculation.options.min', 'Min'),
+            description: 'Minimum value',
+          },
           {
             value: CountdownQueryCalculation.minFuture,
-            label: 'Min Future',
+            label: t('options.optionsBuilder.countdownSettings.queryCalculation.options.minFuture', 'Min Future'),
             description: 'Minimum value that is in the future',
           },
-          { value: CountdownQueryCalculation.max, label: 'Max', description: 'Maximum value' },
+          {
+            value: CountdownQueryCalculation.max,
+            label: t('options.optionsBuilder.countdownSettings.queryCalculation.options.max', 'Max'),
+            description: 'Maximum value',
+          },
         ],
       },
       defaultValue: CountdownQueryCalculation.last,
@@ -130,7 +159,7 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addFieldNamePicker({
       category,
       path: 'countdownSettings.queryField',
-      name: 'Field',
+      name: t('options.optionsBuilder.countdownSettings.queryField.name', 'Field'),
       settings: {
         noFieldsMessage: 'No fields found',
       },
@@ -139,30 +168,30 @@ function addCountdown(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addTextInput({
       category,
       path: 'countdownSettings.endText',
-      name: 'End Text',
+      name: t('options.optionsBuilder.countdownSettings.endText.name', 'End Text'),
       defaultValue: '00:00:00',
       showIf: (o) => o.mode === ClockMode.countdown,
     })
     .addTextInput({
       category,
       path: 'countdownSettings.noValueText',
-      name: 'No Value Text',
+      name: t('options.optionsBuilder.countdownSettings.noValueText.name', 'No Value Text'),
       defaultValue: 'no value found',
       showIf: (o) => o.mode === ClockMode.countdown,
     })
     .addTextInput({
       category,
       path: 'countdownSettings.invalidValueText',
-      name: 'Invalid Value Text',
+      name: t('options.optionsBuilder.countdownSettings.invalidValueText.name', 'Invalid Value Text'),
       defaultValue: 'invalid value',
       showIf: (o) => o.mode === ClockMode.countdown,
     })
     .addTextInput({
       category,
       path: 'countdownSettings.customFormat',
-      name: 'Custom format',
+      name: t('options.optionsBuilder.countdownSettings.customFormat.name', 'Custom format'),
       settings: {
-        placeholder: 'optional',
+        placeholder: t('options.optionsBuilder.countdownSettings.customFormat.settings.placeholder', 'optional'),
       },
       defaultValue: undefined,
       showIf: (o) => o.mode === ClockMode.countdown,
@@ -179,11 +208,17 @@ function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addRadio({
       category,
       path: 'countupSettings.source',
-      name: 'Source',
+      name: t('options.optionsBuilder.countupSettings.source.name', 'Source'),
       settings: {
         options: [
-          { value: ClockSource.input, label: 'Input' },
-          { value: ClockSource.query, label: 'Query' },
+          {
+            value: ClockSource.input,
+            label: t('options.optionsBuilder.countupSettings.source.options.input', 'Input'),
+          },
+          {
+            value: ClockSource.query,
+            label: t('options.optionsBuilder.countupSettings.source.options.query', 'Query'),
+          },
         ],
       },
       defaultValue: ClockSource.input,
@@ -192,9 +227,12 @@ function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addTextInput({
       category,
       path: 'countupSettings.beginCountupTime',
-      name: 'Begin Time',
+      name: t('options.optionsBuilder.countupSettings.beginCountupTime.name', 'Begin Time'),
       settings: {
-        placeholder: 'ISO 8601 or RFC 2822 Date time',
+        placeholder: t(
+          'options.optionsBuilder.countupSettings.beginCountupTime.settings.placeholder',
+          'ISO 8601 or RFC 2822 Date time'
+        ),
       },
       defaultValue: dateTime(Date.now()).add(6, 'h').format(),
       showIf: (o) => o.mode === ClockMode.countup && o.countupSettings.source === ClockSource.input,
@@ -202,27 +240,43 @@ function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addSelect({
       category,
       path: 'countupSettings.queryCalculation',
-      name: 'Calculation',
+      name: t('options.optionsBuilder.countupSettings.queryCalculation.name', 'Calculation'),
       description: 'How to calculate the countup time',
       settings: {
         options: [
           {
             value: CountupQueryCalculation.lastNotNull,
-            label: 'Last *',
+            label: t('options.optionsBuilder.countupSettings.queryCalculation.options.lastNotNull', 'Last *'),
             description: 'Last non-null value (also excludes NaNs)',
           },
-          { value: CountupQueryCalculation.last, label: 'Last', description: 'Last value' },
+          {
+            value: CountupQueryCalculation.last,
+            label: t('options.optionsBuilder.countupSettings.queryCalculation.options.last', 'Last'),
+            description: 'Last value',
+          },
           {
             value: CountupQueryCalculation.firstNotNull,
-            label: 'First *',
+            label: t('options.optionsBuilder.countupSettings.queryCalculation.options.firstNotNull', 'First *'),
             description: 'First non-null value (also excludes NaNs)',
           },
-          { value: CountupQueryCalculation.first, label: 'First', description: 'First value' },
-          { value: CountupQueryCalculation.min, label: 'Min', description: 'Minimum value' },
-          { value: CountupQueryCalculation.max, label: 'Max', description: 'Maximum value' },
+          {
+            value: CountupQueryCalculation.first,
+            label: t('options.optionsBuilder.countupSettings.queryCalculation.options.first', 'First'),
+            description: 'First value',
+          },
+          {
+            value: CountupQueryCalculation.min,
+            label: t('options.optionsBuilder.countupSettings.queryCalculation.options.min', 'Min'),
+            description: 'Minimum value',
+          },
+          {
+            value: CountupQueryCalculation.max,
+            label: t('options.optionsBuilder.countupSettings.queryCalculation.options.max', 'Max'),
+            description: 'Maximum value',
+          },
           {
             value: CountupQueryCalculation.maxPast,
-            label: 'Max Past',
+            label: t('options.optionsBuilder.countupSettings.queryCalculation.options.maxPast', 'Max Past'),
             description: 'Maximum value that is in the past',
           },
         ],
@@ -233,7 +287,7 @@ function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addFieldNamePicker({
       category,
       path: 'countupSettings.queryField',
-      name: 'Field',
+      name: t('options.optionsBuilder.countupSettings.queryField.name', 'Field'),
       settings: {
         noFieldsMessage: 'No fields found',
       },
@@ -242,30 +296,30 @@ function addCountup(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addTextInput({
       category,
       path: 'countupSettings.beginText',
-      name: 'Begin Text',
+      name: t('options.optionsBuilder.countupSettings.beginText.name', 'Begin Text'),
       defaultValue: '00:00:00',
       showIf: (o) => o.mode === ClockMode.countup,
     })
     .addTextInput({
       category,
       path: 'countupSettings.noValueText',
-      name: 'No Value Text',
+      name: t('options.optionsBuilder.countupSettings.noValueText.name', 'No Value Text'),
       defaultValue: 'no value found',
       showIf: (o) => o.mode === ClockMode.countup,
     })
     .addTextInput({
       category,
       path: 'countupSettings.invalidValueText',
-      name: 'Invalid Value Text',
+      name: t('options.optionsBuilder.countupSettings.invalidValueText.name', 'Invalid Value Text'),
       defaultValue: 'invalid value',
       showIf: (o) => o.mode === ClockMode.countup,
     })
     .addTextInput({
       category,
       path: 'countupSettings.customFormat',
-      name: 'Custom format',
+      name: t('options.optionsBuilder.countupSettings.customFormat.name', 'Custom format'),
       settings: {
-        placeholder: 'optional',
+        placeholder: t('options.optionsBuilder.countupSettings.customFormat.settings.placeholder', 'optional'),
       },
       defaultValue: undefined,
       showIf: (o) => o.mode === ClockMode.countup,
@@ -282,11 +336,17 @@ function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addRadio({
       category,
       path: 'descriptionSettings.source',
-      name: 'Source',
+      name: t('options.optionsBuilder.descriptionSettings.source.first.name', 'Source'),
       settings: {
         options: [
-          { value: DescriptionSource.none, label: 'None' },
-          { value: DescriptionSource.input, label: 'Input' },
+          {
+            value: DescriptionSource.none,
+            label: t('options.optionsBuilder.descriptionSettings.source.options.none', 'None'),
+          },
+          {
+            value: DescriptionSource.input,
+            label: t('options.optionsBuilder.descriptionSettings.source.options.input', 'Input'),
+          },
         ],
       },
       defaultValue: DescriptionSource.none,
@@ -306,12 +366,21 @@ function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addRadio({
       category,
       path: 'descriptionSettings.source',
-      name: 'Source',
+      name: t('options.optionsBuilder.descriptionSettings.source.second.name', 'Source'),
       settings: {
         options: [
-          { value: DescriptionSource.none, label: 'None' },
-          { value: DescriptionSource.input, label: 'Input' },
-          { value: DescriptionSource.query, label: 'Query' },
+          {
+            value: DescriptionSource.none,
+            label: t('options.optionsBuilder.descriptionSettings.source.options.none', 'None'),
+          },
+          {
+            value: DescriptionSource.input,
+            label: t('options.optionsBuilder.descriptionSettings.source.options.input', 'Input'),
+          },
+          {
+            value: DescriptionSource.query,
+            label: t('options.optionsBuilder.descriptionSettings.source.options.query', 'Query'),
+          },
         ],
       },
       defaultValue: DescriptionSource.none,
@@ -322,9 +391,12 @@ function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addTextInput({
       category,
       path: 'descriptionSettings.descriptionText',
-      name: 'Description',
+      name: t('options.optionsBuilder.descriptionSettings.descriptionText.name', 'Description'),
       settings: {
-        placeholder: 'Enter description',
+        placeholder: t(
+          'options.optionsBuilder.descriptionSettings.descriptionText.settings.placeholder',
+          'Enter description'
+        ),
       },
       defaultValue: '',
       showIf: (o) => o.descriptionSettings.source === DescriptionSource.input,
@@ -332,7 +404,7 @@ function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addFieldNamePicker({
       category,
       path: 'descriptionSettings.queryField',
-      name: 'Field',
+      name: t('options.optionsBuilder.descriptionSettings.queryField.name', 'Field'),
       settings: {
         filter: (f: Field) => f.type === 'string',
         noFieldsMessage: 'No fields found',
@@ -342,27 +414,36 @@ function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addTextInput({
       category,
       path: 'descriptionSettings.noValueText',
-      name: 'No Value Text',
+      name: t('options.optionsBuilder.descriptionSettings.noValueText.name', 'No Value Text'),
       defaultValue: 'no description found',
       showIf: (o) => o.descriptionSettings.source === DescriptionSource.query,
     })
     .addTextInput({
       category,
       path: 'descriptionSettings.fontSize',
-      name: 'Font size',
+      name: t('options.optionsBuilder.descriptionSettings.fontSize.name', 'Font size'),
       settings: {
-        placeholder: 'Font size (e.g. 12px)',
+        placeholder: t(
+          'options.optionsBuilder.descriptionSettings.fontSize.settings.placeholder',
+          'Font size (e.g. 12px)'
+        ),
       },
       defaultValue: '12px',
     })
     .addRadio({
       category,
       path: 'descriptionSettings.fontWeight',
-      name: 'Font weight',
+      name: t('options.optionsBuilder.descriptionSettings.fontWeight.name', 'Font weight'),
       settings: {
         options: [
-          { value: FontWeight.normal, label: 'Normal' },
-          { value: FontWeight.bold, label: 'Bold' },
+          {
+            value: FontWeight.normal,
+            label: t('options.optionsBuilder.descriptionSettings.fontWeight.options.normal', 'Normal'),
+          },
+          {
+            value: FontWeight.bold,
+            label: t('options.optionsBuilder.descriptionSettings.fontWeight.options.bold', 'Bold'),
+          },
         ],
       },
       defaultValue: FontWeight.normal,
@@ -379,12 +460,12 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addRadio({
       category,
       path: 'clockType',
-      name: 'Clock Type',
+      name: t('options.optionsBuilder.clockType.name', 'Clock Type'),
       settings: {
         options: [
-          { value: ClockType.H24, label: '24 Hour' },
-          { value: ClockType.H12, label: '12 Hour' },
-          { value: ClockType.Custom, label: 'Custom' },
+          { value: ClockType.H24, label: t('options.optionsBuilder.clockType.options.H24', '24 Hour') },
+          { value: ClockType.H12, label: t('options.optionsBuilder.clockType.options.H12', '12 Hour') },
+          { value: ClockType.Custom, label: t('options.optionsBuilder.clockType.options.Custom', 'Custom') },
         ],
       },
       defaultValue: ClockType.H24,
@@ -392,10 +473,10 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addTextInput({
       category,
       path: 'timeSettings.customFormat',
-      name: 'Time Format',
+      name: t('options.optionsBuilder.timeSettings.customFormat.name', 'Time Format'),
       description: 'the date formatting pattern',
       settings: {
-        placeholder: 'date format',
+        placeholder: t('options.optionsBuilder.timeSettings.customFormat.settings.placeholder', 'date format'),
       },
       defaultValue: undefined,
       showIf: (opts) => opts.clockType === ClockType.Custom,
@@ -403,20 +484,23 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addTextInput({
       category,
       path: 'timeSettings.fontSize',
-      name: 'Font size',
+      name: t('options.optionsBuilder.timeSettings.fontSize.name', 'Font size'),
       settings: {
-        placeholder: 'Font size (e.g. 12px)',
+        placeholder: t('options.optionsBuilder.timeSettings.fontSize.settings.placeholder', 'Font size (e.g. 12px)'),
       },
       defaultValue: '12px',
     })
     .addRadio({
       category,
       path: 'timeSettings.fontWeight',
-      name: 'Font weight',
+      name: t('options.optionsBuilder.timeSettings.fontWeight.name', 'Font weight'),
       settings: {
         options: [
-          { value: FontWeight.normal, label: 'Normal' },
-          { value: FontWeight.bold, label: 'Bold' },
+          {
+            value: FontWeight.normal,
+            label: t('options.optionsBuilder.timeSettings.fontWeight.options.normal', 'Normal'),
+          },
+          { value: FontWeight.bold, label: t('options.optionsBuilder.timeSettings.fontWeight.options.bold', 'Bold') },
         ],
       },
       defaultValue: FontWeight.normal,
@@ -444,8 +528,8 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
   const category = ['Timezone'];
 
   const timezones = [
-    { label: 'Browser Time', value: '' },
-    { label: 'Same as Dashboard', value: 'dashboard' },
+    { label: t('options.optionsBuilder.timezone.options.browser', 'Browser Time'), value: '' },
+    { label: t('options.optionsBuilder.timezone.options.dashboard', 'Same as Dashboard'), value: 'dashboard' },
     ...getTimeZoneNames().map((n) => {
       return { label: n, value: n };
     }),
@@ -455,7 +539,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addSelect({
       category,
       path: 'timezone',
-      name: 'Timezone',
+      name: t('options.optionsBuilder.timezone.name', 'Timezone'),
       settings: {
         options: timezones,
         getOptions: async () => {
@@ -471,20 +555,35 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addBooleanSwitch({
       category,
       path: 'timezoneSettings.showTimezone',
-      name: 'Show Timezone',
+      name: t('options.optionsBuilder.timezoneSettings.showTimezone.name', 'Show Timezone'),
       defaultValue: false,
     })
     .addSelect({
       category,
       path: 'timezoneSettings.zoneFormat',
-      name: 'Display Format',
+      name: t('options.optionsBuilder.timezoneSettings.zoneFormat.name', 'Display Format'),
       settings: {
         options: [
-          { value: ZoneFormat.name, label: 'Normal' },
-          { value: ZoneFormat.nameOffset, label: 'Name + Offset' },
-          { value: ZoneFormat.offsetAbbv, label: 'Offset + Abbreviation' },
-          { value: ZoneFormat.offset, label: 'Offset' },
-          { value: ZoneFormat.abbv, label: 'Abbreviation' },
+          {
+            value: ZoneFormat.name,
+            label: t('options.optionsBuilder.timezoneSettings.zoneFormat.options.name', 'Normal'),
+          },
+          {
+            value: ZoneFormat.nameOffset,
+            label: t('options.optionsBuilder.timezoneSettings.zoneFormat.options.nameOffset', 'Name + Offset'),
+          },
+          {
+            value: ZoneFormat.offsetAbbv,
+            label: t('options.optionsBuilder.timezoneSettings.zoneFormat.options.offsetAbbv', 'Offset + Abbreviation'),
+          },
+          {
+            value: ZoneFormat.offset,
+            label: t('options.optionsBuilder.timezoneSettings.zoneFormat.options.offset', 'Offset'),
+          },
+          {
+            value: ZoneFormat.abbv,
+            label: t('options.optionsBuilder.timezoneSettings.zoneFormat.options.abbv', 'Abbreviation'),
+          },
         ],
       },
       defaultValue: ZoneFormat.offsetAbbv,
@@ -493,9 +592,9 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addTextInput({
       category,
       path: 'timezoneSettings.fontSize',
-      name: 'Font size',
+      name: t('options.optionsBuilder.timezoneSettings.fontSize.name', 'Font size'),
       settings: {
-        placeholder: 'font size',
+        placeholder: t('options.optionsBuilder.timezoneSettings.fontSize.settings.placeholder', 'font size'),
       },
       defaultValue: '12px',
       showIf: (s) => s.timezoneSettings?.showTimezone,
@@ -503,11 +602,17 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addRadio({
       category,
       path: 'timezoneSettings.fontWeight',
-      name: 'Font weight',
+      name: t('options.optionsBuilder.timezoneSettings.fontWeight.name', 'Font weight'),
       settings: {
         options: [
-          { value: FontWeight.normal, label: 'Normal' },
-          { value: FontWeight.bold, label: 'Bold' },
+          {
+            value: FontWeight.normal,
+            label: t('options.optionsBuilder.timezoneSettings.fontWeight.options.normal', 'Normal'),
+          },
+          {
+            value: FontWeight.bold,
+            label: t('options.optionsBuilder.timezoneSettings.fontWeight.options.bold', 'Bold'),
+          },
         ],
       },
       defaultValue: FontWeight.normal,
@@ -525,15 +630,15 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addBooleanSwitch({
       category,
       path: 'dateSettings.showDate',
-      name: 'Show Date',
+      name: t('options.optionsBuilder.dateSettings.showDate.name', 'Show Date'),
       defaultValue: false,
     })
     .addTextInput({
       category,
       path: 'dateSettings.dateFormat',
-      name: 'Date Format',
+      name: t('options.optionsBuilder.dateSettings.dateFormat.name', 'Date Format'),
       settings: {
-        placeholder: 'Enter date format',
+        placeholder: t('options.optionsBuilder.dateSettings.dateFormat.settings.placeholder', 'Enter date format'),
       },
       defaultValue: 'YYYY-MM-DD',
       showIf: (s) => s.dateSettings?.showDate,
@@ -541,9 +646,12 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addTextInput({
       category,
       path: 'dateSettings.locale',
-      name: 'Locale',
+      name: t('options.optionsBuilder.dateSettings.locale.name', 'Locale'),
       settings: {
-        placeholder: 'Enter locale: de, fr, es, ... (default: en)',
+        placeholder: t(
+          'options.optionsBuilder.dateSettings.locale.settings.placeholder',
+          'Enter locale: de, fr, es, ... (default: en)'
+        ),
       },
       defaultValue: '',
       showIf: (s) => s.dateSettings?.showDate,
@@ -551,9 +659,9 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addTextInput({
       category,
       path: 'dateSettings.fontSize',
-      name: 'Font size',
+      name: t('options.optionsBuilder.dateSettings.fontSize.name', 'Font size'),
       settings: {
-        placeholder: 'date format',
+        placeholder: t('options.optionsBuilder.dateSettings.fontSize.settings.placeholder', 'date format'),
       },
       defaultValue: '20px',
       showIf: (s) => s.dateSettings?.showDate,
@@ -561,11 +669,14 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
     .addRadio({
       category,
       path: 'dateSettings.fontWeight',
-      name: 'Font weight',
+      name: t('options.optionsBuilder.dateSettings.fontWeight.name', 'Font weight'),
       settings: {
         options: [
-          { value: FontWeight.normal, label: 'Normal' },
-          { value: FontWeight.bold, label: 'Bold' },
+          {
+            value: FontWeight.normal,
+            label: t('options.optionsBuilder.dateSettings.fontWeight.options.normal', 'Normal'),
+          },
+          { value: FontWeight.bold, label: t('options.optionsBuilder.dateSettings.fontWeight.options.bold', 'Bold') },
         ],
       },
       defaultValue: FontWeight.normal,
