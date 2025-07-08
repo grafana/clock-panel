@@ -7,7 +7,7 @@ import { clockMigrationHandler } from './migrations';
 import { initPluginTranslations } from '@grafana/i18n';
 import pluginJson from 'plugin.json';
 
-initPluginTranslations(pluginJson.id);
+await initPluginTranslations(pluginJson.id);
 
 export const plugin = new PanelPlugin<ClockOptions>(ClockPanel)
   .setNoPadding()
