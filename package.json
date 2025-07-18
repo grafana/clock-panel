@@ -50,7 +50,7 @@
     "cspell": "8.18.1",
     "css-loader": "^7.1.2",
     "eslint": "^8.0.0",
-    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-deprecation": "^3.0.0",
     "eslint-plugin-jsdoc": "^50.6.11",
     "eslint-plugin-react": "^7.37.3",
