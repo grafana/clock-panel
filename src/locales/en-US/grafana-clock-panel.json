@@ -1,0 +1,268 @@
+{
+  "colorEditor": {
+    "defaultValue": "Pick Color"
+  },
+  "options": {
+    "optionsBuilder": {
+      "bgColor": {
+        "name": "Background Color"
+      },
+      "clockType": {
+        "name": "Clock Type",
+        "options": {
+          "Custom": "Custom",
+          "H12": "12 Hour",
+          "H24": "24 Hour"
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "Custom format",
+          "settings": {
+            "placeholder": "optional"
+          }
+        },
+        "endCountdownTime": {
+          "name": "End Time",
+          "settings": {
+            "placeholder": "ISO 8601 or RFC 2822 Date time"
+          }
+        },
+        "endText": {
+          "name": "End Text"
+        },
+        "invalidValueText": {
+          "name": "Invalid Value Text"
+        },
+        "noValueText": {
+          "name": "No Value Text"
+        },
+        "queryCalculation": {
+          "name": "Calculation",
+          "options": {
+            "first": "First",
+            "firstNotNull": "First *",
+            "last": "Last",
+            "lastNotNull": "Last *",
+            "max": "Max",
+            "min": "Min",
+            "minFuture": "Min Future"
+          }
+        },
+        "queryField": {
+          "name": "Field"
+        },
+        "source": {
+          "name": "Source",
+          "options": {
+            "input": "Input",
+            "query": "Query"
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "Begin Time",
+          "settings": {
+            "placeholder": "ISO 8601 or RFC 2822 Date time"
+          }
+        },
+        "beginText": {
+          "name": "Begin Text"
+        },
+        "customFormat": {
+          "name": "Custom format",
+          "settings": {
+            "placeholder": "optional"
+          }
+        },
+        "invalidValueText": {
+          "name": "Invalid Value Text"
+        },
+        "noValueText": {
+          "name": "No Value Text"
+        },
+        "queryCalculation": {
+          "name": "Calculation",
+          "options": {
+            "first": "First",
+            "firstNotNull": "First *",
+            "last": "Last",
+            "lastNotNull": "Last *",
+            "max": "Max",
+            "maxPast": "Max Past",
+            "min": "Min"
+          }
+        },
+        "queryField": {
+          "name": "Field"
+        },
+        "source": {
+          "name": "Source",
+          "options": {
+            "input": "Input",
+            "query": "Query"
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "Date Format",
+          "settings": {
+            "placeholder": "Enter date format"
+          }
+        },
+        "fontSize": {
+          "name": "Font size",
+          "settings": {
+            "placeholder": "date format"
+          }
+        },
+        "fontWeight": {
+          "name": "Font weight",
+          "options": {
+            "bold": "Bold",
+            "normal": "Normal"
+          }
+        },
+        "locale": {
+          "name": "Locale",
+          "settings": {
+            "placeholder": "Enter locale: de, fr, es, ... (default: en)"
+          }
+        },
+        "showDate": {
+          "name": "Show Date"
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "Description",
+          "settings": {
+            "placeholder": "Enter description"
+          }
+        },
+        "fontSize": {
+          "name": "Font size",
+          "settings": {
+            "placeholder": "Font size (e.g. 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Font weight",
+          "options": {
+            "bold": "Bold",
+            "normal": "Normal"
+          }
+        },
+        "noValueText": {
+          "name": "No Value Text"
+        },
+        "queryField": {
+          "name": "Field"
+        },
+        "source": {
+          "first": {
+            "name": "Source"
+          },
+          "options": {
+            "input": "Input",
+            "none": "None",
+            "query": "Query"
+          },
+          "second": {
+            "name": "Source"
+          }
+        }
+      },
+      "fontMono": {
+        "name": "Font monospace"
+      },
+      "mode": {
+        "name": "Mode",
+        "options": {
+          "countdown": "Countdown",
+          "countup": "Countup",
+          "time": "Time"
+        }
+      },
+      "refresh": {
+        "name": "Refresh",
+        "options": {
+          "dashboard": "With the dashboard",
+          "sec": "Every second"
+        }
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "Time Format",
+          "settings": {
+            "placeholder": "date format"
+          }
+        },
+        "fontSize": {
+          "name": "Font size",
+          "settings": {
+            "placeholder": "Font size (e.g. 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Font weight",
+          "options": {
+            "bold": "Bold",
+            "normal": "Normal"
+          }
+        }
+      },
+      "timezone": {
+        "name": "Timezone",
+        "options": {
+          "browser": "Browser Time",
+          "dashboard": "Same as Dashboard"
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "Font size",
+          "settings": {
+            "placeholder": "font size"
+          }
+        },
+        "fontWeight": {
+          "name": "Font weight",
+          "options": {
+            "bold": "Bold",
+            "normal": "Normal"
+          }
+        },
+        "showTimezone": {
+          "name": "Show Timezone"
+        },
+        "zoneFormat": {
+          "name": "Display Format",
+          "options": {
+            "abbv": "Abbreviation",
+            "name": "Normal",
+            "nameOffset": "Name + Offset",
+            "offset": "Offset",
+            "offsetAbbv": "Offset + Abbreviation"
+          }
+        }
+      }
+    }
+  },
+  "renderTime": {
+    "day": "1 day, ",
+    "days": " days, ",
+    "hour": "1 hour, ",
+    "hours": " hours, ",
+    "minute": "1 minute, ",
+    "minutes": " minutes, ",
+    "month": "1 month, ",
+    "months": " months, ",
+    "second": "1 second ",
+    "seconds": " seconds",
+    "year": "1 year, ",
+    "years": " years, "
+  }
+}

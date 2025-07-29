@@ -171,8 +171,8 @@
         "bgColor": "dark-green",
         "clockType": "24 hour",
         "countdownSettings": {
-          "endCountdownTime": "2023-12-31T00:00:00+01:00",
-          "endText": "Happy new year 2024!!",
+          "endCountdownTime": "2025-12-31T00:00:00+01:00",
+          "endText": "Happy new year 2026!!",
           "invalidValueText": "invalid value",
           "noValueText": "no value found",
           "queryCalculation": "last",
@@ -216,7 +216,7 @@
         }
       },
       "pluginVersion": "2.1.5",
-      "title": "Time until new years celebration 2024",
+      "title": "Time until new years celebration 2026",
       "type": "grafana-clock-panel"
     },
     {

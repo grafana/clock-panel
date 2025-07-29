@@ -37,3 +37,5 @@ test-results/
 playwright/.auth/admin.json
 playwright/.auth/grafanaAPICredentials.json
 playwright-report/
+.yarn/
+tests/.auth/
