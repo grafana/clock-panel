@@ -33,7 +33,7 @@
     "@grafana/plugin-e2e": "2.1.8",
     "@grafana/tsconfig": "2.0.0",
     "@playwright/test": "1.54.1",
-    "@stylistic/eslint-plugin-ts": "2.11.0",
+    "@stylistic/eslint-plugin-ts": "2.13.0",
     "@swc/core": "1.12.9",
     "@swc/jest": "0.2.37",
     "@testing-library/jest-dom": "6.4.2",
