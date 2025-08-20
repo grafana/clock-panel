@@ -2221,10 +2221,10 @@
   dependencies:
     "@sinonjs/commons" "^3.0.1"
 
-"@stylistic/eslint-plugin-ts@2.11.0":
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/@stylistic/eslint-plugin-ts/-/eslint-plugin-ts-2.11.0.tgz#6adce6852770e186d2f7e7a84759dbc281a87d5f"
-  integrity sha512-ZBxnfSjzxUiwCibbVCeYCYwZw+P5xaQw+pNA8B8uR42fdMQIOhUstXjJuS2nTHoW5CF4+vGSxbL4gklI8WxhyA==
+"@stylistic/eslint-plugin-ts@2.13.0":
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/@stylistic/eslint-plugin-ts/-/eslint-plugin-ts-2.13.0.tgz#5683a49bce2eb328dc42c7e30da430310b751b5e"
+  integrity sha512-nooe1oTwz60T4wQhZ+5u0/GAu3ygkKF9vPPZeRn/meG71ntQ0EZXVOKEonluAYl/+CV2T+nN0dknHa4evAW13Q==
   dependencies:
     "@typescript-eslint/utils" "^8.13.0"
     eslint-visitor-keys "^4.2.0"
