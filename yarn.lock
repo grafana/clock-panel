@@ -2714,10 +2714,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@17.0.87":
-  version "17.0.87"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.87.tgz#998a5e146fbea449986d95a794c0aff47f12b6e6"
-  integrity sha512-wpg9AbtJ6agjA+BKYmhG6dRWEU/2DHYwMzCaBzsz137ft6IyuqZ5fI4ic1DWL4DrI03Zy78IyVE6ucrXl0mu4g==
+"@types/react@*", "@types/react@17.0.88":
+  version "17.0.88"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.88.tgz#d926ade927fcad5a79338fb283dc93fc84bcf1d9"
+  integrity sha512-HEOvpzcFWkEcHq4EsTChnpimRc3Lz1/qzYRDFtobFp4obVa6QVjCDMjWmkgxgaTYttNvyjnldY8MUflGp5YiUw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "^0.16"
