@@ -1087,10 +1087,10 @@
     tslib "2.8.1"
     typescript "5.8.3"
 
-"@grafana/eslint-config@8.1.0":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@grafana/eslint-config/-/eslint-config-8.1.0.tgz#1ecc0c676f9ba5de814ae0a285b4cd9408d47d94"
-  integrity sha512-Erz/YU8XwouTmIXIxxkgaEx8xmZG13Qa0vQSkTONy/RK2uqVPl88lMsiGFyr/UlkQ1g3unxa0o4ZF67aGlLDTw==
+"@grafana/eslint-config@8.2.0":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@grafana/eslint-config/-/eslint-config-8.2.0.tgz#3334f4c763597297223f3ae8a258434a62860111"
+  integrity sha512-siCxTY3uuCg2ekztQwS8i7DBPHH8xDGiWlZAf+d/TVZVB0TluIsM2jHEhNyC2XzTZdgDLbmDJwUt5SCnHC7iAg==
 
 "@grafana/eslint-plugin-plugins@0.4.3":
   version "0.4.3"
