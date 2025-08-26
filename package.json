@@ -52,7 +52,7 @@
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-deprecation": "3.0.0",
-    "eslint-plugin-jsdoc": "50.6.11",
+    "eslint-plugin-jsdoc": "50.8.0",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "4.6.2",
     "eslint-webpack-plugin": "4.2.0",
