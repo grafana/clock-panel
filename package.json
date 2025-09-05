@@ -29,8 +29,8 @@
   "license": "MIT",
   "devDependencies": {
     "@grafana/eslint-config": "8.2.0",
-    "@grafana/eslint-plugin-plugins": "0.4.3",
-    "@grafana/plugin-e2e": "2.1.8",
+    "@grafana/eslint-plugin-plugins": "0.4.5",
+    "@grafana/plugin-e2e": "2.1.11",
     "@grafana/tsconfig": "2.0.0",
     "@playwright/test": "1.55.0",
     "@stylistic/eslint-plugin-ts": "2.13.0",
