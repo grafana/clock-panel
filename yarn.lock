@@ -1079,7 +1079,7 @@
     uplot "1.6.32"
     xss "^1.0.14"
 
-"@grafana/e2e-selectors@12.1.0", "@grafana/e2e-selectors@^12.1.0-254610":
+"@grafana/e2e-selectors@12.1.0":
   version "12.1.0"
   resolved "https://registry.yarnpkg.com/@grafana/e2e-selectors/-/e2e-selectors-12.1.0.tgz#596fc83aa1bf013e92167a4279953acb45cbfafd"
   integrity sha512-RrZI4TnXU0KjKFDBUniuv0mkkLPizWiCFeXmF717TJ4Qq3oCR15nxYemOQqSJXU4aR6QQ1eNhKC6noOOIQFFPA==
@@ -1089,15 +1089,24 @@
     tslib "2.8.1"
     typescript "5.8.3"
 
+"@grafana/e2e-selectors@^12.2.0-255920":
+  version "12.2.0-17449462949"
+  resolved "https://registry.yarnpkg.com/@grafana/e2e-selectors/-/e2e-selectors-12.2.0-17449462949.tgz#01f1a36a9c81782968e1967f7a6c4b0813fddbf9"
+  integrity sha512-utFwuOWjNMLmX7oYYce3NhIrvRV7ps3sCSpiaIZ0bD+ydOUnD+XcSzfLLGsAUith7ZfGxK3qgx1sn87FGxPGmg==
+  dependencies:
+    semver "^7.7.0"
+    tslib "2.8.1"
+    typescript "5.9.2"
+
 "@grafana/eslint-config@8.2.0":
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/@grafana/eslint-config/-/eslint-config-8.2.0.tgz#3334f4c763597297223f3ae8a258434a62860111"
   integrity sha512-siCxTY3uuCg2ekztQwS8i7DBPHH8xDGiWlZAf+d/TVZVB0TluIsM2jHEhNyC2XzTZdgDLbmDJwUt5SCnHC7iAg==
 
-"@grafana/eslint-plugin-plugins@0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@grafana/eslint-plugin-plugins/-/eslint-plugin-plugins-0.4.3.tgz#bd2c07ded72862c949fc8d3f0f76f0d3597a64dc"
-  integrity sha512-vk3UOAprccf5OVfZZ2y3SId5wAP/FuYVOe5FKY9oyY2FmDqjEfQMjYYNVc3sul0Et2JXhxmY5fZTBtSm1JDEEg==
+"@grafana/eslint-plugin-plugins@0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@grafana/eslint-plugin-plugins/-/eslint-plugin-plugins-0.4.5.tgz#d218052ffbb0d07f39e64fe6e0c2c96bb1837235"
+  integrity sha512-IQRw9ej81a2J1FVtrGpR8xwLHMqGg1zQv87JOZhi836fSugZ+FwDm+FDYFD/oSlH91cVLE3zntFbrGZYrnPr8g==
   dependencies:
     "@grafana/levitate" "^0.17.0"
     "@typescript-eslint/utils" "^8.23.0"
@@ -1155,12 +1164,12 @@
     typescript "5.8.3"
     yargs "^18.0.0"
 
-"@grafana/plugin-e2e@2.1.8":
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/@grafana/plugin-e2e/-/plugin-e2e-2.1.8.tgz#a89dfb4e02bdf8df119944f1ebb53f1e60e292a3"
-  integrity sha512-/h0mezWJnsTFJCJbbGJqrDhMGggwBjEwxe+bKH6x9p/Y7ugzW9PjSWBA1WSBoEParNNOHAp8nIgbg0bwsrjgkQ==
+"@grafana/plugin-e2e@2.1.11":
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/@grafana/plugin-e2e/-/plugin-e2e-2.1.11.tgz#e8f64f182385c9c3a7f400b1febfbd23135b230c"
+  integrity sha512-58reVTiIhYXYwu9XuP2+U3dEcH9Kg4hZP3GXqgHm4Z15G8Wvyhh9t3volNLoi0se6HoJZx+OYXDbWdTCSVKHxw==
   dependencies:
-    "@grafana/e2e-selectors" "^12.1.0-254610"
+    "@grafana/e2e-selectors" "^12.2.0-255920"
     semver "^7.5.4"
     uuid "^11.0.2"
     yaml "^2.3.4"
