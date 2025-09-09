@@ -38,7 +38,6 @@
     "@swc/jest": "0.2.39",
     "@testing-library/jest-dom": "6.8.0",
     "@testing-library/react": "15.0.7",
-    "@types/glob": "8.1.0",
     "@types/jest": "29.5.14",
     "@types/node": "20.19.11",
     "@types/react": "17.0.88",
@@ -51,7 +50,6 @@
     "css-loader": "7.1.2",
     "eslint": "8.57.1",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-deprecation": "3.0.0",
     "eslint-plugin-jsdoc": "50.8.0",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "4.6.2",
@@ -76,9 +74,7 @@
     "webpack-cli": "5.1.4",
     "webpack-livereload-plugin": "3.0.2",
     "webpack-subresource-integrity": "5.1.0",
-    "webpack-virtual-modules": "0.6.2",
-    "@swc/helpers": "0.5.17",
-    "semver": "7.7.2"
+    "webpack-virtual-modules": "0.6.2"
   },
   "dependencies": {
     "@emotion/css": "^11.13.5",
@@ -87,8 +83,7 @@
     "@grafana/ui": "^12.0.2",
     "moment-timezone": "0.6.0",
     "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "@grafana/schema": "^12.0.2"
+    "react-dom": "18.3.1"
   },
   "engines": {
     "node": ">=22"
