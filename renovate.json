@@ -1,9 +1,11 @@
 {
     "ignorePresets": [
+        "github>grafana/grafana-renovate-config//presets/base",
         "github>grafana/grafana-renovate-config//presets/automerge",
         "github>grafana/grafana-renovate-config//presets/labels"
     ],
     "extends": [
+        "config:best-practices",
         "github>grafana/grafana-renovate-config//presets/plugin-ci-workflows"
     ],
     "packageRules": [
