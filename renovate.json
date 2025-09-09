@@ -58,7 +58,6 @@
                 "!/^@types/testing-library/"
             ]
         }
-    ],
-    "minimumReleaseAge": "14 days",
+    ],    
     "prConcurrentLimit": 10    
 }
