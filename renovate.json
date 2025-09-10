@@ -2,7 +2,8 @@
     "ignorePresets": [
         "github>grafana/grafana-renovate-config//presets/base",
         "github>grafana/grafana-renovate-config//presets/automerge",
-        "github>grafana/grafana-renovate-config//presets/labels"
+        "github>grafana/grafana-renovate-config//presets/labels",
+        "github>grafana/grafana-renovate-config//presets/npm"
     ],
     "extends": [
         "config:best-practices",
