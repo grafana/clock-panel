@@ -4,7 +4,6 @@ import { useTheme2 } from '@grafana/ui';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ClockOptions, ClockRefresh, DescriptionSource } from './types';
 
-// eslint-disable-next-line
 import { RenderDate } from 'components/RenderDate';
 import { RenderTime } from 'components/RenderTime';
 import { RenderZone } from 'components/RenderZone';

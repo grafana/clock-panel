@@ -7,8 +7,8 @@
     "dev": "webpack -w -c ./.config/webpack/webpack.config.ts --env development",
     "e2e": "playwright test",
     "format": "prettier --write ./src",
-    "lint": "eslint --cache --ignore-path ./.gitignore --ext .js,.jsx,.ts,.tsx .",
-    "lint:fix": "npm run lint --fix && prettier --write --list-different .",
+    "lint": "eslint --cache .",
+    "lint:fix": "eslint --cache --fix .",
     "playwright:test": "npx playwright test",
     "playwright:test:ui": "npx playwright test --ui",
     "playwright:showreport": "npx playwright show-report",
@@ -28,6 +28,7 @@
   "author": "Grafana Labs",
   "license": "MIT",
   "devDependencies": {
+    "@eslint/compat": "^1.3.2",
     "@grafana/eslint-config": "8.2.0",
     "@grafana/eslint-plugin-plugins": "0.4.6",
     "@grafana/plugin-e2e": "2.1.12",
@@ -90,6 +91,6 @@
   },
   "packageManager": "npm@11.6.0",
   "overrides": {
-    "moment": "2.30.1"    
+    "moment": "2.30.1"
   }
 }
