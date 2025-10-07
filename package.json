@@ -44,7 +44,7 @@
     "@types/react": "18.3.24",
     "@types/react-dom": "18.3.7",
     "@typescript-eslint/eslint-plugin": "8.44.1",
-    "@typescript-eslint/parser": "8.44.1",
+    "@typescript-eslint/parser": "8.46.0",
     "copy-webpack-plugin": "13.0.1",
     "cspell": "9.2.1",
     "css-loader": "7.1.2",
