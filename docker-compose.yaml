@@ -1,17 +1,9 @@
 services:
   grafana:
-    container_name: 'grafana-clock-panel'
     platform: 'linux/amd64'
     build:
-      context: ./.config
       args:
-        grafana_image: ${GRAFANA_IMAGE:-grafana-enterprise}
         grafana_version: ${GRAFANA_VERSION:-10.3.3}
-        development: ${DEVELOPMENT:-false}
-    ports:
-      - 3000:3000/tcp
-    volumes:
-      - ./dist:/var/lib/grafana/plugins/grafana-clock-panel
-      - ./provisioning:/etc/grafana/provisioning
-    environment:
-      NODE_ENV: development
+    extends:
+      file: .config/docker-compose-base.yaml
+      service: grafana
