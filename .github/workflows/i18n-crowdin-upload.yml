@@ -1,5 +1,8 @@
 name: Crowdin Upload Action
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   push:

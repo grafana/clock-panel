@@ -1,5 +1,8 @@
 name: Crowdin automatic task management
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   # once a month on the first day of the month at midnight
