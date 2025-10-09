@@ -47,9 +47,7 @@ export default defineConfig([
       '@grafana/plugins': pluginESLintPlugin,
     },
     rules: {
-      // From root .eslintrc
       '@grafana/plugins/import-is-compatible': ['warn'],
-      // From .config/.eslintrc
       'react/prop-types': 'off',
     },
   },
