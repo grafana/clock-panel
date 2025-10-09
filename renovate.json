@@ -8,6 +8,7 @@
     "extends": [
         "config:best-practices",
         ":disableDependencyDashboard",
+        ":preserveSemverRanges",
         "github>grafana/grafana-renovate-config//presets/plugin-ci-workflows"
     ],
     "packageRules": [
