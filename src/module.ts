@@ -8,7 +8,7 @@ import { initPluginTranslations } from '@grafana/i18n';
 import pluginJson from 'plugin.json';
 import { config } from '@grafana/runtime';
 import semver from 'semver';
-import { loadResources } from 'loadResources';
+import { loadResources } from './loadResources';
 
 // Before Grafana version 12.1.0 the plugin is responsible for loading translation resources
 // In Grafana version 12.1.0 and later Grafana is responsible for loading translation resources
