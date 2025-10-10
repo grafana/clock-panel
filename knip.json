@@ -3,7 +3,7 @@
   "entry": ["src/module.{js,ts,tsx}"],
   "project": ["src/**/*", "tests/**/*", ".config/**/*"],
   "eslint": {
-    "config": [".config/.eslintrc", "./.eslintrc"]
+    "config": ["./eslint.config.mjs"]
   },
   "webpack": {
     "config": [".config/webpack/webpack.config.ts"]

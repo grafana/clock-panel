@@ -1,0 +1,18 @@
+name: Crowdin Download Action
+
+permissions:
+  contents: read
+  pull-requests: write
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  download-sources-from-crowdin:
+    uses: grafana/grafana-github-actions/.github/workflows/crowdin-download.yml@main
+    with:
+      crowdin_project_id: 36
+      pr_labels: 'i18n'
+      github_board_id: 76 # Plugins Platform / Grafana Community project

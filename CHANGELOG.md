@@ -1,5 +1,12 @@
 # Change Log
 
+## 3.0.0
+
+- Add translation support for EN, ES an DE. ES an DE translations will be available in later versions.
+- Upgrade to flat ESLint config
+- Drop support for Grafana 8.x.x 
+- Changed package manager from `yarn` to `npm`
+
 ## 2.1.8
 
 - Improves migration handling for non-query panels to eliminate error message display
