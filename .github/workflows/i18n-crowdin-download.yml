@@ -1,9 +1,5 @@
 name: Crowdin Download Action
 
-permissions:
-  contents: read
-  pull-requests: write
-
 on:
   workflow_dispatch:
   schedule:
@@ -11,8 +7,13 @@ on:
 
 jobs:
   download-sources-from-crowdin:
-    uses: grafana/grafana-github-actions/.github/workflows/crowdin-download.yml@main
+    uses: grafana/grafana-github-actions/.github/workflows/crowdin-download.yml@7d2b4af1112747f82e12adfbc00be44fecb3b616
     with:
       crowdin_project_id: 36
       pr_labels: 'i18n'
       github_board_id: 76 # Plugins Platform / Grafana Community project
+
+    permissions:
+      contents: write # needed to commit changes into the PR
+      pull-requests: write # needed to update PR description, labels, etc
+      id-token: write # needed to get vault secrets

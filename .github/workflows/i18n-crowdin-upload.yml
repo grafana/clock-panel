@@ -1,8 +1,5 @@
 name: Crowdin Upload Action
 
-permissions:
-  contents: read
-
 on:
   workflow_dispatch:
   push:
@@ -13,6 +10,10 @@ on:
 
 jobs:
   upload-sources-to-crowdin:
-    uses: grafana/grafana-github-actions/.github/workflows/crowdin-upload.yml@main
+    uses: grafana/grafana-github-actions/.github/workflows/crowdin-upload.yml@43c2b343f8b0e4acb0f0557c62e326780acc19d2
     with:
       crowdin_project_id: 36
+
+    permissions:
+      contents: read
+      id-token: write # needed to get vault secrets
