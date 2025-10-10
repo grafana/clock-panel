@@ -1,8 +1,5 @@
 name: Crowdin automatic task management
 
-permissions:
-  contents: read
-
 on:
   workflow_dispatch:
   # once a month on the first day of the month at midnight
@@ -11,6 +8,10 @@ on:
 
 jobs:
   create-tasks-in-crowdin:
-    uses: grafana/grafana-github-actions/.github/workflows/crowdin-create-tasks.yml@main
+    uses: grafana/grafana-github-actions/.github/workflows/crowdin-create-tasks.yml@9fcaf3ce23a43128b51a0120968e0f0d25298cf5
     with:
       crowdin_project_id: 36
+    
+    permissions:
+      contents: read
+      id-token: write # needed to get vault secrets
