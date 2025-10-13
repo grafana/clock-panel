@@ -19,5 +19,5 @@ jobs:
       id-token: write
     with:
       plugin-version-suffix: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || '' }}
-      run-playwright-with-grafana-dependency: '>=8.5.0'
+      run-playwright-with-grafana-dependency: '>=11.0.0'
       node-version: '22'
