@@ -10,7 +10,7 @@ on:
 
 jobs:
   upload-sources-to-crowdin:
-    uses: grafana/grafana-github-actions/.github/workflows/crowdin-upload.yml@43c2b343f8b0e4acb0f0557c62e326780acc19d2
+    uses: grafana/grafana-github-actions/.github/workflows/crowdin-upload.yml@7d2b4af1112747f82e12adfbc00be44fecb3b616
     with:
       crowdin_project_id: 36
 
