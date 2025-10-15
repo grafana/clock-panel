@@ -1,0 +1,380 @@
+{
+  "components": {
+    "RenderTime": {
+      "getStrings": {
+        "days": "",
+        "hours": "",
+        "minutes": "",
+        "months": "",
+        "oneDay": "",
+        "oneHour": "",
+        "oneMinute": "",
+        "oneMonth": "",
+        "oneSecond": "",
+        "oneYear": "",
+        "seconds": "",
+        "years": ""
+      }
+    }
+  },
+  "module": {
+    "ClockOptions": {
+      "bgColor": {
+        "name": ""
+      },
+      "clockType": {
+        "name": "",
+        "options": {
+          "custom": {
+            "label": ""
+          },
+          "h12": {
+            "label": ""
+          },
+          "h24": {
+            "label": ""
+          }
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "",
+          "settings": {
+            "placeholder": ""
+          }
+        },
+        "endCountdownTime": {
+          "name": "",
+          "placeholder": ""
+        },
+        "endText": {
+          "name": ""
+        },
+        "invalidValueText": {
+          "defaultValue": "",
+          "name": ""
+        },
+        "noValueText": {
+          "defaultValue": "",
+          "name": ""
+        },
+        "queryCalculation": {
+          "description": "",
+          "name": "",
+          "options": {
+            "first": {
+              "description": "",
+              "label": ""
+            },
+            "firstNotNull": {
+              "description": "",
+              "label": ""
+            },
+            "last": {
+              "description": "",
+              "label": ""
+            },
+            "lastNotNull": {
+              "description": "",
+              "label": ""
+            },
+            "max": {
+              "description": "",
+              "label": ""
+            },
+            "min": {
+              "description": "",
+              "label": ""
+            },
+            "minFuture": {
+              "description": "",
+              "label": ""
+            }
+          }
+        },
+        "queryField": {
+          "name": "",
+          "settings": {
+            "noFieldsMessage": ""
+          }
+        },
+        "source": {
+          "options": {
+            "input": {
+              "label": ""
+            },
+            "query": {
+              "label": ""
+            }
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "",
+          "placeholder": ""
+        },
+        "beginText": {
+          "name": ""
+        },
+        "customFormat": {
+          "name": "",
+          "settings": {
+            "placeholder": ""
+          }
+        },
+        "invalidValueText": {
+          "defaultValue": "",
+          "name": ""
+        },
+        "noValueText": {
+          "defaultValue": "",
+          "name": ""
+        },
+        "queryCalculation": {
+          "description": "",
+          "name": "",
+          "options": {
+            "first": {
+              "description": "",
+              "label": ""
+            },
+            "firstNotNull": {
+              "description": "",
+              "label": ""
+            },
+            "last": {
+              "description": "",
+              "label": ""
+            },
+            "lastNotNull": {
+              "description": "",
+              "label": ""
+            },
+            "max": {
+              "description": "",
+              "label": ""
+            },
+            "maxPast": {
+              "description": "",
+              "label": ""
+            },
+            "min": {
+              "description": "",
+              "label": ""
+            }
+          }
+        },
+        "queryField": {
+          "name": "",
+          "settings": {
+            "noFieldsMessage": ""
+          }
+        },
+        "source": {
+          "name": "",
+          "options": {
+            "input": {
+              "label": ""
+            },
+            "query": {
+              "label": ""
+            }
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "",
+          "settings": {
+            "placeholder": ""
+          }
+        },
+        "fontSize": {
+          "name": "",
+          "settings": {
+            "placeholder": ""
+          }
+        },
+        "fontWeight": {
+          "name": "",
+          "options": {
+            "bold": {
+              "label": ""
+            },
+            "normal": {
+              "label": ""
+            }
+          }
+        },
+        "locale": {
+          "name": "",
+          "settings": {
+            "placeholder": ""
+          }
+        },
+        "showDate": {
+          "name": ""
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "",
+          "settings": {
+            "placeholder": ""
+          }
+        },
+        "fontSize": {
+          "name": "",
+          "settings": {
+            "placeholder": ""
+          }
+        },
+        "fontWeight": {
+          "name": "",
+          "options": {
+            "bold": {
+              "label": ""
+            },
+            "normal": {
+              "label": ""
+            }
+          }
+        },
+        "noValueText": {
+          "defaultValue": "",
+          "name": ""
+        },
+        "queryField": {
+          "name": "",
+          "settings": {
+            "noFieldsMessage": ""
+          }
+        },
+        "source": {
+          "name": "",
+          "options": {
+            "input": {
+              "label": ""
+            },
+            "none": {
+              "label": ""
+            },
+            "query": {
+              "label": ""
+            }
+          }
+        }
+      },
+      "fontMono": {
+        "name": ""
+      },
+      "mode": {
+        "name": "",
+        "options": {
+          "countdown": {
+            "label": ""
+          },
+          "countup": {
+            "label": ""
+          },
+          "time": {
+            "label": ""
+          }
+        }
+      },
+      "refresh": {
+        "name": "",
+        "options": {
+          "dashboard": {
+            "label": ""
+          },
+          "sec": {
+            "label": ""
+          }
+        }
+      },
+      "source": {
+        "name": ""
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "",
+          "settings": {
+            "placeholder": ""
+          }
+        },
+        "fontSize": {
+          "name": "",
+          "settings": {
+            "placeholder": ""
+          }
+        },
+        "fontWeight": {
+          "name": "",
+          "options": {
+            "bold": {
+              "label": ""
+            },
+            "normal": {
+              "label": ""
+            }
+          }
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "",
+          "settings": {
+            "placeholder": ""
+          }
+        },
+        "fontWeight": {
+          "name": "",
+          "options": {
+            "bold": {
+              "label": ""
+            },
+            "normal": {
+              "label": ""
+            }
+          }
+        },
+        "options": {
+          "browserTime": {
+            "label": ""
+          },
+          "sameAsDashboard": {
+            "label": ""
+          }
+        },
+        "showTimezone": {
+          "name": ""
+        },
+        "timezone": {
+          "name": ""
+        },
+        "zoneFormat": {
+          "name": "",
+          "options": {
+            "abbv": {
+              "label": ""
+            },
+            "name": {
+              "label": ""
+            },
+            "nameOffset": {
+              "label": ""
+            },
+            "offset": {
+              "label": ""
+            },
+            "offsetAbbv": {
+              "label": ""
+            }
+          }
+        }
+      }
+    }
+  }
+}
