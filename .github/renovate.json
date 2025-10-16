@@ -1,66 +1,49 @@
 {
-    "ignorePresets": [
-        "github>grafana/grafana-renovate-config//presets/base",
-        "github>grafana/grafana-renovate-config//presets/automerge",
-        "github>grafana/grafana-renovate-config//presets/labels",
-        "github>grafana/grafana-renovate-config//presets/npm"
-    ],
-    "extends": [
-        "config:best-practices",
-        ":disableDependencyDashboard",
-        ":preserveSemverRanges",
-        "github>grafana/grafana-renovate-config//presets/plugin-ci-workflows"
-    ],
-    "packageRules": [
-        {
-            "groupName": "grafana",
-            "matchPackageNames": [
-                "/^@grafana/"
-            ],
-            "minimumReleaseAge": null
-        },
-        {
-            "groupName": "runtime",
-            "matchPackageNames": [
-                "/^moment($|-)/"
-            ]
-        },
-        {
-            "groupName": "dev-tools",
-            "matchPackageNames": [
-                "/^jest/",
-                "/^@jest\//",
-                "/^@testing-library\//",
-                "/^@swc/jest$/",
-                "/^@playwright/test$/",
-                "/^@types/jest$/",
-                "/^@types/testing-library/",
-                "/^eslint/",
-                "/^@typescript-eslint\//",
-                "/^@stylistic\//",
-                "/^prettier$/",
-                "/^cspell$/",
-                "/^webpack/",
-                "/.*-webpack-plugin$/",
-                "/.*-loader$/",
-                "/^@swc/core$/",
-                "/^swc-loader$/",
-                "/^terser-webpack-plugin$/"
-            ]
-        },
-        {
-            "groupName": "typescript",
-            "matchPackageNames": [
-                "/^typescript$/",
-                "/^ts-node$/",
-                "/^@types\//",
-                "!/^@types/react/",
-                "!/^@types/jest/",
-                "!/^@types/testing-library/"
-            ]
-        }
-    ],    
-    "prConcurrentLimit": 10,
-    "minimumReleaseAge": "14 days",
-    "rebaseWhen": "behind-base-branch"
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>grafana/grafana-community-team//renovate/renovate"],
+  "packageRules": [
+    {
+      "groupName": "grafana",
+      "matchPackageNames": ["/^@grafana/"],
+      "minimumReleaseAge": null
+    },
+    {
+      "groupName": "runtime",
+      "matchPackageNames": ["/^moment($|-)/"]
+    },
+    {
+      "groupName": "dev-tools",
+      "matchPackageNames": [
+        "/^jest/",
+        "/^@jest\//",
+        "/^@testing-library\//",
+        "/^@swc/jest$/",
+        "/^@playwright/test$/",
+        "/^@types/jest$/",
+        "/^@types/testing-library/",
+        "/^eslint/",
+        "/^@typescript-eslint\//",
+        "/^@stylistic\//",
+        "/^prettier$/",
+        "/^cspell$/",
+        "/^webpack/",
+        "/.*-webpack-plugin$/",
+        "/.*-loader$/",
+        "/^@swc/core$/",
+        "/^swc-loader$/",
+        "/^terser-webpack-plugin$/"
+      ]
+    },
+    {
+      "groupName": "typescript",
+      "matchPackageNames": [
+        "/^typescript$/",
+        "/^ts-node$/",
+        "/^@types\//",
+        "!/^@types/react/",
+        "!/^@types/jest/",
+        "!/^@types/testing-library/"
+      ]
+    }
+  ]
 }
