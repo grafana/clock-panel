@@ -1,12 +1,12 @@
 import React from 'react';
-import { ColorPicker, Input, Icon, stylesFactory } from '@grafana/ui';
+import { ColorPicker, Input, Icon } from '@grafana/ui';
 import { css } from '@emotion/css';
 import { config } from '@grafana/runtime';
-import { GrafanaTheme } from '@grafana/data';
 import { t } from '@grafana/i18n';
+import { GrafanaTheme2 } from '@grafana/data';
 
 export function ColorEditor(props: any) {
-  const styles = getStyles(config.theme);
+  const styles = getStyles(config.theme2);
   let prefix: React.ReactNode = null;
   let suffix: React.ReactNode = null;
   const value = props.value || t('ColorEditor.input.value.placeholder', 'Pick Color');
@@ -18,7 +18,7 @@ export function ColorEditor(props: any) {
     <div className={styles.inputPrefix}>
       <div className={styles.colorPicker}>
         <ColorPicker
-          color={props.value || config.theme.colors.panelBg}
+          color={props.value || config.theme2.colors.primary}
           onChange={props.onChange}
           enableNamedColors={true}
         />
@@ -33,21 +33,21 @@ export function ColorEditor(props: any) {
   );
 }
 
-const getStyles = stylesFactory((theme: GrafanaTheme) => {
+const getStyles = (theme: GrafanaTheme2) => {
   return {
     colorPicker: css`
-      padding: 0 ${theme.spacing.sm};
+      padding: 0 ${theme.spacing(1)};
     `,
     inputPrefix: css`
       display: flex;
       align-items: center;
     `,
     trashIcon: css`
-      color: ${theme.colors.textWeak};
+      color: ${theme.colors.text.secondary};
       cursor: pointer;
       &:hover {
         color: ${theme.colors.text};
       }
     `,
   };
-});
+};
