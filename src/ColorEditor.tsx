@@ -3,11 +3,13 @@ import { ColorPicker, Input, Icon, stylesFactory } from '@grafana/ui';
 import { css } from '@emotion/css';
 import { config } from '@grafana/runtime';
 import { GrafanaTheme } from '@grafana/data';
+import { t } from '@grafana/i18n';
 
 export function ColorEditor(props: any) {
   const styles = getStyles(config.theme);
   let prefix: React.ReactNode = null;
   let suffix: React.ReactNode = null;
+  const value = props.value || t('ColorEditor.input.value.placeholder', 'Pick Color');
   if (props.value) {
     suffix = <Icon className={styles.trashIcon} name="trash-alt" onClick={() => props.onChange(undefined)} />;
   }
@@ -26,7 +28,7 @@ export function ColorEditor(props: any) {
 
   return (
     <div>
-      <Input type="text" value={props.value || 'Pick Color'} prefix={prefix} suffix={suffix} readOnly={true} />
+      <Input type="text" value={value} prefix={prefix} suffix={suffix} readOnly={true} />
     </div>
   );
 }

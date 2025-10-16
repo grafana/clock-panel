@@ -1,4 +1,11 @@
 {
+  "ColorEditor": {
+    "input": {
+      "value": {
+        "placeholder": "Pick Color"
+      }
+    }
+  },
   "components": {
     "RenderTime": {
       "getStrings": {
