@@ -8,7 +8,7 @@
     "e2e": "playwright test",
     "format": "prettier --write ./src",
     "i18n-extract": "i18next-cli extract --sync-primary",
-    "i18n-extract:ci": "i18next-cli extract --sync-primary --ci",
+    "i18n-extract:ci": "i18next-cli extract --sync-primary --dry-run --ci",
     "lint": "eslint --cache .",
     "lint:fix": "npm run lint -- --fix && prettier --write --list-different .",
     "playwright:test": "npx playwright test",
