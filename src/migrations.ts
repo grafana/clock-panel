@@ -10,11 +10,13 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
     options.refresh = ClockRefresh.dashboard;
   }
 
-  if (detectInputOnlyPluginConfig(panel)) {
-    migrateInputOnlyPluginConfig(panel);
+  if (isMutablePanel(panel)) {
+    if (detectInputOnlyPluginConfig(panel)) {
+      migrateInputOnlyPluginConfig(panel);
+    }
+    // configuration options moved as the panel migrated, clean up if needed
+    cleanupConfig(panel);
   }
-  // configuration options moved as the panel migrated, clean up if needed
-  cleanupConfig(panel);
 
   return options;
 };
@@ -159,3 +161,17 @@ const cleanupConfig = (panel: PanelModel<ClockOptions>) => {
     delete panel.timezoneSettings;
   }
 };
+
+function isMutablePanel(panel: PanelModel<ClockOptions, any>) {
+  try {
+    // Try to modify panel to check if it's mutable
+
+    // @ts-ignore
+    panel.asdf = 'test';
+    // @ts-ignore
+    delete panel.asdf;
+    return true;
+  } catch (error) {
+    return false;
+  }
+}

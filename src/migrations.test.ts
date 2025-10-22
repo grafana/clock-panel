@@ -249,4 +249,97 @@ describe('Clock migrations', () => {
     expect(options).toMatchSnapshot();
     expect(panel).toMatchSnapshot();
   });
+
+  // When we introduced schemas in G12 we also made the panel object immutable
+  // We can only mutate the panel options object.
+  describe('support immutability on panel in G12', () => {
+    it('should not mutate panel with input-only config', () => {
+      const panel = createImmutablePanel({
+        options: {
+          countdownSettings: { source: 'input' },
+        },
+        datasource: { type: 'test', uid: '123' },
+        targets: [],
+      } as unknown as PanelModel);
+
+      expect(() => clockMigrationHandler(panel)).not.toThrow();
+    });
+
+    it('should not mutate panel with query-based config', () => {
+      const panel = createImmutablePanel({
+        options: {
+          countdownSettings: { source: 'query' },
+        },
+        datasource: { type: 'test', uid: '123' },
+        targets: [],
+      } as unknown as PanelModel);
+
+      expect(() => clockMigrationHandler(panel)).not.toThrow();
+    });
+
+    it('should not mutate panel with legacy config (pre 2.1.4)', () => {
+      const panel = createImmutablePanel({
+        options: {},
+        datasource: { type: 'test', uid: '123' },
+        targets: [],
+        clockType: '12 hour',
+      } as unknown as PanelModel);
+
+      expect(() => clockMigrationHandler(panel)).not.toThrow();
+    });
+
+    it('should not mutate panel with refreshSettings', () => {
+      const panel = createImmutablePanel({
+        options: {
+          countdownSettings: { source: 'query' },
+        },
+        refreshSettings: { syncWithDashboard: true },
+        datasource: { type: 'test', uid: '123' },
+        targets: [],
+      } as unknown as PanelModel);
+
+      expect(() => clockMigrationHandler(panel)).not.toThrow();
+    });
+
+    it('should not mutate panel with options.refreshSettings', () => {
+      const panel = createImmutablePanel({
+        options: {
+          countdownSettings: { source: 'query' },
+          refreshSettings: { syncWithDashboard: true },
+        },
+        datasource: { type: 'test', uid: '123' },
+        targets: [],
+      } as unknown as PanelModel);
+
+      expect(() => clockMigrationHandler(panel)).not.toThrow();
+    });
+  });
 });
+
+function createImmutablePanel(panel: Partial<PanelModel>): PanelModel {
+  // Create a shallow copy to avoid mutating the original
+  const immutablePanel = { ...panel };
+
+  // Deep freeze all properties except options
+  Object.keys(immutablePanel).forEach((key) => {
+    if (key !== 'options') {
+      const value = immutablePanel[key as keyof PanelModel];
+      if (value && typeof value === 'object') {
+        deepFreeze(value);
+      }
+    }
+  });
+
+  // Freeze the panel itself (options content remains mutable)
+  return Object.freeze(immutablePanel) as PanelModel;
+}
+
+function deepFreeze(obj: any): any {
+  Object.freeze(obj);
+  Object.getOwnPropertyNames(obj).forEach((prop) => {
+    if (obj[prop] && typeof obj[prop] === 'object' && !Object.isFrozen(obj[prop])) {
+      deepFreeze(obj[prop]);
+    }
+  });
+  return obj;
+}
