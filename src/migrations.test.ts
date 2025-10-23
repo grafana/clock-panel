@@ -1,5 +1,5 @@
 import { PanelModel } from '@grafana/data';
-
+import { cloneDeep } from 'lodash';
 import { clockMigrationHandler } from './migrations';
 
 describe('Clock migrations', () => {
@@ -250,62 +250,11 @@ describe('Clock migrations', () => {
     expect(panel).toMatchSnapshot();
   });
 
-  // When we introduced schemas in G12 we also made the panel object immutable
-  // We can only mutate the panel options object.
-  describe('support immutability on panel in G12', () => {
-    it('should not mutate panel with input-only config', () => {
-      const panel = createImmutablePanel({
+  describe('support readonly targets in G12', () => {
+    it('should not try to mutate targets when migrating panel', () => {
+      const panel = createPanelWithReadonlyTargets({
         options: {
           countdownSettings: { source: 'input' },
-        },
-        datasource: { type: 'test', uid: '123' },
-        targets: [],
-      } as unknown as PanelModel);
-
-      expect(() => clockMigrationHandler(panel)).not.toThrow();
-    });
-
-    it('should not mutate panel with query-based config', () => {
-      const panel = createImmutablePanel({
-        options: {
-          countdownSettings: { source: 'query' },
-        },
-        datasource: { type: 'test', uid: '123' },
-        targets: [],
-      } as unknown as PanelModel);
-
-      expect(() => clockMigrationHandler(panel)).not.toThrow();
-    });
-
-    it('should not mutate panel with legacy config (pre 2.1.4)', () => {
-      const panel = createImmutablePanel({
-        options: {},
-        datasource: { type: 'test', uid: '123' },
-        targets: [],
-        clockType: '12 hour',
-      } as unknown as PanelModel);
-
-      expect(() => clockMigrationHandler(panel)).not.toThrow();
-    });
-
-    it('should not mutate panel with refreshSettings', () => {
-      const panel = createImmutablePanel({
-        options: {
-          countdownSettings: { source: 'query' },
-        },
-        refreshSettings: { syncWithDashboard: true },
-        datasource: { type: 'test', uid: '123' },
-        targets: [],
-      } as unknown as PanelModel);
-
-      expect(() => clockMigrationHandler(panel)).not.toThrow();
-    });
-
-    it('should not mutate panel with options.refreshSettings', () => {
-      const panel = createImmutablePanel({
-        options: {
-          countdownSettings: { source: 'query' },
-          refreshSettings: { syncWithDashboard: true },
         },
         datasource: { type: 'test', uid: '123' },
         targets: [],
@@ -316,30 +265,17 @@ describe('Clock migrations', () => {
   });
 });
 
-function createImmutablePanel(panel: Partial<PanelModel>): PanelModel {
-  // Create a shallow copy to avoid mutating the original
-  const immutablePanel = { ...panel };
-
-  // Deep freeze all properties except options
-  Object.keys(immutablePanel).forEach((key) => {
-    if (key !== 'options') {
-      const value = immutablePanel[key as keyof PanelModel];
-      if (value && typeof value === 'object') {
-        deepFreeze(value);
-      }
-    }
+function createPanelWithReadonlyTargets(panel: Partial<PanelModel>): PanelModel {
+  // https://github.com/grafana/grafana/blob/2bbba880cd2a8269e262e4ea7138fcd43f4d5c66/public/app/features/dashboard-scene/serialization/angularMigration.ts#L18
+  const targetClone = cloneDeep(panel.targets);
+  Object.defineProperty(panel, 'targets', {
+    get: function () {
+      console.warn(
+        'Accessing the targets property when migrating a panel plugin is deprecated. Changes to this property will be ignored.'
+      );
+      return targetClone;
+    },
   });
 
-  // Freeze the panel itself (options content remains mutable)
-  return Object.freeze(immutablePanel) as PanelModel;
-}
-
-function deepFreeze(obj: any): any {
-  Object.freeze(obj);
-  Object.getOwnPropertyNames(obj).forEach((prop) => {
-    if (obj[prop] && typeof obj[prop] === 'object' && !Object.isFrozen(obj[prop])) {
-      deepFreeze(obj[prop]);
-    }
-  });
-  return obj;
+  return panel as unknown as PanelModel;
 }

@@ -10,13 +10,13 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
     options.refresh = ClockRefresh.dashboard;
   }
 
-  if (isMutablePanel(panel)) {
+  if (!isReadonlyTarget(panel)) {
     if (detectInputOnlyPluginConfig(panel)) {
       migrateInputOnlyPluginConfig(panel);
     }
-    // configuration options moved as the panel migrated, clean up if needed
-    cleanupConfig(panel);
   }
+  // configuration options moved as the panel migrated, clean up if needed
+  cleanupConfig(panel);
 
   return options;
 };
@@ -162,16 +162,7 @@ const cleanupConfig = (panel: PanelModel<ClockOptions>) => {
   }
 };
 
-function isMutablePanel(panel: PanelModel<ClockOptions, any>) {
-  try {
-    // Try to modify panel to check if it's mutable
-
-    // @ts-ignore
-    panel.asdf = 'test';
-    // @ts-ignore
-    delete panel.asdf;
-    return true;
-  } catch (error) {
-    return false;
-  }
+function isReadonlyTarget(panel: PanelModel<ClockOptions, any>) {
+  const description = Object.getOwnPropertyDescriptor(panel, 'targets');
+  return typeof description?.set === 'undefined' && typeof description?.get === 'function';
 }
