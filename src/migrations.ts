@@ -10,8 +10,10 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
     options.refresh = ClockRefresh.dashboard;
   }
 
-  if (detectInputOnlyPluginConfig(panel)) {
-    migrateInputOnlyPluginConfig(panel);
+  if (!isReadonlyTarget(panel)) {
+    if (detectInputOnlyPluginConfig(panel)) {
+      migrateInputOnlyPluginConfig(panel);
+    }
   }
   // configuration options moved as the panel migrated, clean up if needed
   cleanupConfig(panel);
@@ -159,3 +161,8 @@ const cleanupConfig = (panel: PanelModel<ClockOptions>) => {
     delete panel.timezoneSettings;
   }
 };
+
+function isReadonlyTarget(panel: PanelModel<ClockOptions, any>) {
+  const description = Object.getOwnPropertyDescriptor(panel, 'targets');
+  return typeof description?.set === 'undefined' && typeof description?.get === 'function';
+}
