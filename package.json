@@ -95,7 +95,7 @@
   "engines": {
     "node": ">=22"
   },
-  "packageManager": "npm@11.6.1",
+  "packageManager": "npm@11.6.2",
   "overrides": {
     "moment": "2.30.1"
   }
