@@ -2,9 +2,13 @@ import { defineConfig } from 'eslint/config';
 import grafanaConfig from '@grafana/eslint-config/flat.js';
 import grafanaI18nPlugin from '@grafana/i18n/eslint-plugin';
 import pluginESLintPlugin from '@grafana/eslint-plugin-plugins';
+import reactHooks from 'eslint-plugin-react-hooks';
+
+const [reactHooksConfig, ...rest] = grafanaConfig;
 
 export default defineConfig([
   {
+    name: 'ignore-files',
     ignores: [
       '**/logs',
       '**/*.log',
@@ -38,7 +42,8 @@ export default defineConfig([
       'src/external/**',
     ],
   },
-  ...grafanaConfig,
+  { ...reactHooksConfig, plugins: { 'react-hooks': reactHooks } },
+  ...rest,
   // Global project configuration
   {
     name: 'clock-panel/global',
