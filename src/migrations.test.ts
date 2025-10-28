@@ -1,5 +1,5 @@
 import { PanelModel } from '@grafana/data';
-
+import { cloneDeep } from 'lodash';
 import { clockMigrationHandler } from './migrations';
 
 describe('Clock migrations', () => {
@@ -249,4 +249,33 @@ describe('Clock migrations', () => {
     expect(options).toMatchSnapshot();
     expect(panel).toMatchSnapshot();
   });
+
+  describe('support readonly targets in G12', () => {
+    it('should not try to mutate targets when migrating panel', () => {
+      const panel = createPanelWithReadonlyTargets({
+        options: {
+          countdownSettings: { source: 'input' },
+        },
+        datasource: { type: 'test', uid: '123' },
+        targets: [],
+      } as unknown as PanelModel);
+
+      expect(() => clockMigrationHandler(panel)).not.toThrow();
+    });
+  });
 });
+
+function createPanelWithReadonlyTargets(panel: Partial<PanelModel>): PanelModel {
+  // https://github.com/grafana/grafana/blob/2bbba880cd2a8269e262e4ea7138fcd43f4d5c66/public/app/features/dashboard-scene/serialization/angularMigration.ts#L18
+  const targetClone = cloneDeep(panel.targets);
+  Object.defineProperty(panel, 'targets', {
+    get: function () {
+      console.warn(
+        'Accessing the targets property when migrating a panel plugin is deprecated. Changes to this property will be ignored.'
+      );
+      return targetClone;
+    },
+  });
+
+  return panel as unknown as PanelModel;
+}
