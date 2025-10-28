@@ -4,8 +4,9 @@
 
 - Add translation support for EN, ES an DE. ES an DE translations will be available in later versions.
 - Upgrade to flat ESLint config
-- Drop support for Grafana 8.x.x 
+- Drop support for Grafana 8.x.x
 - Changed package manager from `yarn` to `npm`
+- Fixes [#408](https://github.com/grafana/clock-panel/issues/408)
 
 ## 2.1.8
 
