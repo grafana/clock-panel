@@ -1,12 +1,12 @@
 import React from 'react';
-import { ColorPicker, Input, Icon } from '@grafana/ui';
+import { ColorPicker, Input, Icon, useStyles2 } from '@grafana/ui';
 import { css } from '@emotion/css';
 import { config } from '@grafana/runtime';
 import { t } from '@grafana/i18n';
 import { GrafanaTheme2 } from '@grafana/data';
 
 export function ColorEditor(props: any) {
-  const styles = getStyles(config.theme2);
+  const styles = useStyles2(getStyles);
   let prefix: React.ReactNode = null;
   let suffix: React.ReactNode = null;
   const value = props.value || t('ColorEditor.input.value.placeholder', 'Pick Color');
