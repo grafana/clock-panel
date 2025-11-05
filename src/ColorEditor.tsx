@@ -18,7 +18,7 @@ export function ColorEditor(props: any) {
     <div className={styles.inputPrefix}>
       <div className={styles.colorPicker}>
         <ColorPicker
-          color={props.value || config.theme2.colors.primary}
+          color={props.value || config.theme2.colors.background.primary}
           onChange={props.onChange}
           enableNamedColors={true}
         />
