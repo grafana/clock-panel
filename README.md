@@ -6,7 +6,7 @@ You can use the Clock Panel to display the time in another office, or to track a
 
 ### Plugin options
 
-#### Options
+#### Options 
 
 - **Mode**:
 
