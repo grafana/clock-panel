@@ -2,382 +2,382 @@
   "ColorEditor": {
     "input": {
       "value": {
-        "placeholder": ""
+        "placeholder": "Välj färg"
       }
     }
   },
   "components": {
     "RenderTime": {
       "getStrings": {
-        "days": "",
-        "hours": "",
-        "minutes": "",
-        "months": "",
-        "oneDay": "",
-        "oneHour": "",
-        "oneMinute": "",
-        "oneMonth": "",
-        "oneSecond": "",
-        "oneYear": "",
-        "seconds": "",
-        "years": ""
+        "days": "dagar",
+        "hours": "timmar",
+        "minutes": "minuter",
+        "months": "månader",
+        "oneDay": "1 dag",
+        "oneHour": "1 timme",
+        "oneMinute": "1 minut",
+        "oneMonth": "1 månad",
+        "oneSecond": "1 sekund",
+        "oneYear": "1 år",
+        "seconds": "sekunder",
+        "years": "år"
       }
     }
   },
   "module": {
     "ClockOptions": {
       "bgColor": {
-        "name": ""
+        "name": "Bakgrundsfärg"
       },
       "clockType": {
-        "name": "",
+        "name": "Typ av klocka",
         "options": {
           "custom": {
-            "label": ""
+            "label": "Anpassad"
           },
           "h12": {
-            "label": ""
+            "label": "12 timmar"
           },
           "h24": {
-            "label": ""
+            "label": "24 timmar"
           }
         }
       },
       "countdownSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Anpassat format",
           "settings": {
-            "placeholder": ""
+            "placeholder": "valfritt"
           }
         },
         "endCountdownTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Sluttid",
+          "placeholder": "ISO 8601 eller RFC 2822 Datum tid"
         },
         "endText": {
-          "name": ""
+          "name": "Sluttext"
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "ogiltigt värde",
+          "name": "Ogiltig värdetext"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "inget värde hittades",
+          "name": "Ingen värdetext"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Hur man beräknar nedräkningstiden",
+          "name": "Beräkning",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "Första värde",
+              "label": "Första"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Första icke-nullvärde (exkluderar även NaN)",
+              "label": "Första *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Sista värdet",
+              "label": "Sista"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Sista icke-nullvärde (exkluderar även NaN)",
+              "label": "Sista *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Maximalt värde",
+              "label": "Max"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Minsta värde",
+              "label": "Min"
             },
             "minFuture": {
-              "description": "",
-              "label": ""
+              "description": "Minsta värde som är i framtiden",
+              "label": "Min. framtida"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Fält",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Inga fält hittades"
           }
         },
         "source": {
           "options": {
             "input": {
-              "label": ""
+              "label": "Inmatning"
             },
             "query": {
-              "label": ""
+              "label": "Fråga"
             }
           }
         }
       },
       "countupSettings": {
         "beginCountupTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Starttid",
+          "placeholder": "ISO 8601 eller RFC 2822 Datum tid"
         },
         "beginText": {
-          "name": ""
+          "name": "Starttext"
         },
         "customFormat": {
-          "name": "",
+          "name": "Anpassat format",
           "settings": {
-            "placeholder": ""
+            "placeholder": "valfritt"
           }
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "ogiltigt värde",
+          "name": "Ogiltig värdetext"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "inget värde hittades",
+          "name": "Ingen värdetext"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Hur man beräknar uppräkningstiden",
+          "name": "Beräkning",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "Första värde",
+              "label": "Första"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Första icke-nullvärde (exkluderar även NaN)",
+              "label": "Första *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Sista värdet",
+              "label": "Sista"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Sista icke-nullvärde (exkluderar även NaN)",
+              "label": "Sista *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Maximalt värde",
+              "label": "Max"
             },
             "maxPast": {
-              "description": "",
-              "label": ""
+              "description": "Maximalt värde som är i det förflutna",
+              "label": "Max. tidigare"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Minsta värde",
+              "label": "Min"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Fält",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Inga fält hittades"
           }
         },
         "source": {
-          "name": "",
+          "name": "Källa",
           "options": {
             "input": {
-              "label": ""
+              "label": "Inmatning"
             },
             "query": {
-              "label": ""
+              "label": "Fråga"
             }
           }
         }
       },
       "dateSettings": {
         "dateFormat": {
-          "name": "",
+          "name": "Datumformat",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Ange datumformat"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Teckenstorlek",
           "settings": {
-            "placeholder": ""
+            "placeholder": "datumformat"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Typsnitt",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Fet"
             },
             "normal": {
-              "label": ""
+              "label": "Normal"
             }
           }
         },
         "locale": {
-          "name": "",
+          "name": "Lokal",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Ange språk: de, fr, es, ... (standard: en)"
           }
         },
         "showDate": {
-          "name": ""
+          "name": "Visa datum"
         }
       },
       "descriptionSettings": {
         "descriptionText": {
-          "name": "",
+          "name": "Beskrivning",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Ange beskrivning"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Teckenstorlek",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Teckenstorlek (t.ex. 12px)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Typsnitt",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Fet"
             },
             "normal": {
-              "label": ""
+              "label": "Normal"
             }
           }
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "ingen beskrivning hittades",
+          "name": "Ingen värdetext"
         },
         "queryField": {
-          "name": "",
+          "name": "Fält",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Inga fält hittades"
           }
         },
         "source": {
-          "name": "",
+          "name": "Källa",
           "options": {
             "input": {
-              "label": ""
+              "label": "Inmatning"
             },
             "none": {
-              "label": ""
+              "label": "Ingen"
             },
             "query": {
-              "label": ""
+              "label": "Fråga"
             }
           }
         }
       },
       "fontMono": {
-        "name": ""
+        "name": "Typsnitt monospace"
       },
       "mode": {
-        "name": "",
+        "name": "Läge",
         "options": {
           "countdown": {
-            "label": ""
+            "label": "Nedräkning"
           },
           "countup": {
-            "label": ""
+            "label": "Räkna upp"
           },
           "time": {
-            "label": ""
+            "label": "Tid"
           }
         }
       },
       "refresh": {
-        "name": "",
+        "name": "Uppdatera",
         "options": {
           "dashboard": {
-            "label": ""
+            "label": "Med instrumentpanelen"
           },
           "sec": {
-            "label": ""
+            "label": "Varje sekund"
           }
         }
       },
       "source": {
-        "name": ""
+        "name": "Källa"
       },
       "timeSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Tidsformat",
           "settings": {
-            "placeholder": ""
+            "placeholder": "datumformat"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Teckenstorlek",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Teckenstorlek (t.ex. 12px)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Typsnitt",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Fet"
             },
             "normal": {
-              "label": ""
+              "label": "Normal"
             }
           }
         }
       },
       "timezoneSettings": {
         "fontSize": {
-          "name": "",
+          "name": "Teckenstorlek",
           "settings": {
-            "placeholder": ""
+            "placeholder": "teckenstorlek"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Typsnitt",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Fet"
             },
             "normal": {
-              "label": ""
+              "label": "Normal"
             }
           }
         },
         "options": {
           "browserTime": {
-            "label": ""
+            "label": "Webbläsartid"
           },
           "sameAsDashboard": {
-            "label": ""
+            "label": "Samma som instrumentpanel"
           }
         },
         "showTimezone": {
-          "name": ""
+          "name": "Visa tidszon"
         },
         "timezone": {
-          "name": ""
+          "name": "Tidszon"
         },
         "zoneFormat": {
-          "name": "",
+          "name": "Visningsformat",
           "options": {
             "abbv": {
-              "label": ""
+              "label": "Förkortning"
             },
             "name": {
-              "label": ""
+              "label": "Normal"
             },
             "nameOffset": {
-              "label": ""
+              "label": "Namn + förskjutning"
             },
             "offset": {
-              "label": ""
+              "label": "Förskjutning"
             },
             "offsetAbbv": {
-              "label": ""
+              "label": "Förskjutning + förkortning"
             }
           }
         }

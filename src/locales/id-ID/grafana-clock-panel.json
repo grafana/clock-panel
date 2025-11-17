@@ -2,382 +2,382 @@
   "ColorEditor": {
     "input": {
       "value": {
-        "placeholder": ""
+        "placeholder": "Pilih Warna"
       }
     }
   },
   "components": {
     "RenderTime": {
       "getStrings": {
-        "days": "",
-        "hours": "",
-        "minutes": "",
-        "months": "",
-        "oneDay": "",
-        "oneHour": "",
-        "oneMinute": "",
-        "oneMonth": "",
-        "oneSecond": "",
-        "oneYear": "",
-        "seconds": "",
-        "years": ""
+        "days": "hari",
+        "hours": "jam",
+        "minutes": "menit",
+        "months": "bulan",
+        "oneDay": "1 hari",
+        "oneHour": "1 jam",
+        "oneMinute": "1 menit",
+        "oneMonth": "1 bulan",
+        "oneSecond": "1 detik",
+        "oneYear": "1 tahun",
+        "seconds": "detik",
+        "years": "tahun"
       }
     }
   },
   "module": {
     "ClockOptions": {
       "bgColor": {
-        "name": ""
+        "name": "Warna Latar Belakang"
       },
       "clockType": {
-        "name": "",
+        "name": "Jenis Jam",
         "options": {
           "custom": {
-            "label": ""
+            "label": "Kustom"
           },
           "h12": {
-            "label": ""
+            "label": "12 Jam"
           },
           "h24": {
-            "label": ""
+            "label": "24 Jam"
           }
         }
       },
       "countdownSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Format kustom",
           "settings": {
-            "placeholder": ""
+            "placeholder": "opsional"
           }
         },
         "endCountdownTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Waktu Selesai",
+          "placeholder": "Tanggal & waktu ISO 8601 atau RFC 2822"
         },
         "endText": {
-          "name": ""
+          "name": "Teks Akhir"
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "nilai tidak valid",
+          "name": "Teks Nilai Tidak Valid"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "tidak ada nilai yang ditemukan",
+          "name": "Tidak Ada Teks Nilai"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Cara menghitung waktu hitung mundur",
+          "name": "Perhitungan",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "Nilai pertama",
+              "label": "Pertama"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Nilai pertama yang bukan nol (juga tidak termasuk NaN)",
+              "label": "Pertama *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Nilai terakhir",
+              "label": "Terakhir"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Nilai terakhir yang bukan nol (juga tidak termasuk NaN)",
+              "label": "Terakhir *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Nilai maksimum",
+              "label": "Maksimum"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Nilai minimum",
+              "label": "Minimum"
             },
             "minFuture": {
-              "description": "",
-              "label": ""
+              "description": "Nilai minimum yang ada di masa depan",
+              "label": "Minimum Masa Depan"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Bidang",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Tidak ada bidang yang ditemukan"
           }
         },
         "source": {
           "options": {
             "input": {
-              "label": ""
+              "label": "Input"
             },
             "query": {
-              "label": ""
+              "label": "Kueri"
             }
           }
         }
       },
       "countupSettings": {
         "beginCountupTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Waktu Mulai",
+          "placeholder": "Tanggal & waktu ISO 8601 atau RFC 2822"
         },
         "beginText": {
-          "name": ""
+          "name": "Teks Mulai"
         },
         "customFormat": {
-          "name": "",
+          "name": "Format kustom",
           "settings": {
-            "placeholder": ""
+            "placeholder": "opsional"
           }
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "nilai tidak valid",
+          "name": "Teks Nilai Tidak Valid"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "tidak ada nilai yang ditemukan",
+          "name": "Tidak Ada Teks Nilai"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Cara menghitung waktu hitung maju",
+          "name": "Perhitungan",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "Nilai pertama",
+              "label": "Pertama"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Nilai pertama yang bukan nol (juga tidak termasuk NaN)",
+              "label": "Pertama *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Nilai terakhir",
+              "label": "Terakhir"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Nilai terakhir yang bukan nol (juga tidak termasuk NaN)",
+              "label": "Terakhir *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Nilai maksimum",
+              "label": "Maksimum"
             },
             "maxPast": {
-              "description": "",
-              "label": ""
+              "description": "Nilai maksimum yang ada di masa lampau",
+              "label": "Maksimum di Masa Lampau"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Nilai minimum",
+              "label": "Minimum"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Bidang",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Tidak ada bidang yang ditemukan"
           }
         },
         "source": {
-          "name": "",
+          "name": "Sumber",
           "options": {
             "input": {
-              "label": ""
+              "label": "Input"
             },
             "query": {
-              "label": ""
+              "label": "Kueri"
             }
           }
         }
       },
       "dateSettings": {
         "dateFormat": {
-          "name": "",
+          "name": "Format Tanggal",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Masukkan format tanggal"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Ukuran fon",
           "settings": {
-            "placeholder": ""
+            "placeholder": "format tanggal"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Ketebalan fon",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Tebal"
             },
             "normal": {
-              "label": ""
+              "label": "Normal"
             }
           }
         },
         "locale": {
-          "name": "",
+          "name": "Setelan Lokal",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Masukkan setelan lokal: de, fr, es, ... (default: en)"
           }
         },
         "showDate": {
-          "name": ""
+          "name": "Tampilkan Tanggal"
         }
       },
       "descriptionSettings": {
         "descriptionText": {
-          "name": "",
+          "name": "Deskripsi",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Masukkan deskripsi"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Ukuran fon",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Ukuran fon (misalnya 12 piksel)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Ketebalan fon",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Tebal"
             },
             "normal": {
-              "label": ""
+              "label": "Normal"
             }
           }
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "tidak ada deskripsi yang ditemukan",
+          "name": "Tidak Ada Teks Nilai"
         },
         "queryField": {
-          "name": "",
+          "name": "Bidang",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Tidak ada bidang yang ditemukan"
           }
         },
         "source": {
-          "name": "",
+          "name": "Sumber",
           "options": {
             "input": {
-              "label": ""
+              "label": "Input"
             },
             "none": {
-              "label": ""
+              "label": "Tidak ada"
             },
             "query": {
-              "label": ""
+              "label": "Kueri"
             }
           }
         }
       },
       "fontMono": {
-        "name": ""
+        "name": "Fon monospace"
       },
       "mode": {
-        "name": "",
+        "name": "Mode",
         "options": {
           "countdown": {
-            "label": ""
+            "label": "Hitungan mundur"
           },
           "countup": {
-            "label": ""
+            "label": "Hitungan naik"
           },
           "time": {
-            "label": ""
+            "label": "Waktu"
           }
         }
       },
       "refresh": {
-        "name": "",
+        "name": "Muat ulang",
         "options": {
           "dashboard": {
-            "label": ""
+            "label": "Dengan dasbor"
           },
           "sec": {
-            "label": ""
+            "label": "Setiap detik"
           }
         }
       },
       "source": {
-        "name": ""
+        "name": "Sumber"
       },
       "timeSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Format Waktu",
           "settings": {
-            "placeholder": ""
+            "placeholder": "format tanggal"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Ukuran fon",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Ukuran fon (misalnya 12 piksel)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Ketebalan fon",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Tebal"
             },
             "normal": {
-              "label": ""
+              "label": "Normal"
             }
           }
         }
       },
       "timezoneSettings": {
         "fontSize": {
-          "name": "",
+          "name": "Ukuran fon",
           "settings": {
-            "placeholder": ""
+            "placeholder": "ukuran fon"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Ketebalan fon",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Tebal"
             },
             "normal": {
-              "label": ""
+              "label": "Normal"
             }
           }
         },
         "options": {
           "browserTime": {
-            "label": ""
+            "label": "Waktu Browser"
           },
           "sameAsDashboard": {
-            "label": ""
+            "label": "Sama dengan Dasbor"
           }
         },
         "showTimezone": {
-          "name": ""
+          "name": "Tampilkan Zona Waktu"
         },
         "timezone": {
-          "name": ""
+          "name": "Zona waktu"
         },
         "zoneFormat": {
-          "name": "",
+          "name": "Format Tampilan",
           "options": {
             "abbv": {
-              "label": ""
+              "label": "Singkatan"
             },
             "name": {
-              "label": ""
+              "label": "Normal"
             },
             "nameOffset": {
-              "label": ""
+              "label": "Nama + Selisih waktu"
             },
             "offset": {
-              "label": ""
+              "label": "Selisih waktu"
             },
             "offsetAbbv": {
-              "label": ""
+              "label": "Selisih waktu + Singkatan"
             }
           }
         }

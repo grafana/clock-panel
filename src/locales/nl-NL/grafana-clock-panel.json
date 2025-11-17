@@ -2,382 +2,382 @@
   "ColorEditor": {
     "input": {
       "value": {
-        "placeholder": ""
+        "placeholder": "Kleur kiezen"
       }
     }
   },
   "components": {
     "RenderTime": {
       "getStrings": {
-        "days": "",
-        "hours": "",
-        "minutes": "",
-        "months": "",
-        "oneDay": "",
-        "oneHour": "",
-        "oneMinute": "",
-        "oneMonth": "",
-        "oneSecond": "",
-        "oneYear": "",
-        "seconds": "",
-        "years": ""
+        "days": "dagen",
+        "hours": "uur",
+        "minutes": "minuten",
+        "months": "maanden",
+        "oneDay": "1 dag",
+        "oneHour": "1 uur",
+        "oneMinute": "1 minuut",
+        "oneMonth": "1 maand",
+        "oneSecond": "1 seconde",
+        "oneYear": "1 jaar",
+        "seconds": "seconden",
+        "years": "jaar"
       }
     }
   },
   "module": {
     "ClockOptions": {
       "bgColor": {
-        "name": ""
+        "name": "Achtergrondkleur"
       },
       "clockType": {
-        "name": "",
+        "name": "Type klok",
         "options": {
           "custom": {
-            "label": ""
+            "label": "Aangepast"
           },
           "h12": {
-            "label": ""
+            "label": "12 uur"
           },
           "h24": {
-            "label": ""
+            "label": "24 uur"
           }
         }
       },
       "countdownSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Aangepaste indeling",
           "settings": {
-            "placeholder": ""
+            "placeholder": "optioneel"
           }
         },
         "endCountdownTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Eindtijd",
+          "placeholder": "ISO 8601 of RFC 2822 Datum tijd"
         },
         "endText": {
-          "name": ""
+          "name": "Eindtekst"
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "ongeldige waarde",
+          "name": "Ongeldige waarde tekst"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "geen waarde gevonden",
+          "name": "Geen waarde tekst"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Hoe de afteltijd te berekenen",
+          "name": "Berekening",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "Eerste waarde",
+              "label": "Eerste"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Eerste niet-nulwaarde (sluit ook NaN's uit)",
+              "label": "Eerste *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Laatste waarde",
+              "label": "Laatste"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Laatste niet-nulwaarde (sluit ook NaN's uit)",
+              "label": "Laatste *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Maximumwaarde",
+              "label": "Max"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Minimumwaarde",
+              "label": "Min"
             },
             "minFuture": {
-              "description": "",
-              "label": ""
+              "description": "Minimale waarde die in de toekomst ligt",
+              "label": "Min. toekomst"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Veld",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Geen velden gevonden"
           }
         },
         "source": {
           "options": {
             "input": {
-              "label": ""
+              "label": "Invoer"
             },
             "query": {
-              "label": ""
+              "label": "Query"
             }
           }
         }
       },
       "countupSettings": {
         "beginCountupTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Begintijd",
+          "placeholder": "ISO 8601 of RFC 2822 Datum tijd"
         },
         "beginText": {
-          "name": ""
+          "name": "Begin tekst"
         },
         "customFormat": {
-          "name": "",
+          "name": "Aangepaste indeling",
           "settings": {
-            "placeholder": ""
+            "placeholder": "optioneel"
           }
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "ongeldige waarde",
+          "name": "Ongeldige waarde tekst"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "geen waarde gevonden",
+          "name": "Geen waarde tekst"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Hoe de opgetelde tijd te berekenen",
+          "name": "Berekening",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "Eerste waarde",
+              "label": "Eerste"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Eerste niet-nulwaarde (sluit ook NaN's uit)",
+              "label": "Eerste *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Laatste waarde",
+              "label": "Laatste"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Laatste niet-nulwaarde (sluit ook NaN's uit)",
+              "label": "Laatste *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Maximumwaarde",
+              "label": "Max"
             },
             "maxPast": {
-              "description": "",
-              "label": ""
+              "description": "Maximale waarde die in het verleden ligt",
+              "label": "Max. verleden"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Minimumwaarde",
+              "label": "Min"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Veld",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Geen velden gevonden"
           }
         },
         "source": {
-          "name": "",
+          "name": "Bron",
           "options": {
             "input": {
-              "label": ""
+              "label": "Invoer"
             },
             "query": {
-              "label": ""
+              "label": "Query"
             }
           }
         }
       },
       "dateSettings": {
         "dateFormat": {
-          "name": "",
+          "name": "Datumnotatie",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Voer de datumnotatie in"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Lettergrootte",
           "settings": {
-            "placeholder": ""
+            "placeholder": "datumnotatie"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Letterdikte",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Vet"
             },
             "normal": {
-              "label": ""
+              "label": "Normaal"
             }
           }
         },
         "locale": {
-          "name": "",
+          "name": "Taalcode",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Voer taalcode in: de, fr, es, ... (standaard: en)"
           }
         },
         "showDate": {
-          "name": ""
+          "name": "Datum tonen"
         }
       },
       "descriptionSettings": {
         "descriptionText": {
-          "name": "",
+          "name": "Beschrijving",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Voer beschrijving in"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Lettergrootte",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Lettergrootte (bijv. 12px)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Letterdikte",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Vet"
             },
             "normal": {
-              "label": ""
+              "label": "Normaal"
             }
           }
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "geen beschrijving gevonden",
+          "name": "Geen waarde tekst"
         },
         "queryField": {
-          "name": "",
+          "name": "Veld",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Geen velden gevonden"
           }
         },
         "source": {
-          "name": "",
+          "name": "Bron",
           "options": {
             "input": {
-              "label": ""
+              "label": "Invoer"
             },
             "none": {
-              "label": ""
+              "label": "Geen"
             },
             "query": {
-              "label": ""
+              "label": "Query"
             }
           }
         }
       },
       "fontMono": {
-        "name": ""
+        "name": "Lettertype monospace"
       },
       "mode": {
-        "name": "",
+        "name": "Modus",
         "options": {
           "countdown": {
-            "label": ""
+            "label": "Aftellen"
           },
           "countup": {
-            "label": ""
+            "label": "Optellen"
           },
           "time": {
-            "label": ""
+            "label": "Tijd"
           }
         }
       },
       "refresh": {
-        "name": "",
+        "name": "Vernieuwen",
         "options": {
           "dashboard": {
-            "label": ""
+            "label": "Met het dashboard"
           },
           "sec": {
-            "label": ""
+            "label": "Elke seconde"
           }
         }
       },
       "source": {
-        "name": ""
+        "name": "Bron"
       },
       "timeSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Tijdformaat",
           "settings": {
-            "placeholder": ""
+            "placeholder": "datumnotatie"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Lettergrootte",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Lettergrootte (bijv. 12px)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Letterdikte",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Vet"
             },
             "normal": {
-              "label": ""
+              "label": "Normaal"
             }
           }
         }
       },
       "timezoneSettings": {
         "fontSize": {
-          "name": "",
+          "name": "Lettergrootte",
           "settings": {
-            "placeholder": ""
+            "placeholder": "lettergrootte"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Letterdikte",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Vet"
             },
             "normal": {
-              "label": ""
+              "label": "Normaal"
             }
           }
         },
         "options": {
           "browserTime": {
-            "label": ""
+            "label": "Browsertijd"
           },
           "sameAsDashboard": {
-            "label": ""
+            "label": "Hetzelfde als dashboard"
           }
         },
         "showTimezone": {
-          "name": ""
+          "name": "Tijdzone tonen"
         },
         "timezone": {
-          "name": ""
+          "name": "Tijdzone"
         },
         "zoneFormat": {
-          "name": "",
+          "name": "Weergaveformaat",
           "options": {
             "abbv": {
-              "label": ""
+              "label": "Afkorting"
             },
             "name": {
-              "label": ""
+              "label": "Normaal"
             },
             "nameOffset": {
-              "label": ""
+              "label": "Naam + offset"
             },
             "offset": {
-              "label": ""
+              "label": "Offset"
             },
             "offsetAbbv": {
-              "label": ""
+              "label": "Offset + afkorting"
             }
           }
         }

@@ -2,382 +2,382 @@
   "ColorEditor": {
     "input": {
       "value": {
-        "placeholder": ""
+        "placeholder": "Выберите цвет"
       }
     }
   },
   "components": {
     "RenderTime": {
       "getStrings": {
-        "days": "",
-        "hours": "",
-        "minutes": "",
-        "months": "",
-        "oneDay": "",
-        "oneHour": "",
-        "oneMinute": "",
-        "oneMonth": "",
-        "oneSecond": "",
-        "oneYear": "",
-        "seconds": "",
-        "years": ""
+        "days": "дн.",
+        "hours": "ч.",
+        "minutes": "мин.",
+        "months": "мес.",
+        "oneDay": "1 день",
+        "oneHour": "1 час",
+        "oneMinute": "1 минута",
+        "oneMonth": "1 месяц",
+        "oneSecond": "1 секунда",
+        "oneYear": "1 год",
+        "seconds": "cек.",
+        "years": "лет"
       }
     }
   },
   "module": {
     "ClockOptions": {
       "bgColor": {
-        "name": ""
+        "name": "Цвет фона"
       },
       "clockType": {
-        "name": "",
+        "name": "Формат часов",
         "options": {
           "custom": {
-            "label": ""
+            "label": "Пользовательский"
           },
           "h12": {
-            "label": ""
+            "label": "12 часов"
           },
           "h24": {
-            "label": ""
+            "label": "24 часа"
           }
         }
       },
       "countdownSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Пользовательский формат",
           "settings": {
-            "placeholder": ""
+            "placeholder": "необязательно"
           }
         },
         "endCountdownTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Время окончания",
+          "placeholder": "Дата и время в формате ISO 8601 или RFC 2822"
         },
         "endText": {
-          "name": ""
+          "name": "Текст после окончания"
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "недопустимое значение",
+          "name": "Текст при недопустимом значении"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "значение не найдено",
+          "name": "Текст при отсутствии значения"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Как рассчитать время обратного отсчета",
+          "name": "Расчет",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "Первое значение",
+              "label": "Первое"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Первое непустое значение (также исключаются нечисловые значения)",
+              "label": "Первое *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Последнее значение",
+              "label": "Последнее"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Последнее непустое значение (также исключаются нечисловые значения)",
+              "label": "Последнее *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Максимальное значение",
+              "label": "Макс."
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Минимальное значение",
+              "label": "Мин."
             },
             "minFuture": {
-              "description": "",
-              "label": ""
+              "description": "Минимальное значение в будущем",
+              "label": "Мин. будущее"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Поле",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Поля не найдены"
           }
         },
         "source": {
           "options": {
             "input": {
-              "label": ""
+              "label": "Ввод"
             },
             "query": {
-              "label": ""
+              "label": "Запрос"
             }
           }
         }
       },
       "countupSettings": {
         "beginCountupTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Время начала",
+          "placeholder": "Дата и время в формате ISO 8601 или RFC 2822"
         },
         "beginText": {
-          "name": ""
+          "name": "Текст перед началом"
         },
         "customFormat": {
-          "name": "",
+          "name": "Пользовательский формат",
           "settings": {
-            "placeholder": ""
+            "placeholder": "необязательно"
           }
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "недопустимое значение",
+          "name": "Текст при недопустимом значении"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "значение не найдено",
+          "name": "Текст при отсутствии значения"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Как рассчитать время прямого отсчета",
+          "name": "Расчет",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "Первое значение",
+              "label": "Первое"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Первое непустое значение (также исключаются нечисловые значения)",
+              "label": "Первое *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Последнее значение",
+              "label": "Последнее"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Последнее непустое значение (также исключаются нечисловые значения)",
+              "label": "Последнее *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Максимальное значение",
+              "label": "Макс."
             },
             "maxPast": {
-              "description": "",
-              "label": ""
+              "description": "Максимальное значение в прошлом",
+              "label": "Макс. прошлое"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Минимальное значение",
+              "label": "Мин."
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Поле",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Поля не найдены"
           }
         },
         "source": {
-          "name": "",
+          "name": "Источник",
           "options": {
             "input": {
-              "label": ""
+              "label": "Ввод"
             },
             "query": {
-              "label": ""
+              "label": "Запрос"
             }
           }
         }
       },
       "dateSettings": {
         "dateFormat": {
-          "name": "",
+          "name": "Формат даты",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Введите формат даты"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Размер шрифта",
           "settings": {
-            "placeholder": ""
+            "placeholder": "формат даты"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Толщина шрифта",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Жирный"
             },
             "normal": {
-              "label": ""
+              "label": "Нормальный"
             }
           }
         },
         "locale": {
-          "name": "",
+          "name": "Локаль",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Введите локаль: de, fr, es, ... (по умолчанию: en)"
           }
         },
         "showDate": {
-          "name": ""
+          "name": "Показать дату"
         }
       },
       "descriptionSettings": {
         "descriptionText": {
-          "name": "",
+          "name": "Описание",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Введите описание"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Размер шрифта",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Размер шрифта (например, 12px)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Толщина шрифта",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Жирный"
             },
             "normal": {
-              "label": ""
+              "label": "Нормальный"
             }
           }
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "описание не найдено",
+          "name": "Текст при отсутствии значения"
         },
         "queryField": {
-          "name": "",
+          "name": "Поле",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Поля не найдены"
           }
         },
         "source": {
-          "name": "",
+          "name": "Источник",
           "options": {
             "input": {
-              "label": ""
+              "label": "Ввод"
             },
             "none": {
-              "label": ""
+              "label": "Нет"
             },
             "query": {
-              "label": ""
+              "label": "Запрос"
             }
           }
         }
       },
       "fontMono": {
-        "name": ""
+        "name": "Моноширинный шрифт"
       },
       "mode": {
-        "name": "",
+        "name": "Режим",
         "options": {
           "countdown": {
-            "label": ""
+            "label": "Обратный отсчет"
           },
           "countup": {
-            "label": ""
+            "label": "Прямой отсчет"
           },
           "time": {
-            "label": ""
+            "label": "Время"
           }
         }
       },
       "refresh": {
-        "name": "",
+        "name": "Обновление",
         "options": {
           "dashboard": {
-            "label": ""
+            "label": "Вместе с дашбордом"
           },
           "sec": {
-            "label": ""
+            "label": "Каждую секунду"
           }
         }
       },
       "source": {
-        "name": ""
+        "name": "Источник"
       },
       "timeSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Формат времени",
           "settings": {
-            "placeholder": ""
+            "placeholder": "формат даты"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Размер шрифта",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Размер шрифта (например, 12px)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Толщина шрифта",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Жирный"
             },
             "normal": {
-              "label": ""
+              "label": "Нормальный"
             }
           }
         }
       },
       "timezoneSettings": {
         "fontSize": {
-          "name": "",
+          "name": "Размер шрифта",
           "settings": {
-            "placeholder": ""
+            "placeholder": "размер шрифта"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Толщина шрифта",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Жирный"
             },
             "normal": {
-              "label": ""
+              "label": "Нормальный"
             }
           }
         },
         "options": {
           "browserTime": {
-            "label": ""
+            "label": "Время браузера"
           },
           "sameAsDashboard": {
-            "label": ""
+            "label": "Одинаковое с дашбордом"
           }
         },
         "showTimezone": {
-          "name": ""
+          "name": "Показать часовой пояс"
         },
         "timezone": {
-          "name": ""
+          "name": "Часовой пояс"
         },
         "zoneFormat": {
-          "name": "",
+          "name": "Формат отображения",
           "options": {
             "abbv": {
-              "label": ""
+              "label": "Аббревиатура"
             },
             "name": {
-              "label": ""
+              "label": "Нормальный"
             },
             "nameOffset": {
-              "label": ""
+              "label": "Название + смещение"
             },
             "offset": {
-              "label": ""
+              "label": "Смещение"
             },
             "offsetAbbv": {
-              "label": ""
+              "label": "Смещение + аббревиатура"
             }
           }
         }

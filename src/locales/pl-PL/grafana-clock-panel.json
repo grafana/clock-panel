@@ -2,382 +2,382 @@
   "ColorEditor": {
     "input": {
       "value": {
-        "placeholder": ""
+        "placeholder": "Wybierz kolor"
       }
     }
   },
   "components": {
     "RenderTime": {
       "getStrings": {
-        "days": "",
-        "hours": "",
-        "minutes": "",
-        "months": "",
-        "oneDay": "",
-        "oneHour": "",
-        "oneMinute": "",
-        "oneMonth": "",
-        "oneSecond": "",
-        "oneYear": "",
-        "seconds": "",
-        "years": ""
+        "days": "dni",
+        "hours": "godz.",
+        "minutes": "min",
+        "months": "mies.",
+        "oneDay": "1 dzień",
+        "oneHour": "1 godzina",
+        "oneMinute": "1 minuta",
+        "oneMonth": "1 miesiąc",
+        "oneSecond": "1 sekunda",
+        "oneYear": "1 rok",
+        "seconds": "s",
+        "years": "lat(a)"
       }
     }
   },
   "module": {
     "ClockOptions": {
       "bgColor": {
-        "name": ""
+        "name": "Kolor tła"
       },
       "clockType": {
-        "name": "",
+        "name": "Typ zegara",
         "options": {
           "custom": {
-            "label": ""
+            "label": "Niestandardowy"
           },
           "h12": {
-            "label": ""
+            "label": "12-godzinny"
           },
           "h24": {
-            "label": ""
+            "label": "24-godzinny"
           }
         }
       },
       "countdownSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Format niestandardowy",
           "settings": {
-            "placeholder": ""
+            "placeholder": "opcjonalne"
           }
         },
         "endCountdownTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Czas zakończenia",
+          "placeholder": "Data i godzina zgodnie z normą ISO 8601 lub RFC 2822"
         },
         "endText": {
-          "name": ""
+          "name": "Tekst końcowy"
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "nieprawidłowa wartość",
+          "name": "Tekst dotyczący nieprawidłowej wartości"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "nie znaleziono wartości",
+          "name": "Tekst dotyczący braku wartości"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Jak obliczyć czas odliczania",
+          "name": "Obliczenie",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "Pierwsza wartość",
+              "label": "Pierwsza"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Pierwsza wartość niezerowa (wyklucza również NaN)",
+              "label": "Pierwsza *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Ostatnia wartość",
+              "label": "Ostatnia"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Ostatnia wartość niezerowa (wyklucza również NaN)",
+              "label": "Ostatnia *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Wartość maksymalna",
+              "label": "Maks."
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Wartość minimalna",
+              "label": "Min."
             },
             "minFuture": {
-              "description": "",
-              "label": ""
+              "description": "Wartość minimalna przypadająca w przyszłości",
+              "label": "Min. w przyszłości"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Pole",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Nie znaleziono pól"
           }
         },
         "source": {
           "options": {
             "input": {
-              "label": ""
+              "label": "Dane wejściowe"
             },
             "query": {
-              "label": ""
+              "label": "Zapytanie"
             }
           }
         }
       },
       "countupSettings": {
         "beginCountupTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Czas rozpoczęcia",
+          "placeholder": "Data i godzina zgodnie z normą ISO 8601 lub RFC 2822"
         },
         "beginText": {
-          "name": ""
+          "name": "Tekst początkowy"
         },
         "customFormat": {
-          "name": "",
+          "name": "Format niestandardowy",
           "settings": {
-            "placeholder": ""
+            "placeholder": "opcjonalne"
           }
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "nieprawidłowa wartość",
+          "name": "Tekst dotyczący nieprawidłowej wartości"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "nie znaleziono wartości",
+          "name": "Tekst dotyczący braku wartości"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Jak obliczyć czas zliczania",
+          "name": "Obliczenie",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "Pierwsza wartość",
+              "label": "Pierwsza"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Pierwsza wartość niezerowa (wyklucza również NaN)",
+              "label": "Pierwsza *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Ostatnia wartość",
+              "label": "Ostatnia"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Ostatnia wartość niezerowa (wyklucza również NaN)",
+              "label": "Ostatnia *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Wartość maksymalna",
+              "label": "Maks."
             },
             "maxPast": {
-              "description": "",
-              "label": ""
+              "description": "Wartość maksymalna przypadająca w przeszłości",
+              "label": "Maks. w przeszłości"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Wartość minimalna",
+              "label": "Min."
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Pole",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Nie znaleziono pól"
           }
         },
         "source": {
-          "name": "",
+          "name": "Źródło",
           "options": {
             "input": {
-              "label": ""
+              "label": "Dane wejściowe"
             },
             "query": {
-              "label": ""
+              "label": "Zapytanie"
             }
           }
         }
       },
       "dateSettings": {
         "dateFormat": {
-          "name": "",
+          "name": "Format daty",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Wprowadź format daty"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Rozmiar czcionki",
           "settings": {
-            "placeholder": ""
+            "placeholder": "format daty"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Grubość czcionki",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Pogrubiona"
             },
             "normal": {
-              "label": ""
+              "label": "Normalna"
             }
           }
         },
         "locale": {
-          "name": "",
+          "name": "Ustawienia regionalne",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Podaj ustawienia regionalne: de, fr, es itp. (domyślnie: en)"
           }
         },
         "showDate": {
-          "name": ""
+          "name": "Pokaż datę"
         }
       },
       "descriptionSettings": {
         "descriptionText": {
-          "name": "",
+          "name": "Opis",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Wprowadź opis"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Rozmiar czcionki",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Rozmiar czcionki (np. 12px)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Grubość czcionki",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Pogrubiona"
             },
             "normal": {
-              "label": ""
+              "label": "Normalna"
             }
           }
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "nie znaleziono opisu",
+          "name": "Tekst dotyczący braku wartości"
         },
         "queryField": {
-          "name": "",
+          "name": "Pole",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Nie znaleziono pól"
           }
         },
         "source": {
-          "name": "",
+          "name": "Źródło",
           "options": {
             "input": {
-              "label": ""
+              "label": "Dane wejściowe"
             },
             "none": {
-              "label": ""
+              "label": "Brak"
             },
             "query": {
-              "label": ""
+              "label": "Zapytanie"
             }
           }
         }
       },
       "fontMono": {
-        "name": ""
+        "name": "Czcionka o stałej szerokości"
       },
       "mode": {
-        "name": "",
+        "name": "Tryb",
         "options": {
           "countdown": {
-            "label": ""
+            "label": "Odliczanie"
           },
           "countup": {
-            "label": ""
+            "label": "Zliczanie"
           },
           "time": {
-            "label": ""
+            "label": "Czas"
           }
         }
       },
       "refresh": {
-        "name": "",
+        "name": "Odśwież",
         "options": {
           "dashboard": {
-            "label": ""
+            "label": "Z pulpitem"
           },
           "sec": {
-            "label": ""
+            "label": "Co sekundę"
           }
         }
       },
       "source": {
-        "name": ""
+        "name": "Źródło"
       },
       "timeSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Format czasu",
           "settings": {
-            "placeholder": ""
+            "placeholder": "format daty"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Rozmiar czcionki",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Rozmiar czcionki (np. 12px)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Grubość czcionki",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Pogrubiona"
             },
             "normal": {
-              "label": ""
+              "label": "Normalna"
             }
           }
         }
       },
       "timezoneSettings": {
         "fontSize": {
-          "name": "",
+          "name": "Rozmiar czcionki",
           "settings": {
-            "placeholder": ""
+            "placeholder": "rozmiar czcionki"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Grubość czcionki",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Pogrubiona"
             },
             "normal": {
-              "label": ""
+              "label": "Normalna"
             }
           }
         },
         "options": {
           "browserTime": {
-            "label": ""
+            "label": "Czas przeglądarki"
           },
           "sameAsDashboard": {
-            "label": ""
+            "label": "Taki sam jak czas pulpitu"
           }
         },
         "showTimezone": {
-          "name": ""
+          "name": "Pokaż strefę czasową"
         },
         "timezone": {
-          "name": ""
+          "name": "Strefa czasowa"
         },
         "zoneFormat": {
-          "name": "",
+          "name": "Format wyświetlania",
           "options": {
             "abbv": {
-              "label": ""
+              "label": "Skrót"
             },
             "name": {
-              "label": ""
+              "label": "Normalna"
             },
             "nameOffset": {
-              "label": ""
+              "label": "Nazwa + przesunięcie"
             },
             "offset": {
-              "label": ""
+              "label": "Przesunięcie"
             },
             "offsetAbbv": {
-              "label": ""
+              "label": "Przesunięcie + skrót"
             }
           }
         }
