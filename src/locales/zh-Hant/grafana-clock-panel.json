@@ -2,382 +2,382 @@
   "ColorEditor": {
     "input": {
       "value": {
-        "placeholder": ""
+        "placeholder": "選擇顏色"
       }
     }
   },
   "components": {
     "RenderTime": {
       "getStrings": {
-        "days": "",
-        "hours": "",
-        "minutes": "",
-        "months": "",
-        "oneDay": "",
-        "oneHour": "",
-        "oneMinute": "",
-        "oneMonth": "",
-        "oneSecond": "",
-        "oneYear": "",
-        "seconds": "",
-        "years": ""
+        "days": "天",
+        "hours": "小時",
+        "minutes": "分鐘",
+        "months": "個月",
+        "oneDay": "1 天",
+        "oneHour": "1 小時",
+        "oneMinute": "1 分鐘",
+        "oneMonth": "1 個月",
+        "oneSecond": "1 秒",
+        "oneYear": "1 年",
+        "seconds": "秒",
+        "years": "年"
       }
     }
   },
   "module": {
     "ClockOptions": {
       "bgColor": {
-        "name": ""
+        "name": "背景顏色"
       },
       "clockType": {
-        "name": "",
+        "name": "時鐘類型",
         "options": {
           "custom": {
-            "label": ""
+            "label": "自訂"
           },
           "h12": {
-            "label": ""
+            "label": "12 小時"
           },
           "h24": {
-            "label": ""
+            "label": "24 小時"
           }
         }
       },
       "countdownSettings": {
         "customFormat": {
-          "name": "",
+          "name": "自訂格式",
           "settings": {
-            "placeholder": ""
+            "placeholder": "選填"
           }
         },
         "endCountdownTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "結束時間",
+          "placeholder": "ISO 8601 或 RFC 2822 日期時間"
         },
         "endText": {
-          "name": ""
+          "name": "結束文字"
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "無效值",
+          "name": "無效值文字"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "找不到值",
+          "name": "無值文字"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "如何計算倒數時間",
+          "name": "計算",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "第一項數值",
+              "label": "第一"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "第一個非空值（亦排除 NaN）",
+              "label": "第一 *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "最後一個值",
+              "label": "最後"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "最後一個非空值（亦排除 NaN）",
+              "label": "最後 *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "最大值",
+              "label": "最大"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "最小值",
+              "label": "最小"
             },
             "minFuture": {
-              "description": "",
-              "label": ""
+              "description": "未來的最小值",
+              "label": "未來最小值"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "欄位",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "未找到欄位"
           }
         },
         "source": {
           "options": {
             "input": {
-              "label": ""
+              "label": "輸入"
             },
             "query": {
-              "label": ""
+              "label": "查詢"
             }
           }
         }
       },
       "countupSettings": {
         "beginCountupTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "開始時間",
+          "placeholder": "ISO 8601 或 RFC 2822 日期時間"
         },
         "beginText": {
-          "name": ""
+          "name": "開始文字"
         },
         "customFormat": {
-          "name": "",
+          "name": "自訂格式",
           "settings": {
-            "placeholder": ""
+            "placeholder": "選填"
           }
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "無效值",
+          "name": "無效值文字"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "找不到值",
+          "name": "無值文字"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "如何計算正數時間",
+          "name": "計算",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "第一項數值",
+              "label": "第一"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "第一個非空值（亦排除 NaN）",
+              "label": "第一 *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "最後一個值",
+              "label": "最後"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "最後一個非空值（亦排除 NaN）",
+              "label": "最後 *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "最大值",
+              "label": "最大"
             },
             "maxPast": {
-              "description": "",
-              "label": ""
+              "description": "過去的最大值",
+              "label": "過去最大"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "最小值",
+              "label": "最小"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "欄位",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "未找到欄位"
           }
         },
         "source": {
-          "name": "",
+          "name": "來源",
           "options": {
             "input": {
-              "label": ""
+              "label": "輸入"
             },
             "query": {
-              "label": ""
+              "label": "查詢"
             }
           }
         }
       },
       "dateSettings": {
         "dateFormat": {
-          "name": "",
+          "name": "日期格式",
           "settings": {
-            "placeholder": ""
+            "placeholder": "輸入日期格式"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "字型大小",
           "settings": {
-            "placeholder": ""
+            "placeholder": "日期格式"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "字型粗細",
           "options": {
             "bold": {
-              "label": ""
+              "label": "粗體"
             },
             "normal": {
-              "label": ""
+              "label": "一般"
             }
           }
         },
         "locale": {
-          "name": "",
+          "name": "地區",
           "settings": {
-            "placeholder": ""
+            "placeholder": "輸入地區設定：de、fr、es、...（預設：en）"
           }
         },
         "showDate": {
-          "name": ""
+          "name": "顯示日期"
         }
       },
       "descriptionSettings": {
         "descriptionText": {
-          "name": "",
+          "name": "描述",
           "settings": {
-            "placeholder": ""
+            "placeholder": "輸入描述"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "字型大小",
           "settings": {
-            "placeholder": ""
+            "placeholder": "字型大小（例如 12px）"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "字型粗細",
           "options": {
             "bold": {
-              "label": ""
+              "label": "粗體"
             },
             "normal": {
-              "label": ""
+              "label": "一般"
             }
           }
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "找不到描述",
+          "name": "無值文字"
         },
         "queryField": {
-          "name": "",
+          "name": "欄位",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "未找到欄位"
           }
         },
         "source": {
-          "name": "",
+          "name": "來源",
           "options": {
             "input": {
-              "label": ""
+              "label": "輸入"
             },
             "none": {
-              "label": ""
+              "label": "無"
             },
             "query": {
-              "label": ""
+              "label": "查詢"
             }
           }
         }
       },
       "fontMono": {
-        "name": ""
+        "name": "等寬字型"
       },
       "mode": {
-        "name": "",
+        "name": "模式",
         "options": {
           "countdown": {
-            "label": ""
+            "label": "倒數"
           },
           "countup": {
-            "label": ""
+            "label": "正數"
           },
           "time": {
-            "label": ""
+            "label": "時間"
           }
         }
       },
       "refresh": {
-        "name": "",
+        "name": "重新整理",
         "options": {
           "dashboard": {
-            "label": ""
+            "label": "使用儀表板"
           },
           "sec": {
-            "label": ""
+            "label": "每秒"
           }
         }
       },
       "source": {
-        "name": ""
+        "name": "來源"
       },
       "timeSettings": {
         "customFormat": {
-          "name": "",
+          "name": "時間格式",
           "settings": {
-            "placeholder": ""
+            "placeholder": "日期格式"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "字型大小",
           "settings": {
-            "placeholder": ""
+            "placeholder": "字型大小（例如 12px）"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "字型粗細",
           "options": {
             "bold": {
-              "label": ""
+              "label": "粗體"
             },
             "normal": {
-              "label": ""
+              "label": "一般"
             }
           }
         }
       },
       "timezoneSettings": {
         "fontSize": {
-          "name": "",
+          "name": "字型大小",
           "settings": {
-            "placeholder": ""
+            "placeholder": "字型大小"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "字型粗細",
           "options": {
             "bold": {
-              "label": ""
+              "label": "粗體"
             },
             "normal": {
-              "label": ""
+              "label": "一般"
             }
           }
         },
         "options": {
           "browserTime": {
-            "label": ""
+            "label": "瀏覽器時間"
           },
           "sameAsDashboard": {
-            "label": ""
+            "label": "與儀表板相同"
           }
         },
         "showTimezone": {
-          "name": ""
+          "name": "顯示時區"
         },
         "timezone": {
-          "name": ""
+          "name": "時區"
         },
         "zoneFormat": {
-          "name": "",
+          "name": "顯示格式",
           "options": {
             "abbv": {
-              "label": ""
+              "label": "縮寫"
             },
             "name": {
-              "label": ""
+              "label": "一般"
             },
             "nameOffset": {
-              "label": ""
+              "label": "名稱 + 位移量"
             },
             "offset": {
-              "label": ""
+              "label": "位移量"
             },
             "offsetAbbv": {
-              "label": ""
+              "label": "位移量 + 縮寫"
             }
           }
         }

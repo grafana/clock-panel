@@ -2,382 +2,382 @@
   "ColorEditor": {
     "input": {
       "value": {
-        "placeholder": ""
+        "placeholder": "Renk Seçin"
       }
     }
   },
   "components": {
     "RenderTime": {
       "getStrings": {
-        "days": "",
-        "hours": "",
-        "minutes": "",
-        "months": "",
-        "oneDay": "",
-        "oneHour": "",
-        "oneMinute": "",
-        "oneMonth": "",
-        "oneSecond": "",
-        "oneYear": "",
-        "seconds": "",
-        "years": ""
+        "days": "gün",
+        "hours": "saat",
+        "minutes": "dakika",
+        "months": "ay",
+        "oneDay": "1 gün",
+        "oneHour": "1 saat",
+        "oneMinute": "1 dakika",
+        "oneMonth": "1 ay",
+        "oneSecond": "1 saniye",
+        "oneYear": "1 yıl",
+        "seconds": "saniye",
+        "years": "yıl"
       }
     }
   },
   "module": {
     "ClockOptions": {
       "bgColor": {
-        "name": ""
+        "name": "Arka Plan Rengi"
       },
       "clockType": {
-        "name": "",
+        "name": "Saat Biçimi",
         "options": {
           "custom": {
-            "label": ""
+            "label": "Özel"
           },
           "h12": {
-            "label": ""
+            "label": "12 Saat"
           },
           "h24": {
-            "label": ""
+            "label": "24 Saat"
           }
         }
       },
       "countdownSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Özel biçim",
           "settings": {
-            "placeholder": ""
+            "placeholder": "isteğe bağlı"
           }
         },
         "endCountdownTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Bitiş Zamanı",
+          "placeholder": "ISO 8601 veya RFC 2822 tarih ve saat biçimi"
         },
         "endText": {
-          "name": ""
+          "name": "Bitiş Metni"
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "geçersiz değer",
+          "name": "Geçersiz Değer Metni"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "değer bulunamadı",
+          "name": "Değer Yok Metni"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Geri sayım süresinin hesaplanması",
+          "name": "Hesaplama",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "İlk değer",
+              "label": "İlk"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "İlk boş olmayan değer (NaN'ler de hariç tutulur)",
+              "label": "İlk *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Son değer",
+              "label": "Son"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Son boş olmayan değer (NaN'ler de hariç tutulur)",
+              "label": "Son *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Maksimum değer",
+              "label": "Maks."
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Minimum değer",
+              "label": "Min."
             },
             "minFuture": {
-              "description": "",
-              "label": ""
+              "description": "Gelecekteki minimum değer",
+              "label": "Gelecekteki min."
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Alan",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Hiçbir alan bulunamadı"
           }
         },
         "source": {
           "options": {
             "input": {
-              "label": ""
+              "label": "Girdi"
             },
             "query": {
-              "label": ""
+              "label": "Sorgu"
             }
           }
         }
       },
       "countupSettings": {
         "beginCountupTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Başlama Zamanı",
+          "placeholder": "ISO 8601 veya RFC 2822 tarih ve saat biçimi"
         },
         "beginText": {
-          "name": ""
+          "name": "Başlangıç Metni"
         },
         "customFormat": {
-          "name": "",
+          "name": "Özel biçim",
           "settings": {
-            "placeholder": ""
+            "placeholder": "isteğe bağlı"
           }
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "geçersiz değer",
+          "name": "Geçersiz Değer Metni"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "değer bulunamadı",
+          "name": "Değer Yok Metni"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "İleri sayım süresinin hesaplanması",
+          "name": "Hesaplama",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "İlk değer",
+              "label": "İlk"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "İlk boş olmayan değer (NaN'ler de hariç tutulur)",
+              "label": "İlk *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Son değer",
+              "label": "Son"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Son boş olmayan değer (NaN'ler de hariç tutulur)",
+              "label": "Son *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Maksimum değer",
+              "label": "Maks."
             },
             "maxPast": {
-              "description": "",
-              "label": ""
+              "description": "Geçmişteki maksimum değer",
+              "label": "Geçmişteki maks."
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Minimum değer",
+              "label": "Min."
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Alan",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Hiçbir alan bulunamadı"
           }
         },
         "source": {
-          "name": "",
+          "name": "Kaynak",
           "options": {
             "input": {
-              "label": ""
+              "label": "Girdi"
             },
             "query": {
-              "label": ""
+              "label": "Sorgu"
             }
           }
         }
       },
       "dateSettings": {
         "dateFormat": {
-          "name": "",
+          "name": "Tarih Biçimi",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Tarih biçimini girin"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Yazı tipi boyutu",
           "settings": {
-            "placeholder": ""
+            "placeholder": "tarih biçimi"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Yazı tipi kalınlığı",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Kalın"
             },
             "normal": {
-              "label": ""
+              "label": "Normal"
             }
           }
         },
         "locale": {
-          "name": "",
+          "name": "Yerel ayar",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Yerel ayarı girin: de, fr, es, ... (varsayılan: en)"
           }
         },
         "showDate": {
-          "name": ""
+          "name": "Tarihi Göster"
         }
       },
       "descriptionSettings": {
         "descriptionText": {
-          "name": "",
+          "name": "Açıklama",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Açıklama girin"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Yazı tipi boyutu",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Yazı tipi boyutu (ör. 12 piksel)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Yazı tipi kalınlığı",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Kalın"
             },
             "normal": {
-              "label": ""
+              "label": "Normal"
             }
           }
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "açıklama bulunamadı",
+          "name": "Değer Yok Metni"
         },
         "queryField": {
-          "name": "",
+          "name": "Alan",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Hiçbir alan bulunamadı"
           }
         },
         "source": {
-          "name": "",
+          "name": "Kaynak",
           "options": {
             "input": {
-              "label": ""
+              "label": "Girdi"
             },
             "none": {
-              "label": ""
+              "label": "Yok"
             },
             "query": {
-              "label": ""
+              "label": "Sorgu"
             }
           }
         }
       },
       "fontMono": {
-        "name": ""
+        "name": "Tek aralıklı yazı tipi"
       },
       "mode": {
-        "name": "",
+        "name": "Mod",
         "options": {
           "countdown": {
-            "label": ""
+            "label": "Geri sayım"
           },
           "countup": {
-            "label": ""
+            "label": "İleri sayım"
           },
           "time": {
-            "label": ""
+            "label": "Zaman"
           }
         }
       },
       "refresh": {
-        "name": "",
+        "name": "Yenile",
         "options": {
           "dashboard": {
-            "label": ""
+            "label": "Pano ile"
           },
           "sec": {
-            "label": ""
+            "label": "Her saniye"
           }
         }
       },
       "source": {
-        "name": ""
+        "name": "Kaynak"
       },
       "timeSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Saat Biçimi",
           "settings": {
-            "placeholder": ""
+            "placeholder": "tarih biçimi"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Yazı tipi boyutu",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Yazı tipi boyutu (ör. 12 piksel)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Yazı tipi kalınlığı",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Kalın"
             },
             "normal": {
-              "label": ""
+              "label": "Normal"
             }
           }
         }
       },
       "timezoneSettings": {
         "fontSize": {
-          "name": "",
+          "name": "Yazı tipi boyutu",
           "settings": {
-            "placeholder": ""
+            "placeholder": "yazı tipi boyutu"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Yazı tipi kalınlığı",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Kalın"
             },
             "normal": {
-              "label": ""
+              "label": "Normal"
             }
           }
         },
         "options": {
           "browserTime": {
-            "label": ""
+            "label": "Tarayıcı Saati"
           },
           "sameAsDashboard": {
-            "label": ""
+            "label": "Pano ile aynı"
           }
         },
         "showTimezone": {
-          "name": ""
+          "name": "Saat Dilimini Göster"
         },
         "timezone": {
-          "name": ""
+          "name": "Saat Dilimi"
         },
         "zoneFormat": {
-          "name": "",
+          "name": "Görüntüleme Biçimi",
           "options": {
             "abbv": {
-              "label": ""
+              "label": "Kısaltma"
             },
             "name": {
-              "label": ""
+              "label": "Normal"
             },
             "nameOffset": {
-              "label": ""
+              "label": "Ad + Fark"
             },
             "offset": {
-              "label": ""
+              "label": "Fark"
             },
             "offsetAbbv": {
-              "label": ""
+              "label": "Fark + Kısaltma"
             }
           }
         }

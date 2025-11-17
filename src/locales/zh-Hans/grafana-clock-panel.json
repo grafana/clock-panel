@@ -2,382 +2,382 @@
   "ColorEditor": {
     "input": {
       "value": {
-        "placeholder": ""
+        "placeholder": "选择颜色"
       }
     }
   },
   "components": {
     "RenderTime": {
       "getStrings": {
-        "days": "",
-        "hours": "",
-        "minutes": "",
-        "months": "",
-        "oneDay": "",
-        "oneHour": "",
-        "oneMinute": "",
-        "oneMonth": "",
-        "oneSecond": "",
-        "oneYear": "",
-        "seconds": "",
-        "years": ""
+        "days": "天",
+        "hours": "小时",
+        "minutes": "分钟",
+        "months": "月",
+        "oneDay": "1 天",
+        "oneHour": "1 小时",
+        "oneMinute": "1 分钟",
+        "oneMonth": "1 个月",
+        "oneSecond": "1 秒",
+        "oneYear": "1 年",
+        "seconds": "秒",
+        "years": "年"
       }
     }
   },
   "module": {
     "ClockOptions": {
       "bgColor": {
-        "name": ""
+        "name": "背景颜色"
       },
       "clockType": {
-        "name": "",
+        "name": "时钟类型",
         "options": {
           "custom": {
-            "label": ""
+            "label": "自定义"
           },
           "h12": {
-            "label": ""
+            "label": "12 小时"
           },
           "h24": {
-            "label": ""
+            "label": "24 小时"
           }
         }
       },
       "countdownSettings": {
         "customFormat": {
-          "name": "",
+          "name": "自定义格式",
           "settings": {
-            "placeholder": ""
+            "placeholder": "可选"
           }
         },
         "endCountdownTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "结束时间",
+          "placeholder": "ISO 8601 或 RFC 2822 日期时间"
         },
         "endText": {
-          "name": ""
+          "name": "结束文本"
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "无效值",
+          "name": "无效值文本"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "未找到值",
+          "name": "无值文本"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "如何计算倒计时时间",
+          "name": "计算",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "第一个值",
+              "label": "第一个"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "第一个非空值（也不包括NaNs）",
+              "label": "第一个*"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "最后一个值",
+              "label": "最后一个"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "最后一个非空值（也不包括NaNs）",
+              "label": "最后一个*"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "最大值",
+              "label": "最大"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "最小值",
+              "label": "最小"
             },
             "minFuture": {
-              "description": "",
-              "label": ""
+              "description": "未来的最小值",
+              "label": "最小未来"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "字段",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "未找到字段"
           }
         },
         "source": {
           "options": {
             "input": {
-              "label": ""
+              "label": "输入"
             },
             "query": {
-              "label": ""
+              "label": "查询"
             }
           }
         }
       },
       "countupSettings": {
         "beginCountupTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "开始时间",
+          "placeholder": "ISO 8601 或 RFC 2822 日期时间"
         },
         "beginText": {
-          "name": ""
+          "name": "开始文本"
         },
         "customFormat": {
-          "name": "",
+          "name": "自定义格式",
           "settings": {
-            "placeholder": ""
+            "placeholder": "可选"
           }
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "无效值",
+          "name": "无效值文本"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "未找到值",
+          "name": "无值文本"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "如何计算正计时时间",
+          "name": "计算",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "第一个值",
+              "label": "第一个"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "第一个非空值（也不包括NaNs）",
+              "label": "第一个*"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "最后一个值",
+              "label": "最后一个"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "最后一个非空值（也不包括NaNs）",
+              "label": "最后一个*"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "最大值",
+              "label": "最大"
             },
             "maxPast": {
-              "description": "",
-              "label": ""
+              "description": "过去的最大值",
+              "label": "最大过去"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "最小值",
+              "label": "最小"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "字段",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "未找到字段"
           }
         },
         "source": {
-          "name": "",
+          "name": "来源",
           "options": {
             "input": {
-              "label": ""
+              "label": "输入"
             },
             "query": {
-              "label": ""
+              "label": "查询"
             }
           }
         }
       },
       "dateSettings": {
         "dateFormat": {
-          "name": "",
+          "name": "日期格式",
           "settings": {
-            "placeholder": ""
+            "placeholder": "输入日期格式"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "字体大小",
           "settings": {
-            "placeholder": ""
+            "placeholder": "日期格式"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "字体粗细",
           "options": {
             "bold": {
-              "label": ""
+              "label": "粗体"
             },
             "normal": {
-              "label": ""
+              "label": "正常"
             }
           }
         },
         "locale": {
-          "name": "",
+          "name": "语言环境",
           "settings": {
-            "placeholder": ""
+            "placeholder": "输入语言环境：德语、法语、西班牙语、......（默认：英语）"
           }
         },
         "showDate": {
-          "name": ""
+          "name": "显示日期"
         }
       },
       "descriptionSettings": {
         "descriptionText": {
-          "name": "",
+          "name": "描述",
           "settings": {
-            "placeholder": ""
+            "placeholder": "输入描述"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "字体大小",
           "settings": {
-            "placeholder": ""
+            "placeholder": "字体大小（例如12px）"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "字体粗细",
           "options": {
             "bold": {
-              "label": ""
+              "label": "粗体"
             },
             "normal": {
-              "label": ""
+              "label": "正常"
             }
           }
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "未找到描述",
+          "name": "无值文本"
         },
         "queryField": {
-          "name": "",
+          "name": "字段",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "未找到字段"
           }
         },
         "source": {
-          "name": "",
+          "name": "来源",
           "options": {
             "input": {
-              "label": ""
+              "label": "输入"
             },
             "none": {
-              "label": ""
+              "label": "无"
             },
             "query": {
-              "label": ""
+              "label": "查询"
             }
           }
         }
       },
       "fontMono": {
-        "name": ""
+        "name": "字体等宽"
       },
       "mode": {
-        "name": "",
+        "name": "模式",
         "options": {
           "countdown": {
-            "label": ""
+            "label": "倒计时"
           },
           "countup": {
-            "label": ""
+            "label": "正计时"
           },
           "time": {
-            "label": ""
+            "label": "时间"
           }
         }
       },
       "refresh": {
-        "name": "",
+        "name": "刷新",
         "options": {
           "dashboard": {
-            "label": ""
+            "label": "使用仪表板"
           },
           "sec": {
-            "label": ""
+            "label": "每秒"
           }
         }
       },
       "source": {
-        "name": ""
+        "name": "来源"
       },
       "timeSettings": {
         "customFormat": {
-          "name": "",
+          "name": "时间格式",
           "settings": {
-            "placeholder": ""
+            "placeholder": "日期格式"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "字体大小",
           "settings": {
-            "placeholder": ""
+            "placeholder": "字体大小（例如12px）"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "字体粗细",
           "options": {
             "bold": {
-              "label": ""
+              "label": "粗体"
             },
             "normal": {
-              "label": ""
+              "label": "正常"
             }
           }
         }
       },
       "timezoneSettings": {
         "fontSize": {
-          "name": "",
+          "name": "字体大小",
           "settings": {
-            "placeholder": ""
+            "placeholder": "字体大小"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "字体粗细",
           "options": {
             "bold": {
-              "label": ""
+              "label": "粗体"
             },
             "normal": {
-              "label": ""
+              "label": "正常"
             }
           }
         },
         "options": {
           "browserTime": {
-            "label": ""
+            "label": "浏览器时间"
           },
           "sameAsDashboard": {
-            "label": ""
+            "label": "与仪表板相同"
           }
         },
         "showTimezone": {
-          "name": ""
+          "name": "显示时区"
         },
         "timezone": {
-          "name": ""
+          "name": "时区"
         },
         "zoneFormat": {
-          "name": "",
+          "name": "显示格式",
           "options": {
             "abbv": {
-              "label": ""
+              "label": "缩写"
             },
             "name": {
-              "label": ""
+              "label": "正常"
             },
             "nameOffset": {
-              "label": ""
+              "label": "名称 + 偏移"
             },
             "offset": {
-              "label": ""
+              "label": "偏移"
             },
             "offsetAbbv": {
-              "label": ""
+              "label": "偏移 + 缩写"
             }
           }
         }

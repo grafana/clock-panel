@@ -2,382 +2,382 @@
   "ColorEditor": {
     "input": {
       "value": {
-        "placeholder": ""
+        "placeholder": "Scegli colore"
       }
     }
   },
   "components": {
     "RenderTime": {
       "getStrings": {
-        "days": "",
-        "hours": "",
-        "minutes": "",
-        "months": "",
-        "oneDay": "",
-        "oneHour": "",
-        "oneMinute": "",
-        "oneMonth": "",
-        "oneSecond": "",
-        "oneYear": "",
-        "seconds": "",
-        "years": ""
+        "days": "giorni",
+        "hours": "ore",
+        "minutes": "minuti",
+        "months": "mesi",
+        "oneDay": "1 giorno",
+        "oneHour": "1 ora",
+        "oneMinute": "1 minuto",
+        "oneMonth": "1 mese",
+        "oneSecond": "1 secondo",
+        "oneYear": "1 anno",
+        "seconds": "secondi",
+        "years": "anni"
       }
     }
   },
   "module": {
     "ClockOptions": {
       "bgColor": {
-        "name": ""
+        "name": "Colore dello sfondo"
       },
       "clockType": {
-        "name": "",
+        "name": "Tipo di orologio",
         "options": {
           "custom": {
-            "label": ""
+            "label": "Personalizzazione"
           },
           "h12": {
-            "label": ""
+            "label": "12 ore"
           },
           "h24": {
-            "label": ""
+            "label": "24 ore"
           }
         }
       },
       "countdownSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Formato personalizzato",
           "settings": {
-            "placeholder": ""
+            "placeholder": "opzionale"
           }
         },
         "endCountdownTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Ora di fine",
+          "placeholder": "ISO 8601 o RFC 2822 Data e ora"
         },
         "endText": {
-          "name": ""
+          "name": "Testo finale"
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "valore non valido",
+          "name": "Testo valore non valido"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "nessun valore trovato",
+          "name": "Testo nessun valore"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Come calcolare il tempo del conto alla rovescia",
+          "name": "Calcolo",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "Primo valore",
+              "label": "Primo"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Primo valore non nullo (esclude anche NaN)",
+              "label": "Primo *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Ultimo valore",
+              "label": "Ultimo"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Ultimo valore non nullo (esclude anche NaN)",
+              "label": "Ultimo *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Valore massimo",
+              "label": "Max"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Valore minimo",
+              "label": "Min"
             },
             "minFuture": {
-              "description": "",
-              "label": ""
+              "description": "Valore minimo che è nel futuro",
+              "label": "Min futuro"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Campo",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Nessun campo trovato"
           }
         },
         "source": {
           "options": {
             "input": {
-              "label": ""
+              "label": "Inserisci"
             },
             "query": {
-              "label": ""
+              "label": "Query"
             }
           }
         }
       },
       "countupSettings": {
         "beginCountupTime": {
-          "name": "",
-          "placeholder": ""
+          "name": "Ora di inizio",
+          "placeholder": "ISO 8601 o RFC 2822 Data e ora"
         },
         "beginText": {
-          "name": ""
+          "name": "Testo iniziale"
         },
         "customFormat": {
-          "name": "",
+          "name": "Formato personalizzato",
           "settings": {
-            "placeholder": ""
+            "placeholder": "opzionale"
           }
         },
         "invalidValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "valore non valido",
+          "name": "Testo valore non valido"
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "nessun valore trovato",
+          "name": "Testo nessun valore"
         },
         "queryCalculation": {
-          "description": "",
-          "name": "",
+          "description": "Come calcolare il tempo di conteggio",
+          "name": "Calcolo",
           "options": {
             "first": {
-              "description": "",
-              "label": ""
+              "description": "Primo valore",
+              "label": "Primo"
             },
             "firstNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Primo valore non nullo (esclude anche NaN)",
+              "label": "Primo *"
             },
             "last": {
-              "description": "",
-              "label": ""
+              "description": "Ultimo valore",
+              "label": "Ultimo"
             },
             "lastNotNull": {
-              "description": "",
-              "label": ""
+              "description": "Ultimo valore non nullo (esclude anche NaN)",
+              "label": "Ultimo *"
             },
             "max": {
-              "description": "",
-              "label": ""
+              "description": "Valore massimo",
+              "label": "Max"
             },
             "maxPast": {
-              "description": "",
-              "label": ""
+              "description": "Valore massimo che è nel passato",
+              "label": "Max passato"
             },
             "min": {
-              "description": "",
-              "label": ""
+              "description": "Valore minimo",
+              "label": "Min"
             }
           }
         },
         "queryField": {
-          "name": "",
+          "name": "Campo",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Nessun campo trovato"
           }
         },
         "source": {
-          "name": "",
+          "name": "Origine",
           "options": {
             "input": {
-              "label": ""
+              "label": "Inserisci"
             },
             "query": {
-              "label": ""
+              "label": "Query"
             }
           }
         }
       },
       "dateSettings": {
         "dateFormat": {
-          "name": "",
+          "name": "Formato data",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Inserisci il formato della data"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Dimensione carattere",
           "settings": {
-            "placeholder": ""
+            "placeholder": "formato data"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Spessore carattere",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Grassetto"
             },
             "normal": {
-              "label": ""
+              "label": "Normale"
             }
           }
         },
         "locale": {
-          "name": "",
+          "name": "Locale",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Inserisci locale: de, fr, es, ... (predefinito: en)"
           }
         },
         "showDate": {
-          "name": ""
+          "name": "Mostra data"
         }
       },
       "descriptionSettings": {
         "descriptionText": {
-          "name": "",
+          "name": "Descrizione",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Inserisci descrizione"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Dimensione carattere",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Dimensione carattere (ad es. 12px)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Spessore carattere",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Grassetto"
             },
             "normal": {
-              "label": ""
+              "label": "Normale"
             }
           }
         },
         "noValueText": {
-          "defaultValue": "",
-          "name": ""
+          "defaultValue": "nessuna descrizione trovata",
+          "name": "Testo nessun valore"
         },
         "queryField": {
-          "name": "",
+          "name": "Campo",
           "settings": {
-            "noFieldsMessage": ""
+            "noFieldsMessage": "Nessun campo trovato"
           }
         },
         "source": {
-          "name": "",
+          "name": "Origine",
           "options": {
             "input": {
-              "label": ""
+              "label": "Inserisci"
             },
             "none": {
-              "label": ""
+              "label": "Nessuno"
             },
             "query": {
-              "label": ""
+              "label": "Query"
             }
           }
         }
       },
       "fontMono": {
-        "name": ""
+        "name": "Carattere monospazio"
       },
       "mode": {
-        "name": "",
+        "name": "Modalità",
         "options": {
           "countdown": {
-            "label": ""
+            "label": "Conto"
           },
           "countup": {
-            "label": ""
+            "label": "Conteggio"
           },
           "time": {
-            "label": ""
+            "label": "Tempo"
           }
         }
       },
       "refresh": {
-        "name": "",
+        "name": "Aggiorna",
         "options": {
           "dashboard": {
-            "label": ""
+            "label": "Con la dashboard"
           },
           "sec": {
-            "label": ""
+            "label": "Ogni secondo"
           }
         }
       },
       "source": {
-        "name": ""
+        "name": "Origine"
       },
       "timeSettings": {
         "customFormat": {
-          "name": "",
+          "name": "Time Format (Formato ora)",
           "settings": {
-            "placeholder": ""
+            "placeholder": "formato data"
           }
         },
         "fontSize": {
-          "name": "",
+          "name": "Dimensione carattere",
           "settings": {
-            "placeholder": ""
+            "placeholder": "Dimensione carattere (ad es. 12px)"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Spessore carattere",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Grassetto"
             },
             "normal": {
-              "label": ""
+              "label": "Normale"
             }
           }
         }
       },
       "timezoneSettings": {
         "fontSize": {
-          "name": "",
+          "name": "Dimensione carattere",
           "settings": {
-            "placeholder": ""
+            "placeholder": "dimensione carattere"
           }
         },
         "fontWeight": {
-          "name": "",
+          "name": "Spessore carattere",
           "options": {
             "bold": {
-              "label": ""
+              "label": "Grassetto"
             },
             "normal": {
-              "label": ""
+              "label": "Normale"
             }
           }
         },
         "options": {
           "browserTime": {
-            "label": ""
+            "label": "Ora del browser"
           },
           "sameAsDashboard": {
-            "label": ""
+            "label": "Uguale alla dashboard"
           }
         },
         "showTimezone": {
-          "name": ""
+          "name": "Mostra fuso orario"
         },
         "timezone": {
-          "name": ""
+          "name": "Fuso orario"
         },
         "zoneFormat": {
-          "name": "",
+          "name": "Formato di visualizzazione",
           "options": {
             "abbv": {
-              "label": ""
+              "label": "Abbreviazione"
             },
             "name": {
-              "label": ""
+              "label": "Normale"
             },
             "nameOffset": {
-              "label": ""
+              "label": "Nome + Compensazione"
             },
             "offset": {
-              "label": ""
+              "label": "Compensazione"
             },
             "offsetAbbv": {
-              "label": ""
+              "label": "Compensazione + Abbreviazione"
             }
           }
         }
