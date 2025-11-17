@@ -18,7 +18,19 @@
     "Themeable",
     "Unthemed",
     "testdata",
-    "testid"
+    "testid",
+    "Čeština",
+    "Deutsch",
+    "Bahasa",
+    "Italiano",
+    "Nederlands",
+    "Polski",
+    "Português",
+    "Brasileiro",
+    "Português",
+    "Русский",
+    "Svenska",
+    "Türkçe"
   ],
   "ignoreRegExpList": ["@[\\w]+"]
 }
