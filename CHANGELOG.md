@@ -1,5 +1,28 @@
 # Change Log
 
+## 3.1.0
+
+- The Clock panel is now available in the following languages:
+  - English (en-US)
+  - Čeština (cs-CZ)
+  - Deutsch (de-DE)
+  - Español (es-ES)
+  - Français (fr-FR)
+  - Magyar (hu-HU)
+  - Bahasa Indonesia (id-ID)
+  - Italiano (it-IT)
+  - 日本語 (ja-JP)
+  - 한국어 (ko-KR)
+  - Nederlands (nl-NL)
+  - Polski (pl-PL)
+  - Português Brasileiro (pt-BR)
+  - Português (pt-PT)
+  - Русский (ru-RU)
+  - Svenska (sv-SE)
+  - Türkçe (tr-TR)
+  - 中文（简体）(zh-Hans)
+  - 中文（繁體）(zh-Hant)
+
 ## 3.0.1
 
 - Fixes [#408](https://github.com/grafana/clock-panel/issues/408)
