@@ -5,6 +5,7 @@ import {
   ClockMode,
   ClockRefresh,
   ClockSource,
+  ClockStyle,
   ClockType,
   CountdownQueryCalculation,
   CountupQueryCalculation,
@@ -489,6 +490,7 @@ const getDefaultProps = () => {
       clockType: ClockType.H24,
       mode: ClockMode.time,
       refresh: ClockRefresh.sec,
+      style: ClockStyle.text,
       countdownSettings: {
         source: ClockSource.input,
         queryCalculation: CountdownQueryCalculation.lastNotNull,

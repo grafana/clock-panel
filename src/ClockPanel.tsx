@@ -73,11 +73,13 @@ export function ClockPanel(props: Props) {
         height,
       }}
     >
-      {dateSettings.showDate ? <RenderDate now={now} options={props.options} /> : null}
-      <RenderTime options={props.options} targetTime={targetTime} err={err} now={now} />
-      {timezoneSettings.showTimezone ? <RenderZone now={now} options={props.options} timezone={timezoneToUse} /> : null}
+      {dateSettings.showDate ? <RenderDate now={now} options={props.options} width={width} height={height} /> : null}
+      <RenderTime options={props.options} targetTime={targetTime} err={err} now={now} width={width} height={height} />
+      {timezoneSettings.showTimezone ? (
+        <RenderZone now={now} options={props.options} timezone={timezoneToUse} width={width} height={height} />
+      ) : null}
       {props.options.descriptionSettings.source !== DescriptionSource.none ? (
-        <RenderDescription options={props.options} descriptionText={descriptionText} />
+        <RenderDescription options={props.options} descriptionText={descriptionText} width={width} height={height} />
       ) : null}
     </div>
   );

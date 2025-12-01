@@ -11,6 +11,8 @@ export interface ClockOptions {
   dateSettings: DateSettings;
   timeSettings: TimeSettings;
   timezoneSettings: TimezoneSettings;
+  style?: ClockStyle;
+  digitalSettings?: DigitalSettings;
 }
 
 export enum ClockSource {
@@ -49,6 +51,11 @@ export enum ClockMode {
   time = 'time',
   countdown = 'countdown',
   countup = 'countup',
+}
+
+export enum ClockStyle {
+  text = 'text',
+  digital = 'digital',
 }
 
 export enum ClockRefresh {
@@ -125,4 +132,18 @@ interface TimezoneSettings {
   zoneFormat: ZoneFormat;
   fontSize: string;
   fontWeight: FontWeight;
+}
+
+export interface DigitalSettings {
+  fillColor?: string;
+  strokeColor?: string;
+  strokeWidth?: number;
+  glowSize?: number;
+}
+
+export interface Heights {
+  date: number;
+  time: number;
+  zone: number;
+  description: number;
 }
