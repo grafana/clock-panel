@@ -14,6 +14,10 @@ export function getWidth(char: string, prevChar?: string): number {
     return SVG_VIEW_BOX_WIDTH * 0.5;
   }
 
+  if (prevChar === undefined && char === '1') {
+    return SVG_VIEW_BOX_WIDTH * 0.5;
+  }
+
   return SVG_VIEW_BOX_WIDTH;
 }
 

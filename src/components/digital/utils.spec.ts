@@ -9,6 +9,7 @@ describe('getWidth', () => {
     { char: '.', prevChar: undefined, expected: 83.5 },
     { char: ';', prevChar: undefined, expected: 83.5 },
     { char: '1', prevChar: '-', expected: 83.5 },
+    { char: '1', prevChar: undefined, expected: 83.5 },
     { char: '1', prevChar: ' ', expected: 167 },
     { char: 'a', prevChar: undefined, expected: 167 },
   ])(`when called with $char and $prevChar then the result should be $expected`, ({ char, prevChar, expected }) => {
