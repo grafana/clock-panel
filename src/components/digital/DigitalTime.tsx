@@ -4,7 +4,13 @@ import { ClockOptions } from 'types';
 import { Digit } from './Digit';
 import { Colon } from './Colon';
 import { Text } from './Text';
-import { DEFAULT_FILL_COLOR, DEFAULT_STROKE_COLOR, SVG_VIEW_BOX_HEIGHT, SVG_VIEW_BOX_WIDTH } from '../../constants';
+import {
+  DEFAULT_FILL_COLOR,
+  DEFAULT_STROKE_COLOR,
+  SVG_DIGITIZED,
+  SVG_VIEW_BOX_HEIGHT,
+  SVG_VIEW_BOX_WIDTH,
+} from '../../constants';
 import { Dash } from './Dash';
 import { getWidth } from './utils';
 
@@ -63,45 +69,56 @@ export function DigitalTime({ text, width: panelWidth, height: panelHeight, opti
       </defs>
       {chars.map((char, charIndex) => {
         x += getWidth(char, chars[charIndex - 1]);
+        const digit = parseInt(char, 10);
+        const isDigit = !isNaN(digit);
+
         return (
           <>
-            <Digit
-              x={x}
-              char={char}
-              fill={fill}
-              filter={`url(#${filterId})`}
-              key={`${key}-${charIndex}-digit`}
-              parentKey={`${key}-${charIndex}-digit`}
-              stroke={stroke}
-              strokeWidth={strokeWidth}
-            />
-            <Colon
-              x={x}
-              char={char}
-              fill={fill}
-              filter={`url(#${filterId})`}
-              key={`${key}-${charIndex}-colon`}
-              stroke={stroke}
-              strokeWidth={strokeWidth}
-            />
-            <Dash
-              x={x}
-              char={char}
-              fill={fill}
-              filter={`url(#${filterId})`}
-              key={`${key}-${charIndex}-dash`}
-              stroke={stroke}
-              strokeWidth={strokeWidth}
-            />
-            <Text
-              x={x}
-              char={char}
-              fill={fill}
-              filter={`url(#${filterId})`}
-              key={`${key}-${charIndex}-colon`}
-              stroke={stroke}
-              strokeWidth={strokeWidth}
-            />
+            {isDigit && (
+              <Digit
+                x={x}
+                char={char}
+                fill={fill}
+                filter={`url(#${filterId})`}
+                key={`${key}-${charIndex}-digit`}
+                parentKey={`${key}-${charIndex}-digit`}
+                stroke={stroke}
+                strokeWidth={strokeWidth}
+              />
+            )}
+            {char === ':' && (
+              <Colon
+                x={x}
+                char={char}
+                fill={fill}
+                filter={`url(#${filterId})`}
+                key={`${key}-${charIndex}-colon`}
+                stroke={stroke}
+                strokeWidth={strokeWidth}
+              />
+            )}
+            {char === '-' && (
+              <Dash
+                x={x}
+                char={char}
+                fill={fill}
+                filter={`url(#${filterId})`}
+                key={`${key}-${charIndex}-dash`}
+                stroke={stroke}
+                strokeWidth={strokeWidth}
+              />
+            )}
+            {!SVG_DIGITIZED.includes(char) && (
+              <Text
+                x={x}
+                char={char}
+                fill={fill}
+                filter={`url(#${filterId})`}
+                key={`${key}-${charIndex}-colon`}
+                stroke={stroke}
+                strokeWidth={strokeWidth}
+              />
+            )}
           </>
         );
       })}

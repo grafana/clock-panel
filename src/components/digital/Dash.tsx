@@ -10,10 +10,6 @@ interface DashProps {
 }
 
 export function Dash({ char, fill, filter, stroke, strokeWidth, x = 0 }: DashProps) {
-  if (char !== '-') {
-    return null;
-  }
-
   const transform = `translate(${x}, 0)`;
 
   return (

@@ -45,11 +45,6 @@ interface DigitProps {
 
 export function Digit({ parentKey, char, fill, filter, stroke, strokeWidth, x = 0 }: DigitProps) {
   const digit = parseInt(char, 10);
-  const isDigit = !isNaN(digit);
-
-  if (!isDigit) {
-    return null;
-  }
 
   if (!digits[digit]) {
     return null;

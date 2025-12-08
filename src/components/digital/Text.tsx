@@ -1,5 +1,5 @@
 import React from 'react';
-import { SVG_DIGITIZED, SVG_VIEW_BOX_HEIGHT, SVG_VIEW_BOX_WIDTH } from '../../constants';
+import { SVG_VIEW_BOX_HEIGHT, SVG_VIEW_BOX_WIDTH } from '../../constants';
 
 interface TextProps {
   char: string;
@@ -11,10 +11,6 @@ interface TextProps {
 }
 
 export function Text({ char, fill, filter, stroke, strokeWidth, x = 0 }: TextProps) {
-  if (SVG_DIGITIZED.includes(char)) {
-    return null;
-  }
-
   const fontSize = SVG_VIEW_BOX_HEIGHT * 0.85;
 
   return (

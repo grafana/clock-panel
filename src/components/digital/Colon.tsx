@@ -10,10 +10,6 @@ interface ColonProps {
 }
 
 export function Colon({ char, fill, filter, stroke, strokeWidth, x = 0 }: ColonProps) {
-  if (char !== ':') {
-    return null;
-  }
-
   const transform = `translate(${x}, 0)`;
 
   return (
