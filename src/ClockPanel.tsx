@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import { PanelProps } from '@grafana/data';
 import { useTheme2 } from '@grafana/ui';
 import React, { useEffect, useMemo, useState } from 'react';
-import { ClockOptions, ClockRefresh, DescriptionSource } from './types';
+import { ClockOptions, ClockRefresh, ClockStyle, DescriptionSource } from './types';
 
 import { RenderDate } from 'components/RenderDate';
 import { RenderTime } from 'components/RenderTime';
@@ -12,6 +12,7 @@ import { getMoment } from 'utils';
 import './external/moment-duration-format';
 import { CalculateClockOptions } from 'components/CalculateClockOptions';
 import { RenderDescription } from 'components/RenderDescription';
+import { useInteraction } from './hooks/useInteraction';
 
 interface Props extends PanelProps<ClockOptions> {}
 
@@ -23,6 +24,8 @@ export function ClockPanel(props: Props) {
   const { timeZone: dashboardTimezone } = props;
   const timezoneToUse = optionsTimezone === 'dashboard' ? dashboardTimezone : (optionsTimezone ?? '');
   const [now, setNow] = useState<Moment>(getMoment(timezoneToUse));
+  const interaction = useMemo(() => ({ clock_style: options.style || ClockStyle.text }), [options.style]);
+  useInteraction('on_render', interaction);
 
   const className = useMemo(() => {
     return css`
