@@ -1,9 +1,8 @@
-import { css } from '@emotion/css';
-import { useTheme2 } from '@grafana/ui';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ClockOptions, ClockStyle } from 'types';
 import { DigitalTime } from './digital/DigitalTime';
 import { getHeights } from './digital/utils';
+import { useClockStyles } from 'hooks/useClockStyles';
 
 export function RenderDescription({
   options,
@@ -16,22 +15,7 @@ export function RenderDescription({
   width: number;
   height: number;
 }) {
-  const { descriptionSettings } = options;
-  const theme = useTheme2();
-  const fill =
-    options.style === ClockStyle.digital && options.digitalSettings?.fillColor
-      ? theme.visualization.getColorByName(options.digitalSettings.fillColor)
-      : '';
-
-  const className = useMemo(() => {
-    return css`
-      font-size: ${descriptionSettings.fontSize};
-      font-weight: ${descriptionSettings.fontWeight};
-      font-family: ${options.fontMono ? 'monospace' : ''};
-      margin: 0;
-      color: ${fill};
-    `;
-  }, [descriptionSettings.fontSize, descriptionSettings.fontWeight, options.fontMono, fill]);
+  const { description } = useClockStyles(options);
 
   if (options.style === ClockStyle.digital) {
     return (
@@ -46,7 +30,7 @@ export function RenderDescription({
 
   return (
     <span>
-      <h3 className={className}>{descriptionText}</h3>
+      <h3 className={description}>{descriptionText}</h3>
     </span>
   );
 }

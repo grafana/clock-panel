@@ -1,11 +1,10 @@
-import { css } from '@emotion/css';
 import { t } from '@grafana/i18n';
 import moment, { Moment } from 'moment-timezone';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ClockMode, ClockOptions, ClockStyle, ClockType, TimeSettings } from 'types';
 import { DigitalTime } from './digital/DigitalTime';
 import { getHeights } from './digital/utils';
-import { useTheme2 } from '@grafana/ui';
+import { useClockStyles } from 'hooks/useClockStyles';
 
 function getStrings() {
   const oneYear = t('components.RenderTime.getStrings.oneYear', '1 year');
@@ -164,24 +163,11 @@ interface RenderTimeProps {
 
 export function RenderTime({ now, options, targetTime, err, width, height }: RenderTimeProps) {
   const { clockType, timeSettings, mode } = options;
-  const theme = useTheme2();
-  const fill =
-    options.style === ClockStyle.digital && options.digitalSettings?.fillColor
-      ? theme.visualization.getColorByName(options.digitalSettings.fillColor)
-      : '';
-  const className = useMemo(() => {
-    return css`
-      font-size: ${timeSettings.fontSize};
-      font-family: ${options.fontMono ? 'monospace' : ''};
-      font-weight: ${timeSettings.fontWeight};
-      color: ${fill};
-      margin: 0;
-    `;
-  }, [options.fontMono, timeSettings.fontSize, timeSettings.fontWeight, fill]);
+  const { time } = useClockStyles(options);
 
   let display = '';
   if (err !== null) {
-    return <h2 className={className}>{err}</h2>;
+    return <h2 className={time}>{err}</h2>;
   }
 
   switch (mode) {
@@ -208,5 +194,5 @@ export function RenderTime({ now, options, targetTime, err, width, height }: Ren
     return <DigitalTime text={display} width={width} height={getHeights(height, options).time} options={options} />;
   }
 
-  return <h2 className={className}>{display}</h2>;
+  return <h2 className={time}>{display}</h2>;
 }

@@ -1,11 +1,10 @@
-import { css } from '@emotion/css';
 import { Moment } from 'moment-timezone';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ClockOptions, ClockStyle, ZoneFormat } from '../types';
 import { getMoment } from '../utils';
-import { useTheme2 } from '@grafana/ui';
 import { DigitalTime } from './digital/DigitalTime';
 import { getHeights } from './digital/utils';
+import { useClockStyles } from 'hooks/useClockStyles';
 
 export function RenderZone({
   options,
@@ -20,24 +19,9 @@ export function RenderZone({
   width: number;
   height: number;
 }) {
+  const styles = useClockStyles(options);
   const { timezoneSettings } = options;
   const { zoneFormat } = timezoneSettings;
-
-  const theme = useTheme2();
-  const fill =
-    options.style === ClockStyle.digital && options.digitalSettings?.fillColor
-      ? theme.visualization.getColorByName(options.digitalSettings.fillColor)
-      : '';
-  const className = useMemo(() => {
-    return css`
-      font-size: ${timezoneSettings.fontSize};
-      font-weight: ${timezoneSettings.fontWeight};
-      font-family: ${options.fontMono ? 'monospace' : ''};
-      line-height: 1.4;
-      margin: 0;
-      color: ${fill};
-    `;
-  }, [options.fontMono, timezoneSettings.fontSize, timezoneSettings.fontWeight, fill]);
 
   let zone = timezone;
 
@@ -65,7 +49,7 @@ export function RenderZone({
   }
 
   return (
-    <h4 className={className} data-testid="time-zone">
+    <h4 className={styles.zone} data-testid="time-zone">
       {zone}
       {zoneFormat === ZoneFormat.nameOffset && (
         <>
