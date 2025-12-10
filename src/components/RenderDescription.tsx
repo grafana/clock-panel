@@ -1,22 +1,36 @@
-import { css } from '@emotion/css';
-import React, { useMemo } from 'react';
-import { ClockOptions } from 'types';
+import React from 'react';
+import { ClockOptions, ClockStyle } from 'types';
+import { DigitalTime } from './digital/DigitalTime';
+import { getHeights } from './digital/utils';
+import { useClockStyles } from 'hooks/useClockStyles';
 
-export function RenderDescription({ options, descriptionText }: { options: ClockOptions; descriptionText: string }) {
-  const { descriptionSettings } = options;
+export function RenderDescription({
+  options,
+  descriptionText,
+  width,
+  height,
+}: {
+  options: ClockOptions;
+  descriptionText: string;
+  width: number;
+  height: number;
+}) {
+  const { description } = useClockStyles(options);
 
-  const className = useMemo(() => {
-    return css`
-      font-size: ${descriptionSettings.fontSize};
-      font-weight: ${descriptionSettings.fontWeight};
-      font-family: ${options.fontMono ? 'monospace' : ''};
-      margin: 0;
-    `;
-  }, [descriptionSettings.fontSize, descriptionSettings.fontWeight, options.fontMono]);
+  if (options.style === ClockStyle.digital) {
+    return (
+      <DigitalTime
+        width={width}
+        height={getHeights(height, options).description}
+        options={options}
+        text={descriptionText}
+      />
+    );
+  }
 
   return (
     <span>
-      <h3 className={className}>{descriptionText}</h3>
+      <h3 className={description}>{descriptionText}</h3>
     </span>
   );
 }

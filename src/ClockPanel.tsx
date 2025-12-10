@@ -1,8 +1,6 @@
-import { css } from '@emotion/css';
 import { PanelProps } from '@grafana/data';
-import { useTheme2 } from '@grafana/ui';
 import React, { useEffect, useMemo, useState } from 'react';
-import { ClockOptions, ClockRefresh, DescriptionSource } from './types';
+import { ClockOptions, ClockRefresh, ClockStyle, DescriptionSource } from './types';
 
 import { RenderDate } from 'components/RenderDate';
 import { RenderTime } from 'components/RenderTime';
@@ -12,31 +10,20 @@ import { getMoment } from 'utils';
 import './external/moment-duration-format';
 import { CalculateClockOptions } from 'components/CalculateClockOptions';
 import { RenderDescription } from 'components/RenderDescription';
+import { useInteraction } from 'hooks/useInteraction';
+import { useClockStyles } from 'hooks/useClockStyles';
 
 interface Props extends PanelProps<ClockOptions> {}
 
 export function ClockPanel(props: Props) {
   const { options, width, height, data } = props;
-  const theme = useTheme2();
+  const { panel } = useClockStyles(options);
   const { timezone: optionsTimezone, dateSettings, timezoneSettings } = options;
-  // notice the uppercase Z.
   const { timeZone: dashboardTimezone } = props;
   const timezoneToUse = optionsTimezone === 'dashboard' ? dashboardTimezone : (optionsTimezone ?? '');
   const [now, setNow] = useState<Moment>(getMoment(timezoneToUse));
-
-  const className = useMemo(() => {
-    return css`
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-flow: column wrap;
-      font-family: ${options.fontMono ? 'monospace' : ''};
-      text-align: center;
-      background-color: ${!options.bgColor
-        ? theme.colors.background.primary
-        : theme.visualization.getColorByName(options.bgColor)};
-    `;
-  }, [options.bgColor, options.fontMono, theme]);
+  const interaction = useMemo(() => ({ clock_style: options.style || ClockStyle.text }), [options.style]);
+  useInteraction('clock_panel_on_render', interaction);
 
   // Clock refresh only on dashboard refresh
   useEffect(() => {
@@ -67,17 +54,19 @@ export function ClockPanel(props: Props) {
 
   return (
     <div
-      className={className}
+      className={panel}
       style={{
         width,
         height,
       }}
     >
-      {dateSettings.showDate ? <RenderDate now={now} options={props.options} /> : null}
-      <RenderTime options={props.options} targetTime={targetTime} err={err} now={now} />
-      {timezoneSettings.showTimezone ? <RenderZone now={now} options={props.options} timezone={timezoneToUse} /> : null}
+      {dateSettings.showDate ? <RenderDate now={now} options={props.options} width={width} height={height} /> : null}
+      <RenderTime options={props.options} targetTime={targetTime} err={err} now={now} width={width} height={height} />
+      {timezoneSettings.showTimezone ? (
+        <RenderZone now={now} options={props.options} timezone={timezoneToUse} width={width} height={height} />
+      ) : null}
       {props.options.descriptionSettings.source !== DescriptionSource.none ? (
-        <RenderDescription options={props.options} descriptionText={descriptionText} />
+        <RenderDescription options={props.options} descriptionText={descriptionText} width={width} height={height} />
       ) : null}
     </div>
   );

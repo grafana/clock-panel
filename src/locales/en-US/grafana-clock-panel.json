@@ -273,6 +273,20 @@
           }
         }
       },
+      "digitalSettings": {
+        "fillColor": {
+          "name": "Fill Color"
+        },
+        "glowSize": {
+          "name": "Glow Size"
+        },
+        "strokeColor": {
+          "name": "Stroke Color"
+        },
+        "strokeWidth": {
+          "name": "Stroke Width"
+        }
+      },
       "fontMono": {
         "name": "Font monospace"
       },
@@ -303,6 +317,17 @@
       },
       "source": {
         "name": "Source"
+      },
+      "style": {
+        "name": "Style",
+        "options": {
+          "digital": {
+            "label": "Digital"
+          },
+          "legacy": {
+            "label": "Text"
+          }
+        }
       },
       "timeSettings": {
         "customFormat": {

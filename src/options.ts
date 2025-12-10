@@ -11,11 +11,15 @@ import {
   CountdownQueryCalculation,
   CountupQueryCalculation,
   DescriptionSource,
+  ClockStyle,
 } from './types';
 import { ColorEditor } from './ColorEditor';
 import { getTemplateSrv } from '@grafana/runtime';
 import { getTimeZoneNames } from 'utils';
 import { t } from '@grafana/i18n';
+import { DEFAULT_FILL_COLOR, DEFAULT_STROKE_COLOR } from './constants';
+
+const isTextStyle = (options: ClockOptions) => options.style === ClockStyle.text;
 
 export const optionsBuilder = (
   builder: PanelOptionsEditorBuilder<ClockOptions>,
@@ -34,6 +38,17 @@ export const optionsBuilder = (
         ],
       },
       defaultValue: ClockMode.time,
+    })
+    .addRadio({
+      path: 'style',
+      name: t('module.ClockOptions.style.name', 'Style'),
+      settings: {
+        options: [
+          { value: ClockStyle.text, label: t('module.ClockOptions.style.options.legacy.label', 'Text') },
+          { value: ClockStyle.digital, label: t('module.ClockOptions.style.options.digital.label', 'Digital') },
+        ],
+      },
+      defaultValue: ClockStyle.text,
     })
     .addRadio({
       path: 'refresh',
@@ -60,8 +75,10 @@ export const optionsBuilder = (
       path: 'fontMono',
       name: t('module.ClockOptions.fontMono.name', 'Font monospace'),
       defaultValue: false,
+      showIf: (o) => isTextStyle(o),
     });
 
+  addDigitalSettings(builder);
   addCountdown(builder);
   addCountup(builder);
   addDescription(builder);
@@ -486,6 +503,7 @@ function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ),
       },
       defaultValue: '12px',
+      showIf: (o) => isTextStyle(o),
     })
     .addRadio({
       category,
@@ -504,6 +522,7 @@ function addDescription(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: FontWeight.normal,
+      showIf: (o) => isTextStyle(o),
     });
 }
 
@@ -536,7 +555,7 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: t('module.ClockOptions.timeSettings.customFormat.settings.placeholder', 'date format'),
       },
       defaultValue: undefined,
-      showIf: (opts) => opts.clockType === ClockType.Custom,
+      showIf: (o) => o.clockType === ClockType.Custom,
     })
     .addTextInput({
       category,
@@ -546,6 +565,7 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: t('module.ClockOptions.timeSettings.fontSize.settings.placeholder', 'Font size (e.g. 12px)'),
       },
       defaultValue: '12px',
+      showIf: (o) => isTextStyle(o),
     })
     .addRadio({
       category,
@@ -564,6 +584,7 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: FontWeight.normal,
+      showIf: (o) => isTextStyle(o),
     });
 }
 
@@ -653,7 +674,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: ZoneFormat.offsetAbbv,
-      showIf: (s) => s.timezoneSettings?.showTimezone,
+      showIf: (o) => o.timezoneSettings?.showTimezone,
     })
     .addTextInput({
       category,
@@ -663,7 +684,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: t('module.ClockOptions.timezoneSettings.fontSize.settings.placeholder', 'font size'),
       },
       defaultValue: '12px',
-      showIf: (s) => s.timezoneSettings?.showTimezone,
+      showIf: (o) => o.timezoneSettings?.showTimezone && isTextStyle(o),
     })
     .addRadio({
       category,
@@ -682,7 +703,7 @@ function addTimeZone(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: FontWeight.normal,
-      showIf: (s) => s.timezoneSettings?.showTimezone,
+      showIf: (o) => o.timezoneSettings?.showTimezone && isTextStyle(o),
     });
 }
 
@@ -707,7 +728,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: t('module.ClockOptions.dateSettings.dateFormat.settings.placeholder', 'Enter date format'),
       },
       defaultValue: 'YYYY-MM-DD',
-      showIf: (s) => s.dateSettings?.showDate,
+      showIf: (o) => o.dateSettings?.showDate,
     })
     .addTextInput({
       category,
@@ -720,7 +741,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ),
       },
       defaultValue: '',
-      showIf: (s) => s.dateSettings?.showDate,
+      showIf: (o) => o.dateSettings?.showDate,
     })
     .addTextInput({
       category,
@@ -730,7 +751,7 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         placeholder: t('module.ClockOptions.dateSettings.fontSize.settings.placeholder', 'date format'),
       },
       defaultValue: '20px',
-      showIf: (s) => s.dateSettings?.showDate,
+      showIf: (o) => o.dateSettings?.showDate && isTextStyle(o),
     })
     .addRadio({
       category,
@@ -749,6 +770,45 @@ function addDateFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
         ],
       },
       defaultValue: FontWeight.normal,
-      showIf: (s) => s.dateSettings?.showDate,
+      showIf: (o) => o.dateSettings?.showDate && isTextStyle(o),
+    });
+}
+
+function addDigitalSettings(builder: PanelOptionsEditorBuilder<ClockOptions>) {
+  const category = ['Digital Options'];
+  builder
+    .addCustomEditor({
+      category,
+      id: 'digitalSettings.fillColor',
+      path: 'digitalSettings.fillColor',
+      name: t('module.ClockOptions.digitalSettings.fillColor.name', 'Fill Color'),
+      editor: ColorEditor,
+      defaultValue: DEFAULT_FILL_COLOR,
+      showIf: (o) => !isTextStyle(o),
+    })
+    .addCustomEditor({
+      category,
+      id: 'digitalSettings.strokeColor',
+      path: 'digitalSettings.strokeColor',
+      name: t('module.ClockOptions.digitalSettings.strokeColor.name', 'Stroke Color'),
+      editor: ColorEditor,
+      defaultValue: DEFAULT_STROKE_COLOR,
+      showIf: (o) => !isTextStyle(o),
+    })
+    .addSliderInput({
+      category,
+      path: 'digitalSettings.strokeWidth',
+      name: t('module.ClockOptions.digitalSettings.strokeWidth.name', 'Stroke Width'),
+      defaultValue: 0,
+      settings: { max: 20, min: 0 },
+      showIf: (o) => !isTextStyle(o),
+    })
+    .addSliderInput({
+      category,
+      path: 'digitalSettings.glowSize',
+      name: t('module.ClockOptions.digitalSettings.glowSize.name', 'Glow Size'),
+      defaultValue: 0,
+      settings: { max: 20, min: 0 },
+      showIf: (o) => !isTextStyle(o),
     });
 }

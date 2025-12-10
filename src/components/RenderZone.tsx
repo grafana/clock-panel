@@ -1,22 +1,27 @@
-import { css } from '@emotion/css';
 import { Moment } from 'moment-timezone';
-import React, { useMemo } from 'react';
-import { ClockOptions, ZoneFormat } from 'types';
-import { getMoment } from 'utils';
+import React from 'react';
+import { ClockOptions, ClockStyle, ZoneFormat } from '../types';
+import { getMoment } from '../utils';
+import { DigitalTime } from './digital/DigitalTime';
+import { getHeights } from './digital/utils';
+import { useClockStyles } from 'hooks/useClockStyles';
 
-export function RenderZone({ options, now, timezone }: { options: ClockOptions; now: Moment; timezone: string }) {
+export function RenderZone({
+  options,
+  now,
+  timezone,
+  width,
+  height,
+}: {
+  options: ClockOptions;
+  now: Moment;
+  timezone: string;
+  width: number;
+  height: number;
+}) {
+  const styles = useClockStyles(options);
   const { timezoneSettings } = options;
   const { zoneFormat } = timezoneSettings;
-
-  const className = useMemo(() => {
-    return css`
-      font-size: ${timezoneSettings.fontSize};
-      font-weight: ${timezoneSettings.fontWeight};
-      font-family: ${options.fontMono ? 'monospace' : ''};
-      line-height: 1.4;
-      margin: 0;
-    `;
-  }, [options.fontMono, timezoneSettings.fontSize, timezoneSettings.fontWeight]);
 
   let zone = timezone;
 
@@ -38,8 +43,13 @@ export function RenderZone({ options, now, timezone }: { options: ClockOptions; 
       }
   }
 
+  if (options.style === ClockStyle.digital) {
+    const text = zoneFormat === ZoneFormat.nameOffset ? `${zone}\n${now.format('Z z')}` : zone;
+    return <DigitalTime width={width} height={getHeights(height, options).zone} options={options} text={text} />;
+  }
+
   return (
-    <h4 className={className} data-testid="time-zone">
+    <h4 className={styles.zone} data-testid="time-zone">
       {zone}
       {zoneFormat === ZoneFormat.nameOffset && (
         <>

@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.2.0
+
+- Add `Digital` clock style 
+
 ## 3.1.0
 
 - The Clock panel is now available in the following languages:
