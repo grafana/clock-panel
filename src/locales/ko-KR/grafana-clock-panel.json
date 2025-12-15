@@ -273,6 +273,20 @@
           }
         }
       },
+      "digitalSettings": {
+        "fillColor": {
+          "name": ""
+        },
+        "glowSize": {
+          "name": ""
+        },
+        "strokeColor": {
+          "name": ""
+        },
+        "strokeWidth": {
+          "name": ""
+        }
+      },
       "fontMono": {
         "name": "고정 폭 글자"
       },
@@ -303,6 +317,17 @@
       },
       "source": {
         "name": "소스"
+      },
+      "style": {
+        "name": "",
+        "options": {
+          "digital": {
+            "label": ""
+          },
+          "legacy": {
+            "label": ""
+          }
+        }
       },
       "timeSettings": {
         "customFormat": {

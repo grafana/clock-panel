@@ -273,6 +273,20 @@
           }
         }
       },
+      "digitalSettings": {
+        "fillColor": {
+          "name": ""
+        },
+        "glowSize": {
+          "name": ""
+        },
+        "strokeColor": {
+          "name": ""
+        },
+        "strokeWidth": {
+          "name": ""
+        }
+      },
       "fontMono": {
         "name": "Fon monospace"
       },
@@ -303,6 +317,17 @@
       },
       "source": {
         "name": "Sumber"
+      },
+      "style": {
+        "name": "",
+        "options": {
+          "digital": {
+            "label": ""
+          },
+          "legacy": {
+            "label": ""
+          }
+        }
       },
       "timeSettings": {
         "customFormat": {

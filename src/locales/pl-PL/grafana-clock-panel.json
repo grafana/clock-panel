@@ -273,6 +273,20 @@
           }
         }
       },
+      "digitalSettings": {
+        "fillColor": {
+          "name": ""
+        },
+        "glowSize": {
+          "name": ""
+        },
+        "strokeColor": {
+          "name": ""
+        },
+        "strokeWidth": {
+          "name": ""
+        }
+      },
       "fontMono": {
         "name": "Czcionka o stałej szerokości"
       },
@@ -303,6 +317,17 @@
       },
       "source": {
         "name": "Źródło"
+      },
+      "style": {
+        "name": "",
+        "options": {
+          "digital": {
+            "label": ""
+          },
+          "legacy": {
+            "label": ""
+          }
+        }
       },
       "timeSettings": {
         "customFormat": {

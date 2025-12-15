@@ -273,6 +273,20 @@
           }
         }
       },
+      "digitalSettings": {
+        "fillColor": {
+          "name": ""
+        },
+        "glowSize": {
+          "name": ""
+        },
+        "strokeColor": {
+          "name": ""
+        },
+        "strokeWidth": {
+          "name": ""
+        }
+      },
       "fontMono": {
         "name": "Tipo de letra monoespaciado"
       },
@@ -303,6 +317,17 @@
       },
       "source": {
         "name": "Fuente"
+      },
+      "style": {
+        "name": "",
+        "options": {
+          "digital": {
+            "label": ""
+          },
+          "legacy": {
+            "label": ""
+          }
+        }
       },
       "timeSettings": {
         "customFormat": {

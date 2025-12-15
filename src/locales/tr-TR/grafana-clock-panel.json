@@ -273,6 +273,20 @@
           }
         }
       },
+      "digitalSettings": {
+        "fillColor": {
+          "name": ""
+        },
+        "glowSize": {
+          "name": ""
+        },
+        "strokeColor": {
+          "name": ""
+        },
+        "strokeWidth": {
+          "name": ""
+        }
+      },
       "fontMono": {
         "name": "Tek aralıklı yazı tipi"
       },
@@ -303,6 +317,17 @@
       },
       "source": {
         "name": "Kaynak"
+      },
+      "style": {
+        "name": "",
+        "options": {
+          "digital": {
+            "label": ""
+          },
+          "legacy": {
+            "label": ""
+          }
+        }
       },
       "timeSettings": {
         "customFormat": {
