@@ -32,7 +32,7 @@
   "devDependencies": {
     "@grafana/eslint-config": "^9.0.0",
     "@grafana/eslint-plugin-plugins": "0.5.4",
-    "@grafana/plugin-e2e": "^3.0.3",
+    "@grafana/plugin-e2e": "^3.0.4",
     "@grafana/tsconfig": "^2.0.0",
     "@playwright/test": "1.56.1",
     "@stylistic/eslint-plugin-ts": "4.4.1",
