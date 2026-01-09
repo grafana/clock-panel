@@ -44,3 +44,22 @@ export function getHeights(panelHeight: number, options: ClockOptions): Heights 
     zone,
   };
 }
+
+export function getFragmentKey(key: string, char: string, charIndex: number) {
+  const digit = parseInt(char, 10);
+  const isDigit = !isNaN(digit);
+
+  if (isDigit) {
+    return `${key}-${charIndex}-digit`;
+  }
+
+  if (char === ':') {
+    return `${key}-${charIndex}-colon`;
+  }
+
+  if (char === '-') {
+    return `${key}-${charIndex}-dash`;
+  }
+
+  return `${key}-${charIndex}-text`;
+}

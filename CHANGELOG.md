@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.2.1
+
+- Fixes React unique child key error
+
 ## 3.2.0
 
 - Add `Digital` clock style 
