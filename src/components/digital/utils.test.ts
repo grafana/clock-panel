@@ -1,5 +1,5 @@
 import { ClockOptions, DescriptionSource } from 'types';
-import { getHeights, getWidth } from './utils';
+import { getFragmentKey, getHeights, getWidth } from './utils';
 
 describe('getWidth', () => {
   it.each([
@@ -137,4 +137,19 @@ describe('getHeights', () => {
       expect(getHeights(panelHeight, options).zone).toBe(12.166666666666666);
     });
   });
+});
+
+describe('getFragmentKey', () => {
+  it.each([
+    { key: 'some-key', char: '1', charIndex: 0, expected: 'some-key-0-digit' },
+    { key: 'some-key', char: '1', charIndex: 2, expected: 'some-key-2-digit' },
+    { key: 'key', char: ':', charIndex: 0, expected: 'key-0-colon' },
+    { key: 'k', char: '-', charIndex: 1, expected: 'k-1-dash' },
+    { key: 't', char: 't', charIndex: 5, expected: 't-5-text' },
+  ])(
+    `when called with $key, $char and $charIndex then the result should be $expected`,
+    ({ key, char, charIndex, expected }) => {
+      expect(getFragmentKey(key, char, charIndex)).toBe(expected);
+    }
+  );
 });
