@@ -34,7 +34,7 @@ const digits: Record<number, string[]> = {
 };
 
 interface DigitProps {
-  parentKey: string;
+  fragmentKey: string;
   char: string;
   stroke: string;
   strokeWidth: number;
@@ -43,7 +43,7 @@ interface DigitProps {
   x?: number;
 }
 
-export function Digit({ parentKey, char, fill, filter, stroke, strokeWidth, x = 0 }: DigitProps) {
+export function Digit({ fragmentKey, char, fill, filter, stroke, strokeWidth, x = 0 }: DigitProps) {
   const digit = parseInt(char, 10);
 
   if (!digits[digit]) {
@@ -56,7 +56,7 @@ export function Digit({ parentKey, char, fill, filter, stroke, strokeWidth, x = 
     <>
       {digits[digit].map((d, index) => (
         <path
-          key={`${parentKey}-${index}-digit`}
+          key={`${fragmentKey}-${index}-digit`}
           d={d}
           stroke={stroke}
           strokeWidth={strokeWidth}

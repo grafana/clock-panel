@@ -12,7 +12,7 @@ import {
   SVG_VIEW_BOX_WIDTH,
 } from '../../constants';
 import { Dash } from './Dash';
-import { getWidth } from './utils';
+import { getFragmentKey, getWidth } from './utils';
 
 interface RenderDigitalTimeProps {
   text: string;
@@ -71,17 +71,17 @@ export function DigitalTime({ text, width: panelWidth, height: panelHeight, opti
         x += getWidth(char, chars[charIndex - 1]);
         const digit = parseInt(char, 10);
         const isDigit = !isNaN(digit);
+        const fragmentKey = getFragmentKey(key, char, charIndex);
 
         return (
-          <>
+          <React.Fragment key={fragmentKey}>
             {isDigit && (
               <Digit
                 x={x}
                 char={char}
                 fill={fill}
                 filter={`url(#${filterId})`}
-                key={`${key}-${charIndex}-digit`}
-                parentKey={`${key}-${charIndex}-digit`}
+                fragmentKey={fragmentKey}
                 stroke={stroke}
                 strokeWidth={strokeWidth}
               />
@@ -92,7 +92,6 @@ export function DigitalTime({ text, width: panelWidth, height: panelHeight, opti
                 char={char}
                 fill={fill}
                 filter={`url(#${filterId})`}
-                key={`${key}-${charIndex}-colon`}
                 stroke={stroke}
                 strokeWidth={strokeWidth}
               />
@@ -103,7 +102,6 @@ export function DigitalTime({ text, width: panelWidth, height: panelHeight, opti
                 char={char}
                 fill={fill}
                 filter={`url(#${filterId})`}
-                key={`${key}-${charIndex}-dash`}
                 stroke={stroke}
                 strokeWidth={strokeWidth}
               />
@@ -114,12 +112,11 @@ export function DigitalTime({ text, width: panelWidth, height: panelHeight, opti
                 char={char}
                 fill={fill}
                 filter={`url(#${filterId})`}
-                key={`${key}-${charIndex}-colon`}
                 stroke={stroke}
                 strokeWidth={strokeWidth}
               />
             )}
-          </>
+          </React.Fragment>
         );
       })}
     </svg>

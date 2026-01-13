@@ -7,50 +7,22 @@
     "github>grafana/grafana-renovate-config//presets/labels",
     "github>grafana/grafana-renovate-config//presets/npm"
   ],
-  "labels": ["dependencies", "javascript"],
+  "ignorePaths": [
+    "**/fixtures/**/package.json",
+    "**/tests/**/package.json",
+    "**/test/**/package.json"
+  ],
   "packageRules": [
     {
-      "groupName": "grafana",
-      "matchPackageNames": ["/^@grafana/"],
-      "minimumReleaseAge": null
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "description": "Group GitHub Actions updates"
     },
     {
-      "groupName": "runtime",
-      "matchPackageNames": ["/^moment($|-)/"]
-    },
-    {
-      "groupName": "dev-tools",
-      "matchPackageNames": [
-        "/^jest/",
-        "/^@jest\//",
-        "/^@testing-library\//",
-        "/^@swc/jest$/",
-        "/^@playwright/test$/",
-        "/^@types/jest$/",
-        "/^@types/testing-library/",
-        "/^eslint/",
-        "/^@typescript-eslint\//",
-        "/^@stylistic\//",
-        "/^prettier$/",
-        "/^cspell$/",
-        "/^webpack/",
-        "/.*-webpack-plugin$/",
-        "/.*-loader$/",
-        "/^@swc/core$/",
-        "/^swc-loader$/",
-        "/^terser-webpack-plugin$/"
-      ]
-    },
-    {
-      "groupName": "typescript",
-      "matchPackageNames": [
-        "/^typescript$/",
-        "/^ts-node$/",
-        "/^@types\//",
-        "!/^@types/react/",
-        "!/^@types/jest/",
-        "!/^@types/testing-library/"
-      ]
+      "matchManagers": ["npm"],
+      "groupName": "npm dependencies",
+      "description": "Group all other npm dependencies"
     }
-  ]
+  ],
+  "labels": ["dependencies"]
 }
