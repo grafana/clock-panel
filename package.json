@@ -59,7 +59,7 @@
     "eslint-webpack-plugin": "5.0.2",
     "fork-ts-checker-webpack-plugin": "9.1.0",
     "glob": "11.1.0",
-    "i18next-cli": "^1.11.4",
+    "i18next-cli": "^1.36.1",
     "identity-obj-proxy": "3.0.0",
     "imports-loader": "^5.0.0",
     "jest": "30.2.0",
