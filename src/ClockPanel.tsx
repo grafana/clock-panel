@@ -12,6 +12,7 @@ import { CalculateClockOptions } from 'components/CalculateClockOptions';
 import { RenderDescription } from 'components/RenderDescription';
 import { useInteraction } from 'hooks/useInteraction';
 import { useClockStyles } from 'hooks/useClockStyles';
+import { TEST_IDS } from './constants';
 
 interface Props extends PanelProps<ClockOptions> {}
 
@@ -55,6 +56,7 @@ export function ClockPanel(props: Props) {
   return (
     <div
       className={panel}
+      data-testid={TEST_IDS.clockPanel}
       style={{
         width,
         height,
