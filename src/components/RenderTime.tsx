@@ -5,6 +5,7 @@ import { ClockMode, ClockOptions, ClockStyle, ClockType, TimeSettings } from 'ty
 import { DigitalTime } from './digital/DigitalTime';
 import { getHeights } from './digital/utils';
 import { useClockStyles } from 'hooks/useClockStyles';
+import { TEST_IDS } from '../constants';
 
 function getStrings() {
   const oneYear = t('components.RenderTime.getStrings.oneYear', '1 year');
@@ -194,5 +195,9 @@ export function RenderTime({ now, options, targetTime, err, width, height }: Ren
     return <DigitalTime text={display} width={width} height={getHeights(height, options).time} options={options} />;
   }
 
-  return <h2 className={time}>{display}</h2>;
+  return (
+    <h2 className={time} data-testid={TEST_IDS.clockPanelTime}>
+      {display}
+    </h2>
+  );
 }
