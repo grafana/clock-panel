@@ -275,16 +275,16 @@
       },
       "digitalSettings": {
         "fillColor": {
-          "name": ""
+          "name": "Kitöltőszín"
         },
         "glowSize": {
-          "name": ""
+          "name": "Ragyogás mérete"
         },
         "strokeColor": {
-          "name": ""
+          "name": "Körvonal színe"
         },
         "strokeWidth": {
-          "name": ""
+          "name": "Körvonal vastagság"
         }
       },
       "fontMono": {
@@ -319,13 +319,13 @@
         "name": "Forrás"
       },
       "style": {
-        "name": "",
+        "name": "Stílus",
         "options": {
           "digital": {
-            "label": ""
+            "label": "Digitális"
           },
           "legacy": {
-            "label": ""
+            "label": "Szöveg"
           }
         }
       },

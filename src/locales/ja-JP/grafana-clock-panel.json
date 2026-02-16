@@ -275,16 +275,16 @@
       },
       "digitalSettings": {
         "fillColor": {
-          "name": ""
+          "name": "塗りつぶし色"
         },
         "glowSize": {
-          "name": ""
+          "name": "グローサイズ"
         },
         "strokeColor": {
-          "name": ""
+          "name": "ストロークの色"
         },
         "strokeWidth": {
-          "name": ""
+          "name": "ストロークの幅"
         }
       },
       "fontMono": {
@@ -319,13 +319,13 @@
         "name": "ソース"
       },
       "style": {
-        "name": "",
+        "name": "スタイル",
         "options": {
           "digital": {
-            "label": ""
+            "label": "デジタル"
           },
           "legacy": {
-            "label": ""
+            "label": "テキスト"
           }
         }
       },

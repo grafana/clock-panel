@@ -275,16 +275,16 @@
       },
       "digitalSettings": {
         "fillColor": {
-          "name": ""
+          "name": "Warna Isian"
         },
         "glowSize": {
-          "name": ""
+          "name": "Ukuran Efek Cahaya"
         },
         "strokeColor": {
-          "name": ""
+          "name": "Warna Stroke"
         },
         "strokeWidth": {
-          "name": ""
+          "name": "Ketebalan Stroke"
         }
       },
       "fontMono": {
@@ -319,13 +319,13 @@
         "name": "Sumber"
       },
       "style": {
-        "name": "",
+        "name": "Gaya tampilan",
         "options": {
           "digital": {
-            "label": ""
+            "label": "Digital"
           },
           "legacy": {
-            "label": ""
+            "label": "Teks"
           }
         }
       },
