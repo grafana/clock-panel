@@ -275,16 +275,16 @@
       },
       "digitalSettings": {
         "fillColor": {
-          "name": ""
+          "name": "Barva výplně"
         },
         "glowSize": {
-          "name": ""
+          "name": "Velikost záře"
         },
         "strokeColor": {
-          "name": ""
+          "name": "Barva tahu"
         },
         "strokeWidth": {
-          "name": ""
+          "name": "Šířka tahu"
         }
       },
       "fontMono": {
@@ -319,13 +319,13 @@
         "name": "Zdroj"
       },
       "style": {
-        "name": "",
+        "name": "Styl",
         "options": {
           "digital": {
-            "label": ""
+            "label": "Digitální"
           },
           "legacy": {
-            "label": ""
+            "label": "Text"
           }
         }
       },

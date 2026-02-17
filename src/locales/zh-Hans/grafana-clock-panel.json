@@ -275,16 +275,16 @@
       },
       "digitalSettings": {
         "fillColor": {
-          "name": ""
+          "name": "填充颜色"
         },
         "glowSize": {
-          "name": ""
+          "name": "发光大小"
         },
         "strokeColor": {
-          "name": ""
+          "name": "描边颜色"
         },
         "strokeWidth": {
-          "name": ""
+          "name": "描边宽度"
         }
       },
       "fontMono": {
@@ -319,13 +319,13 @@
         "name": "来源"
       },
       "style": {
-        "name": "",
+        "name": "样式",
         "options": {
           "digital": {
-            "label": ""
+            "label": "数字"
           },
           "legacy": {
-            "label": ""
+            "label": "文字"
           }
         }
       },
