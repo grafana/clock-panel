@@ -275,16 +275,16 @@
       },
       "digitalSettings": {
         "fillColor": {
-          "name": ""
+          "name": "Füllfarbe"
         },
         "glowSize": {
-          "name": ""
+          "name": "Leuchtgröße"
         },
         "strokeColor": {
-          "name": ""
+          "name": "Strichfarbe"
         },
         "strokeWidth": {
-          "name": ""
+          "name": "Strichbreite"
         }
       },
       "fontMono": {
@@ -319,13 +319,13 @@
         "name": "Quelle"
       },
       "style": {
-        "name": "",
+        "name": "Stil",
         "options": {
           "digital": {
-            "label": ""
+            "label": "Digital"
           },
           "legacy": {
-            "label": ""
+            "label": "Text"
           }
         }
       },

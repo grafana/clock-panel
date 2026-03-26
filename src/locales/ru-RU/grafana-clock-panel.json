@@ -275,16 +275,16 @@
       },
       "digitalSettings": {
         "fillColor": {
-          "name": ""
+          "name": "Цвет заливки"
         },
         "glowSize": {
-          "name": ""
+          "name": "Размер свечения"
         },
         "strokeColor": {
-          "name": ""
+          "name": "Цвет обводки"
         },
         "strokeWidth": {
-          "name": ""
+          "name": "Ширина обводки"
         }
       },
       "fontMono": {
@@ -319,13 +319,13 @@
         "name": "Источник"
       },
       "style": {
-        "name": "",
+        "name": "Стиль",
         "options": {
           "digital": {
-            "label": ""
+            "label": "Цифры"
           },
           "legacy": {
-            "label": ""
+            "label": "Текст"
           }
         }
       },

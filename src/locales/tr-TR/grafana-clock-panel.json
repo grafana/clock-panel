@@ -275,16 +275,16 @@
       },
       "digitalSettings": {
         "fillColor": {
-          "name": ""
+          "name": "Dolgu Rengi"
         },
         "glowSize": {
-          "name": ""
+          "name": "Parıltı Boyutu"
         },
         "strokeColor": {
-          "name": ""
+          "name": "Çizgi Rengi"
         },
         "strokeWidth": {
-          "name": ""
+          "name": "Çizgi Genişliği"
         }
       },
       "fontMono": {
@@ -319,13 +319,13 @@
         "name": "Kaynak"
       },
       "style": {
-        "name": "",
+        "name": "Stil",
         "options": {
           "digital": {
-            "label": ""
+            "label": "Dijital"
           },
           "legacy": {
-            "label": ""
+            "label": "Metin"
           }
         }
       },

@@ -275,16 +275,16 @@
       },
       "digitalSettings": {
         "fillColor": {
-          "name": ""
+          "name": "Fyllningsfärg"
         },
         "glowSize": {
-          "name": ""
+          "name": "Glödstorlek"
         },
         "strokeColor": {
-          "name": ""
+          "name": "Linjefärg"
         },
         "strokeWidth": {
-          "name": ""
+          "name": "Linjebredd"
         }
       },
       "fontMono": {
@@ -319,13 +319,13 @@
         "name": "Källa"
       },
       "style": {
-        "name": "",
+        "name": "Stil",
         "options": {
           "digital": {
-            "label": ""
+            "label": "Digital"
           },
           "legacy": {
-            "label": ""
+            "label": "Text"
           }
         }
       },

@@ -275,16 +275,16 @@
       },
       "digitalSettings": {
         "fillColor": {
-          "name": ""
+          "name": "Opvulkleur"
         },
         "glowSize": {
-          "name": ""
+          "name": "Gloedgrootte"
         },
         "strokeColor": {
-          "name": ""
+          "name": "Lijnkleur"
         },
         "strokeWidth": {
-          "name": ""
+          "name": "Lijndikte"
         }
       },
       "fontMono": {
@@ -319,13 +319,13 @@
         "name": "Bron"
       },
       "style": {
-        "name": "",
+        "name": "Stijl",
         "options": {
           "digital": {
-            "label": ""
+            "label": "Digitaal"
           },
           "legacy": {
-            "label": ""
+            "label": "Tekst"
           }
         }
       },

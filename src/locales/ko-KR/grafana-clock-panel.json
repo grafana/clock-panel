@@ -275,16 +275,16 @@
       },
       "digitalSettings": {
         "fillColor": {
-          "name": ""
+          "name": "색상 채우기"
         },
         "glowSize": {
-          "name": ""
+          "name": "글로우 크기"
         },
         "strokeColor": {
-          "name": ""
+          "name": "선 색상"
         },
         "strokeWidth": {
-          "name": ""
+          "name": "선 너비"
         }
       },
       "fontMono": {
@@ -319,13 +319,13 @@
         "name": "소스"
       },
       "style": {
-        "name": "",
+        "name": "스타일",
         "options": {
           "digital": {
-            "label": ""
+            "label": "디지털"
           },
           "legacy": {
-            "label": ""
+            "label": "텍스트"
           }
         }
       },

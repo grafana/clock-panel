@@ -275,16 +275,16 @@
       },
       "digitalSettings": {
         "fillColor": {
-          "name": ""
+          "name": "Couleur de remplissage"
         },
         "glowSize": {
-          "name": ""
+          "name": "Taille de l’effet lumineux"
         },
         "strokeColor": {
-          "name": ""
+          "name": "Couleur du contour"
         },
         "strokeWidth": {
-          "name": ""
+          "name": "Épaisseur du contour"
         }
       },
       "fontMono": {
@@ -319,13 +319,13 @@
         "name": "Source"
       },
       "style": {
-        "name": "",
+        "name": "Style",
         "options": {
           "digital": {
-            "label": ""
+            "label": "Numérique"
           },
           "legacy": {
-            "label": ""
+            "label": "Texte"
           }
         }
       },
