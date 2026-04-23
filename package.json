@@ -102,11 +102,11 @@
   },
   "lavamoat": {
     "allowScripts": {
-      "@grafana/ui>@grafana/faro-web-sdk>@grafana/faro-core>@opentelemetry/otlp-transformer>protobufjs": false,
-      "@swc/core": false,
-      "i18next-cli>@swc/core": false,
-      "jest>@jest/core>jest-resolve>unrs-resolver": false,
-      "sass>@parcel/watcher": false
+      "@grafana/ui>@grafana/faro-web-sdk>@grafana/faro-core>@opentelemetry/otlp-transformer>protobufjs": true,
+      "@swc/core": true,
+      "i18next-cli>@swc/core": true,
+      "jest>@jest/core>jest-resolve>unrs-resolver": true,
+      "sass>@parcel/watcher": true
     }
   }
 }
