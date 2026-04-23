@@ -34,6 +34,7 @@
     "@grafana/eslint-plugin-plugins": "0.6.0",
     "@grafana/plugin-e2e": "^3.3.0",
     "@grafana/tsconfig": "^2.0.0",
+    "@lavamoat/allow-scripts": "^2.5.1",
     "@playwright/test": "1.57.0",
     "@stylistic/eslint-plugin-ts": "4.4.1",
     "@swc/core": "1.15.8",
@@ -98,5 +99,14 @@
   "packageManager": "npm@11.6.2",
   "overrides": {
     "moment": "2.30.1"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "@grafana/ui>@grafana/faro-web-sdk>@grafana/faro-core>@opentelemetry/otlp-transformer>protobufjs": false,
+      "@swc/core": false,
+      "i18next-cli>@swc/core": false,
+      "jest>@jest/core>jest-resolve>unrs-resolver": false,
+      "sass>@parcel/watcher": false
+    }
   }
 }
