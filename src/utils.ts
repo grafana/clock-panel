@@ -18,7 +18,7 @@ export const isQueryDrivenOptions = (options: Partial<ClockOptions>): boolean =>
     return true;
   }
   if (options.mode === ClockMode.time) {
-    // time mode never consumes countdown/countup sources — skip those checks
+    // time mode has no configurable source field — nothing to check
   } else if (options.mode === ClockMode.countdown) {
     const src = options.countdownSettings?.source;
     if (src && src !== ClockSource.input) {

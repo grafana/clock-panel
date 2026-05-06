@@ -1,5 +1,7 @@
 import { PanelModel } from '@grafana/data';
 import { ClockOptions, ClockRefresh } from './types';
+
+const RANDOM_WALK_QUERY_TYPE = 'randomWalk';
 import { config } from '@grafana/runtime';
 import { findGrafanaDataSource, isQueryDrivenOptions } from './utils';
 
@@ -17,18 +19,12 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
   if (!readonlyTargets && inputOnly) {
     migrateInputOnlyPluginConfig(panel);
   }
-  // configuration options moved as the panel migrated, clean up if needed
   cleanupConfig(panel);
 
-  // Grafana 12: targets is a read-only getter — migrateInputOnlyPluginConfig was skipped
-  // above. If stale bare targets exist, we cannot clear the array, so redirect them to
-  // the Grafana built-in datasource (randomWalk) to prevent errors against the default
-  // datasource. Panels with empty targets need no intervention.
-  //
-  // The Grafana built-in datasource (uid='grafana') is a Grafana core internal — always
-  // present regardless of org configuration. Prefer the registered instance from
-  // config.datasources (which carries the correct type); fall back to the known-stable
-  // uid when it is absent from config (e.g. in test environments).
+  // Grafana 12: targets is a read-only getter so we can't clear the array — redirect
+  // stale targets to randomWalk on the Grafana built-in DS instead.
+  // uid 'grafana' is a Grafana core internal always present; used as fallback when absent
+  // from config (e.g. test environments).
   if (readonlyTargets && inputOnly) {
     const targets = panel.targets;
     if (Array.isArray(targets) && targets.length > 0) {
@@ -36,7 +32,7 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
       panel.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
       for (const target of targets) {
         target.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
-        target.queryType = 'randomWalk';
+        target.queryType = RANDOM_WALK_QUERY_TYPE;
       }
     }
   }

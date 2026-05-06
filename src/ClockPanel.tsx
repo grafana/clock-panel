@@ -46,7 +46,6 @@ export function ClockPanel(props: Props) {
     return;
   }, [props.options.refresh, timezoneToUse]);
 
-  //refresh the time
   let [targetTime, descriptionText, err]: [Moment, string, string | null] = useMemo(() => {
     return CalculateClockOptions({
       options: props.options,
