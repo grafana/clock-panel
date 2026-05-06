@@ -2,7 +2,8 @@ import { LoadingState, PanelProps } from '@grafana/data';
 import { t } from '@grafana/i18n';
 import { useTheme2 } from '@grafana/ui';
 import React, { useEffect, useMemo, useState } from 'react';
-import { ClockOptions, ClockMode, ClockRefresh, ClockSource, ClockStyle, DescriptionSource } from './types';
+import { isQueryDrivenOptions } from './utils';
+import { ClockOptions, ClockRefresh, ClockStyle, DescriptionSource } from './types';
 
 import { RenderDate } from 'components/RenderDate';
 import { RenderTime } from 'components/RenderTime';
@@ -59,22 +60,11 @@ export function ClockPanel(props: Props) {
   // Show a notice when an input-only panel has a stale query running — either because
   // migration couldn't clear it (e.g., Grafana 12 readonly targets) or because Grafana's
   // query editor re-added a default target row after the user opened and saved the panel.
-  // Only the source that matches the active mode is actually consumed by CalculateClockOptions;
-  // a stale source='query' on the inactive mode must not suppress the notice.
-  const activeSourceIsQuery =
-    options.descriptionSettings?.source === DescriptionSource.query ||
-    (options.mode === ClockMode.countdown && options.countdownSettings?.source === ClockSource.query) ||
-    (options.mode === ClockMode.countup && options.countupSettings?.source === ClockSource.query) ||
-    // old config / unknown mode: conservatively treat either source=query as active
-    (options.mode == null && (
-      options.countdownSettings?.source === ClockSource.query ||
-      options.countupSettings?.source === ClockSource.query
-    ));
-  const isNonQueryPanel = !activeSourceIsQuery;
   const hasDataErrors =
     data.state === LoadingState.Error || (Array.isArray(data.errors) && data.errors.length > 0);
   const hasActiveQuery = (data.request?.targets?.length ?? 0) > 0;
-  const showStaleQueryNotice = isNonQueryPanel && (hasDataErrors || hasActiveQuery);
+  const showStaleQueryNotice =
+    !isQueryDrivenOptions(options) && (hasDataErrors || hasActiveQuery);
 
   return (
     <div

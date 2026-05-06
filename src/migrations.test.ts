@@ -1,7 +1,8 @@
 import { PanelModel } from '@grafana/data';
 import { cloneDeep } from 'lodash';
 import { config } from '@grafana/runtime';
-import { clockMigrationHandler, findGrafanaDataSource } from './migrations';
+import { clockMigrationHandler } from './migrations';
+import { findGrafanaDataSource } from './utils';
 import { ClockRefresh } from './types';
 
 describe('Clock migrations', () => {
@@ -598,29 +599,6 @@ describe('Clock migrations', () => {
     });
   });
 
-  describe('findGrafanaDataSource', () => {
-    it('finds datasource by uid', () => {
-      const datasources = {
-        grafana: { uid: 'grafana', type: 'datasource', name: '-- Grafana --' },
-      };
-      expect(findGrafanaDataSource(datasources)).toBe(datasources.grafana);
-    });
-
-    it('finds datasource by name and type when uid differs', () => {
-      const datasources = {
-        special: { uid: 'other-uid', type: 'datasource', name: '-- Grafana --' },
-      };
-      expect(findGrafanaDataSource(datasources)).toBe(datasources.special);
-    });
-
-    it('returns undefined when no Grafana datasource is present', () => {
-      expect(findGrafanaDataSource({ influxdb: { uid: 'abc', type: 'influxdb', name: 'InfluxDB' } })).toBeUndefined();
-    });
-
-    it('returns undefined for empty datasources', () => {
-      expect(findGrafanaDataSource({})).toBeUndefined();
-    });
-  });
 });
 
 describe('Real-world: barn-thermals-imperial v13 clock panel', () => {

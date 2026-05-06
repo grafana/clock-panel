@@ -1,6 +1,7 @@
 import { PanelModel } from '@grafana/data';
-import { ClockMode, ClockOptions, ClockRefresh } from './types';
+import { ClockOptions, ClockRefresh } from './types';
 import { config } from '@grafana/runtime';
+import { findGrafanaDataSource, isQueryDrivenOptions } from './utils';
 
 export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<ClockOptions> => {
   const options: any = panel.options || {};
@@ -43,51 +44,8 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
   return options;
 };
 
-// detect clock panel that does not use a query
-// Only the source that matches the active mode is actually consumed by CalculateClockOptions.
-// A stale source='query' on an inactive mode must not cause the panel to be treated as query-driven.
-const detectInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
-  const options: any = panel.options || {};
-
-  // description is independent of mode
-  if (options.descriptionSettings?.source === 'query') {
-    return false;
-  }
-
-  if (options.mode === ClockMode.time) {
-    // time mode never consumes countdown/countup sources — skip those checks
-  } else if (options.mode === ClockMode.countdown) {
-    const src = options.countdownSettings?.source;
-    if (src && src !== 'input') {
-      return false;
-    }
-  } else if (options.mode === ClockMode.countup) {
-    const src = options.countupSettings?.source;
-    if (src && src !== 'input') {
-      return false;
-    }
-  } else {
-    // mode absent (old config / unknown): check both sources conservatively
-    if (options.countdownSettings?.source && options.countdownSettings.source !== 'input') {
-      return false;
-    }
-    if (options.countupSettings?.source && options.countupSettings.source !== 'input') {
-      return false;
-    }
-  }
-
-  return true;
-};
-
-export const findGrafanaDataSource = (datasources: Record<string, any>) => {
-  for (const key of Object.keys(datasources || {})) {
-    const ds = datasources[key];
-    if (ds.uid === 'grafana' || (ds.name === '-- Grafana --' && ds.type === 'datasource')) {
-      return ds;
-    }
-  }
-  return undefined;
-};
+const detectInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) =>
+  !isQueryDrivenOptions(panel.options || {});
 
 const migrateInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
   delete panel.datasource;
