@@ -1,6 +1,6 @@
 import { ClockPanel } from 'ClockPanel';
 import { act, render, screen } from '@testing-library/react';
-import { FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange, DataFrame, FieldType } from '@grafana/data';
+import { DataQuery, DataQueryRequest, FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange, DataFrame, FieldType } from '@grafana/data';
 import {
   ClockMode,
   ClockRefresh,
@@ -459,7 +459,7 @@ describe('stale query notice', () => {
 
   it('renders when input-only panel has an active query running (no error)', () => {
     const props = getDefaultProps();
-    render(<ClockPanel {...props} data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }} />);
+    render(<ClockPanel {...props} data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }} />);
     expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
   });
 
@@ -475,7 +475,7 @@ describe('stale query notice', () => {
           mode: ClockMode.countdown,
           countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query },
         }}
-        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }}
+        data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
       />
     );
     expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
@@ -493,7 +493,7 @@ describe('stale query notice', () => {
           mode: ClockMode.time,
           countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query },
         }}
-        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }}
+        data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
       />
     );
     expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
@@ -509,7 +509,7 @@ describe('stale query notice', () => {
           mode: ClockMode.countup,
           countupSettings: { ...props.options.countupSettings, source: ClockSource.query },
         }}
-        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }}
+        data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
       />
     );
     expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
@@ -528,7 +528,7 @@ describe('stale query notice', () => {
           countdownSettings: { ...props.options.countdownSettings, source: ClockSource.input },
           countupSettings: { ...props.options.countupSettings, source: ClockSource.query },
         }}
-        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }}
+        data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
       />
     );
     expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
@@ -546,7 +546,7 @@ describe('stale query notice', () => {
           countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query },
           countupSettings: { ...props.options.countupSettings, source: ClockSource.input },
         }}
-        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }}
+        data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
       />
     );
     expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
@@ -564,7 +564,7 @@ describe('stale query notice', () => {
           ...optionsWithoutMode,
           countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query },
         }}
-        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }}
+        data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
       />
     );
     expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
@@ -679,3 +679,15 @@ const getDefaultProps = () => {
   };
   return props;
 };
+
+const mockRequest = (targets: Array<{ refId: string }>): DataQueryRequest<DataQuery> => ({
+  requestId: 'test',
+  interval: '1s',
+  intervalMs: 1000,
+  range: getDefaultTimeRange(),
+  scopedVars: {},
+  targets: targets as DataQuery[],
+  timezone: 'browser',
+  app: 'panel-editor',
+  startTime: 0,
+});
