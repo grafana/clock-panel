@@ -3,8 +3,7 @@ import moment, { Moment } from 'moment-timezone';
 import { ClockMode, ClockOptions, ClockSource, DescriptionSource } from './types';
 
 export const findGrafanaDataSource = (datasources: Record<string, any>) => {
-  for (const key of Object.keys(datasources || {})) {
-    const ds = datasources[key];
+  for (const ds of Object.values(datasources || {})) {
     if (ds.uid === 'grafana' || (ds.name === '-- Grafana --' && ds.type === 'datasource')) {
       return ds;
     }
