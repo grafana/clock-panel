@@ -497,9 +497,10 @@ describe('stale query notice', () => {
         : expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
     });
 
-    it('does not render when mode is absent and countdown.source=query (old config)', () => {
-      // Pre-2.1.4 panels have no mode field. countdown.source='query' without a mode means
-      // migration treats the panel as query-driven — notice must agree and stay hidden.
+    it('does not render when countdown.source=query and mode is absent (treated as query-driven)', () => {
+      // Pre-2.1.4 panels have no mode field. The conservative else-branch in isQueryDrivenOptions
+      // checks both sources — countdown.source='query' marks the panel as query-driven, so the
+      // notice is suppressed just as it would be for an explicit mode=countdown panel.
       const props = getDefaultProps();
       const { mode: _mode, ...optionsWithoutMode } = props.options as any;
       render(
