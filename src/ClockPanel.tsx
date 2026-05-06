@@ -1,7 +1,7 @@
 import { LoadingState, PanelProps } from '@grafana/data';
 import { t } from '@grafana/i18n';
 import React, { useEffect, useMemo, useState } from 'react';
-import { ClockOptions, ClockRefresh, ClockSource, ClockStyle, DescriptionSource } from './types';
+import { ClockOptions, ClockMode, ClockRefresh, ClockSource, ClockStyle, DescriptionSource } from './types';
 
 import { RenderDate } from 'components/RenderDate';
 import { RenderTime } from 'components/RenderTime';
@@ -57,10 +57,16 @@ export function ClockPanel(props: Props) {
   // Show a notice when an input-only panel has a stale query running — either because
   // migration couldn't clear it (e.g., Grafana 12 readonly targets) or because Grafana's
   // query editor re-added a default target row after the user opened and saved the panel.
+  // A panel is "non-query" only when no query source is actually consumed:
+  //   - description source is independent of mode; checked unconditionally
+  //   - countdown/countup sources are only consumed when mode matches; when mode is
+  //     'time' those settings are ignored by CalculateClockOptions regardless of what
+  //     they say, so a stale source='query' there must not suppress the notice
   const isNonQueryPanel =
-    options.countdownSettings?.source !== ClockSource.query &&
-    options.countupSettings?.source !== ClockSource.query &&
-    options.descriptionSettings?.source !== DescriptionSource.query;
+    options.descriptionSettings?.source !== DescriptionSource.query &&
+    (options.mode === ClockMode.time ||
+      (options.countdownSettings?.source !== ClockSource.query &&
+       options.countupSettings?.source !== ClockSource.query));
   const hasDataErrors =
     data.state === LoadingState.Error || (Array.isArray(data.errors) && data.errors.length > 0);
   const hasActiveQuery = (data.request?.targets?.length ?? 0) > 0;
@@ -86,7 +92,7 @@ export function ClockPanel(props: Props) {
       ) : null}
       {showStaleQueryNotice && (
         <div
-          data-testid={TEST_IDS.clockPanel + '-stale-query-notice'}
+          data-testid={TEST_IDS.staleQueryNotice}
           style={{
             position: 'absolute',
             bottom: 8,
