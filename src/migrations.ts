@@ -22,16 +22,19 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
   // above. If stale bare targets exist, we cannot clear the array, so redirect them to
   // the Grafana built-in datasource (randomWalk) to prevent errors against the default
   // datasource. Panels with empty targets need no intervention.
+  //
+  // The Grafana built-in datasource (uid='grafana') is a Grafana core internal — always
+  // present regardless of org configuration. Prefer the registered instance from
+  // config.datasources (which carries the correct type); fall back to the known-stable
+  // uid when it is absent from config (e.g. in test environments).
   if (isReadonlyTarget(panel) && detectInputOnlyPluginConfig(panel)) {
     const targets = panel.targets;
     if (Array.isArray(targets) && targets.length > 0) {
-      const grafanaDs = findGrafanaDataSource(config.datasources);
-      if (grafanaDs) {
-        panel.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
-        for (const target of targets) {
-          target.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
-          target.queryType = 'randomWalk';
-        }
+      const grafanaDs = findGrafanaDataSource(config.datasources) ?? { type: 'datasource', uid: 'grafana' };
+      panel.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
+      for (const target of targets) {
+        target.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
+        target.queryType = 'randomWalk';
       }
     }
   }

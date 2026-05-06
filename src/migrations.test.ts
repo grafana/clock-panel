@@ -390,9 +390,11 @@ describe('Clock migrations', () => {
       });
     });
 
-    describe('without Grafana built-in datasource', () => {
-      it('does not throw when no Grafana DS is registered', () => {
-        // config.datasources defaults to {} in test environment
+    describe('without Grafana built-in datasource in config.datasources', () => {
+      // The Grafana built-in DS uid='grafana' is a Grafana core internal always present
+      // in a real deployment. These tests simulate config.datasources being empty (e.g.
+      // test environments) and verify the fallback to the known-stable uid is used.
+      it('does not throw when Grafana DS is absent from config.datasources', () => {
         const panel = createPanelWithReadonlyTargets({
           options: {
             countdownSettings: { source: 'input' },
@@ -404,12 +406,11 @@ describe('Clock migrations', () => {
         } as unknown as PanelModel);
 
         expect(() => clockMigrationHandler(panel)).not.toThrow();
-        // Without a Grafana DS, the panel datasource cannot be fixed — that is acceptable.
-        // The important guarantee is no crash.
       });
 
-      it('leaves stale target elements untouched when no Grafana DS is registered', () => {
-        // Path D: cannot redirect — assert elements are not silently mutated.
+      it('redirects stale targets to built-in Grafana DS uid when absent from config.datasources', () => {
+        // Path D: even with no Grafana DS in config, fall back to { type:'datasource', uid:'grafana' }
+        // so stale targets use randomWalk rather than the default datasource.
         const panel = createPanelWithReadonlyTargets({
           options: {
             countdownSettings: { source: 'input' },
@@ -422,9 +423,9 @@ describe('Clock migrations', () => {
 
         clockMigrationHandler(panel);
 
-        expect(panel.targets[0].queryType).toBeUndefined();
-        expect(panel.targets[0].datasource).toBeUndefined();
-        expect(panel.datasource).toEqual({ type: 'influxdb', uid: 'xxx' });
+        expect(panel.targets[0].datasource).toEqual({ type: 'datasource', uid: 'grafana' });
+        expect(panel.targets[0].queryType).toBe('randomWalk');
+        expect(panel.datasource).toEqual({ type: 'datasource', uid: 'grafana' });
       });
     });
   });
