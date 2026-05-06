@@ -1,9 +1,9 @@
 import { PanelModel } from '@grafana/data';
 import { ClockOptions, ClockRefresh } from './types';
-
-const RANDOM_WALK_QUERY_TYPE = 'randomWalk';
 import { config } from '@grafana/runtime';
 import { findGrafanaDataSource, isQueryDrivenOptions } from './utils';
+
+const RANDOM_WALK_QUERY_TYPE = 'randomWalk';
 
 export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<ClockOptions> => {
   const options: any = panel.options || {};
@@ -14,7 +14,7 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
   }
 
   const readonlyTargets = isReadonlyTarget(panel);
-  const inputOnly = detectInputOnlyPluginConfig(panel);
+  const inputOnly = !isQueryDrivenOptions(panel.options || {});
 
   if (!readonlyTargets && inputOnly) {
     migrateInputOnlyPluginConfig(panel);
@@ -40,9 +40,6 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
   return options;
 };
 
-const detectInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) =>
-  !isQueryDrivenOptions(panel.options || {});
-
 const migrateInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
   delete panel.datasource;
   panel.targets = [];
@@ -59,9 +56,8 @@ const cleanupConfig = (panel: PanelModel<ClockOptions>) => {
     // @ts-ignore
     delete panel.countdownSettings;
   }
-  // NOTE: panel.datasource is intentionally NOT deleted here.
-  // For input-only panels, migrateInputOnlyPluginConfig handles datasource removal.
-  // For query panels, the panel-level datasource must be preserved.
+  // panel.datasource is NOT deleted here — migrateInputOnlyPluginConfig handles it for
+  // input-only panels; query panels must keep their datasource.
   // @ts-ignore
   if (panel.dateSettings) {
     // @ts-ignore

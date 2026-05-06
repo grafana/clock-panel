@@ -11,6 +11,9 @@ export const findGrafanaDataSource = (datasources: Record<string, any>) => {
   return undefined;
 };
 
+// ClockSource is a two-value enum; absent/input both mean no query needed
+const isQuerySource = (src: ClockSource | undefined) => src === ClockSource.query;
+
 // Only the source that matches the active mode is actually consumed by CalculateClockOptions.
 // A stale source='query' on an inactive mode must not cause the panel to be treated as query-driven.
 export const isQueryDrivenOptions = (options: Partial<ClockOptions>): boolean => {
@@ -20,21 +23,16 @@ export const isQueryDrivenOptions = (options: Partial<ClockOptions>): boolean =>
   if (options.mode === ClockMode.time) {
     // time mode has no configurable source field — nothing to check
   } else if (options.mode === ClockMode.countdown) {
-    const src = options.countdownSettings?.source;
-    if (src && src !== ClockSource.input) {
+    if (isQuerySource(options.countdownSettings?.source)) {
       return true;
     }
   } else if (options.mode === ClockMode.countup) {
-    const src = options.countupSettings?.source;
-    if (src && src !== ClockSource.input) {
+    if (isQuerySource(options.countupSettings?.source)) {
       return true;
     }
   } else {
     // mode absent (old config / unknown): check both sources conservatively
-    if (options.countdownSettings?.source && options.countdownSettings.source !== ClockSource.input) {
-      return true;
-    }
-    if (options.countupSettings?.source && options.countupSettings.source !== ClockSource.input) {
+    if (isQuerySource(options.countdownSettings?.source) || isQuerySource(options.countupSettings?.source)) {
       return true;
     }
   }
