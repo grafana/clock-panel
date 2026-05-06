@@ -2,8 +2,51 @@ import { PanelModel } from '@grafana/data';
 import { cloneDeep } from 'lodash';
 import { config } from '@grafana/runtime';
 import { clockMigrationHandler, findGrafanaDataSource } from './migrations';
+import { ClockRefresh } from './types';
 
 describe('Clock migrations', () => {
+
+  describe('refreshSettings migration', () => {
+    it('sets refresh to dashboard when options.refreshSettings.syncWithDashboard is true (new format)', () => {
+      // options.refreshSettings lives inside panel.options — the newer storage location.
+      const panel = {
+        options: { refreshSettings: { syncWithDashboard: true } },
+        targets: [],
+        type: 'grafana-clock-panel',
+      } as unknown as PanelModel;
+
+      const options = clockMigrationHandler(panel);
+
+      expect(options.refresh).toBe(ClockRefresh.dashboard);
+    });
+
+    it('sets refresh to dashboard when panel.refreshSettings.syncWithDashboard is true (legacy root format)', () => {
+      // panel.refreshSettings at the root was the old storage location (pre-2.x).
+      const panel = {
+        refreshSettings: { syncWithDashboard: true },
+        options: {},
+        targets: [],
+        type: 'grafana-clock-panel',
+      } as unknown as PanelModel;
+
+      const options = clockMigrationHandler(panel);
+
+      expect(options.refresh).toBe(ClockRefresh.dashboard);
+    });
+
+    it('does not set refresh to dashboard when syncWithDashboard is false', () => {
+      const panel = {
+        refreshSettings: { syncWithDashboard: false },
+        options: {},
+        targets: [],
+        type: 'grafana-clock-panel',
+      } as unknown as PanelModel;
+
+      const options = clockMigrationHandler(panel);
+
+      expect(options.refresh).not.toBe(ClockRefresh.dashboard);
+    });
+  });
   it('Non-Query config with datasource included', () => {
     const panel = {
       clockType: '12 hour',
@@ -262,6 +305,8 @@ describe('Clock migrations', () => {
       } as unknown as PanelModel);
 
       expect(() => clockMigrationHandler(panel)).not.toThrow();
+      // Nothing in this path touches datasource — original value must be preserved.
+      expect(panel.datasource).toEqual({ type: 'test', uid: '123' });
     });
 
     describe('with Grafana built-in datasource available', () => {
