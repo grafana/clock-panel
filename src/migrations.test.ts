@@ -2,7 +2,6 @@ import { PanelModel } from '@grafana/data';
 import { cloneDeep } from 'lodash';
 import { config } from '@grafana/runtime';
 import { clockMigrationHandler } from './migrations';
-import { findGrafanaDataSource } from './utils';
 import { ClockRefresh, ClockSource, DescriptionSource } from './types';
 
 describe('Clock migrations', () => {
