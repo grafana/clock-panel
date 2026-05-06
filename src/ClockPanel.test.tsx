@@ -445,129 +445,71 @@ describe('ClockPanel', () => {
 });
 
 describe('stale query notice', () => {
-  it('does not render when input-only panel has no queries configured', () => {
-    const props = getDefaultProps();
-    render(<ClockPanel {...props} />);
-    expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
+  describe('trigger conditions', () => {
+    it('does not render when no queries and no errors', () => {
+      const props = getDefaultProps();
+      render(<ClockPanel {...props} />);
+      expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
+    });
+
+    it('renders when data state is Error', () => {
+      const props = getDefaultProps();
+      render(<ClockPanel {...props} data={{ ...props.data, state: LoadingState.Error, errors: [{ message: 'failed' }] }} />);
+      expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
+    });
+
+    it('renders when request has active targets', () => {
+      const props = getDefaultProps();
+      render(<ClockPanel {...props} data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }} />);
+      expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
+    });
   });
 
-  it('renders when input-only panel has data errors', () => {
-    const props = getDefaultProps();
-    render(<ClockPanel {...props} data={{ ...props.data, state: LoadingState.Error, errors: [{ message: 'failed' }] }} />);
-    expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
-  });
+  describe('mode-aware source suppression', () => {
+    // All cases below have an active request — we are testing whether the mode×source
+    // combination correctly identifies the panel as query-driven (suppresses notice)
+    // or input-only (shows notice). The trigger is always present so it can't interfere.
+    it.each<[string, ClockMode, ClockSource, ClockSource, boolean]>([
+      // description                              mode              cdSrc              cuSrc              visible
+      ['mode=time,     no stale sources',         ClockMode.time,     ClockSource.input, ClockSource.input, true ],
+      ['mode=time,     stale countdown.query',    ClockMode.time,     ClockSource.query, ClockSource.input, true ],
+      ['mode=countdown active countdown.query',   ClockMode.countdown,ClockSource.query, ClockSource.input, false],
+      ['mode=countdown stale countup.query',      ClockMode.countdown,ClockSource.input, ClockSource.query, true ],
+      ['mode=countup   active countup.query',     ClockMode.countup,  ClockSource.input, ClockSource.query, false],
+      ['mode=countup   stale countdown.query',    ClockMode.countup,  ClockSource.query, ClockSource.input, true ],
+    ])('%s', (_, mode, cdSrc, cuSrc, visible) => {
+      const props = getDefaultProps();
+      render(
+        <ClockPanel
+          {...props}
+          options={{
+            ...props.options,
+            mode,
+            countdownSettings: { ...props.options.countdownSettings, source: cdSrc },
+            countupSettings: { ...props.options.countupSettings, source: cuSrc },
+          }}
+          data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
+        />
+      );
+      visible
+        ? expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument()
+        : expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
+    });
 
-  it('renders when input-only panel has an active query running (no error)', () => {
-    const props = getDefaultProps();
-    render(<ClockPanel {...props} data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }} />);
-    expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
-  });
-
-  it('does not render when panel mode=countdown uses countdown query source (legitimate query panel)', () => {
-    // For the notice to be suppressed, mode must match the source setting — mode=countdown with
-    // countdownSettings.source=query means the query is actually consumed by the panel.
-    const props = getDefaultProps();
-    render(
-      <ClockPanel
-        {...props}
-        options={{
-          ...props.options,
-          mode: ClockMode.countdown,
-          countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query },
-        }}
-        data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
-      />
-    );
-    expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
-  });
-
-  it('renders when mode=time panel has a stale countdownSettings.source=query and an active query', () => {
-    // mode=time means CalculateClockOptions never reads countdown/countup source settings.
-    // A leftover source='query' from a prior countdown configuration must not suppress the notice.
-    const props = getDefaultProps();
-    render(
-      <ClockPanel
-        {...props}
-        options={{
-          ...props.options,
-          mode: ClockMode.time,
-          countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query },
-        }}
-        data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
-      />
-    );
-    expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
-  });
-
-  it('does not render when mode=countup uses countup query source (legitimate query panel)', () => {
-    const props = getDefaultProps();
-    render(
-      <ClockPanel
-        {...props}
-        options={{
-          ...props.options,
-          mode: ClockMode.countup,
-          countupSettings: { ...props.options.countupSettings, source: ClockSource.query },
-        }}
-        data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
-      />
-    );
-    expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
-  });
-
-  it('renders when mode=countdown has stale countupSettings.source=query (inactive source)', () => {
-    // countupSettings.source is not consumed when mode=countdown — a stale query source
-    // there must not suppress the notice.
-    const props = getDefaultProps();
-    render(
-      <ClockPanel
-        {...props}
-        options={{
-          ...props.options,
-          mode: ClockMode.countdown,
-          countdownSettings: { ...props.options.countdownSettings, source: ClockSource.input },
-          countupSettings: { ...props.options.countupSettings, source: ClockSource.query },
-        }}
-        data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
-      />
-    );
-    expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
-  });
-
-  it('renders when mode=countup has stale countdownSettings.source=query (inactive source)', () => {
-    // countdownSettings.source is not consumed when mode=countup — same symmetry as above.
-    const props = getDefaultProps();
-    render(
-      <ClockPanel
-        {...props}
-        options={{
-          ...props.options,
-          mode: ClockMode.countup,
-          countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query },
-          countupSettings: { ...props.options.countupSettings, source: ClockSource.input },
-        }}
-        data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
-      />
-    );
-    expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
-  });
-
-  it('does not render when mode is absent and countdownSettings.source=query (old config, query still active)', () => {
-    // Old pre-2.1.4 panels have no mode field. When countdown.source='query' the migration
-    // treats the panel as query-driven and preserves its targets — the notice must agree.
-    const props = getDefaultProps();
-    const { mode: _mode, ...optionsWithoutMode } = props.options as any;
-    render(
-      <ClockPanel
-        {...props}
-        options={{
-          ...optionsWithoutMode,
-          countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query },
-        }}
-        data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
-      />
-    );
-    expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
+    it('does not render when mode is absent and countdown.source=query (old config)', () => {
+      // Pre-2.1.4 panels have no mode field. countdown.source='query' without a mode means
+      // migration treats the panel as query-driven — notice must agree and stay hidden.
+      const props = getDefaultProps();
+      const { mode: _mode, ...optionsWithoutMode } = props.options as any;
+      render(
+        <ClockPanel
+          {...props}
+          options={{ ...optionsWithoutMode, countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query } }}
+          data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
+        />
+      );
+      expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
+    });
   });
 });
 const getDefaultProps = () => {
