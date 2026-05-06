@@ -18,18 +18,16 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
   // configuration options moved as the panel migrated, clean up if needed
   cleanupConfig(panel);
 
-  // Grafana 12: targets are a read-only getter — migrateInputOnlyPluginConfig was skipped
-  // above. For input-only panels this leaves a stale bare target that Grafana will query
-  // against the default datasource, producing an error. Point it at the Grafana built-in
-  // datasource (which always succeeds with a randomWalk) so the panel loads cleanly.
+  // Grafana 12: targets is a read-only getter — migrateInputOnlyPluginConfig was skipped
+  // above. If stale bare targets exist, we cannot clear the array, so redirect them to
+  // the Grafana built-in datasource (randomWalk) to prevent errors against the default
+  // datasource. Panels with empty targets need no intervention.
   if (isReadonlyTarget(panel) && detectInputOnlyPluginConfig(panel)) {
-    const grafanaDs = findGrafanaDataSource(config.datasources);
-    if (grafanaDs) {
-      panel.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
-      // The readonly getter returns a mutable clone; mutate element properties in place
-      // so individual targets also point at the Grafana datasource.
-      const targets = panel.targets;
-      if (Array.isArray(targets)) {
+    const targets = panel.targets;
+    if (Array.isArray(targets) && targets.length > 0) {
+      const grafanaDs = findGrafanaDataSource(config.datasources);
+      if (grafanaDs) {
+        panel.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
         for (const target of targets) {
           target.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
           target.queryType = 'randomWalk';
@@ -97,31 +95,8 @@ export const findGrafanaDataSource = (datasources: Record<string, any>) => {
 };
 
 const migrateInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
-  // remove the datasource
   delete panel.datasource;
-  // remove the targets
   panel.targets = [];
-
-  // find the grafana datasource and set it if available
-  const grafanaDs = findGrafanaDataSource(config.datasources);
-
-  // set a default random walk
-  if (grafanaDs !== undefined) {
-    panel.targets = [
-      {
-        refId: 'A',
-        datasource: {
-          type: grafanaDs.type,
-          uid: grafanaDs.uid,
-        },
-        queryType: 'randomWalk',
-      },
-    ];
-    panel.datasource = {
-      type: grafanaDs.type,
-      uid: grafanaDs.uid,
-    };
-  }
 };
 
 const cleanupConfig = (panel: PanelModel<ClockOptions>) => {

@@ -384,7 +384,7 @@ describe('Clock migrations', () => {
 
       clockMigrationHandler(panel);
 
-      // Without a Grafana DS in test env, targets end up as []
+      // migrateInputOnlyPluginConfig always clears to [] regardless of Grafana DS presence.
       expect(panel.targets).toEqual([]);
     });
   });
@@ -477,17 +477,17 @@ describe('Real-world: barn-thermals-imperial v13 clock panel', () => {
     expect(panel.datasource).toBeUndefined();
   });
 
-  it('inserts a randomWalk target when Grafana built-in DS is available', () => {
+  it('does not insert a query target even when Grafana built-in DS is available', () => {
     (config as any).datasources = {
       grafana: { uid: 'grafana', type: 'datasource', name: '-- Grafana --' },
     };
     try {
       const panel = { ...v13Panel } as unknown as PanelModel;
       clockMigrationHandler(panel);
-      expect(panel.targets).toEqual([
-        { refId: 'A', datasource: { type: 'datasource', uid: 'grafana' }, queryType: 'randomWalk' },
-      ]);
-      expect(panel.datasource).toEqual({ type: 'datasource', uid: 'grafana' });
+      // Input-only panels need no datasource or query — targets must be empty
+      // and datasource must be absent even when the Grafana built-in DS is registered.
+      expect(panel.targets).toEqual([]);
+      expect(panel.datasource).toBeUndefined();
     } finally {
       (config as any).datasources = {};
     }
