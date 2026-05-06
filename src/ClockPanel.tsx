@@ -1,6 +1,7 @@
-import { PanelProps } from '@grafana/data';
+import { LoadingState, PanelProps } from '@grafana/data';
+import { t } from '@grafana/i18n';
 import React, { useEffect, useMemo, useState } from 'react';
-import { ClockOptions, ClockRefresh, ClockStyle, DescriptionSource } from './types';
+import { ClockOptions, ClockRefresh, ClockSource, ClockStyle, DescriptionSource } from './types';
 
 import { RenderDate } from 'components/RenderDate';
 import { RenderTime } from 'components/RenderTime';
@@ -53,6 +54,17 @@ export function ClockPanel(props: Props) {
     });
   }, [props.options, timezoneToUse, data, props.replaceVariables, now]);
 
+  // Detect panels that don't use a datasource query but have a stale target causing errors.
+  // This can happen when migration couldn't clear the target (e.g., Grafana 12 readonly
+  // targets with no Grafana built-in datasource registered).
+  const isNonQueryPanel =
+    options.countdownSettings?.source !== ClockSource.query &&
+    options.countupSettings?.source !== ClockSource.query &&
+    options.descriptionSettings?.source !== DescriptionSource.query;
+  const hasDataErrors =
+    data.state === LoadingState.Error || (Array.isArray(data.errors) && data.errors.length > 0);
+  const showStaleQueryNotice = isNonQueryPanel && hasDataErrors;
+
   return (
     <div
       className={panel}
@@ -60,6 +72,7 @@ export function ClockPanel(props: Props) {
       style={{
         width,
         height,
+        position: 'relative',
       }}
     >
       {dateSettings.showDate ? <RenderDate now={now} options={props.options} width={width} height={height} /> : null}
@@ -70,6 +83,29 @@ export function ClockPanel(props: Props) {
       {props.options.descriptionSettings.source !== DescriptionSource.none ? (
         <RenderDescription options={props.options} descriptionText={descriptionText} width={width} height={height} />
       ) : null}
+      {showStaleQueryNotice && (
+        <div
+          data-testid={TEST_IDS.clockPanel + '-stale-query-notice'}
+          style={{
+            position: 'absolute',
+            bottom: 8,
+            left: 8,
+            right: 8,
+            padding: '6px 10px',
+            background: 'rgba(229, 84, 84, 0.12)',
+            border: '1px solid rgba(229, 84, 84, 0.5)',
+            borderRadius: 4,
+            fontSize: '12px',
+            color: '#e55454',
+            pointerEvents: 'none',
+          }}
+        >
+          {t(
+            'ClockPanel.staleQueryNotice.message',
+            'This panel does not use a datasource query. A stale query is causing an error. Open the Query tab and remove all queries to clear this warning.'
+          )}
+        </div>
+      )}
     </div>
   );
 }

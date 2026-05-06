@@ -137,6 +137,10 @@ exports[`Clock migrations Query config with datasource 1`] = `
 
 exports[`Clock migrations Query config with datasource 2`] = `
 {
+  "datasource": {
+    "type": "influxdb",
+    "uid": "000000001",
+  },
   "gridPos": {
     "h": 5,
     "w": 9,

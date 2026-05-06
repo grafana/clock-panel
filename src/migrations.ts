@@ -18,6 +18,26 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
   // configuration options moved as the panel migrated, clean up if needed
   cleanupConfig(panel);
 
+  // Grafana 12: targets are a read-only getter — migrateInputOnlyPluginConfig was skipped
+  // above. For input-only panels this leaves a stale bare target that Grafana will query
+  // against the default datasource, producing an error. Point it at the Grafana built-in
+  // datasource (which always succeeds with a randomWalk) so the panel loads cleanly.
+  if (isReadonlyTarget(panel) && detectInputOnlyPluginConfig(panel)) {
+    const grafanaDs = findGrafanaDataSource(config.datasources);
+    if (grafanaDs) {
+      panel.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
+      // The readonly getter returns a mutable clone; mutate element properties in place
+      // so individual targets also point at the Grafana datasource.
+      const targets = panel.targets;
+      if (Array.isArray(targets)) {
+        for (const target of targets) {
+          target.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
+          target.queryType = 'randomWalk';
+        }
+      }
+    }
+  }
+
   return options;
 };
 
@@ -33,18 +53,7 @@ const detectInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
       return false;
     }
   } else {
-    // no source indicates and old config (pre 2.1.4)
-    isInputOnly = true;
-  }
-  // an input source does not require a datasource
-  if (options.countdownSettings?.source) {
-    if (options.countdownSettings?.source === 'input') {
-      isInputOnly = true;
-    } else {
-      return false;
-    }
-  } else {
-    // no source indicates and old config (pre 2.1.4)
+    // no source indicates an old config (pre 2.1.4)
     isInputOnly = true;
   }
 
@@ -55,7 +64,7 @@ const detectInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
       return false;
     }
   } else {
-    // no source indicates and old config (pre 2.1.4)
+    // no source indicates an old config (pre 2.1.4)
     isInputOnly = true;
   }
 
@@ -70,11 +79,21 @@ const detectInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
       return false;
     }
   } else {
-    // no source indicates and old config (pre 2.1.4)
+    // no source indicates an old config (pre 2.1.4)
     isInputOnly = true;
   }
 
   return isInputOnly;
+};
+
+export const findGrafanaDataSource = (datasources: Record<string, any>) => {
+  for (const key of Object.keys(datasources || {})) {
+    const ds = datasources[key];
+    if (ds.uid === 'grafana' || (ds.name === '-- Grafana --' && ds.type === 'datasource')) {
+      return ds;
+    }
+  }
+  return undefined;
 };
 
 const migrateInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
@@ -84,16 +103,7 @@ const migrateInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
   panel.targets = [];
 
   // find the grafana datasource and set it if available
-  const datasources = config.datasources || [];
-  let grafanaDs: (typeof datasources)[number] | undefined = undefined;
-
-  for (let datasourceKey of Object.keys(datasources)) {
-    const ds = datasources[datasourceKey];
-    if (ds.uid === 'grafana' || (ds.name === '-- Grafana --' && ds.type === 'datasource')) {
-      grafanaDs = ds;
-      break;
-    }
-  }
+  const grafanaDs = findGrafanaDataSource(config.datasources);
 
   // set a default random walk
   if (grafanaDs !== undefined) {
@@ -125,11 +135,9 @@ const cleanupConfig = (panel: PanelModel<ClockOptions>) => {
     // @ts-ignore
     delete panel.countdownSettings;
   }
-  // @ts-ignore
-  if (panel.datasource) {
-    // @ts-ignore
-    delete panel.datasource;
-  }
+  // NOTE: panel.datasource is intentionally NOT deleted here.
+  // For input-only panels, migrateInputOnlyPluginConfig handles datasource removal.
+  // For query panels, the panel-level datasource must be preserved.
   // @ts-ignore
   if (panel.dateSettings) {
     // @ts-ignore
