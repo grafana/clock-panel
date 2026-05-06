@@ -98,7 +98,7 @@ const cleanupConfig = (panel: PanelModel<ClockOptions>) => {
   }
 };
 
-function isReadonlyTarget(panel: PanelModel<ClockOptions, any>) {
+function isReadonlyTarget(panel: PanelModel<ClockOptions>) {
   const description = Object.getOwnPropertyDescriptor(panel, 'targets');
   return typeof description?.set === 'undefined' && typeof description?.get === 'function';
 }
