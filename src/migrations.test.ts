@@ -474,95 +474,33 @@ describe('Clock migrations', () => {
   });
 
   describe('detectInputOnlyPluginConfig — mode-aware source checks', () => {
-    it('clears targets for mode=time panel with stale countdownSettings.source=query', () => {
-      // mode=time never consumes countdownSettings.source — a stale source='query' left
-      // over from a prior countdown configuration must not block migration cleanup.
+    // clearsTargets=true: panel is input-only → migration should empty targets
+    // clearsTargets=false: panel actively uses query source → targets preserved
+    it.each<[string, string, ClockSource, ClockSource, boolean]>([
+      // description                              mode          countdownSource              countupSource              clearsTargets
+      ['mode=time,     stale countdown.query', 'time',     ClockSource.query, ClockSource.input, true ],
+      ['mode=countdown stale countup.query',   'countdown',ClockSource.input, ClockSource.query, true ],
+      ['mode=countdown active countdown.query','countdown',ClockSource.query, ClockSource.input, false],
+      ['mode=countup   stale countdown.query', 'countup',  ClockSource.query, ClockSource.input, true ],
+      ['mode=countup   active countup.query',  'countup',  ClockSource.input, ClockSource.query, false],
+    ])('%s', (_, mode, countdownSource, countupSource, clearsTargets) => {
       const panel = {
         options: {
-          mode: 'time',
-          countdownSettings: { source: ClockSource.query },
-          countupSettings: { source: ClockSource.input },
+          mode,
+          countdownSettings: { source: countdownSource },
+          countupSettings: { source: countupSource },
           descriptionSettings: { source: DescriptionSource.none },
         },
-        targets: [{ refId: 'A' }],
+        ...(clearsTargets ? {} : { datasource: { type: 'influxdb', uid: 'xxx' } }),
+        targets: [{ refId: 'A', ...(clearsTargets ? {} : { datasource: { type: 'influxdb', uid: 'xxx' } }) }],
         type: 'grafana-clock-panel',
       } as unknown as PanelModel;
 
       clockMigrationHandler(panel);
 
-      expect(panel.targets).toEqual([]);
-    });
-
-    it('clears targets for mode=countdown with stale countupSettings.source=query (inactive source)', () => {
-      // mode=countdown only consumes countdownSettings.source; a stale countupSettings.source='query'
-      // must not prevent migration from treating this as an input-only panel.
-      const panel = {
-        options: {
-          mode: 'countdown',
-          countdownSettings: { source: ClockSource.input },
-          countupSettings: { source: ClockSource.query },
-          descriptionSettings: { source: DescriptionSource.none },
-        },
-        targets: [{ refId: 'A' }],
-        type: 'grafana-clock-panel',
-      } as unknown as PanelModel;
-
-      clockMigrationHandler(panel);
-
-      expect(panel.targets).toEqual([]);
-    });
-
-    it('does not clear targets for mode=countdown with countdownSettings.source=query (active query panel)', () => {
-      const panel = {
-        options: {
-          mode: 'countdown',
-          countdownSettings: { source: ClockSource.query },
-          countupSettings: { source: ClockSource.input },
-          descriptionSettings: { source: DescriptionSource.none },
-        },
-        datasource: { type: 'influxdb', uid: 'xxx' },
-        targets: [{ refId: 'A', datasource: { type: 'influxdb', uid: 'xxx' } }],
-        type: 'grafana-clock-panel',
-      } as unknown as PanelModel;
-
-      clockMigrationHandler(panel);
-
-      expect(panel.targets).toHaveLength(1);
-    });
-
-    it('clears targets for mode=countup with stale countdownSettings.source=query (inactive source)', () => {
-      const panel = {
-        options: {
-          mode: 'countup',
-          countdownSettings: { source: ClockSource.query },
-          countupSettings: { source: ClockSource.input },
-          descriptionSettings: { source: DescriptionSource.none },
-        },
-        targets: [{ refId: 'A' }],
-        type: 'grafana-clock-panel',
-      } as unknown as PanelModel;
-
-      clockMigrationHandler(panel);
-
-      expect(panel.targets).toEqual([]);
-    });
-
-    it('does not clear targets for mode=countup with countupSettings.source=query (active query panel)', () => {
-      const panel = {
-        options: {
-          mode: 'countup',
-          countdownSettings: { source: ClockSource.input },
-          countupSettings: { source: ClockSource.query },
-          descriptionSettings: { source: DescriptionSource.none },
-        },
-        datasource: { type: 'influxdb', uid: 'xxx' },
-        targets: [{ refId: 'A', datasource: { type: 'influxdb', uid: 'xxx' } }],
-        type: 'grafana-clock-panel',
-      } as unknown as PanelModel;
-
-      clockMigrationHandler(panel);
-
-      expect(panel.targets).toHaveLength(1);
+      clearsTargets
+        ? expect(panel.targets).toEqual([])
+        : expect(panel.targets).toHaveLength(1);
     });
   });
 

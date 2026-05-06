@@ -39,53 +39,29 @@ describe('isQueryDrivenOptions', () => {
     ).toBe(true);
   });
 
-  describe('mode=time', () => {
-    it.each<[string, ClockSource, ClockSource, boolean]>([
-      ['all input',            ClockSource.input, ClockSource.input, false],
-      ['stale countdown.query',ClockSource.query, ClockSource.input, false],
-      ['stale countup.query',  ClockSource.input, ClockSource.query, false],
-      ['both query',           ClockSource.query, ClockSource.query, false],
-    ])('%s', (_, cdSrc, cuSrc, expected) => {
-      expect(
-        isQueryDrivenOptions({
-          mode: ClockMode.time,
-          countdownSettings: { source: cdSrc } as any,
-          countupSettings: { source: cuSrc } as any,
-        })
-      ).toBe(expected);
-    });
-  });
-
-  describe('mode=countdown', () => {
-    it.each<[string, ClockSource, ClockSource, boolean]>([
-      ['countdown.input, countup.input', ClockSource.input, ClockSource.input, false],
-      ['countdown.query (active)',       ClockSource.query, ClockSource.input, true ],
-      ['stale countup.query',            ClockSource.input, ClockSource.query, false],
-    ])('%s', (_, cdSrc, cuSrc, expected) => {
-      expect(
-        isQueryDrivenOptions({
-          mode: ClockMode.countdown,
-          countdownSettings: { source: cdSrc } as any,
-          countupSettings: { source: cuSrc } as any,
-        })
-      ).toBe(expected);
-    });
-  });
-
-  describe('mode=countup', () => {
-    it.each<[string, ClockSource, ClockSource, boolean]>([
-      ['countup.input, countdown.input', ClockSource.input, ClockSource.input, false],
-      ['countup.query (active)',         ClockSource.input, ClockSource.query, true ],
-      ['stale countdown.query',          ClockSource.query, ClockSource.input, false],
-    ])('%s', (_, cdSrc, cuSrc, expected) => {
-      expect(
-        isQueryDrivenOptions({
-          mode: ClockMode.countup,
-          countdownSettings: { source: cdSrc } as any,
-          countupSettings: { source: cuSrc } as any,
-        })
-      ).toBe(expected);
-    });
+  it.each<[string, ClockMode, ClockSource, ClockSource, boolean]>([
+    // description                              mode              countdownSource              countupSource              expected
+    // mode=time: countdown/countup sources never consumed — always false
+    ['mode=time,     all input',            ClockMode.time,     ClockSource.input, ClockSource.input, false],
+    ['mode=time,     stale countdown.query',ClockMode.time,     ClockSource.query, ClockSource.input, false],
+    ['mode=time,     stale countup.query',  ClockMode.time,     ClockSource.input, ClockSource.query, false],
+    ['mode=time,     both query',           ClockMode.time,     ClockSource.query, ClockSource.query, false],
+    // mode=countdown: only countdownSettings.source is active
+    ['mode=countdown both input',           ClockMode.countdown,ClockSource.input, ClockSource.input, false],
+    ['mode=countdown active countdown',     ClockMode.countdown,ClockSource.query, ClockSource.input, true ],
+    ['mode=countdown stale countup.query',  ClockMode.countdown,ClockSource.input, ClockSource.query, false],
+    // mode=countup: only countupSettings.source is active
+    ['mode=countup   both input',           ClockMode.countup,  ClockSource.input, ClockSource.input, false],
+    ['mode=countup   active countup',       ClockMode.countup,  ClockSource.input, ClockSource.query, true ],
+    ['mode=countup   stale countdown.query',ClockMode.countup,  ClockSource.query, ClockSource.input, false],
+  ])('%s', (_, mode, countdownSource, countupSource, expected) => {
+    expect(
+      isQueryDrivenOptions({
+        mode,
+        countdownSettings: { source: countdownSource } as any,
+        countupSettings: { source: countupSource } as any,
+      })
+    ).toBe(expected);
   });
 
   describe('mode absent (old config)', () => {
@@ -95,13 +71,13 @@ describe('isQueryDrivenOptions', () => {
       ['countup.query',        ClockSource.input,  ClockSource.query, true ],
       ['both query',           ClockSource.query,  ClockSource.query, true ],
       ['both input',           ClockSource.input,  ClockSource.input, false],
-    ])('%s', (_, cdSrc, cuSrc, expected) => {
+    ])('%s', (_, countdownSource, countupSource, expected) => {
       const options: Partial<ClockOptions> = {};
-      if (cdSrc !== undefined) {
-        options.countdownSettings = { source: cdSrc } as any;
+      if (countdownSource !== undefined) {
+        options.countdownSettings = { source: countdownSource } as any;
       }
-      if (cuSrc !== undefined) {
-        options.countupSettings = { source: cuSrc } as any;
+      if (countupSource !== undefined) {
+        options.countupSettings = { source: countupSource } as any;
       }
       expect(isQueryDrivenOptions(options)).toBe(expected);
     });

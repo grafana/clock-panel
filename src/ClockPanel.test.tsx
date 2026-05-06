@@ -470,14 +470,14 @@ describe('stale query notice', () => {
     // combination correctly identifies the panel as query-driven (suppresses notice)
     // or input-only (shows notice). The trigger is always present so it can't interfere.
     it.each<[string, ClockMode, ClockSource, ClockSource, boolean]>([
-      // description                              mode              cdSrc              cuSrc              visible
+      // description                              mode              countdownSource              countupSource              visible
       ['mode=time,     no stale sources',         ClockMode.time,     ClockSource.input, ClockSource.input, true ],
       ['mode=time,     stale countdown.query',    ClockMode.time,     ClockSource.query, ClockSource.input, true ],
       ['mode=countdown active countdown.query',   ClockMode.countdown,ClockSource.query, ClockSource.input, false],
       ['mode=countdown stale countup.query',      ClockMode.countdown,ClockSource.input, ClockSource.query, true ],
       ['mode=countup   active countup.query',     ClockMode.countup,  ClockSource.input, ClockSource.query, false],
       ['mode=countup   stale countdown.query',    ClockMode.countup,  ClockSource.query, ClockSource.input, true ],
-    ])('%s', (_, mode, cdSrc, cuSrc, visible) => {
+    ])('%s', (_, mode, countdownSource, countupSource, visible) => {
       const props = getDefaultProps();
       render(
         <ClockPanel
@@ -485,8 +485,8 @@ describe('stale query notice', () => {
           options={{
             ...props.options,
             mode,
-            countdownSettings: { ...props.options.countdownSettings, source: cdSrc },
-            countupSettings: { ...props.options.countupSettings, source: cuSrc },
+            countdownSettings: { ...props.options.countdownSettings, source: countdownSource },
+            countupSettings: { ...props.options.countupSettings, source: countupSource },
           }}
           data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
         />
