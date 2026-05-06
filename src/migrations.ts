@@ -1,5 +1,5 @@
 import { PanelModel } from '@grafana/data';
-import { ClockOptions, ClockRefresh } from './types';
+import { ClockMode, ClockOptions, ClockRefresh } from './types';
 import { config } from '@grafana/runtime';
 
 export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<ClockOptions> => {
@@ -43,48 +43,39 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
 };
 
 // detect clock panel that does not use a query
+// Only the source that matches the active mode is actually consumed by CalculateClockOptions.
+// A stale source='query' on an inactive mode must not cause the panel to be treated as query-driven.
 const detectInputOnlyPluginConfig = (panel: PanelModel<ClockOptions>) => {
-  let isInputOnly = false;
-
   const options: any = panel.options || {};
-  if (options.countdownSettings?.source) {
-    if (options.countdownSettings?.source === 'input') {
-      isInputOnly = true;
-    } else {
+
+  // description is independent of mode
+  if (options.descriptionSettings?.source === 'query') {
+    return false;
+  }
+
+  if (options.mode === ClockMode.time) {
+    // time mode never consumes countdown/countup sources — skip those checks
+  } else if (options.mode === ClockMode.countdown) {
+    const src = options.countdownSettings?.source;
+    if (src && src !== 'input') {
+      return false;
+    }
+  } else if (options.mode === ClockMode.countup) {
+    const src = options.countupSettings?.source;
+    if (src && src !== 'input') {
       return false;
     }
   } else {
-    // no source indicates an old config (pre 2.1.4)
-    isInputOnly = true;
-  }
-
-  if (options.countupSettings?.source) {
-    if (options.countupSettings?.source === 'input') {
-      isInputOnly = true;
-    } else {
+    // mode absent (old config / unknown): check both sources conservatively
+    if (options.countdownSettings?.source && options.countdownSettings.source !== 'input') {
       return false;
     }
-  } else {
-    // no source indicates an old config (pre 2.1.4)
-    isInputOnly = true;
-  }
-
-  if (options.descriptionSettings?.source) {
-    if (options.descriptionSettings?.source === 'none') {
-      isInputOnly = true;
-    }
-    if (options.descriptionSettings?.source === 'input') {
-      isInputOnly = true;
-    }
-    if (options.descriptionSettings?.source === 'query') {
+    if (options.countupSettings?.source && options.countupSettings.source !== 'input') {
       return false;
     }
-  } else {
-    // no source indicates an old config (pre 2.1.4)
-    isInputOnly = true;
   }
 
-  return isInputOnly;
+  return true;
 };
 
 export const findGrafanaDataSource = (datasources: Record<string, any>) => {

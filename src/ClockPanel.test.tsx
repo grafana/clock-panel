@@ -498,6 +498,59 @@ describe('stale query notice', () => {
     );
     expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
   });
+
+  it('does not render when mode=countup uses countup query source (legitimate query panel)', () => {
+    const props = getDefaultProps();
+    render(
+      <ClockPanel
+        {...props}
+        options={{
+          ...props.options,
+          mode: ClockMode.countup,
+          countupSettings: { ...props.options.countupSettings, source: ClockSource.query },
+        }}
+        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } }}
+      />
+    );
+    expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
+  });
+
+  it('renders when mode=countdown has stale countupSettings.source=query (inactive source)', () => {
+    // countupSettings.source is not consumed when mode=countdown — a stale query source
+    // there must not suppress the notice.
+    const props = getDefaultProps();
+    render(
+      <ClockPanel
+        {...props}
+        options={{
+          ...props.options,
+          mode: ClockMode.countdown,
+          countdownSettings: { ...props.options.countdownSettings, source: ClockSource.input },
+          countupSettings: { ...props.options.countupSettings, source: ClockSource.query },
+        }}
+        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }}
+      />
+    );
+    expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
+  });
+
+  it('renders when mode=countup has stale countdownSettings.source=query (inactive source)', () => {
+    // countdownSettings.source is not consumed when mode=countup — same symmetry as above.
+    const props = getDefaultProps();
+    render(
+      <ClockPanel
+        {...props}
+        options={{
+          ...props.options,
+          mode: ClockMode.countup,
+          countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query },
+          countupSettings: { ...props.options.countupSettings, source: ClockSource.input },
+        }}
+        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }}
+      />
+    );
+    expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
+  });
 });
 const getDefaultProps = () => {
   const props = {
