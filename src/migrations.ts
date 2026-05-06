@@ -10,10 +10,11 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
     options.refresh = ClockRefresh.dashboard;
   }
 
-  if (!isReadonlyTarget(panel)) {
-    if (detectInputOnlyPluginConfig(panel)) {
-      migrateInputOnlyPluginConfig(panel);
-    }
+  const readonlyTargets = isReadonlyTarget(panel);
+  const inputOnly = detectInputOnlyPluginConfig(panel);
+
+  if (!readonlyTargets && inputOnly) {
+    migrateInputOnlyPluginConfig(panel);
   }
   // configuration options moved as the panel migrated, clean up if needed
   cleanupConfig(panel);
@@ -27,7 +28,7 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
   // present regardless of org configuration. Prefer the registered instance from
   // config.datasources (which carries the correct type); fall back to the known-stable
   // uid when it is absent from config (e.g. in test environments).
-  if (isReadonlyTarget(panel) && detectInputOnlyPluginConfig(panel)) {
+  if (readonlyTargets && inputOnly) {
     const targets = panel.targets;
     if (Array.isArray(targets) && targets.length > 0) {
       const grafanaDs = findGrafanaDataSource(config.datasources) ?? { type: 'datasource', uid: 'grafana' };
