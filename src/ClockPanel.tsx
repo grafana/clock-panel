@@ -64,7 +64,12 @@ export function ClockPanel(props: Props) {
   const activeSourceIsQuery =
     options.descriptionSettings?.source === DescriptionSource.query ||
     (options.mode === ClockMode.countdown && options.countdownSettings?.source === ClockSource.query) ||
-    (options.mode === ClockMode.countup && options.countupSettings?.source === ClockSource.query);
+    (options.mode === ClockMode.countup && options.countupSettings?.source === ClockSource.query) ||
+    // old config / unknown mode: conservatively treat either source=query as active
+    (options.mode == null && (
+      options.countdownSettings?.source === ClockSource.query ||
+      options.countupSettings?.source === ClockSource.query
+    ));
   const isNonQueryPanel = !activeSourceIsQuery;
   const hasDataErrors =
     data.state === LoadingState.Error || (Array.isArray(data.errors) && data.errors.length > 0);

@@ -551,6 +551,24 @@ describe('stale query notice', () => {
     );
     expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
   });
+
+  it('does not render when mode is absent and countdownSettings.source=query (old config, query still active)', () => {
+    // Old pre-2.1.4 panels have no mode field. When countdown.source='query' the migration
+    // treats the panel as query-driven and preserves its targets — the notice must agree.
+    const props = getDefaultProps();
+    const { mode: _mode, ...optionsWithoutMode } = props.options as any;
+    render(
+      <ClockPanel
+        {...props}
+        options={{
+          ...optionsWithoutMode,
+          countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query },
+        }}
+        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }}
+      />
+    );
+    expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
+  });
 });
 const getDefaultProps = () => {
   const props = {
