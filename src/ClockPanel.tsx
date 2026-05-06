@@ -1,5 +1,6 @@
 import { LoadingState, PanelProps } from '@grafana/data';
 import { t } from '@grafana/i18n';
+import { useTheme2 } from '@grafana/ui';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ClockOptions, ClockMode, ClockRefresh, ClockSource, ClockStyle, DescriptionSource } from './types';
 
@@ -20,6 +21,7 @@ interface Props extends PanelProps<ClockOptions> {}
 export function ClockPanel(props: Props) {
   const { options, width, height, data } = props;
   const { panel } = useClockStyles(options);
+  const theme = useTheme2();
   const { timezone: optionsTimezone, dateSettings, timezoneSettings } = options;
   const { timeZone: dashboardTimezone } = props;
   const timezoneToUse = optionsTimezone === 'dashboard' ? dashboardTimezone : (optionsTimezone ?? '');
@@ -96,11 +98,11 @@ export function ClockPanel(props: Props) {
             left: 8,
             right: 8,
             padding: '6px 10px',
-            background: 'rgba(229, 84, 84, 0.12)',
-            border: '1px solid rgba(229, 84, 84, 0.5)',
-            borderRadius: 4,
-            fontSize: '12px',
-            color: '#e55454',
+            background: theme.colors.error.transparent,
+            border: `1px solid ${theme.colors.error.borderTransparent}`,
+            borderRadius: theme.shape.radius.default,
+            fontSize: theme.typography.bodySmall.fontSize,
+            color: theme.colors.error.text,
             pointerEvents: 'none',
           }}
         >

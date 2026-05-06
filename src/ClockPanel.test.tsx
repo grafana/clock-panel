@@ -459,7 +459,7 @@ describe('stale query notice', () => {
 
   it('renders when input-only panel has an active query running (no error)', () => {
     const props = getDefaultProps();
-    render(<ClockPanel {...props} data={{ ...props.data, request: { targets: [{ refId: 'A' }] } }} />);
+    render(<ClockPanel {...props} data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }} />);
     expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
   });
 
@@ -475,7 +475,7 @@ describe('stale query notice', () => {
           mode: ClockMode.countdown,
           countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query },
         }}
-        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } }}
+        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }}
       />
     );
     expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
@@ -509,7 +509,7 @@ describe('stale query notice', () => {
           mode: ClockMode.countup,
           countupSettings: { ...props.options.countupSettings, source: ClockSource.query },
         }}
-        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } }}
+        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } as any }}
       />
     );
     expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
