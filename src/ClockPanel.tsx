@@ -54,16 +54,17 @@ export function ClockPanel(props: Props) {
     });
   }, [props.options, timezoneToUse, data, props.replaceVariables, now]);
 
-  // Detect panels that don't use a datasource query but have a stale target causing errors.
-  // This can happen when migration couldn't clear the target (e.g., Grafana 12 readonly
-  // targets with no Grafana built-in datasource registered).
+  // Show a notice when an input-only panel has a stale query running — either because
+  // migration couldn't clear it (e.g., Grafana 12 readonly targets) or because Grafana's
+  // query editor re-added a default target row after the user opened and saved the panel.
   const isNonQueryPanel =
     options.countdownSettings?.source !== ClockSource.query &&
     options.countupSettings?.source !== ClockSource.query &&
     options.descriptionSettings?.source !== DescriptionSource.query;
   const hasDataErrors =
     data.state === LoadingState.Error || (Array.isArray(data.errors) && data.errors.length > 0);
-  const showStaleQueryNotice = isNonQueryPanel && hasDataErrors;
+  const hasActiveQuery = (data.request?.targets?.length ?? 0) > 0;
+  const showStaleQueryNotice = isNonQueryPanel && (hasDataErrors || hasActiveQuery);
 
   return (
     <div
@@ -102,7 +103,7 @@ export function ClockPanel(props: Props) {
         >
           {t(
             'ClockPanel.staleQueryNotice.message',
-            'This panel does not use a datasource query. A stale query is causing an error. Open the Query tab and remove all queries to clear this warning.'
+            'This panel does not use a datasource query but one is configured. Open the Query tab and remove all queries to clear this notice.'
           )}
         </div>
       )}

@@ -1,5 +1,5 @@
 import { ClockPanel } from 'ClockPanel';
-import { act, render } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange, DataFrame, FieldType } from '@grafana/data';
 import {
   ClockMode,
@@ -440,6 +440,38 @@ describe('ClockPanel', () => {
 
     const { container } = render(<ClockPanel {...props} />);
     expect(container).toHaveTextContent('Undefined from series b');
+  });
+});
+
+describe('stale query notice', () => {
+  it('does not render when input-only panel has no queries configured', () => {
+    const props = getDefaultProps();
+    render(<ClockPanel {...props} />);
+    expect(screen.queryByTestId('clock-panel-stale-query-notice')).toBeNull();
+  });
+
+  it('renders when input-only panel has data errors', () => {
+    const props = getDefaultProps();
+    render(<ClockPanel {...props} data={{ ...props.data, state: LoadingState.Error, errors: [{ message: 'failed' }] }} />);
+    expect(screen.getByTestId('clock-panel-stale-query-notice')).toBeInTheDocument();
+  });
+
+  it('renders when input-only panel has an active query running (no error)', () => {
+    const props = getDefaultProps();
+    render(<ClockPanel {...props} data={{ ...props.data, request: { targets: [{ refId: 'A' }] } }} />);
+    expect(screen.getByTestId('clock-panel-stale-query-notice')).toBeInTheDocument();
+  });
+
+  it('does not render when panel uses query source (legitimate query panel)', () => {
+    const props = getDefaultProps();
+    render(
+      <ClockPanel
+        {...props}
+        options={{ ...props.options, countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query } }}
+        data={{ ...props.data, request: { targets: [{ refId: 'A' }] } }}
+      />
+    );
+    expect(screen.queryByTestId('clock-panel-stale-query-notice')).toBeNull();
   });
 });
 
