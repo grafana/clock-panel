@@ -349,8 +349,8 @@ describe('Clock migrations', () => {
         clockMigrationHandler(panel);
 
         // The readonly getter returns a mutable clone; mutations to elements are observable.
-        expect(panel.targets[0].datasource).toEqual({ type: grafanaDs.type, uid: grafanaDs.uid });
-        expect(panel.targets[0].queryType).toBe('randomWalk');
+        expect(panel.targets![0].datasource).toEqual({ type: grafanaDs.type, uid: grafanaDs.uid });
+        expect(panel.targets![0].queryType).toBe('randomWalk');
       });
 
       it('does not touch query-mode panels that have readonly targets', () => {
@@ -366,8 +366,8 @@ describe('Clock migrations', () => {
 
         // detectInputOnlyPluginConfig returns false for source='query',
         // so Fix 2 block must not be entered — original datasource preserved.
-        expect(panel.targets[0].datasource).toEqual({ type: 'influxdb', uid: 'yyy' });
-        expect(panel.targets[0].queryType).toBeUndefined();
+        expect(panel.targets![0].datasource).toEqual({ type: 'influxdb', uid: 'yyy' });
+        expect(panel.targets![0].queryType).toBeUndefined();
       });
 
       it('does not redirect targets or change datasource when readonly targets are already empty', () => {
@@ -423,8 +423,8 @@ describe('Clock migrations', () => {
 
         clockMigrationHandler(panel);
 
-        expect(panel.targets[0].datasource).toEqual({ type: 'datasource', uid: 'grafana' });
-        expect(panel.targets[0].queryType).toBe('randomWalk');
+        expect(panel.targets![0].datasource).toEqual({ type: 'datasource', uid: 'grafana' });
+        expect(panel.targets![0].queryType).toBe('randomWalk');
         expect(panel.datasource).toEqual({ type: 'datasource', uid: 'grafana' });
       });
     });
