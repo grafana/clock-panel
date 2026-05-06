@@ -459,6 +459,12 @@ describe('stale query notice', () => {
       expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
     });
 
+    it('renders when errors array is non-empty without error state', () => {
+      const props = getDefaultProps();
+      render(<ClockPanel {...props} data={{ ...props.data, state: LoadingState.Done, errors: [{ message: 'partial failure' }] }} />);
+      expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
+    });
+
     it('renders when request has active targets', () => {
       const props = getDefaultProps();
       render(<ClockPanel {...props} data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }} />);

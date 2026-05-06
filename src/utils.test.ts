@@ -1,5 +1,32 @@
-import { findGrafanaDataSource, isQueryDrivenOptions } from './utils';
+import { findGrafanaDataSource, getMoment, getTimeZoneNames, isQueryDrivenOptions } from './utils';
 import { ClockMode, ClockOptions, ClockSource, DescriptionSource } from './types';
+
+jest.mock('@grafana/runtime', () => ({
+  getTemplateSrv: () => ({ replace: (v: string) => v }),
+}));
+
+describe('getTimeZoneNames', () => {
+  it('returns a non-empty array of strings', () => {
+    const names = getTimeZoneNames();
+    expect(Array.isArray(names)).toBe(true);
+    expect(names.length).toBeGreaterThan(0);
+    expect(names).toContain('America/New_York');
+  });
+});
+
+describe('getMoment', () => {
+  it('returns a moment for a given timezone', () => {
+    const m = getMoment('America/New_York');
+    expect(m).toBeDefined();
+    expect(typeof m.format).toBe('function');
+  });
+
+  it('returns a moment when no timezone provided (guesses local)', () => {
+    const m = getMoment();
+    expect(m).toBeDefined();
+    expect(typeof m.format).toBe('function');
+  });
+});
 
 describe('findGrafanaDataSource', () => {
   it('finds datasource by uid', () => {
