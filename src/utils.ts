@@ -2,8 +2,6 @@ import { getTemplateSrv } from '@grafana/runtime';
 import moment, { Moment } from 'moment-timezone';
 import { ClockMode, ClockOptions, ClockSource, DescriptionSource } from './types';
 
-// Only the source that matches the active mode is actually consumed by CalculateClockOptions.
-// A stale source='query' on an inactive mode must not cause the panel to be treated as query-driven.
 export const findGrafanaDataSource = (datasources: Record<string, any>) => {
   for (const key of Object.keys(datasources || {})) {
     const ds = datasources[key];
@@ -14,6 +12,8 @@ export const findGrafanaDataSource = (datasources: Record<string, any>) => {
   return undefined;
 };
 
+// Only the source that matches the active mode is actually consumed by CalculateClockOptions.
+// A stale source='query' on an inactive mode must not cause the panel to be treated as query-driven.
 export const isQueryDrivenOptions = (options: Partial<ClockOptions>): boolean => {
   if (options.descriptionSettings?.source === DescriptionSource.query) {
     return true;

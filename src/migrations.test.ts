@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash';
 import { config } from '@grafana/runtime';
 import { clockMigrationHandler } from './migrations';
 import { findGrafanaDataSource } from './utils';
-import { ClockRefresh } from './types';
+import { ClockRefresh, ClockSource, DescriptionSource } from './types';
 
 describe('Clock migrations', () => {
 
@@ -198,7 +198,7 @@ describe('Clock migrations', () => {
           invalidValueText: 'invalid value',
           noValueText: 'no value found',
           queryCalculation: 'last',
-          source: 'query',
+          source: ClockSource.query,
         },
         countupSettings: {
           beginCountupTime: '2022-04-03T14:43:46-04:00',
@@ -206,7 +206,7 @@ describe('Clock migrations', () => {
           invalidValueText: 'invalid value',
           noValueText: 'no value found',
           queryCalculation: 'last',
-          source: 'query',
+          source: ClockSource.query,
         },
         dateSettings: {
           dateFormat: 'YYYY-MM-DD',
@@ -220,7 +220,7 @@ describe('Clock migrations', () => {
           fontSize: '12px',
           fontWeight: 'normal',
           noValueText: 'no description found',
-          source: 'none',
+          source: DescriptionSource.none,
         },
         fontMono: true,
         mode: 'time',
@@ -299,7 +299,7 @@ describe('Clock migrations', () => {
     it('should not try to mutate targets when migrating panel', () => {
       const panel = createPanelWithReadonlyTargets({
         options: {
-          countdownSettings: { source: 'input' },
+          countdownSettings: { source: ClockSource.input },
         },
         datasource: { type: 'test', uid: '123' },
         targets: [],
@@ -324,9 +324,9 @@ describe('Clock migrations', () => {
       it('sets panel datasource to Grafana built-in when targets are readonly and panel is input-only', () => {
         const panel = createPanelWithReadonlyTargets({
           options: {
-            countdownSettings: { source: 'input' },
-            countupSettings: { source: 'input' },
-            descriptionSettings: { source: 'none' },
+            countdownSettings: { source: ClockSource.input },
+            countupSettings: { source: ClockSource.input },
+            descriptionSettings: { source: DescriptionSource.none },
           },
           datasource: { type: 'influxdb', uid: 'xxx' },
           targets: [{ refId: 'A' }],
@@ -339,9 +339,9 @@ describe('Clock migrations', () => {
       it('mutates bare target elements to use Grafana built-in datasource with randomWalk', () => {
         const panel = createPanelWithReadonlyTargets({
           options: {
-            countdownSettings: { source: 'input' },
-            countupSettings: { source: 'input' },
-            descriptionSettings: { source: 'none' },
+            countdownSettings: { source: ClockSource.input },
+            countupSettings: { source: ClockSource.input },
+            descriptionSettings: { source: DescriptionSource.none },
           },
           datasource: { type: 'influxdb', uid: 'xxx' },
           targets: [{ refId: 'A' }],
@@ -357,7 +357,7 @@ describe('Clock migrations', () => {
       it('does not touch query-mode panels that have readonly targets', () => {
         const panel = createPanelWithReadonlyTargets({
           options: {
-            countdownSettings: { source: 'query' },
+            countdownSettings: { source: ClockSource.query },
           },
           datasource: { type: 'influxdb', uid: 'yyy' },
           targets: [{ refId: 'A', datasource: { type: 'influxdb', uid: 'yyy' } }],
@@ -365,8 +365,7 @@ describe('Clock migrations', () => {
 
         clockMigrationHandler(panel);
 
-        // detectInputOnlyPluginConfig returns false for source='query',
-        // so Fix 2 block must not be entered — original datasource preserved.
+        // A query-driven panel must not have its targets or datasource replaced.
         expect(panel.targets![0].datasource).toEqual({ type: 'influxdb', uid: 'yyy' });
         expect(panel.targets![0].queryType).toBeUndefined();
       });
@@ -376,9 +375,9 @@ describe('Clock migrations', () => {
         // panel.datasource must NOT be changed to the Grafana built-in even when it is available.
         const panel = createPanelWithReadonlyTargets({
           options: {
-            countdownSettings: { source: 'input' },
-            countupSettings: { source: 'input' },
-            descriptionSettings: { source: 'none' },
+            countdownSettings: { source: ClockSource.input },
+            countupSettings: { source: ClockSource.input },
+            descriptionSettings: { source: DescriptionSource.none },
           },
           datasource: { type: 'influxdb', uid: 'xxx' },
           targets: [],
@@ -398,9 +397,9 @@ describe('Clock migrations', () => {
       it('does not throw when Grafana DS is absent from config.datasources', () => {
         const panel = createPanelWithReadonlyTargets({
           options: {
-            countdownSettings: { source: 'input' },
-            countupSettings: { source: 'input' },
-            descriptionSettings: { source: 'none' },
+            countdownSettings: { source: ClockSource.input },
+            countupSettings: { source: ClockSource.input },
+            descriptionSettings: { source: DescriptionSource.none },
           },
           datasource: { type: 'influxdb', uid: 'xxx' },
           targets: [{ refId: 'A' }],
@@ -414,9 +413,9 @@ describe('Clock migrations', () => {
         // so stale targets use randomWalk rather than the default datasource.
         const panel = createPanelWithReadonlyTargets({
           options: {
-            countdownSettings: { source: 'input' },
-            countupSettings: { source: 'input' },
-            descriptionSettings: { source: 'none' },
+            countdownSettings: { source: ClockSource.input },
+            countupSettings: { source: ClockSource.input },
+            descriptionSettings: { source: DescriptionSource.none },
           },
           datasource: { type: 'influxdb', uid: 'xxx' },
           targets: [{ refId: 'A' }],
@@ -437,9 +436,9 @@ describe('Clock migrations', () => {
       const panel = {
         datasource: { type: 'influxdb', uid: 'xxx' },
         options: {
-          countdownSettings: { source: 'query' },
-          countupSettings: { source: 'query' },
-          descriptionSettings: { source: 'none' },
+          countdownSettings: { source: ClockSource.query },
+          countupSettings: { source: ClockSource.query },
+          descriptionSettings: { source: DescriptionSource.none },
         },
         targets: [{ refId: 'A', datasource: { type: 'influxdb', uid: 'xxx' } }],
         type: 'grafana-clock-panel',
@@ -458,9 +457,9 @@ describe('Clock migrations', () => {
       // (non-Grafana-12), migrateInputOnlyPluginConfig runs and clears them again.
       const panel = {
         options: {
-          countdownSettings: { source: 'input' },
-          countupSettings: { source: 'input' },
-          descriptionSettings: { source: 'none' },
+          countdownSettings: { source: ClockSource.input },
+          countupSettings: { source: ClockSource.input },
+          descriptionSettings: { source: DescriptionSource.none },
         },
         targets: [{ refId: 'A' }],
         pluginVersion: '2.1.8',
@@ -481,9 +480,9 @@ describe('Clock migrations', () => {
       const panel = {
         options: {
           mode: 'time',
-          countdownSettings: { source: 'query' },
-          countupSettings: { source: 'input' },
-          descriptionSettings: { source: 'none' },
+          countdownSettings: { source: ClockSource.query },
+          countupSettings: { source: ClockSource.input },
+          descriptionSettings: { source: DescriptionSource.none },
         },
         targets: [{ refId: 'A' }],
         type: 'grafana-clock-panel',
@@ -500,9 +499,9 @@ describe('Clock migrations', () => {
       const panel = {
         options: {
           mode: 'countdown',
-          countdownSettings: { source: 'input' },
-          countupSettings: { source: 'query' },
-          descriptionSettings: { source: 'none' },
+          countdownSettings: { source: ClockSource.input },
+          countupSettings: { source: ClockSource.query },
+          descriptionSettings: { source: DescriptionSource.none },
         },
         targets: [{ refId: 'A' }],
         type: 'grafana-clock-panel',
@@ -517,9 +516,9 @@ describe('Clock migrations', () => {
       const panel = {
         options: {
           mode: 'countdown',
-          countdownSettings: { source: 'query' },
-          countupSettings: { source: 'input' },
-          descriptionSettings: { source: 'none' },
+          countdownSettings: { source: ClockSource.query },
+          countupSettings: { source: ClockSource.input },
+          descriptionSettings: { source: DescriptionSource.none },
         },
         datasource: { type: 'influxdb', uid: 'xxx' },
         targets: [{ refId: 'A', datasource: { type: 'influxdb', uid: 'xxx' } }],
@@ -535,9 +534,9 @@ describe('Clock migrations', () => {
       const panel = {
         options: {
           mode: 'countup',
-          countdownSettings: { source: 'query' },
-          countupSettings: { source: 'input' },
-          descriptionSettings: { source: 'none' },
+          countdownSettings: { source: ClockSource.query },
+          countupSettings: { source: ClockSource.input },
+          descriptionSettings: { source: DescriptionSource.none },
         },
         targets: [{ refId: 'A' }],
         type: 'grafana-clock-panel',
@@ -552,9 +551,9 @@ describe('Clock migrations', () => {
       const panel = {
         options: {
           mode: 'countup',
-          countdownSettings: { source: 'input' },
-          countupSettings: { source: 'query' },
-          descriptionSettings: { source: 'none' },
+          countdownSettings: { source: ClockSource.input },
+          countupSettings: { source: ClockSource.query },
+          descriptionSettings: { source: DescriptionSource.none },
         },
         datasource: { type: 'influxdb', uid: 'xxx' },
         targets: [{ refId: 'A', datasource: { type: 'influxdb', uid: 'xxx' } }],
@@ -583,9 +582,9 @@ describe('Clock migrations', () => {
       // when the Grafana built-in DS is registered — the panel does not need a query.
       const panel = {
         options: {
-          countdownSettings: { source: 'input' },
-          countupSettings: { source: 'input' },
-          descriptionSettings: { source: 'none' },
+          countdownSettings: { source: ClockSource.input },
+          countupSettings: { source: ClockSource.input },
+          descriptionSettings: { source: DescriptionSource.none },
         },
         datasource: { type: 'influxdb', uid: 'xxx' },
         targets: [{ refId: 'A' }],
@@ -617,7 +616,7 @@ describe('Real-world: barn-thermals-imperial v13 clock panel', () => {
         invalidValueText: 'invalid value',
         noValueText: 'no value found',
         queryCalculation: 'last',
-        source: 'input',
+        source: ClockSource.input,
       },
       countupSettings: {
         beginCountupTime: '2022-04-03T14:43:46-04:00',
@@ -625,7 +624,7 @@ describe('Real-world: barn-thermals-imperial v13 clock panel', () => {
         invalidValueText: 'invalid value',
         noValueText: 'no value found',
         queryCalculation: 'last',
-        source: 'input',
+        source: ClockSource.input,
       },
       dateSettings: {
         dateFormat: 'YYYY-MM-DD',
@@ -639,7 +638,7 @@ describe('Real-world: barn-thermals-imperial v13 clock panel', () => {
         fontSize: '12px',
         fontWeight: 'normal',
         noValueText: 'no description found',
-        source: 'none',
+        source: DescriptionSource.none,
       },
       fontMono: true,
       mode: 'time',
