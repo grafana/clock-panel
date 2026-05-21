@@ -23,14 +23,44 @@ on:
 permissions: {}
 
 jobs:
+  check-changelog:
+    name: Check changelog
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.event.inputs.branch }}
+      - name: Verify CHANGELOG.md has no [Unreleased] section
+        run: |
+          UNRELEASED_LINE=$(grep -n "^## \[Unreleased\]" CHANGELOG.md | head -1 | cut -d: -f1)
+          RELEASE_LINE=$(grep -n "^## \[[0-9]" CHANGELOG.md | head -1 | cut -d: -f1)
+
+          # No [Unreleased] section — nothing to check
+          if [ -z "$UNRELEASED_LINE" ]; then
+            exit 0
+          fi
+
+          # [Unreleased] is below the latest release — fine
+          if [ -n "$RELEASE_LINE" ] && [ "$UNRELEASED_LINE" -gt "$RELEASE_LINE" ]; then
+            exit 0
+          fi
+
+          VERSION=$(jq -r '.version' package.json)
+          echo "Error: CHANGELOG.md contains an [Unreleased] section."
+          echo "A released version is required and must match package.json (${VERSION})."
+          exit 1
+
   cd:
     name: CD
-    uses: grafana/plugin-ci-workflows/.github/workflows/cd.yml@ci-cd-workflows/v6.0.0
+    needs: check-changelog
+    uses: grafana/plugin-ci-workflows/.github/workflows/cd.yml@ci-cd-workflows/v8.0.0
     permissions:
+      attestations: write
       contents: write
       id-token: write
-      attestations: write
-      pull-requests: read # Required for v6.0.0
+      pull-requests: read
     with:
       branch: ${{ github.event.inputs.branch }}
       environment: ${{ github.event.inputs.environment }}
