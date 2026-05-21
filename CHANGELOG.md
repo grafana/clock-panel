@@ -1,5 +1,13 @@
 # Change Log
 
+## [Unreleased]
+
+### Project Updates
+
+- Added pre-flight changelog validation to publish workflow.
+- Bumped `plugin-ci-workflows` to v8.0.0.
+- Added `.npmrc` with `ignore-scripts=true` to disable lifecycle scripts and mitigate supply-chain attack risk.
+
 ## 3.2.1
 
 - Fixes React unique child key error
