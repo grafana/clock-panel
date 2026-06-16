@@ -1,0 +1,412 @@
+{
+  "ColorEditor": {
+    "input": {
+      "value": {
+        "placeholder": "色を選択"
+      }
+    }
+  },
+  "components": {
+    "RenderTime": {
+      "getStrings": {
+        "days": "日",
+        "hours": "時間",
+        "minutes": "分",
+        "months": "か月",
+        "oneDay": "1日",
+        "oneHour": "1時間",
+        "oneMinute": "1分",
+        "oneMonth": "1か月",
+        "oneSecond": "1秒",
+        "oneYear": "1年",
+        "seconds": "秒",
+        "years": "年"
+      }
+    }
+  },
+  "module": {
+    "ClockOptions": {
+      "bgColor": {
+        "name": "背景色"
+      },
+      "clockType": {
+        "name": "時計タイプ",
+        "options": {
+          "custom": {
+            "label": "カスタム"
+          },
+          "h12": {
+            "label": "12時間"
+          },
+          "h24": {
+            "label": "24時間"
+          }
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "カスタム形式",
+          "settings": {
+            "placeholder": "オプション"
+          }
+        },
+        "endCountdownTime": {
+          "name": "終了時刻",
+          "placeholder": "ISO 8601またはRFC 2822の日時"
+        },
+        "endText": {
+          "name": "終結テキスト"
+        },
+        "invalidValueText": {
+          "defaultValue": "無効な値",
+          "name": "無効な値のテキスト"
+        },
+        "noValueText": {
+          "defaultValue": "値が見つかりません",
+          "name": "値なしのテキスト"
+        },
+        "queryCalculation": {
+          "description": "カウントダウン時間の計算方法",
+          "name": "計算",
+          "options": {
+            "first": {
+              "description": "最初の値",
+              "label": "最初の"
+            },
+            "firstNotNull": {
+              "description": "最初の非NULL値（NaNも除く）",
+              "label": "最初の*"
+            },
+            "last": {
+              "description": "最終値",
+              "label": "最終"
+            },
+            "lastNotNull": {
+              "description": "最終非NULL値（NaNも除く）",
+              "label": "最終*"
+            },
+            "max": {
+              "description": "最大値",
+              "label": "最大"
+            },
+            "min": {
+              "description": "最小値",
+              "label": "最小"
+            },
+            "minFuture": {
+              "description": "未来の最小値",
+              "label": "未来の最小"
+            }
+          }
+        },
+        "queryField": {
+          "name": "フィールド",
+          "settings": {
+            "noFieldsMessage": "フィールドが見つかりません"
+          }
+        },
+        "source": {
+          "options": {
+            "input": {
+              "label": "入力"
+            },
+            "query": {
+              "label": "クエリ"
+            }
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "開始時刻",
+          "placeholder": "ISO 8601またはRFC 2822の日時"
+        },
+        "beginText": {
+          "name": "開始テキスト"
+        },
+        "customFormat": {
+          "name": "カスタム形式",
+          "settings": {
+            "placeholder": "オプション"
+          }
+        },
+        "invalidValueText": {
+          "defaultValue": "無効な値",
+          "name": "無効な値のテキスト"
+        },
+        "noValueText": {
+          "defaultValue": "値が見つかりません",
+          "name": "値なしのテキスト"
+        },
+        "queryCalculation": {
+          "description": "カウントアップ時間の計算方法",
+          "name": "計算",
+          "options": {
+            "first": {
+              "description": "最初の値",
+              "label": "最初の"
+            },
+            "firstNotNull": {
+              "description": "最初の非NULL値（NaNも除く）",
+              "label": "最初の*"
+            },
+            "last": {
+              "description": "最終値",
+              "label": "最終"
+            },
+            "lastNotNull": {
+              "description": "最終非NULL値（NaNも除く）",
+              "label": "最終*"
+            },
+            "max": {
+              "description": "最大値",
+              "label": "最大"
+            },
+            "maxPast": {
+              "description": "過去の最大値",
+              "label": "過去の最大"
+            },
+            "min": {
+              "description": "最小値",
+              "label": "最小"
+            }
+          }
+        },
+        "queryField": {
+          "name": "フィールド",
+          "settings": {
+            "noFieldsMessage": "フィールドが見つかりません"
+          }
+        },
+        "source": {
+          "name": "ソース",
+          "options": {
+            "input": {
+              "label": "入力"
+            },
+            "query": {
+              "label": "クエリ"
+            }
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "日付形式",
+          "settings": {
+            "placeholder": "日付形式を入力"
+          }
+        },
+        "fontSize": {
+          "name": "フォントサイズ",
+          "settings": {
+            "placeholder": "日付形式"
+          }
+        },
+        "fontWeight": {
+          "name": "フォントの太さ",
+          "options": {
+            "bold": {
+              "label": "太字"
+            },
+            "normal": {
+              "label": "通常"
+            }
+          }
+        },
+        "locale": {
+          "name": "ロケール",
+          "settings": {
+            "placeholder": "ロケールを入力：独、仏、西、...（デフォルト：英）"
+          }
+        },
+        "showDate": {
+          "name": "日付を表示"
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "説明",
+          "settings": {
+            "placeholder": "説明を入力"
+          }
+        },
+        "fontSize": {
+          "name": "フォントサイズ",
+          "settings": {
+            "placeholder": "フォントサイズ（例：12px）"
+          }
+        },
+        "fontWeight": {
+          "name": "フォントの太さ",
+          "options": {
+            "bold": {
+              "label": "太字"
+            },
+            "normal": {
+              "label": "通常"
+            }
+          }
+        },
+        "noValueText": {
+          "defaultValue": "説明が見つかりません",
+          "name": "値なしのテキスト"
+        },
+        "queryField": {
+          "name": "フィールド",
+          "settings": {
+            "noFieldsMessage": "フィールドが見つかりません"
+          }
+        },
+        "source": {
+          "name": "ソース",
+          "options": {
+            "input": {
+              "label": "入力"
+            },
+            "none": {
+              "label": "なし"
+            },
+            "query": {
+              "label": "クエリ"
+            }
+          }
+        }
+      },
+      "digitalSettings": {
+        "fillColor": {
+          "name": "塗りつぶし色"
+        },
+        "glowSize": {
+          "name": "グローサイズ"
+        },
+        "strokeColor": {
+          "name": "ストロークの色"
+        },
+        "strokeWidth": {
+          "name": "ストロークの幅"
+        }
+      },
+      "fontMono": {
+        "name": "フォント等幅"
+      },
+      "mode": {
+        "name": "モード",
+        "options": {
+          "countdown": {
+            "label": "カウントダウン"
+          },
+          "countup": {
+            "label": "カウントアップ"
+          },
+          "time": {
+            "label": "時刻"
+          }
+        }
+      },
+      "refresh": {
+        "name": "更新",
+        "options": {
+          "dashboard": {
+            "label": "ダッシュボード使用"
+          },
+          "sec": {
+            "label": "毎秒"
+          }
+        }
+      },
+      "source": {
+        "name": "ソース"
+      },
+      "style": {
+        "name": "スタイル",
+        "options": {
+          "digital": {
+            "label": "デジタル"
+          },
+          "legacy": {
+            "label": "テキスト"
+          }
+        }
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "時刻形式",
+          "settings": {
+            "placeholder": "日付形式"
+          }
+        },
+        "fontSize": {
+          "name": "フォントサイズ",
+          "settings": {
+            "placeholder": "フォントサイズ（例：12px）"
+          }
+        },
+        "fontWeight": {
+          "name": "フォントの太さ",
+          "options": {
+            "bold": {
+              "label": "太字"
+            },
+            "normal": {
+              "label": "通常"
+            }
+          }
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "フォントサイズ",
+          "settings": {
+            "placeholder": "フォントサイズ"
+          }
+        },
+        "fontWeight": {
+          "name": "フォントの太さ",
+          "options": {
+            "bold": {
+              "label": "太字"
+            },
+            "normal": {
+              "label": "通常"
+            }
+          }
+        },
+        "options": {
+          "browserTime": {
+            "label": "ブラウザ時刻"
+          },
+          "sameAsDashboard": {
+            "label": "ダッシュボードと同じ"
+          }
+        },
+        "showTimezone": {
+          "name": "タイムゾーンを表示"
+        },
+        "timezone": {
+          "name": "タイムゾーン"
+        },
+        "zoneFormat": {
+          "name": "表示形式",
+          "options": {
+            "abbv": {
+              "label": "略語"
+            },
+            "name": {
+              "label": "通常"
+            },
+            "nameOffset": {
+              "label": "名前+オフセット"
+            },
+            "offset": {
+              "label": "オフセット"
+            },
+            "offsetAbbv": {
+              "label": "オフセット+略語"
+            }
+          }
+        }
+      }
+    }
+  }
+}

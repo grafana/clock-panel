@@ -1,0 +1,239 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Clock migrations Non-Query config with datasource included 1`] = `
+{
+  "bgColor": "rgb(27, 29, 33)",
+  "clockType": "12 hour",
+  "countdownSettings": {
+    "endCountdownTime": "2020-05-23T14:12:03-05:00",
+    "endText": "00:00:00",
+  },
+  "countupSettings": {
+    "beginCountupTime": "2022-04-03T14:43:46-04:00",
+    "beginText": "00:00:00",
+  },
+  "dateSettings": {
+    "dateFormat": "YYYY-MM-DD",
+    "fontSize": "32px",
+    "fontWeight": "normal",
+    "locale": "",
+    "showDate": true,
+  },
+  "fontMono": true,
+  "mode": "time",
+  "refresh": "sec",
+  "timeSettings": {
+    "fontSize": "52px",
+    "fontWeight": "bold",
+  },
+  "timezone": "America/New_York",
+  "timezoneSettings": {
+    "fontSize": "24px",
+    "fontWeight": "normal",
+    "showTimezone": true,
+    "zoneFormat": "offsetAbbv",
+  },
+}
+`;
+
+exports[`Clock migrations Non-Query config with datasource included 2`] = `
+{
+  "gridPos": {
+    "h": 5,
+    "w": 9,
+    "x": 0,
+    "y": 0,
+  },
+  "id": 1,
+  "options": {
+    "bgColor": "rgb(27, 29, 33)",
+    "clockType": "12 hour",
+    "countdownSettings": {
+      "endCountdownTime": "2020-05-23T14:12:03-05:00",
+      "endText": "00:00:00",
+    },
+    "countupSettings": {
+      "beginCountupTime": "2022-04-03T14:43:46-04:00",
+      "beginText": "00:00:00",
+    },
+    "dateSettings": {
+      "dateFormat": "YYYY-MM-DD",
+      "fontSize": "32px",
+      "fontWeight": "normal",
+      "locale": "",
+      "showDate": true,
+    },
+    "fontMono": true,
+    "mode": "time",
+    "refresh": "sec",
+    "timeSettings": {
+      "fontSize": "52px",
+      "fontWeight": "bold",
+    },
+    "timezone": "America/New_York",
+    "timezoneSettings": {
+      "fontSize": "24px",
+      "fontWeight": "normal",
+      "showTimezone": true,
+      "zoneFormat": "offsetAbbv",
+    },
+  },
+  "pluginVersion": "2.1.3",
+  "targets": [],
+  "type": "grafana-clock-panel",
+}
+`;
+
+exports[`Clock migrations Query config with datasource 1`] = `
+{
+  "bgColor": "rgb(27, 29, 33)",
+  "clockType": "12 hour",
+  "countdownSettings": {
+    "endCountdownTime": "2020-05-23T14:12:03-05:00",
+    "endText": "00:00:00",
+    "invalidValueText": "invalid value",
+    "noValueText": "no value found",
+    "queryCalculation": "last",
+    "source": "query",
+  },
+  "countupSettings": {
+    "beginCountupTime": "2022-04-03T14:43:46-04:00",
+    "beginText": "00:00:00",
+    "invalidValueText": "invalid value",
+    "noValueText": "no value found",
+    "queryCalculation": "last",
+    "source": "query",
+  },
+  "dateSettings": {
+    "dateFormat": "YYYY-MM-DD",
+    "fontSize": "32px",
+    "fontWeight": "normal",
+    "locale": "",
+    "showDate": true,
+  },
+  "descriptionSettings": {
+    "descriptionText": "",
+    "fontSize": "12px",
+    "fontWeight": "normal",
+    "noValueText": "no description found",
+    "source": "none",
+  },
+  "fontMono": true,
+  "mode": "time",
+  "refresh": "sec",
+  "timeSettings": {
+    "fontSize": "52px",
+    "fontWeight": "bold",
+  },
+  "timezone": "America/New_York",
+  "timezoneSettings": {
+    "fontSize": "24px",
+    "fontWeight": "normal",
+    "showTimezone": true,
+    "zoneFormat": "offsetAbbv",
+  },
+}
+`;
+
+exports[`Clock migrations Query config with datasource 2`] = `
+{
+  "gridPos": {
+    "h": 5,
+    "w": 9,
+    "x": 0,
+    "y": 0,
+  },
+  "id": 1,
+  "options": {
+    "bgColor": "rgb(27, 29, 33)",
+    "clockType": "12 hour",
+    "countdownSettings": {
+      "endCountdownTime": "2020-05-23T14:12:03-05:00",
+      "endText": "00:00:00",
+      "invalidValueText": "invalid value",
+      "noValueText": "no value found",
+      "queryCalculation": "last",
+      "source": "query",
+    },
+    "countupSettings": {
+      "beginCountupTime": "2022-04-03T14:43:46-04:00",
+      "beginText": "00:00:00",
+      "invalidValueText": "invalid value",
+      "noValueText": "no value found",
+      "queryCalculation": "last",
+      "source": "query",
+    },
+    "dateSettings": {
+      "dateFormat": "YYYY-MM-DD",
+      "fontSize": "32px",
+      "fontWeight": "normal",
+      "locale": "",
+      "showDate": true,
+    },
+    "descriptionSettings": {
+      "descriptionText": "",
+      "fontSize": "12px",
+      "fontWeight": "normal",
+      "noValueText": "no description found",
+      "source": "none",
+    },
+    "fontMono": true,
+    "mode": "time",
+    "refresh": "sec",
+    "timeSettings": {
+      "fontSize": "52px",
+      "fontWeight": "bold",
+    },
+    "timezone": "America/New_York",
+    "timezoneSettings": {
+      "fontSize": "24px",
+      "fontWeight": "normal",
+      "showTimezone": true,
+      "zoneFormat": "offsetAbbv",
+    },
+  },
+  "pluginVersion": "2.1.6",
+  "targets": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "000000001",
+      },
+      "groupBy": [
+        {
+          "params": [
+            "$__interval",
+          ],
+          "type": "time",
+        },
+        {
+          "params": [
+            "null",
+          ],
+          "type": "fill",
+        },
+      ],
+      "orderByTime": "ASC",
+      "policy": "default",
+      "refId": "A",
+      "resultFormat": "time_series",
+      "select": [
+        [
+          {
+            "params": [
+              "value",
+            ],
+            "type": "field",
+          },
+          {
+            "params": [],
+            "type": "mean",
+          },
+        ],
+      ],
+      "tags": [],
+    },
+  ],
+  "type": "grafana-clock-panel",
+}
+`;

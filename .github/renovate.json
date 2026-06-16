@@ -1,0 +1,28 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>grafana/grafana-community-team//renovate/renovate"],
+  "ignorePresets": [
+    "github>grafana/grafana-renovate-config//presets/base",
+    "github>grafana/grafana-renovate-config//presets/automerge",
+    "github>grafana/grafana-renovate-config//presets/labels",
+    "github>grafana/grafana-renovate-config//presets/npm"
+  ],
+  "ignorePaths": [
+    "**/fixtures/**/package.json",
+    "**/tests/**/package.json",
+    "**/test/**/package.json"
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "description": "Group GitHub Actions updates"
+    },
+    {
+      "matchManagers": ["npm"],
+      "groupName": "npm dependencies",
+      "description": "Group all other npm dependencies"
+    }
+  ],
+  "labels": ["dependencies"]
+}

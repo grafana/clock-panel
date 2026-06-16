@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": ["src/module.{js,ts,tsx}"],
+  "project": ["src/**/*", "tests/**/*", ".config/**/*"],
+  "eslint": {
+    "config": ["./eslint.config.mjs"]
+  },
+  "webpack": {
+    "config": [".config/webpack/webpack.config.ts"]
+  }
+}

@@ -1,0 +1,412 @@
+{
+  "ColorEditor": {
+    "input": {
+      "value": {
+        "placeholder": "Pick Color"
+      }
+    }
+  },
+  "components": {
+    "RenderTime": {
+      "getStrings": {
+        "days": "days",
+        "hours": "hours",
+        "minutes": "minutes",
+        "months": "months",
+        "oneDay": "1 day",
+        "oneHour": "1 hour",
+        "oneMinute": "1 minute",
+        "oneMonth": "1 month",
+        "oneSecond": "1 second",
+        "oneYear": "1 year",
+        "seconds": "seconds",
+        "years": "years"
+      }
+    }
+  },
+  "module": {
+    "ClockOptions": {
+      "bgColor": {
+        "name": "Background Color"
+      },
+      "clockType": {
+        "name": "Clock Type",
+        "options": {
+          "custom": {
+            "label": "Custom"
+          },
+          "h12": {
+            "label": "12 Hour"
+          },
+          "h24": {
+            "label": "24 Hour"
+          }
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "Custom format",
+          "settings": {
+            "placeholder": "optional"
+          }
+        },
+        "endCountdownTime": {
+          "name": "End Time",
+          "placeholder": "ISO 8601 or RFC 2822 Date time"
+        },
+        "endText": {
+          "name": "End Text"
+        },
+        "invalidValueText": {
+          "defaultValue": "invalid value",
+          "name": "Invalid Value Text"
+        },
+        "noValueText": {
+          "defaultValue": "no value found",
+          "name": "No Value Text"
+        },
+        "queryCalculation": {
+          "description": "How to calculate the countdown time",
+          "name": "Calculation",
+          "options": {
+            "first": {
+              "description": "First value",
+              "label": "First"
+            },
+            "firstNotNull": {
+              "description": "First non-null value (also excludes NaNs)",
+              "label": "First *"
+            },
+            "last": {
+              "description": "Last value",
+              "label": "Last"
+            },
+            "lastNotNull": {
+              "description": "Last non-null value (also excludes NaNs)",
+              "label": "Last *"
+            },
+            "max": {
+              "description": "Maximum value",
+              "label": "Max"
+            },
+            "min": {
+              "description": "Minimum value",
+              "label": "Min"
+            },
+            "minFuture": {
+              "description": "Minimum value that is in the future",
+              "label": "Min Future"
+            }
+          }
+        },
+        "queryField": {
+          "name": "Field",
+          "settings": {
+            "noFieldsMessage": "No fields found"
+          }
+        },
+        "source": {
+          "options": {
+            "input": {
+              "label": "Input"
+            },
+            "query": {
+              "label": "Query"
+            }
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "Begin Time",
+          "placeholder": "ISO 8601 or RFC 2822 Date time"
+        },
+        "beginText": {
+          "name": "Begin Text"
+        },
+        "customFormat": {
+          "name": "Custom format",
+          "settings": {
+            "placeholder": "optional"
+          }
+        },
+        "invalidValueText": {
+          "defaultValue": "invalid value",
+          "name": "Invalid Value Text"
+        },
+        "noValueText": {
+          "defaultValue": "no value found",
+          "name": "No Value Text"
+        },
+        "queryCalculation": {
+          "description": "How to calculate the countup time",
+          "name": "Calculation",
+          "options": {
+            "first": {
+              "description": "First value",
+              "label": "First"
+            },
+            "firstNotNull": {
+              "description": "First non-null value (also excludes NaNs)",
+              "label": "First *"
+            },
+            "last": {
+              "description": "Last value",
+              "label": "Last"
+            },
+            "lastNotNull": {
+              "description": "Last non-null value (also excludes NaNs)",
+              "label": "Last *"
+            },
+            "max": {
+              "description": "Maximum value",
+              "label": "Max"
+            },
+            "maxPast": {
+              "description": "Maximum value that is in the past",
+              "label": "Max Past"
+            },
+            "min": {
+              "description": "Minimum value",
+              "label": "Min"
+            }
+          }
+        },
+        "queryField": {
+          "name": "Field",
+          "settings": {
+            "noFieldsMessage": "No fields found"
+          }
+        },
+        "source": {
+          "name": "Source",
+          "options": {
+            "input": {
+              "label": "Input"
+            },
+            "query": {
+              "label": "Query"
+            }
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "Date Format",
+          "settings": {
+            "placeholder": "Enter date format"
+          }
+        },
+        "fontSize": {
+          "name": "Font size",
+          "settings": {
+            "placeholder": "date format"
+          }
+        },
+        "fontWeight": {
+          "name": "Font weight",
+          "options": {
+            "bold": {
+              "label": "Bold"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        },
+        "locale": {
+          "name": "Locale",
+          "settings": {
+            "placeholder": "Enter locale: de, fr, es, ... (default: en)"
+          }
+        },
+        "showDate": {
+          "name": "Show Date"
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "Description",
+          "settings": {
+            "placeholder": "Enter description"
+          }
+        },
+        "fontSize": {
+          "name": "Font size",
+          "settings": {
+            "placeholder": "Font size (e.g. 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Font weight",
+          "options": {
+            "bold": {
+              "label": "Bold"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        },
+        "noValueText": {
+          "defaultValue": "no description found",
+          "name": "No Value Text"
+        },
+        "queryField": {
+          "name": "Field",
+          "settings": {
+            "noFieldsMessage": "No fields found"
+          }
+        },
+        "source": {
+          "name": "Source",
+          "options": {
+            "input": {
+              "label": "Input"
+            },
+            "none": {
+              "label": "None"
+            },
+            "query": {
+              "label": "Query"
+            }
+          }
+        }
+      },
+      "digitalSettings": {
+        "fillColor": {
+          "name": "Fill Color"
+        },
+        "glowSize": {
+          "name": "Glow Size"
+        },
+        "strokeColor": {
+          "name": "Stroke Color"
+        },
+        "strokeWidth": {
+          "name": "Stroke Width"
+        }
+      },
+      "fontMono": {
+        "name": "Font monospace"
+      },
+      "mode": {
+        "name": "Mode",
+        "options": {
+          "countdown": {
+            "label": "Countdown"
+          },
+          "countup": {
+            "label": "Countup"
+          },
+          "time": {
+            "label": "Time"
+          }
+        }
+      },
+      "refresh": {
+        "name": "Refresh",
+        "options": {
+          "dashboard": {
+            "label": "With the dashboard"
+          },
+          "sec": {
+            "label": "Every second"
+          }
+        }
+      },
+      "source": {
+        "name": "Source"
+      },
+      "style": {
+        "name": "Style",
+        "options": {
+          "digital": {
+            "label": "Digital"
+          },
+          "legacy": {
+            "label": "Text"
+          }
+        }
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "Time Format",
+          "settings": {
+            "placeholder": "date format"
+          }
+        },
+        "fontSize": {
+          "name": "Font size",
+          "settings": {
+            "placeholder": "Font size (e.g. 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Font weight",
+          "options": {
+            "bold": {
+              "label": "Bold"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "Font size",
+          "settings": {
+            "placeholder": "font size"
+          }
+        },
+        "fontWeight": {
+          "name": "Font weight",
+          "options": {
+            "bold": {
+              "label": "Bold"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        },
+        "options": {
+          "browserTime": {
+            "label": "Browser Time"
+          },
+          "sameAsDashboard": {
+            "label": "Same as Dashboard"
+          }
+        },
+        "showTimezone": {
+          "name": "Show Timezone"
+        },
+        "timezone": {
+          "name": "Timezone"
+        },
+        "zoneFormat": {
+          "name": "Display Format",
+          "options": {
+            "abbv": {
+              "label": "Abbreviation"
+            },
+            "name": {
+              "label": "Normal"
+            },
+            "nameOffset": {
+              "label": "Name + Offset"
+            },
+            "offset": {
+              "label": "Offset"
+            },
+            "offsetAbbv": {
+              "label": "Offset + Abbreviation"
+            }
+          }
+        }
+      }
+    }
+  }
+}

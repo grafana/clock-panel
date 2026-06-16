@@ -1,0 +1,412 @@
+{
+  "ColorEditor": {
+    "input": {
+      "value": {
+        "placeholder": "색상 선택"
+      }
+    }
+  },
+  "components": {
+    "RenderTime": {
+      "getStrings": {
+        "days": "일",
+        "hours": "시간",
+        "minutes": "분",
+        "months": "개월",
+        "oneDay": "1일",
+        "oneHour": "1시간",
+        "oneMinute": "1분",
+        "oneMonth": "1개월",
+        "oneSecond": "1초",
+        "oneYear": "1년",
+        "seconds": "초",
+        "years": "년"
+      }
+    }
+  },
+  "module": {
+    "ClockOptions": {
+      "bgColor": {
+        "name": "배경색"
+      },
+      "clockType": {
+        "name": "시계 유형",
+        "options": {
+          "custom": {
+            "label": "사용자 지정"
+          },
+          "h12": {
+            "label": "12시간"
+          },
+          "h24": {
+            "label": "24시간"
+          }
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "사용자 지정 형식",
+          "settings": {
+            "placeholder": "선택 사항"
+          }
+        },
+        "endCountdownTime": {
+          "name": "종료 시간",
+          "placeholder": "ISO 8601 또는 RFC 2822 날짜 시간"
+        },
+        "endText": {
+          "name": "종료 텍스트"
+        },
+        "invalidValueText": {
+          "defaultValue": "유효하지 않은 값",
+          "name": "값이 유효하지 않을 때 표시할 텍스트"
+        },
+        "noValueText": {
+          "defaultValue": "값을 찾을 수 없음",
+          "name": "값이 없을 때 표시할 텍스트"
+        },
+        "queryCalculation": {
+          "description": "카운트다운 시간을 계산하는 방법",
+          "name": "계산",
+          "options": {
+            "first": {
+              "description": "첫 번째 값",
+              "label": "첫 번째"
+            },
+            "firstNotNull": {
+              "description": "null이 아닌 첫 번째 값(NaN도 제외)",
+              "label": "첫 번째 *"
+            },
+            "last": {
+              "description": "마지막 값",
+              "label": "마지막"
+            },
+            "lastNotNull": {
+              "description": "null이 아닌 마지막 값(NaN도 제외)",
+              "label": "마지막 *"
+            },
+            "max": {
+              "description": "최댓값",
+              "label": "최대"
+            },
+            "min": {
+              "description": "최솟값",
+              "label": "최소"
+            },
+            "minFuture": {
+              "description": "미래 시점의 최솟값",
+              "label": "미래 최솟값"
+            }
+          }
+        },
+        "queryField": {
+          "name": "필드",
+          "settings": {
+            "noFieldsMessage": "필드를 찾을 수 없음"
+          }
+        },
+        "source": {
+          "options": {
+            "input": {
+              "label": "입력"
+            },
+            "query": {
+              "label": "쿼리"
+            }
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "시작 시간",
+          "placeholder": "ISO 8601 또는 RFC 2822 날짜 시간"
+        },
+        "beginText": {
+          "name": "시작 텍스트"
+        },
+        "customFormat": {
+          "name": "사용자 지정 형식",
+          "settings": {
+            "placeholder": "선택 사항"
+          }
+        },
+        "invalidValueText": {
+          "defaultValue": "유효하지 않은 값",
+          "name": "값이 유효하지 않을 때 표시할 텍스트"
+        },
+        "noValueText": {
+          "defaultValue": "값을 찾을 수 없음",
+          "name": "값이 없을 때 표시할 텍스트"
+        },
+        "queryCalculation": {
+          "description": "카운트업 시간을 계산하는 방법",
+          "name": "계산",
+          "options": {
+            "first": {
+              "description": "첫 번째 값",
+              "label": "첫 번째"
+            },
+            "firstNotNull": {
+              "description": "null이 아닌 첫 번째 값(NaN도 제외)",
+              "label": "첫 번째 *"
+            },
+            "last": {
+              "description": "마지막 값",
+              "label": "마지막"
+            },
+            "lastNotNull": {
+              "description": "null이 아닌 마지막 값(NaN도 제외)",
+              "label": "마지막 *"
+            },
+            "max": {
+              "description": "최댓값",
+              "label": "최대"
+            },
+            "maxPast": {
+              "description": "과거 시점의 최댓값",
+              "label": "과거 최댓값"
+            },
+            "min": {
+              "description": "최솟값",
+              "label": "최소"
+            }
+          }
+        },
+        "queryField": {
+          "name": "필드",
+          "settings": {
+            "noFieldsMessage": "필드를 찾을 수 없음"
+          }
+        },
+        "source": {
+          "name": "소스",
+          "options": {
+            "input": {
+              "label": "입력"
+            },
+            "query": {
+              "label": "쿼리"
+            }
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "날짜 형식",
+          "settings": {
+            "placeholder": "날짜 형식 입력"
+          }
+        },
+        "fontSize": {
+          "name": "글자 크기",
+          "settings": {
+            "placeholder": "날짜 형식"
+          }
+        },
+        "fontWeight": {
+          "name": "글자 굵기",
+          "options": {
+            "bold": {
+              "label": "굵게"
+            },
+            "normal": {
+              "label": "보통"
+            }
+          }
+        },
+        "locale": {
+          "name": "로케일",
+          "settings": {
+            "placeholder": "로케일 입력: de, fr, es, ... (기본값: en)"
+          }
+        },
+        "showDate": {
+          "name": "날짜 표시"
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "설명",
+          "settings": {
+            "placeholder": "설명 입력"
+          }
+        },
+        "fontSize": {
+          "name": "글자 크기",
+          "settings": {
+            "placeholder": "글자 크기(예: 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "글자 굵기",
+          "options": {
+            "bold": {
+              "label": "굵게"
+            },
+            "normal": {
+              "label": "보통"
+            }
+          }
+        },
+        "noValueText": {
+          "defaultValue": "설명을 찾을 수 없음",
+          "name": "값이 없을 때 표시할 텍스트"
+        },
+        "queryField": {
+          "name": "필드",
+          "settings": {
+            "noFieldsMessage": "필드를 찾을 수 없음"
+          }
+        },
+        "source": {
+          "name": "소스",
+          "options": {
+            "input": {
+              "label": "입력"
+            },
+            "none": {
+              "label": "없음"
+            },
+            "query": {
+              "label": "쿼리"
+            }
+          }
+        }
+      },
+      "digitalSettings": {
+        "fillColor": {
+          "name": "색상 채우기"
+        },
+        "glowSize": {
+          "name": "글로우 크기"
+        },
+        "strokeColor": {
+          "name": "선 색상"
+        },
+        "strokeWidth": {
+          "name": "선 너비"
+        }
+      },
+      "fontMono": {
+        "name": "고정 폭 글자"
+      },
+      "mode": {
+        "name": "모드",
+        "options": {
+          "countdown": {
+            "label": "카운트다운"
+          },
+          "countup": {
+            "label": "카운트업"
+          },
+          "time": {
+            "label": "시간"
+          }
+        }
+      },
+      "refresh": {
+        "name": "새로 고침",
+        "options": {
+          "dashboard": {
+            "label": "대시보드와 함께"
+          },
+          "sec": {
+            "label": "1초마다"
+          }
+        }
+      },
+      "source": {
+        "name": "소스"
+      },
+      "style": {
+        "name": "스타일",
+        "options": {
+          "digital": {
+            "label": "디지털"
+          },
+          "legacy": {
+            "label": "텍스트"
+          }
+        }
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "시간 형식",
+          "settings": {
+            "placeholder": "날짜 형식"
+          }
+        },
+        "fontSize": {
+          "name": "글자 크기",
+          "settings": {
+            "placeholder": "글자 크기(예: 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "글자 굵기",
+          "options": {
+            "bold": {
+              "label": "굵게"
+            },
+            "normal": {
+              "label": "보통"
+            }
+          }
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "글자 크기",
+          "settings": {
+            "placeholder": "글자 크기"
+          }
+        },
+        "fontWeight": {
+          "name": "글자 굵기",
+          "options": {
+            "bold": {
+              "label": "굵게"
+            },
+            "normal": {
+              "label": "보통"
+            }
+          }
+        },
+        "options": {
+          "browserTime": {
+            "label": "브라우저 시간"
+          },
+          "sameAsDashboard": {
+            "label": "대시보드와 동일"
+          }
+        },
+        "showTimezone": {
+          "name": "시간대 표시"
+        },
+        "timezone": {
+          "name": "시간대"
+        },
+        "zoneFormat": {
+          "name": "표시 형식",
+          "options": {
+            "abbv": {
+              "label": "약어"
+            },
+            "name": {
+              "label": "일반"
+            },
+            "nameOffset": {
+              "label": "이름 + 오프셋"
+            },
+            "offset": {
+              "label": "오프셋"
+            },
+            "offsetAbbv": {
+              "label": "오프셋 + 약어"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**",
+    "src/external/**",
+    "provisioning/**",
+    "package.json",
+    "renovate.json",
+    "src/locales/**"
+  ],
+  "words": [
+    "gdev",
+    "grafana",
+    "datasource",
+    "datasources",
+    "rgba",
+    "countup",
+    "Themeable",
+    "Unthemed",
+    "testdata",
+    "testid",
+    "Čeština",
+    "Deutsch",
+    "Bahasa",
+    "Español",
+    "Français",
+    "Italiano",
+    "Nederlands",
+    "Polski",
+    "Português",
+    "Brasileiro",
+    "Português",
+    "Русский",
+    "Svenska",
+    "Türkçe"
+  ],
+  "ignoreRegExpList": ["@[\\w]+"]
+}

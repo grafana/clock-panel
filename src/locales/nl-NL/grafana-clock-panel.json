@@ -1,0 +1,412 @@
+{
+  "ColorEditor": {
+    "input": {
+      "value": {
+        "placeholder": "Kleur kiezen"
+      }
+    }
+  },
+  "components": {
+    "RenderTime": {
+      "getStrings": {
+        "days": "dagen",
+        "hours": "uur",
+        "minutes": "minuten",
+        "months": "maanden",
+        "oneDay": "1 dag",
+        "oneHour": "1 uur",
+        "oneMinute": "1 minuut",
+        "oneMonth": "1 maand",
+        "oneSecond": "1 seconde",
+        "oneYear": "1 jaar",
+        "seconds": "seconden",
+        "years": "jaar"
+      }
+    }
+  },
+  "module": {
+    "ClockOptions": {
+      "bgColor": {
+        "name": "Achtergrondkleur"
+      },
+      "clockType": {
+        "name": "Type klok",
+        "options": {
+          "custom": {
+            "label": "Aangepast"
+          },
+          "h12": {
+            "label": "12 uur"
+          },
+          "h24": {
+            "label": "24 uur"
+          }
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "Aangepaste indeling",
+          "settings": {
+            "placeholder": "optioneel"
+          }
+        },
+        "endCountdownTime": {
+          "name": "Eindtijd",
+          "placeholder": "ISO 8601 of RFC 2822 Datum tijd"
+        },
+        "endText": {
+          "name": "Eindtekst"
+        },
+        "invalidValueText": {
+          "defaultValue": "ongeldige waarde",
+          "name": "Ongeldige waarde tekst"
+        },
+        "noValueText": {
+          "defaultValue": "geen waarde gevonden",
+          "name": "Geen waarde tekst"
+        },
+        "queryCalculation": {
+          "description": "Hoe de afteltijd te berekenen",
+          "name": "Berekening",
+          "options": {
+            "first": {
+              "description": "Eerste waarde",
+              "label": "Eerste"
+            },
+            "firstNotNull": {
+              "description": "Eerste niet-nulwaarde (sluit ook NaN's uit)",
+              "label": "Eerste *"
+            },
+            "last": {
+              "description": "Laatste waarde",
+              "label": "Laatste"
+            },
+            "lastNotNull": {
+              "description": "Laatste niet-nulwaarde (sluit ook NaN's uit)",
+              "label": "Laatste *"
+            },
+            "max": {
+              "description": "Maximumwaarde",
+              "label": "Max"
+            },
+            "min": {
+              "description": "Minimumwaarde",
+              "label": "Min"
+            },
+            "minFuture": {
+              "description": "Minimale waarde die in de toekomst ligt",
+              "label": "Min. toekomst"
+            }
+          }
+        },
+        "queryField": {
+          "name": "Veld",
+          "settings": {
+            "noFieldsMessage": "Geen velden gevonden"
+          }
+        },
+        "source": {
+          "options": {
+            "input": {
+              "label": "Invoer"
+            },
+            "query": {
+              "label": "Query"
+            }
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "Begintijd",
+          "placeholder": "ISO 8601 of RFC 2822 Datum tijd"
+        },
+        "beginText": {
+          "name": "Begin tekst"
+        },
+        "customFormat": {
+          "name": "Aangepaste indeling",
+          "settings": {
+            "placeholder": "optioneel"
+          }
+        },
+        "invalidValueText": {
+          "defaultValue": "ongeldige waarde",
+          "name": "Ongeldige waarde tekst"
+        },
+        "noValueText": {
+          "defaultValue": "geen waarde gevonden",
+          "name": "Geen waarde tekst"
+        },
+        "queryCalculation": {
+          "description": "Hoe de opgetelde tijd te berekenen",
+          "name": "Berekening",
+          "options": {
+            "first": {
+              "description": "Eerste waarde",
+              "label": "Eerste"
+            },
+            "firstNotNull": {
+              "description": "Eerste niet-nulwaarde (sluit ook NaN's uit)",
+              "label": "Eerste *"
+            },
+            "last": {
+              "description": "Laatste waarde",
+              "label": "Laatste"
+            },
+            "lastNotNull": {
+              "description": "Laatste niet-nulwaarde (sluit ook NaN's uit)",
+              "label": "Laatste *"
+            },
+            "max": {
+              "description": "Maximumwaarde",
+              "label": "Max"
+            },
+            "maxPast": {
+              "description": "Maximale waarde die in het verleden ligt",
+              "label": "Max. verleden"
+            },
+            "min": {
+              "description": "Minimumwaarde",
+              "label": "Min"
+            }
+          }
+        },
+        "queryField": {
+          "name": "Veld",
+          "settings": {
+            "noFieldsMessage": "Geen velden gevonden"
+          }
+        },
+        "source": {
+          "name": "Bron",
+          "options": {
+            "input": {
+              "label": "Invoer"
+            },
+            "query": {
+              "label": "Query"
+            }
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "Datumnotatie",
+          "settings": {
+            "placeholder": "Voer de datumnotatie in"
+          }
+        },
+        "fontSize": {
+          "name": "Lettergrootte",
+          "settings": {
+            "placeholder": "datumnotatie"
+          }
+        },
+        "fontWeight": {
+          "name": "Letterdikte",
+          "options": {
+            "bold": {
+              "label": "Vet"
+            },
+            "normal": {
+              "label": "Normaal"
+            }
+          }
+        },
+        "locale": {
+          "name": "Taalcode",
+          "settings": {
+            "placeholder": "Voer taalcode in: de, fr, es, ... (standaard: en)"
+          }
+        },
+        "showDate": {
+          "name": "Datum tonen"
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "Beschrijving",
+          "settings": {
+            "placeholder": "Voer beschrijving in"
+          }
+        },
+        "fontSize": {
+          "name": "Lettergrootte",
+          "settings": {
+            "placeholder": "Lettergrootte (bijv. 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Letterdikte",
+          "options": {
+            "bold": {
+              "label": "Vet"
+            },
+            "normal": {
+              "label": "Normaal"
+            }
+          }
+        },
+        "noValueText": {
+          "defaultValue": "geen beschrijving gevonden",
+          "name": "Geen waarde tekst"
+        },
+        "queryField": {
+          "name": "Veld",
+          "settings": {
+            "noFieldsMessage": "Geen velden gevonden"
+          }
+        },
+        "source": {
+          "name": "Bron",
+          "options": {
+            "input": {
+              "label": "Invoer"
+            },
+            "none": {
+              "label": "Geen"
+            },
+            "query": {
+              "label": "Query"
+            }
+          }
+        }
+      },
+      "digitalSettings": {
+        "fillColor": {
+          "name": "Opvulkleur"
+        },
+        "glowSize": {
+          "name": "Gloedgrootte"
+        },
+        "strokeColor": {
+          "name": "Lijnkleur"
+        },
+        "strokeWidth": {
+          "name": "Lijndikte"
+        }
+      },
+      "fontMono": {
+        "name": "Lettertype monospace"
+      },
+      "mode": {
+        "name": "Modus",
+        "options": {
+          "countdown": {
+            "label": "Aftellen"
+          },
+          "countup": {
+            "label": "Optellen"
+          },
+          "time": {
+            "label": "Tijd"
+          }
+        }
+      },
+      "refresh": {
+        "name": "Vernieuwen",
+        "options": {
+          "dashboard": {
+            "label": "Met het dashboard"
+          },
+          "sec": {
+            "label": "Elke seconde"
+          }
+        }
+      },
+      "source": {
+        "name": "Bron"
+      },
+      "style": {
+        "name": "Stijl",
+        "options": {
+          "digital": {
+            "label": "Digitaal"
+          },
+          "legacy": {
+            "label": "Tekst"
+          }
+        }
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "Tijdformaat",
+          "settings": {
+            "placeholder": "datumnotatie"
+          }
+        },
+        "fontSize": {
+          "name": "Lettergrootte",
+          "settings": {
+            "placeholder": "Lettergrootte (bijv. 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Letterdikte",
+          "options": {
+            "bold": {
+              "label": "Vet"
+            },
+            "normal": {
+              "label": "Normaal"
+            }
+          }
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "Lettergrootte",
+          "settings": {
+            "placeholder": "lettergrootte"
+          }
+        },
+        "fontWeight": {
+          "name": "Letterdikte",
+          "options": {
+            "bold": {
+              "label": "Vet"
+            },
+            "normal": {
+              "label": "Normaal"
+            }
+          }
+        },
+        "options": {
+          "browserTime": {
+            "label": "Browsertijd"
+          },
+          "sameAsDashboard": {
+            "label": "Hetzelfde als dashboard"
+          }
+        },
+        "showTimezone": {
+          "name": "Tijdzone tonen"
+        },
+        "timezone": {
+          "name": "Tijdzone"
+        },
+        "zoneFormat": {
+          "name": "Weergaveformaat",
+          "options": {
+            "abbv": {
+              "label": "Afkorting"
+            },
+            "name": {
+              "label": "Normaal"
+            },
+            "nameOffset": {
+              "label": "Naam + offset"
+            },
+            "offset": {
+              "label": "Offset"
+            },
+            "offsetAbbv": {
+              "label": "Offset + afkorting"
+            }
+          }
+        }
+      }
+    }
+  }
+}

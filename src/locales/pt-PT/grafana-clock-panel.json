@@ -1,0 +1,412 @@
+{
+  "ColorEditor": {
+    "input": {
+      "value": {
+        "placeholder": "Escolher cor"
+      }
+    }
+  },
+  "components": {
+    "RenderTime": {
+      "getStrings": {
+        "days": "dias",
+        "hours": "horas",
+        "minutes": "minutos",
+        "months": "meses",
+        "oneDay": "1 dia",
+        "oneHour": "1 hora",
+        "oneMinute": "1 minuto",
+        "oneMonth": "1 mês",
+        "oneSecond": "1 segundo",
+        "oneYear": "1 ano",
+        "seconds": "segundos",
+        "years": "anos"
+      }
+    }
+  },
+  "module": {
+    "ClockOptions": {
+      "bgColor": {
+        "name": "Cor de fundo"
+      },
+      "clockType": {
+        "name": "Tipo de relógio",
+        "options": {
+          "custom": {
+            "label": "Personalizar"
+          },
+          "h12": {
+            "label": "12 horas"
+          },
+          "h24": {
+            "label": "24 horas"
+          }
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "Formato personalizado",
+          "settings": {
+            "placeholder": "opcional"
+          }
+        },
+        "endCountdownTime": {
+          "name": "Hora de fim",
+          "placeholder": "Data e hora ISO 8601 ou RFC 2822"
+        },
+        "endText": {
+          "name": "Texto de fim"
+        },
+        "invalidValueText": {
+          "defaultValue": "valor inválido",
+          "name": "Texto de valor inválido"
+        },
+        "noValueText": {
+          "defaultValue": "nenhum valor encontrado",
+          "name": "Nenhum texto de valor"
+        },
+        "queryCalculation": {
+          "description": "Como calcular o tempo de contagem decrescente",
+          "name": "Cálculo",
+          "options": {
+            "first": {
+              "description": "Primeiro valor",
+              "label": "Primeiro"
+            },
+            "firstNotNull": {
+              "description": "Primeiro valor não nulo (também exclui NaNs)",
+              "label": "Primeiro *"
+            },
+            "last": {
+              "description": "Último valor",
+              "label": "Último"
+            },
+            "lastNotNull": {
+              "description": "Último valor não nulo (também exclui NaNs)",
+              "label": "Último *"
+            },
+            "max": {
+              "description": "Valor máximo",
+              "label": "Máx."
+            },
+            "min": {
+              "description": "Valor mínimo",
+              "label": "Mín."
+            },
+            "minFuture": {
+              "description": "Valor mínimo que é no futuro",
+              "label": "Mín. futuro"
+            }
+          }
+        },
+        "queryField": {
+          "name": "Campo",
+          "settings": {
+            "noFieldsMessage": "Nenhum campo encontrado"
+          }
+        },
+        "source": {
+          "options": {
+            "input": {
+              "label": "Entrada"
+            },
+            "query": {
+              "label": "Consulta"
+            }
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "Hora de início",
+          "placeholder": "Data e hora ISO 8601 ou RFC 2822"
+        },
+        "beginText": {
+          "name": "Texto de início"
+        },
+        "customFormat": {
+          "name": "Formato personalizado",
+          "settings": {
+            "placeholder": "opcional"
+          }
+        },
+        "invalidValueText": {
+          "defaultValue": "valor inválido",
+          "name": "Texto de valor inválido"
+        },
+        "noValueText": {
+          "defaultValue": "nenhum valor encontrado",
+          "name": "Nenhum texto de valor"
+        },
+        "queryCalculation": {
+          "description": "Como calcular o tempo de contagem crescente",
+          "name": "Cálculo",
+          "options": {
+            "first": {
+              "description": "Primeiro valor",
+              "label": "Primeiro"
+            },
+            "firstNotNull": {
+              "description": "Primeiro valor não nulo (também exclui NaNs)",
+              "label": "Primeiro *"
+            },
+            "last": {
+              "description": "Último valor",
+              "label": "Último"
+            },
+            "lastNotNull": {
+              "description": "Último valor não nulo (também exclui NaNs)",
+              "label": "Último *"
+            },
+            "max": {
+              "description": "Valor máximo",
+              "label": "Máx."
+            },
+            "maxPast": {
+              "description": "Valor máximo no passado",
+              "label": "Máx. passado"
+            },
+            "min": {
+              "description": "Valor mínimo",
+              "label": "Mín."
+            }
+          }
+        },
+        "queryField": {
+          "name": "Campo",
+          "settings": {
+            "noFieldsMessage": "Nenhum campo encontrado"
+          }
+        },
+        "source": {
+          "name": "Origem",
+          "options": {
+            "input": {
+              "label": "Entrada"
+            },
+            "query": {
+              "label": "Consulta"
+            }
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "Formato da data",
+          "settings": {
+            "placeholder": "Introduzir formato de data"
+          }
+        },
+        "fontSize": {
+          "name": "Tamanho do tipo de letra",
+          "settings": {
+            "placeholder": "formato de data"
+          }
+        },
+        "fontWeight": {
+          "name": "Espessura do tipo de letra",
+          "options": {
+            "bold": {
+              "label": "Negrito"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        },
+        "locale": {
+          "name": "Local",
+          "settings": {
+            "placeholder": "Introduzir local: de, fr, es, etc. (predefinição: en)"
+          }
+        },
+        "showDate": {
+          "name": "Mostrar data"
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "Descrição",
+          "settings": {
+            "placeholder": "Introduzir descrição"
+          }
+        },
+        "fontSize": {
+          "name": "Tamanho do tipo de letra",
+          "settings": {
+            "placeholder": "Tamanho do tipo de letra (por exemplo, 12 px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Espessura do tipo de letra",
+          "options": {
+            "bold": {
+              "label": "Negrito"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        },
+        "noValueText": {
+          "defaultValue": "nenhuma descrição encontrada",
+          "name": "Nenhum texto de valor"
+        },
+        "queryField": {
+          "name": "Campo",
+          "settings": {
+            "noFieldsMessage": "Nenhum campo encontrado"
+          }
+        },
+        "source": {
+          "name": "Origem",
+          "options": {
+            "input": {
+              "label": "Entrada"
+            },
+            "none": {
+              "label": "Nenhuma"
+            },
+            "query": {
+              "label": "Consulta"
+            }
+          }
+        }
+      },
+      "digitalSettings": {
+        "fillColor": {
+          "name": "Cor de preenchimento"
+        },
+        "glowSize": {
+          "name": "Tamanho do brilho"
+        },
+        "strokeColor": {
+          "name": "Cor do traço"
+        },
+        "strokeWidth": {
+          "name": "Largura do traço"
+        }
+      },
+      "fontMono": {
+        "name": "Tipo de letra monoespaço"
+      },
+      "mode": {
+        "name": "Modo",
+        "options": {
+          "countdown": {
+            "label": "Contagem decrescente"
+          },
+          "countup": {
+            "label": "Contagem crescente"
+          },
+          "time": {
+            "label": "Hora"
+          }
+        }
+      },
+      "refresh": {
+        "name": "Atualizar",
+        "options": {
+          "dashboard": {
+            "label": "Com o painel de controlo"
+          },
+          "sec": {
+            "label": "A cada segundo"
+          }
+        }
+      },
+      "source": {
+        "name": "Origem"
+      },
+      "style": {
+        "name": "Estilo",
+        "options": {
+          "digital": {
+            "label": "Digital"
+          },
+          "legacy": {
+            "label": "Texto"
+          }
+        }
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "Formato da hora",
+          "settings": {
+            "placeholder": "formato de data"
+          }
+        },
+        "fontSize": {
+          "name": "Tamanho do tipo de letra",
+          "settings": {
+            "placeholder": "Tamanho do tipo de letra (por exemplo, 12 px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Espessura do tipo de letra",
+          "options": {
+            "bold": {
+              "label": "Negrito"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "Tamanho do tipo de letra",
+          "settings": {
+            "placeholder": "tamanho do tipo de letra"
+          }
+        },
+        "fontWeight": {
+          "name": "Espessura do tipo de letra",
+          "options": {
+            "bold": {
+              "label": "Negrito"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        },
+        "options": {
+          "browserTime": {
+            "label": "Hora do navegador"
+          },
+          "sameAsDashboard": {
+            "label": "Igual ao painel de controlo"
+          }
+        },
+        "showTimezone": {
+          "name": "Mostrar fuso horário"
+        },
+        "timezone": {
+          "name": "Fuso horário"
+        },
+        "zoneFormat": {
+          "name": "Formato de exibição",
+          "options": {
+            "abbv": {
+              "label": "Abreviatura"
+            },
+            "name": {
+              "label": "Normal"
+            },
+            "nameOffset": {
+              "label": "Nome + deslocamento"
+            },
+            "offset": {
+              "label": "Deslocamento"
+            },
+            "offsetAbbv": {
+              "label": "Deslocamento + abreviatura"
+            }
+          }
+        }
+      }
+    }
+  }
+}

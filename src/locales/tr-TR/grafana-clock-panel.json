@@ -1,0 +1,412 @@
+{
+  "ColorEditor": {
+    "input": {
+      "value": {
+        "placeholder": "Renk Seçin"
+      }
+    }
+  },
+  "components": {
+    "RenderTime": {
+      "getStrings": {
+        "days": "gün",
+        "hours": "saat",
+        "minutes": "dakika",
+        "months": "ay",
+        "oneDay": "1 gün",
+        "oneHour": "1 saat",
+        "oneMinute": "1 dakika",
+        "oneMonth": "1 ay",
+        "oneSecond": "1 saniye",
+        "oneYear": "1 yıl",
+        "seconds": "saniye",
+        "years": "yıl"
+      }
+    }
+  },
+  "module": {
+    "ClockOptions": {
+      "bgColor": {
+        "name": "Arka Plan Rengi"
+      },
+      "clockType": {
+        "name": "Saat Biçimi",
+        "options": {
+          "custom": {
+            "label": "Özel"
+          },
+          "h12": {
+            "label": "12 Saat"
+          },
+          "h24": {
+            "label": "24 Saat"
+          }
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "Özel biçim",
+          "settings": {
+            "placeholder": "isteğe bağlı"
+          }
+        },
+        "endCountdownTime": {
+          "name": "Bitiş Zamanı",
+          "placeholder": "ISO 8601 veya RFC 2822 tarih ve saat biçimi"
+        },
+        "endText": {
+          "name": "Bitiş Metni"
+        },
+        "invalidValueText": {
+          "defaultValue": "geçersiz değer",
+          "name": "Geçersiz Değer Metni"
+        },
+        "noValueText": {
+          "defaultValue": "değer bulunamadı",
+          "name": "Değer Yok Metni"
+        },
+        "queryCalculation": {
+          "description": "Geri sayım süresinin hesaplanması",
+          "name": "Hesaplama",
+          "options": {
+            "first": {
+              "description": "İlk değer",
+              "label": "İlk"
+            },
+            "firstNotNull": {
+              "description": "İlk boş olmayan değer (NaN'ler de hariç tutulur)",
+              "label": "İlk *"
+            },
+            "last": {
+              "description": "Son değer",
+              "label": "Son"
+            },
+            "lastNotNull": {
+              "description": "Son boş olmayan değer (NaN'ler de hariç tutulur)",
+              "label": "Son *"
+            },
+            "max": {
+              "description": "Maksimum değer",
+              "label": "Maks."
+            },
+            "min": {
+              "description": "Minimum değer",
+              "label": "Min."
+            },
+            "minFuture": {
+              "description": "Gelecekteki minimum değer",
+              "label": "Gelecekteki min."
+            }
+          }
+        },
+        "queryField": {
+          "name": "Alan",
+          "settings": {
+            "noFieldsMessage": "Hiçbir alan bulunamadı"
+          }
+        },
+        "source": {
+          "options": {
+            "input": {
+              "label": "Girdi"
+            },
+            "query": {
+              "label": "Sorgu"
+            }
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "Başlama Zamanı",
+          "placeholder": "ISO 8601 veya RFC 2822 tarih ve saat biçimi"
+        },
+        "beginText": {
+          "name": "Başlangıç Metni"
+        },
+        "customFormat": {
+          "name": "Özel biçim",
+          "settings": {
+            "placeholder": "isteğe bağlı"
+          }
+        },
+        "invalidValueText": {
+          "defaultValue": "geçersiz değer",
+          "name": "Geçersiz Değer Metni"
+        },
+        "noValueText": {
+          "defaultValue": "değer bulunamadı",
+          "name": "Değer Yok Metni"
+        },
+        "queryCalculation": {
+          "description": "İleri sayım süresinin hesaplanması",
+          "name": "Hesaplama",
+          "options": {
+            "first": {
+              "description": "İlk değer",
+              "label": "İlk"
+            },
+            "firstNotNull": {
+              "description": "İlk boş olmayan değer (NaN'ler de hariç tutulur)",
+              "label": "İlk *"
+            },
+            "last": {
+              "description": "Son değer",
+              "label": "Son"
+            },
+            "lastNotNull": {
+              "description": "Son boş olmayan değer (NaN'ler de hariç tutulur)",
+              "label": "Son *"
+            },
+            "max": {
+              "description": "Maksimum değer",
+              "label": "Maks."
+            },
+            "maxPast": {
+              "description": "Geçmişteki maksimum değer",
+              "label": "Geçmişteki maks."
+            },
+            "min": {
+              "description": "Minimum değer",
+              "label": "Min."
+            }
+          }
+        },
+        "queryField": {
+          "name": "Alan",
+          "settings": {
+            "noFieldsMessage": "Hiçbir alan bulunamadı"
+          }
+        },
+        "source": {
+          "name": "Kaynak",
+          "options": {
+            "input": {
+              "label": "Girdi"
+            },
+            "query": {
+              "label": "Sorgu"
+            }
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "Tarih Biçimi",
+          "settings": {
+            "placeholder": "Tarih biçimini girin"
+          }
+        },
+        "fontSize": {
+          "name": "Yazı tipi boyutu",
+          "settings": {
+            "placeholder": "tarih biçimi"
+          }
+        },
+        "fontWeight": {
+          "name": "Yazı tipi kalınlığı",
+          "options": {
+            "bold": {
+              "label": "Kalın"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        },
+        "locale": {
+          "name": "Yerel ayar",
+          "settings": {
+            "placeholder": "Yerel ayarı girin: de, fr, es, ... (varsayılan: en)"
+          }
+        },
+        "showDate": {
+          "name": "Tarihi Göster"
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "Açıklama",
+          "settings": {
+            "placeholder": "Açıklama girin"
+          }
+        },
+        "fontSize": {
+          "name": "Yazı tipi boyutu",
+          "settings": {
+            "placeholder": "Yazı tipi boyutu (ör. 12 piksel)"
+          }
+        },
+        "fontWeight": {
+          "name": "Yazı tipi kalınlığı",
+          "options": {
+            "bold": {
+              "label": "Kalın"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        },
+        "noValueText": {
+          "defaultValue": "açıklama bulunamadı",
+          "name": "Değer Yok Metni"
+        },
+        "queryField": {
+          "name": "Alan",
+          "settings": {
+            "noFieldsMessage": "Hiçbir alan bulunamadı"
+          }
+        },
+        "source": {
+          "name": "Kaynak",
+          "options": {
+            "input": {
+              "label": "Girdi"
+            },
+            "none": {
+              "label": "Yok"
+            },
+            "query": {
+              "label": "Sorgu"
+            }
+          }
+        }
+      },
+      "digitalSettings": {
+        "fillColor": {
+          "name": "Dolgu Rengi"
+        },
+        "glowSize": {
+          "name": "Parıltı Boyutu"
+        },
+        "strokeColor": {
+          "name": "Çizgi Rengi"
+        },
+        "strokeWidth": {
+          "name": "Çizgi Genişliği"
+        }
+      },
+      "fontMono": {
+        "name": "Tek aralıklı yazı tipi"
+      },
+      "mode": {
+        "name": "Mod",
+        "options": {
+          "countdown": {
+            "label": "Geri sayım"
+          },
+          "countup": {
+            "label": "İleri sayım"
+          },
+          "time": {
+            "label": "Zaman"
+          }
+        }
+      },
+      "refresh": {
+        "name": "Yenile",
+        "options": {
+          "dashboard": {
+            "label": "Pano ile"
+          },
+          "sec": {
+            "label": "Her saniye"
+          }
+        }
+      },
+      "source": {
+        "name": "Kaynak"
+      },
+      "style": {
+        "name": "Stil",
+        "options": {
+          "digital": {
+            "label": "Dijital"
+          },
+          "legacy": {
+            "label": "Metin"
+          }
+        }
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "Saat Biçimi",
+          "settings": {
+            "placeholder": "tarih biçimi"
+          }
+        },
+        "fontSize": {
+          "name": "Yazı tipi boyutu",
+          "settings": {
+            "placeholder": "Yazı tipi boyutu (ör. 12 piksel)"
+          }
+        },
+        "fontWeight": {
+          "name": "Yazı tipi kalınlığı",
+          "options": {
+            "bold": {
+              "label": "Kalın"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "Yazı tipi boyutu",
+          "settings": {
+            "placeholder": "yazı tipi boyutu"
+          }
+        },
+        "fontWeight": {
+          "name": "Yazı tipi kalınlığı",
+          "options": {
+            "bold": {
+              "label": "Kalın"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        },
+        "options": {
+          "browserTime": {
+            "label": "Tarayıcı Saati"
+          },
+          "sameAsDashboard": {
+            "label": "Pano ile aynı"
+          }
+        },
+        "showTimezone": {
+          "name": "Saat Dilimini Göster"
+        },
+        "timezone": {
+          "name": "Saat Dilimi"
+        },
+        "zoneFormat": {
+          "name": "Görüntüleme Biçimi",
+          "options": {
+            "abbv": {
+              "label": "Kısaltma"
+            },
+            "name": {
+              "label": "Normal"
+            },
+            "nameOffset": {
+              "label": "Ad + Fark"
+            },
+            "offset": {
+              "label": "Fark"
+            },
+            "offsetAbbv": {
+              "label": "Fark + Kısaltma"
+            }
+          }
+        }
+      }
+    }
+  }
+}

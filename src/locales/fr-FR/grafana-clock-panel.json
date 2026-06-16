@@ -1,0 +1,412 @@
+{
+  "ColorEditor": {
+    "input": {
+      "value": {
+        "placeholder": "Sélectionner une couleur"
+      }
+    }
+  },
+  "components": {
+    "RenderTime": {
+      "getStrings": {
+        "days": "jours",
+        "hours": "heures",
+        "minutes": "minutes",
+        "months": "mois",
+        "oneDay": "1 jour",
+        "oneHour": "1 heure",
+        "oneMinute": "1 minute",
+        "oneMonth": "1 mois",
+        "oneSecond": "1 seconde",
+        "oneYear": "1 an",
+        "seconds": "secondes",
+        "years": "années"
+      }
+    }
+  },
+  "module": {
+    "ClockOptions": {
+      "bgColor": {
+        "name": "Couleur d’arrière-plan"
+      },
+      "clockType": {
+        "name": "Type d’horloge",
+        "options": {
+          "custom": {
+            "label": "Personnalisé"
+          },
+          "h12": {
+            "label": "Format 12 heures"
+          },
+          "h24": {
+            "label": "Format 24 heures"
+          }
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "Format personnalisé",
+          "settings": {
+            "placeholder": "optionnel"
+          }
+        },
+        "endCountdownTime": {
+          "name": "Heure de fin",
+          "placeholder": "Format ISO 8601 ou RFC 2822"
+        },
+        "endText": {
+          "name": "Texte de fin"
+        },
+        "invalidValueText": {
+          "defaultValue": "valeur non valide",
+          "name": "Texte en cas de valeur non valide"
+        },
+        "noValueText": {
+          "defaultValue": "aucune valeur trouvée",
+          "name": "Texte en cas d’absence de valeur"
+        },
+        "queryCalculation": {
+          "description": "Méthode de calcul du compte à rebours",
+          "name": "Calcul",
+          "options": {
+            "first": {
+              "description": "Première valeur",
+              "label": "Première"
+            },
+            "firstNotNull": {
+              "description": "Première valeur non nulle (NaN exclus)",
+              "label": "Première*"
+            },
+            "last": {
+              "description": "Dernière valeur",
+              "label": "Dernière"
+            },
+            "lastNotNull": {
+              "description": "Dernière valeur non nulle (NaN exclus)",
+              "label": "Dernière*"
+            },
+            "max": {
+              "description": "Valeur maximale",
+              "label": "Max."
+            },
+            "min": {
+              "description": "Valeur minimale",
+              "label": "Min."
+            },
+            "minFuture": {
+              "description": "Valeur minimale située dans le futur",
+              "label": "Min. futur"
+            }
+          }
+        },
+        "queryField": {
+          "name": "Champ",
+          "settings": {
+            "noFieldsMessage": "Aucun champ trouvé"
+          }
+        },
+        "source": {
+          "options": {
+            "input": {
+              "label": "Entrée"
+            },
+            "query": {
+              "label": "Requête"
+            }
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "Heure de début",
+          "placeholder": "Format ISO 8601 ou RFC 2822"
+        },
+        "beginText": {
+          "name": "Texte de début"
+        },
+        "customFormat": {
+          "name": "Format personnalisé",
+          "settings": {
+            "placeholder": "optionnel"
+          }
+        },
+        "invalidValueText": {
+          "defaultValue": "valeur non valide",
+          "name": "Texte en cas de valeur non valide"
+        },
+        "noValueText": {
+          "defaultValue": "aucune valeur trouvée",
+          "name": "Texte en cas d’absence de valeur"
+        },
+        "queryCalculation": {
+          "description": "Méthode de calcul du temps écoulé",
+          "name": "Calcul",
+          "options": {
+            "first": {
+              "description": "Première valeur",
+              "label": "Première"
+            },
+            "firstNotNull": {
+              "description": "Première valeur non nulle (NaN exclus)",
+              "label": "Première*"
+            },
+            "last": {
+              "description": "Dernière valeur",
+              "label": "Dernière"
+            },
+            "lastNotNull": {
+              "description": "Dernière valeur non nulle (NaN exclus)",
+              "label": "Dernière*"
+            },
+            "max": {
+              "description": "Valeur maximale",
+              "label": "Max."
+            },
+            "maxPast": {
+              "description": "Valeur maximale située dans le passé",
+              "label": "Max. passé"
+            },
+            "min": {
+              "description": "Valeur minimale",
+              "label": "Min."
+            }
+          }
+        },
+        "queryField": {
+          "name": "Champ",
+          "settings": {
+            "noFieldsMessage": "Aucun champ trouvé"
+          }
+        },
+        "source": {
+          "name": "Source",
+          "options": {
+            "input": {
+              "label": "Entrée"
+            },
+            "query": {
+              "label": "Requête"
+            }
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "Format de date",
+          "settings": {
+            "placeholder": "Saisir le format de date"
+          }
+        },
+        "fontSize": {
+          "name": "Taille de police",
+          "settings": {
+            "placeholder": "format de date"
+          }
+        },
+        "fontWeight": {
+          "name": "Graisse de police",
+          "options": {
+            "bold": {
+              "label": "Gras"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        },
+        "locale": {
+          "name": "Langue",
+          "settings": {
+            "placeholder": "Saisir la langue : de, fr, es… (par défaut : en)"
+          }
+        },
+        "showDate": {
+          "name": "Afficher la date"
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "Description",
+          "settings": {
+            "placeholder": "Saisir une description"
+          }
+        },
+        "fontSize": {
+          "name": "Taille de police",
+          "settings": {
+            "placeholder": "Taille de police (ex. : 12 px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Graisse de police",
+          "options": {
+            "bold": {
+              "label": "Gras"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        },
+        "noValueText": {
+          "defaultValue": "aucune description trouvée",
+          "name": "Texte en cas d’absence de valeur"
+        },
+        "queryField": {
+          "name": "Champ",
+          "settings": {
+            "noFieldsMessage": "Aucun champ trouvé"
+          }
+        },
+        "source": {
+          "name": "Source",
+          "options": {
+            "input": {
+              "label": "Entrée"
+            },
+            "none": {
+              "label": "Aucune"
+            },
+            "query": {
+              "label": "Requête"
+            }
+          }
+        }
+      },
+      "digitalSettings": {
+        "fillColor": {
+          "name": "Couleur de remplissage"
+        },
+        "glowSize": {
+          "name": "Taille de l’effet lumineux"
+        },
+        "strokeColor": {
+          "name": "Couleur du contour"
+        },
+        "strokeWidth": {
+          "name": "Épaisseur du contour"
+        }
+      },
+      "fontMono": {
+        "name": "Police à chasse fixe"
+      },
+      "mode": {
+        "name": "Mode",
+        "options": {
+          "countdown": {
+            "label": "Compte à rebours"
+          },
+          "countup": {
+            "label": "Chronomètre"
+          },
+          "time": {
+            "label": "Heure"
+          }
+        }
+      },
+      "refresh": {
+        "name": "Actualisation",
+        "options": {
+          "dashboard": {
+            "label": "Avec le tableau de bord"
+          },
+          "sec": {
+            "label": "Chaque seconde"
+          }
+        }
+      },
+      "source": {
+        "name": "Source"
+      },
+      "style": {
+        "name": "Style",
+        "options": {
+          "digital": {
+            "label": "Numérique"
+          },
+          "legacy": {
+            "label": "Texte"
+          }
+        }
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "Format de l’heure",
+          "settings": {
+            "placeholder": "format de date"
+          }
+        },
+        "fontSize": {
+          "name": "Taille de police",
+          "settings": {
+            "placeholder": "Taille de police (ex. : 12 px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Graisse de police",
+          "options": {
+            "bold": {
+              "label": "Gras"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "Taille de police",
+          "settings": {
+            "placeholder": "taille de police"
+          }
+        },
+        "fontWeight": {
+          "name": "Graisse de police",
+          "options": {
+            "bold": {
+              "label": "Gras"
+            },
+            "normal": {
+              "label": "Normal"
+            }
+          }
+        },
+        "options": {
+          "browserTime": {
+            "label": "Heure du navigateur"
+          },
+          "sameAsDashboard": {
+            "label": "Identique au tableau de bord"
+          }
+        },
+        "showTimezone": {
+          "name": "Afficher le fuseau horaire"
+        },
+        "timezone": {
+          "name": "Fuseau horaire"
+        },
+        "zoneFormat": {
+          "name": "Format d’affichage",
+          "options": {
+            "abbv": {
+              "label": "Abréviation"
+            },
+            "name": {
+              "label": "Normal"
+            },
+            "nameOffset": {
+              "label": "Nom + Décalage"
+            },
+            "offset": {
+              "label": "Décalage"
+            },
+            "offsetAbbv": {
+              "label": "Décalage + Abréviation"
+            }
+          }
+        }
+      }
+    }
+  }
+}

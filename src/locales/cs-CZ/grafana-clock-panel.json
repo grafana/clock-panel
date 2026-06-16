@@ -1,0 +1,412 @@
+{
+  "ColorEditor": {
+    "input": {
+      "value": {
+        "placeholder": "Vyberte barvu"
+      }
+    }
+  },
+  "components": {
+    "RenderTime": {
+      "getStrings": {
+        "days": "dny",
+        "hours": "hodiny",
+        "minutes": "minuty",
+        "months": "měsíce",
+        "oneDay": "1 den",
+        "oneHour": "1 hodina",
+        "oneMinute": "1 minuta",
+        "oneMonth": "1 měsíc",
+        "oneSecond": "1 sekunda",
+        "oneYear": "1 rok",
+        "seconds": "sekundy",
+        "years": "roky"
+      }
+    }
+  },
+  "module": {
+    "ClockOptions": {
+      "bgColor": {
+        "name": "Barva pozadí"
+      },
+      "clockType": {
+        "name": "Typ hodin",
+        "options": {
+          "custom": {
+            "label": "Vlastní"
+          },
+          "h12": {
+            "label": "12hodinový"
+          },
+          "h24": {
+            "label": "24hodinový"
+          }
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "Vlastní formát",
+          "settings": {
+            "placeholder": "volitelné"
+          }
+        },
+        "endCountdownTime": {
+          "name": "Čas ukončení",
+          "placeholder": "Datum a čas podle ISO 8601 nebo RFC 2822"
+        },
+        "endText": {
+          "name": "Text ukončení"
+        },
+        "invalidValueText": {
+          "defaultValue": "neplatná hodnota",
+          "name": "Text neplatné hodnoty"
+        },
+        "noValueText": {
+          "defaultValue": "nebyla nalezena žádná hodnota",
+          "name": "Text v případě žádné hodnoty"
+        },
+        "queryCalculation": {
+          "description": "Jak vypočítat čas odpočítávání",
+          "name": "Výpočet",
+          "options": {
+            "first": {
+              "description": "První hodnota",
+              "label": "První"
+            },
+            "firstNotNull": {
+              "description": "První nenulová hodnota (také vylučuje NaN)",
+              "label": "První *"
+            },
+            "last": {
+              "description": "Poslední hodnota",
+              "label": "Poslední"
+            },
+            "lastNotNull": {
+              "description": "Poslední nenulová hodnota (také vylučuje NaN)",
+              "label": "Poslední *"
+            },
+            "max": {
+              "description": "Maximální hodnota",
+              "label": "Max."
+            },
+            "min": {
+              "description": "Minimální hodnota",
+              "label": "Min."
+            },
+            "minFuture": {
+              "description": "Minimální hodnota, která je v budoucnosti",
+              "label": "Min. budoucí"
+            }
+          }
+        },
+        "queryField": {
+          "name": "Pole",
+          "settings": {
+            "noFieldsMessage": "Nebyla nalezena žádná pole"
+          }
+        },
+        "source": {
+          "options": {
+            "input": {
+              "label": "Vstup"
+            },
+            "query": {
+              "label": "Dotaz"
+            }
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "Čas zahájení",
+          "placeholder": "Datum a čas podle ISO 8601 nebo RFC 2822"
+        },
+        "beginText": {
+          "name": "Text zahájení"
+        },
+        "customFormat": {
+          "name": "Vlastní formát",
+          "settings": {
+            "placeholder": "volitelné"
+          }
+        },
+        "invalidValueText": {
+          "defaultValue": "neplatná hodnota",
+          "name": "Text neplatné hodnoty"
+        },
+        "noValueText": {
+          "defaultValue": "nebyla nalezena žádná hodnota",
+          "name": "Text v případě žádné hodnoty"
+        },
+        "queryCalculation": {
+          "description": "Jak vypočítat čas počítání nahoru",
+          "name": "Výpočet",
+          "options": {
+            "first": {
+              "description": "První hodnota",
+              "label": "První"
+            },
+            "firstNotNull": {
+              "description": "První nenulová hodnota (také vylučuje NaN)",
+              "label": "První *"
+            },
+            "last": {
+              "description": "Poslední hodnota",
+              "label": "Poslední"
+            },
+            "lastNotNull": {
+              "description": "Poslední nenulová hodnota (také vylučuje NaN)",
+              "label": "Poslední *"
+            },
+            "max": {
+              "description": "Maximální hodnota",
+              "label": "Max."
+            },
+            "maxPast": {
+              "description": "Maximální hodnota, která je v minulosti",
+              "label": "Max. minulá"
+            },
+            "min": {
+              "description": "Minimální hodnota",
+              "label": "Min."
+            }
+          }
+        },
+        "queryField": {
+          "name": "Pole",
+          "settings": {
+            "noFieldsMessage": "Nebyla nalezena žádná pole"
+          }
+        },
+        "source": {
+          "name": "Zdroj",
+          "options": {
+            "input": {
+              "label": "Vstup"
+            },
+            "query": {
+              "label": "Dotaz"
+            }
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "Formát data",
+          "settings": {
+            "placeholder": "Zadejte formát data"
+          }
+        },
+        "fontSize": {
+          "name": "Velikost písma",
+          "settings": {
+            "placeholder": "formát data"
+          }
+        },
+        "fontWeight": {
+          "name": "Tloušťka písma",
+          "options": {
+            "bold": {
+              "label": "Tučné"
+            },
+            "normal": {
+              "label": "Normální"
+            }
+          }
+        },
+        "locale": {
+          "name": "Národní prostředí",
+          "settings": {
+            "placeholder": "Zadejte národní prostředí: de, fr, es, ... (výchozí: en)"
+          }
+        },
+        "showDate": {
+          "name": "Zobrazit datum"
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "Popis",
+          "settings": {
+            "placeholder": "Zadejte popis"
+          }
+        },
+        "fontSize": {
+          "name": "Velikost písma",
+          "settings": {
+            "placeholder": "Velikost písma (např. 12 px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Tloušťka písma",
+          "options": {
+            "bold": {
+              "label": "Tučné"
+            },
+            "normal": {
+              "label": "Normální"
+            }
+          }
+        },
+        "noValueText": {
+          "defaultValue": "nebyl nalezen žádný popis",
+          "name": "Text v případě žádné hodnoty"
+        },
+        "queryField": {
+          "name": "Pole",
+          "settings": {
+            "noFieldsMessage": "Nebyla nalezena žádná pole"
+          }
+        },
+        "source": {
+          "name": "Zdroj",
+          "options": {
+            "input": {
+              "label": "Vstup"
+            },
+            "none": {
+              "label": "Žádné"
+            },
+            "query": {
+              "label": "Dotaz"
+            }
+          }
+        }
+      },
+      "digitalSettings": {
+        "fillColor": {
+          "name": "Barva výplně"
+        },
+        "glowSize": {
+          "name": "Velikost záře"
+        },
+        "strokeColor": {
+          "name": "Barva tahu"
+        },
+        "strokeWidth": {
+          "name": "Šířka tahu"
+        }
+      },
+      "fontMono": {
+        "name": "Písmo s pevnou šířkou"
+      },
+      "mode": {
+        "name": "Režim",
+        "options": {
+          "countdown": {
+            "label": "Odpočítávání"
+          },
+          "countup": {
+            "label": "Počítání nahoru"
+          },
+          "time": {
+            "label": "Čas"
+          }
+        }
+      },
+      "refresh": {
+        "name": "Obnovit",
+        "options": {
+          "dashboard": {
+            "label": "S nástěnkou"
+          },
+          "sec": {
+            "label": "Každou sekundu"
+          }
+        }
+      },
+      "source": {
+        "name": "Zdroj"
+      },
+      "style": {
+        "name": "Styl",
+        "options": {
+          "digital": {
+            "label": "Digitální"
+          },
+          "legacy": {
+            "label": "Text"
+          }
+        }
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "Formát času",
+          "settings": {
+            "placeholder": "formát data"
+          }
+        },
+        "fontSize": {
+          "name": "Velikost písma",
+          "settings": {
+            "placeholder": "Velikost písma (např. 12 px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Tloušťka písma",
+          "options": {
+            "bold": {
+              "label": "Tučné"
+            },
+            "normal": {
+              "label": "Normální"
+            }
+          }
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "Velikost písma",
+          "settings": {
+            "placeholder": "velikost písma"
+          }
+        },
+        "fontWeight": {
+          "name": "Tloušťka písma",
+          "options": {
+            "bold": {
+              "label": "Tučné"
+            },
+            "normal": {
+              "label": "Normální"
+            }
+          }
+        },
+        "options": {
+          "browserTime": {
+            "label": "Čas prohlížeče"
+          },
+          "sameAsDashboard": {
+            "label": "Stejné jako nástěnka"
+          }
+        },
+        "showTimezone": {
+          "name": "Zobrazit časové pásmo"
+        },
+        "timezone": {
+          "name": "Časové pásmo"
+        },
+        "zoneFormat": {
+          "name": "Formát zobrazení",
+          "options": {
+            "abbv": {
+              "label": "Zkratka"
+            },
+            "name": {
+              "label": "Normální"
+            },
+            "nameOffset": {
+              "label": "Název + odchylka"
+            },
+            "offset": {
+              "label": "Odchylka"
+            },
+            "offsetAbbv": {
+              "label": "Odchylka + zkratka"
+            }
+          }
+        }
+      }
+    }
+  }
+}

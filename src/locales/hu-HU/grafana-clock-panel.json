@@ -1,0 +1,412 @@
+{
+  "ColorEditor": {
+    "input": {
+      "value": {
+        "placeholder": "Színválasztás"
+      }
+    }
+  },
+  "components": {
+    "RenderTime": {
+      "getStrings": {
+        "days": "nap",
+        "hours": "óra",
+        "minutes": "perc",
+        "months": "hónap",
+        "oneDay": "1 nap",
+        "oneHour": "1 óra",
+        "oneMinute": "1 perc",
+        "oneMonth": "1 hónap",
+        "oneSecond": "1 másodperc",
+        "oneYear": "1 év",
+        "seconds": "másodperc",
+        "years": "év"
+      }
+    }
+  },
+  "module": {
+    "ClockOptions": {
+      "bgColor": {
+        "name": "Háttérszín"
+      },
+      "clockType": {
+        "name": "Óra típusa",
+        "options": {
+          "custom": {
+            "label": "Egyéni"
+          },
+          "h12": {
+            "label": "12 órás"
+          },
+          "h24": {
+            "label": "24 órás"
+          }
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "Egyéni formátum",
+          "settings": {
+            "placeholder": "opcionális"
+          }
+        },
+        "endCountdownTime": {
+          "name": "Befejezés ideje",
+          "placeholder": "ISO 8601 vagy RFC 2822 Dátum és idő"
+        },
+        "endText": {
+          "name": "Befejező szöveg"
+        },
+        "invalidValueText": {
+          "defaultValue": "érvénytelen érték",
+          "name": "Érvénytelen értékszöveg"
+        },
+        "noValueText": {
+          "defaultValue": "nem található érték",
+          "name": "Nincs értékszöveg"
+        },
+        "queryCalculation": {
+          "description": "A visszaszámlálási idő kiszámítása",
+          "name": "Számítás",
+          "options": {
+            "first": {
+              "description": "Első érték",
+              "label": "Első"
+            },
+            "firstNotNull": {
+              "description": "Első nem null érték (a NaN-okat is kizárja)",
+              "label": "Első *"
+            },
+            "last": {
+              "description": "Utolsó érték",
+              "label": "Utolsó"
+            },
+            "lastNotNull": {
+              "description": "Utolsó nem null érték (a NaN-okat is kizárja)",
+              "label": "Utolsó *"
+            },
+            "max": {
+              "description": "Maximális érték",
+              "label": "Max."
+            },
+            "min": {
+              "description": "Minimális érték",
+              "label": "Min."
+            },
+            "minFuture": {
+              "description": "Jövőbeli minimális érték",
+              "label": "Jövőbeli min."
+            }
+          }
+        },
+        "queryField": {
+          "name": "Mező",
+          "settings": {
+            "noFieldsMessage": "Nem található mező"
+          }
+        },
+        "source": {
+          "options": {
+            "input": {
+              "label": "Bemenet"
+            },
+            "query": {
+              "label": "Lekérdezés"
+            }
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "Kezdés ideje",
+          "placeholder": "ISO 8601 vagy RFC 2822 Dátum és idő"
+        },
+        "beginText": {
+          "name": "Kezdő szöveg"
+        },
+        "customFormat": {
+          "name": "Egyéni formátum",
+          "settings": {
+            "placeholder": "opcionális"
+          }
+        },
+        "invalidValueText": {
+          "defaultValue": "érvénytelen érték",
+          "name": "Érvénytelen értékszöveg"
+        },
+        "noValueText": {
+          "defaultValue": "nem található érték",
+          "name": "Nincs értékszöveg"
+        },
+        "queryCalculation": {
+          "description": "Az eltelt idő kiszámítása",
+          "name": "Számítás",
+          "options": {
+            "first": {
+              "description": "Első érték",
+              "label": "Első"
+            },
+            "firstNotNull": {
+              "description": "Első nem null érték (a NaN-okat is kizárja)",
+              "label": "Első *"
+            },
+            "last": {
+              "description": "Utolsó érték",
+              "label": "Utolsó"
+            },
+            "lastNotNull": {
+              "description": "Utolsó nem null érték (a NaN-okat is kizárja)",
+              "label": "Utolsó *"
+            },
+            "max": {
+              "description": "Maximális érték",
+              "label": "Max."
+            },
+            "maxPast": {
+              "description": "Múltbeli maximális érték",
+              "label": "Múltbeli max."
+            },
+            "min": {
+              "description": "Minimális érték",
+              "label": "Min."
+            }
+          }
+        },
+        "queryField": {
+          "name": "Mező",
+          "settings": {
+            "noFieldsMessage": "Nem található mező"
+          }
+        },
+        "source": {
+          "name": "Forrás",
+          "options": {
+            "input": {
+              "label": "Bemenet"
+            },
+            "query": {
+              "label": "Lekérdezés"
+            }
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "Dátumformátum",
+          "settings": {
+            "placeholder": "Dátumformátum megadása"
+          }
+        },
+        "fontSize": {
+          "name": "Betűméret",
+          "settings": {
+            "placeholder": "dátumformátum"
+          }
+        },
+        "fontWeight": {
+          "name": "Betűvastagság",
+          "options": {
+            "bold": {
+              "label": "Félkövér"
+            },
+            "normal": {
+              "label": "Normál"
+            }
+          }
+        },
+        "locale": {
+          "name": "Nyelv",
+          "settings": {
+            "placeholder": "Nyelv megadása: de, fr, es... (alapértelmezett: en)"
+          }
+        },
+        "showDate": {
+          "name": "Dátum megjelenítése"
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "Leírás",
+          "settings": {
+            "placeholder": "Leírás megadása"
+          }
+        },
+        "fontSize": {
+          "name": "Betűméret",
+          "settings": {
+            "placeholder": "Betűméret (pl. 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Betűvastagság",
+          "options": {
+            "bold": {
+              "label": "Félkövér"
+            },
+            "normal": {
+              "label": "Normál"
+            }
+          }
+        },
+        "noValueText": {
+          "defaultValue": "nem található leírás",
+          "name": "Nincs értékszöveg"
+        },
+        "queryField": {
+          "name": "Mező",
+          "settings": {
+            "noFieldsMessage": "Nem található mező"
+          }
+        },
+        "source": {
+          "name": "Forrás",
+          "options": {
+            "input": {
+              "label": "Bemenet"
+            },
+            "none": {
+              "label": "Nincs"
+            },
+            "query": {
+              "label": "Lekérdezés"
+            }
+          }
+        }
+      },
+      "digitalSettings": {
+        "fillColor": {
+          "name": "Kitöltőszín"
+        },
+        "glowSize": {
+          "name": "Ragyogás mérete"
+        },
+        "strokeColor": {
+          "name": "Körvonal színe"
+        },
+        "strokeWidth": {
+          "name": "Körvonal vastagság"
+        }
+      },
+      "fontMono": {
+        "name": "Rögzített szélességű betűtípus"
+      },
+      "mode": {
+        "name": "Mód",
+        "options": {
+          "countdown": {
+            "label": "Visszaszámlálás"
+          },
+          "countup": {
+            "label": "Eltelt idő számlálása"
+          },
+          "time": {
+            "label": "Idő"
+          }
+        }
+      },
+      "refresh": {
+        "name": "Frissítés",
+        "options": {
+          "dashboard": {
+            "label": "Az irányítópulttal"
+          },
+          "sec": {
+            "label": "Másodpercenként"
+          }
+        }
+      },
+      "source": {
+        "name": "Forrás"
+      },
+      "style": {
+        "name": "Stílus",
+        "options": {
+          "digital": {
+            "label": "Digitális"
+          },
+          "legacy": {
+            "label": "Szöveg"
+          }
+        }
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "Időformátum",
+          "settings": {
+            "placeholder": "dátumformátum"
+          }
+        },
+        "fontSize": {
+          "name": "Betűméret",
+          "settings": {
+            "placeholder": "Betűméret (pl. 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Betűvastagság",
+          "options": {
+            "bold": {
+              "label": "Félkövér"
+            },
+            "normal": {
+              "label": "Normál"
+            }
+          }
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "Betűméret",
+          "settings": {
+            "placeholder": "betűméret"
+          }
+        },
+        "fontWeight": {
+          "name": "Betűvastagság",
+          "options": {
+            "bold": {
+              "label": "Félkövér"
+            },
+            "normal": {
+              "label": "Normál"
+            }
+          }
+        },
+        "options": {
+          "browserTime": {
+            "label": "Böngészőidő"
+          },
+          "sameAsDashboard": {
+            "label": "Ugyanaz, mint az irányítópulton"
+          }
+        },
+        "showTimezone": {
+          "name": "Időzóna megjelenítése"
+        },
+        "timezone": {
+          "name": "Időzóna"
+        },
+        "zoneFormat": {
+          "name": "Megjelenítési formátum",
+          "options": {
+            "abbv": {
+              "label": "Rövidítés"
+            },
+            "name": {
+              "label": "Normál"
+            },
+            "nameOffset": {
+              "label": "Név + eltolás"
+            },
+            "offset": {
+              "label": "Eltolás"
+            },
+            "offsetAbbv": {
+              "label": "Eltolás + rövidítés"
+            }
+          }
+        }
+      }
+    }
+  }
+}

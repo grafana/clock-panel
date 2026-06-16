@@ -1,0 +1,412 @@
+{
+  "ColorEditor": {
+    "input": {
+      "value": {
+        "placeholder": "Выберите цвет"
+      }
+    }
+  },
+  "components": {
+    "RenderTime": {
+      "getStrings": {
+        "days": "дн.",
+        "hours": "ч.",
+        "minutes": "мин.",
+        "months": "мес.",
+        "oneDay": "1 день",
+        "oneHour": "1 час",
+        "oneMinute": "1 минута",
+        "oneMonth": "1 месяц",
+        "oneSecond": "1 секунда",
+        "oneYear": "1 год",
+        "seconds": "cек.",
+        "years": "лет"
+      }
+    }
+  },
+  "module": {
+    "ClockOptions": {
+      "bgColor": {
+        "name": "Цвет фона"
+      },
+      "clockType": {
+        "name": "Формат часов",
+        "options": {
+          "custom": {
+            "label": "Пользовательский"
+          },
+          "h12": {
+            "label": "12 часов"
+          },
+          "h24": {
+            "label": "24 часа"
+          }
+        }
+      },
+      "countdownSettings": {
+        "customFormat": {
+          "name": "Пользовательский формат",
+          "settings": {
+            "placeholder": "необязательно"
+          }
+        },
+        "endCountdownTime": {
+          "name": "Время окончания",
+          "placeholder": "Дата и время в формате ISO 8601 или RFC 2822"
+        },
+        "endText": {
+          "name": "Текст после окончания"
+        },
+        "invalidValueText": {
+          "defaultValue": "недопустимое значение",
+          "name": "Текст при недопустимом значении"
+        },
+        "noValueText": {
+          "defaultValue": "значение не найдено",
+          "name": "Текст при отсутствии значения"
+        },
+        "queryCalculation": {
+          "description": "Как рассчитать время обратного отсчета",
+          "name": "Расчет",
+          "options": {
+            "first": {
+              "description": "Первое значение",
+              "label": "Первое"
+            },
+            "firstNotNull": {
+              "description": "Первое непустое значение (также исключаются нечисловые значения)",
+              "label": "Первое *"
+            },
+            "last": {
+              "description": "Последнее значение",
+              "label": "Последнее"
+            },
+            "lastNotNull": {
+              "description": "Последнее непустое значение (также исключаются нечисловые значения)",
+              "label": "Последнее *"
+            },
+            "max": {
+              "description": "Максимальное значение",
+              "label": "Макс."
+            },
+            "min": {
+              "description": "Минимальное значение",
+              "label": "Мин."
+            },
+            "minFuture": {
+              "description": "Минимальное значение в будущем",
+              "label": "Мин. будущее"
+            }
+          }
+        },
+        "queryField": {
+          "name": "Поле",
+          "settings": {
+            "noFieldsMessage": "Поля не найдены"
+          }
+        },
+        "source": {
+          "options": {
+            "input": {
+              "label": "Ввод"
+            },
+            "query": {
+              "label": "Запрос"
+            }
+          }
+        }
+      },
+      "countupSettings": {
+        "beginCountupTime": {
+          "name": "Время начала",
+          "placeholder": "Дата и время в формате ISO 8601 или RFC 2822"
+        },
+        "beginText": {
+          "name": "Текст перед началом"
+        },
+        "customFormat": {
+          "name": "Пользовательский формат",
+          "settings": {
+            "placeholder": "необязательно"
+          }
+        },
+        "invalidValueText": {
+          "defaultValue": "недопустимое значение",
+          "name": "Текст при недопустимом значении"
+        },
+        "noValueText": {
+          "defaultValue": "значение не найдено",
+          "name": "Текст при отсутствии значения"
+        },
+        "queryCalculation": {
+          "description": "Как рассчитать время прямого отсчета",
+          "name": "Расчет",
+          "options": {
+            "first": {
+              "description": "Первое значение",
+              "label": "Первое"
+            },
+            "firstNotNull": {
+              "description": "Первое непустое значение (также исключаются нечисловые значения)",
+              "label": "Первое *"
+            },
+            "last": {
+              "description": "Последнее значение",
+              "label": "Последнее"
+            },
+            "lastNotNull": {
+              "description": "Последнее непустое значение (также исключаются нечисловые значения)",
+              "label": "Последнее *"
+            },
+            "max": {
+              "description": "Максимальное значение",
+              "label": "Макс."
+            },
+            "maxPast": {
+              "description": "Максимальное значение в прошлом",
+              "label": "Макс. прошлое"
+            },
+            "min": {
+              "description": "Минимальное значение",
+              "label": "Мин."
+            }
+          }
+        },
+        "queryField": {
+          "name": "Поле",
+          "settings": {
+            "noFieldsMessage": "Поля не найдены"
+          }
+        },
+        "source": {
+          "name": "Источник",
+          "options": {
+            "input": {
+              "label": "Ввод"
+            },
+            "query": {
+              "label": "Запрос"
+            }
+          }
+        }
+      },
+      "dateSettings": {
+        "dateFormat": {
+          "name": "Формат даты",
+          "settings": {
+            "placeholder": "Введите формат даты"
+          }
+        },
+        "fontSize": {
+          "name": "Размер шрифта",
+          "settings": {
+            "placeholder": "формат даты"
+          }
+        },
+        "fontWeight": {
+          "name": "Толщина шрифта",
+          "options": {
+            "bold": {
+              "label": "Жирный"
+            },
+            "normal": {
+              "label": "Нормальный"
+            }
+          }
+        },
+        "locale": {
+          "name": "Локаль",
+          "settings": {
+            "placeholder": "Введите локаль: de, fr, es, ... (по умолчанию: en)"
+          }
+        },
+        "showDate": {
+          "name": "Показать дату"
+        }
+      },
+      "descriptionSettings": {
+        "descriptionText": {
+          "name": "Описание",
+          "settings": {
+            "placeholder": "Введите описание"
+          }
+        },
+        "fontSize": {
+          "name": "Размер шрифта",
+          "settings": {
+            "placeholder": "Размер шрифта (например, 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Толщина шрифта",
+          "options": {
+            "bold": {
+              "label": "Жирный"
+            },
+            "normal": {
+              "label": "Нормальный"
+            }
+          }
+        },
+        "noValueText": {
+          "defaultValue": "описание не найдено",
+          "name": "Текст при отсутствии значения"
+        },
+        "queryField": {
+          "name": "Поле",
+          "settings": {
+            "noFieldsMessage": "Поля не найдены"
+          }
+        },
+        "source": {
+          "name": "Источник",
+          "options": {
+            "input": {
+              "label": "Ввод"
+            },
+            "none": {
+              "label": "Нет"
+            },
+            "query": {
+              "label": "Запрос"
+            }
+          }
+        }
+      },
+      "digitalSettings": {
+        "fillColor": {
+          "name": "Цвет заливки"
+        },
+        "glowSize": {
+          "name": "Размер свечения"
+        },
+        "strokeColor": {
+          "name": "Цвет обводки"
+        },
+        "strokeWidth": {
+          "name": "Ширина обводки"
+        }
+      },
+      "fontMono": {
+        "name": "Моноширинный шрифт"
+      },
+      "mode": {
+        "name": "Режим",
+        "options": {
+          "countdown": {
+            "label": "Обратный отсчет"
+          },
+          "countup": {
+            "label": "Прямой отсчет"
+          },
+          "time": {
+            "label": "Время"
+          }
+        }
+      },
+      "refresh": {
+        "name": "Обновление",
+        "options": {
+          "dashboard": {
+            "label": "Вместе с дашбордом"
+          },
+          "sec": {
+            "label": "Каждую секунду"
+          }
+        }
+      },
+      "source": {
+        "name": "Источник"
+      },
+      "style": {
+        "name": "Стиль",
+        "options": {
+          "digital": {
+            "label": "Цифры"
+          },
+          "legacy": {
+            "label": "Текст"
+          }
+        }
+      },
+      "timeSettings": {
+        "customFormat": {
+          "name": "Формат времени",
+          "settings": {
+            "placeholder": "формат даты"
+          }
+        },
+        "fontSize": {
+          "name": "Размер шрифта",
+          "settings": {
+            "placeholder": "Размер шрифта (например, 12px)"
+          }
+        },
+        "fontWeight": {
+          "name": "Толщина шрифта",
+          "options": {
+            "bold": {
+              "label": "Жирный"
+            },
+            "normal": {
+              "label": "Нормальный"
+            }
+          }
+        }
+      },
+      "timezoneSettings": {
+        "fontSize": {
+          "name": "Размер шрифта",
+          "settings": {
+            "placeholder": "размер шрифта"
+          }
+        },
+        "fontWeight": {
+          "name": "Толщина шрифта",
+          "options": {
+            "bold": {
+              "label": "Жирный"
+            },
+            "normal": {
+              "label": "Нормальный"
+            }
+          }
+        },
+        "options": {
+          "browserTime": {
+            "label": "Время браузера"
+          },
+          "sameAsDashboard": {
+            "label": "Одинаковое с дашбордом"
+          }
+        },
+        "showTimezone": {
+          "name": "Показать часовой пояс"
+        },
+        "timezone": {
+          "name": "Часовой пояс"
+        },
+        "zoneFormat": {
+          "name": "Формат отображения",
+          "options": {
+            "abbv": {
+              "label": "Аббревиатура"
+            },
+            "name": {
+              "label": "Нормальный"
+            },
+            "nameOffset": {
+              "label": "Название + смещение"
+            },
+            "offset": {
+              "label": "Смещение"
+            },
+            "offsetAbbv": {
+              "label": "Смещение + аббревиатура"
+            }
+          }
+        }
+      }
+    }
+  }
+}
