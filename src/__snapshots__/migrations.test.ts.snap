@@ -193,47 +193,7 @@ exports[`Clock migrations Query config with datasource 2`] = `
     },
   },
   "pluginVersion": "2.1.6",
-  "targets": [
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "000000001",
-      },
-      "groupBy": [
-        {
-          "params": [
-            "$__interval",
-          ],
-          "type": "time",
-        },
-        {
-          "params": [
-            "null",
-          ],
-          "type": "fill",
-        },
-      ],
-      "orderByTime": "ASC",
-      "policy": "default",
-      "refId": "A",
-      "resultFormat": "time_series",
-      "select": [
-        [
-          {
-            "params": [
-              "value",
-            ],
-            "type": "field",
-          },
-          {
-            "params": [],
-            "type": "mean",
-          },
-        ],
-      ],
-      "tags": [],
-    },
-  ],
+  "targets": [],
   "type": "grafana-clock-panel",
 }
 `;

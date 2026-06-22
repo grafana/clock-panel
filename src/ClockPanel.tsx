@@ -1,5 +1,8 @@
-import { PanelProps } from '@grafana/data';
+import { LoadingState, PanelProps } from '@grafana/data';
+import { t } from '@grafana/i18n';
+import { useTheme2 } from '@grafana/ui';
 import React, { useEffect, useMemo, useState } from 'react';
+import { isQueryDrivenOptions } from './utils';
 import { ClockOptions, ClockRefresh, ClockStyle, DescriptionSource } from './types';
 
 import { RenderDate } from 'components/RenderDate';
@@ -19,6 +22,7 @@ interface Props extends PanelProps<ClockOptions> {}
 export function ClockPanel(props: Props) {
   const { options, width, height, data } = props;
   const { panel } = useClockStyles(options);
+  const theme = useTheme2();
   const { timezone: optionsTimezone, dateSettings, timezoneSettings } = options;
   const { timeZone: dashboardTimezone } = props;
   const timezoneToUse = optionsTimezone === 'dashboard' ? dashboardTimezone : (optionsTimezone ?? '');
@@ -42,7 +46,6 @@ export function ClockPanel(props: Props) {
     return;
   }, [props.options.refresh, timezoneToUse]);
 
-  //refresh the time
   let [targetTime, descriptionText, err]: [Moment, string, string | null] = useMemo(() => {
     return CalculateClockOptions({
       options: props.options,
@@ -53,6 +56,15 @@ export function ClockPanel(props: Props) {
     });
   }, [props.options, timezoneToUse, data, props.replaceVariables, now]);
 
+  // Show a notice when an input-only panel has a stale query running — either because
+  // migration couldn't clear it (e.g., Grafana 12 readonly targets) or because Grafana's
+  // query editor re-added a default target row after the user opened and saved the panel.
+  const hasDataErrors =
+    data.state === LoadingState.Error || (Array.isArray(data.errors) && data.errors.length > 0);
+  const hasActiveQuery = (data.request?.targets?.length ?? 0) > 0;
+  const showStaleQueryNotice =
+    !isQueryDrivenOptions(options) && (hasDataErrors || hasActiveQuery);
+
   return (
     <div
       className={panel}
@@ -60,6 +72,7 @@ export function ClockPanel(props: Props) {
       style={{
         width,
         height,
+        position: 'relative',
       }}
     >
       {dateSettings.showDate ? <RenderDate now={now} options={props.options} width={width} height={height} /> : null}
@@ -70,6 +83,29 @@ export function ClockPanel(props: Props) {
       {props.options.descriptionSettings.source !== DescriptionSource.none ? (
         <RenderDescription options={props.options} descriptionText={descriptionText} width={width} height={height} />
       ) : null}
+      {showStaleQueryNotice && (
+        <div
+          data-testid={TEST_IDS.staleQueryNotice}
+          style={{
+            position: 'absolute',
+            bottom: 8,
+            left: 8,
+            right: 8,
+            padding: '6px 10px',
+            background: theme.colors.error.transparent,
+            border: `1px solid ${theme.colors.error.borderTransparent}`,
+            borderRadius: theme.shape.radius.default,
+            fontSize: theme.typography.bodySmall.fontSize,
+            color: theme.colors.error.text,
+            pointerEvents: 'none',
+          }}
+        >
+          {t(
+            'ClockPanel.staleQueryNotice.message',
+            'This panel does not use a datasource query but one is configured. Open the Query tab and remove all queries to clear this notice.'
+          )}
+        </div>
+      )}
     </div>
   );
 }

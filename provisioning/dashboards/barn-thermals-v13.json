@@ -1,0 +1,69 @@
+{
+  "title": "barn-thermals-imperial v13 migration test",
+  "uid": "barn-thermals-v13",
+  "version": 1,
+  "schemaVersion": 39,
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
+    {
+      "gridPos": { "h": 4, "w": 24, "x": 0, "y": 0 },
+      "id": 10,
+      "options": {
+        "bgColor": "rgb(27, 29, 33)",
+        "clockType": "12 hour",
+        "countdownSettings": {
+          "endCountdownTime": "2020-05-23T14:12:03-05:00",
+          "endText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
+        },
+        "countupSettings": {
+          "beginCountupTime": "2022-04-03T14:43:46-04:00",
+          "beginText": "00:00:00",
+          "invalidValueText": "invalid value",
+          "noValueText": "no value found",
+          "queryCalculation": "last",
+          "source": "input"
+        },
+        "dateSettings": {
+          "dateFormat": "YYYY-MM-DD",
+          "fontSize": "35px",
+          "fontWeight": "bold",
+          "locale": "",
+          "showDate": true
+        },
+        "descriptionSettings": {
+          "descriptionText": "",
+          "fontSize": "12px",
+          "fontWeight": "normal",
+          "noValueText": "no description found",
+          "source": "none"
+        },
+        "fontMono": true,
+        "mode": "time",
+        "refresh": "sec",
+        "timeSettings": { "fontSize": "56px", "fontWeight": "bold" },
+        "timezone": "America/New_York",
+        "timezoneSettings": {
+          "fontSize": "28px",
+          "fontWeight": "bold",
+          "showTimezone": false,
+          "zoneFormat": "offsetAbbv"
+        }
+      },
+      "pluginVersion": "2.1.3",
+      "type": "grafana-clock-panel"
+    }
+  ],
+  "refresh": "",
+  "tags": [],
+  "templating": { "list": [] },
+  "annotations": { "list": [] },
+  "time": { "from": "now-6h", "to": "now" },
+  "timepicker": {}
+}

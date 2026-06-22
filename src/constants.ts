@@ -10,4 +10,5 @@ export const SVG_DIGITIZED = SVG_DIGITS.concat(SVG_SEPARATORS);
 export const TEST_IDS = {
   clockPanel: 'clock-panel',
   clockPanelTime: 'clock-panel-time',
+  staleQueryNotice: 'clock-panel-stale-query-notice',
 };
