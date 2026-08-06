@@ -1,0 +1,36 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "prConcurrentLimit": 5,
+  "minimumReleaseAge": "5 days",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "Exclude plugin-e2e from cooldown to avoid false positives with canary e2e tests",
+      "matchPackageNames": ["@grafana/plugin-e2e"],
+      "minimumReleaseAge": "0 days"
+    },
+    {
+      "groupName": "unit-test",
+      "matchPackageNames": ["@testing-library/**", "jest**", "@types/jest"]
+    },
+    {
+      "groupName": "eslint",
+      "matchPackageNames": ["@grafana/eslint-config", "eslint**", "@typescript-eslint/**", "@stylistic/**"]
+    },
+    {
+      "groupName": "grafana",
+      "matchPackageNames": ["@grafana/**"],
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "groupName": "react",
+      "matchPackageNames": ["react", "react-dom", "@types/react", "@types/react-dom"],
+      "matchUpdateTypes": ["minor", "patch"]
+    }
+  ]
+}
