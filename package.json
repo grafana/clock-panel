@@ -19,7 +19,7 @@
     "test": "jest --watch --onlyChanged",
     "test:ci": "jest --passWithNoTests --maxWorkers 4",
     "typecheck": "tsc --noEmit",
-    "sign": "npx --yes @grafana/sign-plugin@latest"
+    "sign": "sign-plugin"
   },
   "keywords": [
     "clock",
@@ -33,6 +33,7 @@
     "@grafana/eslint-config": "9.0.0",
     "@grafana/eslint-plugin-plugins": "0.7.0",
     "@grafana/plugin-e2e": "3.7.0",
+    "@grafana/sign-plugin": "^3.2.2",
     "@grafana/tsconfig": "2.0.0",
     "@playwright/test": "1.57.0",
     "@stylistic/eslint-plugin-ts": "4.4.1",
