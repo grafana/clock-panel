@@ -336,6 +336,7 @@
       },
       "timeSettings": {
         "customFormat": {
+          "description": "the date formatting pattern",
           "name": "Time Format",
           "settings": {
             "placeholder": "date format"

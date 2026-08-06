@@ -26,25 +26,22 @@ export function ClockPanel(props: Props) {
   const { timezone: optionsTimezone, dateSettings, timezoneSettings } = options;
   const { timeZone: dashboardTimezone } = props;
   const timezoneToUse = optionsTimezone === 'dashboard' ? dashboardTimezone : (optionsTimezone ?? '');
-  const [now, setNow] = useState<Moment>(getMoment(timezoneToUse));
+  const [tickNow, setTickNow] = useState<Moment>(() => getMoment(timezoneToUse));
   const interaction = useMemo(() => ({ clock_style: options.style || ClockStyle.text }), [options.style]);
   useInteraction('clock_panel_on_render', interaction);
-
-  // Clock refresh only on dashboard refresh
-  useEffect(() => {
-    if (props.options.refresh === ClockRefresh.dashboard) {
-      setNow(getMoment(timezoneToUse));
-    }
-  }, [props, timezoneToUse]);
 
   // Clock refresh every second
   useEffect(() => {
     if (props.options.refresh === ClockRefresh.sec) {
-      const timer = setInterval(() => setNow(getMoment(timezoneToUse)), 1000);
+      const timer = setInterval(() => setTickNow(getMoment(timezoneToUse)), 1000);
       return () => clearInterval(timer);
     }
     return;
   }, [props.options.refresh, timezoneToUse]);
+
+  // Clock refresh only on dashboard refresh — recompute during render on every
+  // dashboard-triggered re-render instead of scheduling a state update from an effect.
+  const now = props.options.refresh === ClockRefresh.dashboard ? getMoment(timezoneToUse) : tickNow;
 
   let [targetTime, descriptionText, err]: [Moment, string, string | null] = useMemo(() => {
     return CalculateClockOptions({

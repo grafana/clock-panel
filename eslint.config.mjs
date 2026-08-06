@@ -82,4 +82,11 @@ export default defineConfig([
       '@grafana/i18n/no-translation-top-level': 'error',
     },
   },
+  {
+    name: 'clock-panel/jest-tests',
+    files: ['**/*.test.{ts,tsx}'],
+    rules: {
+      '@grafana/i18n/no-untranslated-strings': 'off',
+    },
+  },
 ]);
