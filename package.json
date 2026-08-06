@@ -33,7 +33,7 @@
     "@grafana/eslint-config": "9.0.0",
     "@grafana/eslint-plugin-plugins": "0.7.0",
     "@grafana/plugin-e2e": "3.7.0",
-    "@grafana/sign-plugin": "^3.2.2",
+    "@grafana/sign-plugin": "3.3.3",
     "@grafana/tsconfig": "2.0.0",
     "@playwright/test": "1.57.0",
     "@stylistic/eslint-plugin-ts": "4.4.1",
