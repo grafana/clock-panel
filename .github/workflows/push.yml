@@ -21,4 +21,4 @@ jobs:
       plugin-version-suffix: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || '' }}
       node-version: '24'
       run-playwright-with-grafana-dependency: '>=11.0.0'
-      run-playwright-with-skip-grafana-nightly-image: 'true'
+      run-playwright-with-skip-grafana-nightly-image: true
