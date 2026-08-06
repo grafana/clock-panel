@@ -1,5 +1,5 @@
 import { defineConfig } from 'eslint/config';
-import grafanaConfig from '@grafana/eslint-config/flat.js';
+import grafanaConfig from '@grafana/eslint-config';
 import grafanaI18nPlugin from '@grafana/i18n/eslint-plugin';
 import pluginESLintPlugin from '@grafana/eslint-plugin-plugins';
 
