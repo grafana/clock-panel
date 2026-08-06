@@ -1,12 +1,10 @@
 # Change Log
 
-## [Unreleased]
+## 3.2.3
 
-### Project Updates
+- Update dependencies and workflows
 
-- Added pre-flight changelog validation to publish workflow.
-- Bumped `plugin-ci-workflows` to v8.0.0.
-- Added `.npmrc` with `ignore-scripts=true` to disable lifecycle scripts and mitigate supply-chain attack risk.
+## 3.2.2
 
 ## 3.2.1
 
