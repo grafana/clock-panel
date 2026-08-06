@@ -67,3 +67,4 @@ jobs:
       docs-only: ${{ fromJSON(github.event.inputs.docs-only) }}
       attestation: true
       node-version: '24'
+      run-playwright-with-skip-grafana-nightly-image: true
