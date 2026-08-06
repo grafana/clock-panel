@@ -1,7 +1,6 @@
 name: Verify i18n markup has been committed
 
-permissions:
-  contents: read
+permissions: {}
 
 on:
   pull_request:
