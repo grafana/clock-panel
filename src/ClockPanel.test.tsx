@@ -118,8 +118,8 @@ describe('ClockPanel', () => {
     // simulate a dashboard refresh: system time advances and the panel is re-rendered
     // with a bumped renderCounter, as Grafana does on every dashboard refresh
     jest.setSystemTime(new Date('20 Aug 2020 02:12:05 GMT').getTime());
-    const refreshedProps = { ...props, renderCounter: props.renderCounter + 1 };
-    rerender(<ClockPanel {...refreshedProps} />);
+    props.renderCounter += 1;
+    rerender(<ClockPanel {...props} />);
 
     expect(container).toHaveTextContent('02:12:05');
   });
