@@ -8,6 +8,8 @@ on:
     branches:
       - main
 
+permissions: {}
+
 jobs:
   upload-sources-to-crowdin:
     runs-on: ubuntu-x64

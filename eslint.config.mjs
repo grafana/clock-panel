@@ -1,5 +1,5 @@
 import { defineConfig } from 'eslint/config';
-import grafanaConfig from '@grafana/eslint-config/flat.js';
+import grafanaConfig from '@grafana/eslint-config';
 import grafanaI18nPlugin from '@grafana/i18n/eslint-plugin';
 import pluginESLintPlugin from '@grafana/eslint-plugin-plugins';
 
@@ -80,6 +80,13 @@ export default defineConfig([
     rules: {
       '@grafana/i18n/no-untranslated-strings': ['error', { calleesToIgnore: ['^css$', 'use[A-Z].*'] }],
       '@grafana/i18n/no-translation-top-level': 'error',
+    },
+  },
+  {
+    name: 'clock-panel/jest-tests',
+    files: ['**/*.test.{ts,tsx}'],
+    rules: {
+      '@grafana/i18n/no-untranslated-strings': 'off',
     },
   },
 ]);

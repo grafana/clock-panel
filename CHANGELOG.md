@@ -1,8 +1,10 @@
 # Change Log
 
-## [Unreleased]
+## 3.2.3
 
-### Project Updates
+- Update dependencies and workflows
+
+## 3.2.2
 
 - Added pre-flight changelog validation to publish workflow.
 - Bumped `plugin-ci-workflows` to v8.0.0.

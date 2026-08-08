@@ -550,7 +550,7 @@ function addTimeFormat(builder: PanelOptionsEditorBuilder<ClockOptions>) {
       category,
       path: 'timeSettings.customFormat',
       name: t('module.ClockOptions.timeSettings.customFormat.name', 'Time Format'),
-      description: 'the date formatting pattern',
+      description: t('module.ClockOptions.timeSettings.customFormat.description', 'the date formatting pattern'),
       settings: {
         placeholder: t('module.ClockOptions.timeSettings.customFormat.settings.placeholder', 'date format'),
       },
