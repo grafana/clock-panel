@@ -19,7 +19,9 @@
     "test": "jest --watch --onlyChanged",
     "test:ci": "jest --passWithNoTests --maxWorkers 4",
     "typecheck": "tsc --noEmit",
-    "sign": "sign-plugin"
+    "sign": "sign-plugin",
+    "docs:serve": "plugin-docs-cli serve --port 3001 --reload",
+    "docs:validate": "plugin-docs-cli validate --strict"
   },
   "keywords": [
     "clock",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@grafana/eslint-config": "10.0.0",
     "@grafana/eslint-plugin-plugins": "0.7.0",
+    "@grafana/plugin-docs-cli": "^0.2.0",
     "@grafana/plugin-e2e": "3.11.0",
     "@grafana/sign-plugin": "3.3.3",
     "@grafana/tsconfig": "2.2.0",

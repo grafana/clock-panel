@@ -2,7 +2,6 @@
   "type": "panel",
   "name": "Clock",
   "id": "grafana-clock-panel",
-
   "info": {
     "description": "Clock panel for grafana",
     "author": {
@@ -15,12 +14,24 @@
       "large": "img/clock.svg"
     },
     "links": [
-      { "name": "Project site", "url": "https://github.com/grafana/clock-panel" },
-      { "name": "MIT License", "url": "https://github.com/grafana/clock-panel/blob/master/LICENSE" }
+      {
+        "name": "Project site",
+        "url": "https://github.com/grafana/clock-panel"
+      },
+      {
+        "name": "MIT License",
+        "url": "https://github.com/grafana/clock-panel/blob/master/LICENSE"
+      }
     ],
     "screenshots": [
-      { "name": "Showcase", "path": "img/screenshot-showcase.png" },
-      { "name": "Options", "path": "img/screenshot-clock-options.png" }
+      {
+        "name": "Showcase",
+        "path": "img/screenshot-showcase.png"
+      },
+      {
+        "name": "Options",
+        "path": "img/screenshot-clock-options.png"
+      }
     ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
@@ -49,5 +60,6 @@
     "tr-TR",
     "zh-Hans",
     "zh-Hant"
-  ]
+  ],
+  "docsPath": "docs"
 }
