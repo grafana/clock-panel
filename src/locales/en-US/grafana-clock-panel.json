@@ -1,9 +1,4 @@
 {
-  "ClockPanel": {
-    "staleQueryNotice": {
-      "message": "This panel does not use a datasource query but one is configured. Open the Query tab and remove all queries to clear this notice."
-    }
-  },
   "ColorEditor": {
     "input": {
       "value": {

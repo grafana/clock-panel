@@ -1,8 +1,5 @@
-import { LoadingState, PanelProps } from '@grafana/data';
-import { t } from '@grafana/i18n';
-import { useTheme2 } from '@grafana/ui';
+import { PanelProps } from '@grafana/data';
 import React, { useEffect, useMemo, useState } from 'react';
-import { isQueryDrivenOptions } from './utils';
 import { ClockOptions, ClockRefresh, ClockStyle, DescriptionSource } from './types';
 
 import { RenderDate } from 'components/RenderDate';
@@ -22,7 +19,6 @@ interface Props extends PanelProps<ClockOptions> {}
 export function ClockPanel(props: Props) {
   const { options, width, height, data } = props;
   const { panel } = useClockStyles(options);
-  const theme = useTheme2();
   const { timezone: optionsTimezone, dateSettings, timezoneSettings } = options;
   const { timeZone: dashboardTimezone } = props;
   const timezoneToUse = optionsTimezone === 'dashboard' ? dashboardTimezone : (optionsTimezone ?? '');
@@ -53,15 +49,12 @@ export function ClockPanel(props: Props) {
     });
   }, [props.options, timezoneToUse, data, props.replaceVariables, now]);
 
-  // Show a notice when an input-only panel has a stale query running — either because
-  // migration couldn't clear it (e.g., Grafana 12 readonly targets) or because Grafana's
-  // query editor re-added a default target row after the user opened and saved the panel.
-  const hasDataErrors =
-    data.state === LoadingState.Error || (Array.isArray(data.errors) && data.errors.length > 0);
-  const hasActiveQuery = (data.request?.targets?.length ?? 0) > 0;
-  const showStaleQueryNotice =
-    !isQueryDrivenOptions(options) && (hasDataErrors || hasActiveQuery);
-
+  // No stale-query notice is rendered here. Grafana 13 injects and executes a default query on
+  // every panel regardless of what the panel JSON stores (verified on 13.0.2 with targets
+  // omitted, targets: [] and targets: [] + datasource: null), and resolves it against the org
+  // default datasource even when the panel names another one. On a datasource that rejects an
+  // empty query the result is an error the panel cannot attribute, cannot clear, and cannot
+  // advise on — Grafana core already surfaces it. See issue #535.
   return (
     <div
       className={panel}
@@ -80,29 +73,6 @@ export function ClockPanel(props: Props) {
       {props.options.descriptionSettings.source !== DescriptionSource.none ? (
         <RenderDescription options={props.options} descriptionText={descriptionText} width={width} height={height} />
       ) : null}
-      {showStaleQueryNotice && (
-        <div
-          data-testid={TEST_IDS.staleQueryNotice}
-          style={{
-            position: 'absolute',
-            bottom: 8,
-            left: 8,
-            right: 8,
-            padding: '6px 10px',
-            background: theme.colors.error.transparent,
-            border: `1px solid ${theme.colors.error.borderTransparent}`,
-            borderRadius: theme.shape.radius.default,
-            fontSize: theme.typography.bodySmall.fontSize,
-            color: theme.colors.error.text,
-            pointerEvents: 'none',
-          }}
-        >
-          {t(
-            'ClockPanel.staleQueryNotice.message',
-            'This panel does not use a datasource query but one is configured. Open the Query tab and remove all queries to clear this notice.'
-          )}
-        </div>
-      )}
     </div>
   );
 }

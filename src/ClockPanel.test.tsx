@@ -1,6 +1,15 @@
 import { ClockPanel } from 'ClockPanel';
 import { act, render, screen } from '@testing-library/react';
-import { DataQueryRequest, FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange, DataFrame, FieldType } from '@grafana/data';
+import {
+  DataQueryRequest,
+  FieldConfigSource,
+  PanelData,
+  ScopedVars,
+  LoadingState,
+  getDefaultTimeRange,
+  DataFrame,
+  FieldType,
+} from '@grafana/data';
 import { DataQuery } from '@grafana/schema';
 import {
   ClockMode,
@@ -460,79 +469,31 @@ describe('ClockPanel', () => {
   });
 });
 
-describe('stale query notice', () => {
-  describe('trigger conditions', () => {
-    it('does not render when no queries and no errors', () => {
-      const props = getDefaultProps();
-      render(<ClockPanel {...props} />);
-      expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
-    });
+describe('query state never produces a panel-level notice (issue #535)', () => {
+  // Grafana 13 injects and executes a default query on every panel regardless of what the panel
+  // JSON stores — verified on 13.0.2 with targets omitted, targets: [] and targets: [] +
+  // datasource: null — and resolves it against the org default datasource even when the panel
+  // names another one. On a datasource that rejects an empty query (InfluxDB: "error parsing
+  // query: found FROM, expected identifier") the result is an error the panel did not cause and
+  // the user cannot clear. The panel therefore renders no notice of its own in any query state;
+  // Grafana core reports query failures.
+  const NOTICE_TEXT = /does not use a datasource query/i;
 
-    it('renders when data state is Error', () => {
-      const props = getDefaultProps();
-      render(<ClockPanel {...props} data={{ ...props.data, state: LoadingState.Error, errors: [{ message: 'failed' }] }} />);
-      expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
-    });
-
-    it('renders when errors array is non-empty without error state', () => {
-      const props = getDefaultProps();
-      render(<ClockPanel {...props} data={{ ...props.data, state: LoadingState.Done, errors: [{ message: 'partial failure' }] }} />);
-      expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
-    });
-
-    it('renders when request has active targets', () => {
-      const props = getDefaultProps();
-      render(<ClockPanel {...props} data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }} />);
-      expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument();
-    });
-  });
-
-  describe('mode-aware source suppression', () => {
-    // All cases below have an active request — we are testing whether the mode×source
-    // combination correctly identifies the panel as query-driven (suppresses notice)
-    // or input-only (shows notice). The trigger is always present so it can't interfere.
-    it.each<[string, ClockMode, ClockSource, ClockSource, boolean]>([
-      // description                              mode              countdownSource              countupSource              visible
-      ['mode=time,     no stale sources',         ClockMode.time,     ClockSource.input, ClockSource.input, true ],
-      ['mode=time,     stale countdown.query',    ClockMode.time,     ClockSource.query, ClockSource.input, true ],
-      ['mode=countdown active countdown.query',   ClockMode.countdown,ClockSource.query, ClockSource.input, false],
-      ['mode=countdown stale countup.query',      ClockMode.countdown,ClockSource.input, ClockSource.query, true ],
-      ['mode=countup   active countup.query',     ClockMode.countup,  ClockSource.input, ClockSource.query, false],
-      ['mode=countup   stale countdown.query',    ClockMode.countup,  ClockSource.query, ClockSource.input, true ],
-    ])('%s', (_, mode, countdownSource, countupSource, visible) => {
-      const props = getDefaultProps();
-      render(
-        <ClockPanel
-          {...props}
-          options={{
-            ...props.options,
-            mode,
-            countdownSettings: { ...props.options.countdownSettings, source: countdownSource },
-            countupSettings: { ...props.options.countupSettings, source: countupSource },
-          }}
-          data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
-        />
-      );
-      visible
-        ? expect(screen.getByTestId(TEST_IDS.staleQueryNotice)).toBeInTheDocument()
-        : expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
-    });
-
-    it('does not render when countdown.source=query and mode is absent (treated as query-driven)', () => {
-      // Pre-2.1.4 panels have no mode field. The conservative else-branch in isQueryDrivenOptions
-      // checks both sources — countdown.source='query' marks the panel as query-driven, so the
-      // notice is suppressed just as it would be for an explicit mode=countdown panel.
-      const props = getDefaultProps();
-      const { mode: _mode, ...optionsWithoutMode } = props.options as any;
-      render(
-        <ClockPanel
-          {...props}
-          options={{ ...optionsWithoutMode, countdownSettings: { ...props.options.countdownSettings, source: ClockSource.query } }}
-          data={{ ...props.data, request: mockRequest([{ refId: 'A' }]) }}
-        />
-      );
-      expect(screen.queryByTestId(TEST_IDS.staleQueryNotice)).toBeNull();
-    });
+  it.each<[string, () => Partial<PanelData>]>([
+    ['idle, no request', () => ({})],
+    ['successful injected query', () => ({
+      state: LoadingState.Done,
+      request: mockRequest([
+        { refId: 'A', scenarioId: 'random_walk', datasource: { type: 'grafana-testdata-datasource', uid: 'abc' } },
+      ]),
+    })],
+    ['error state', () => ({ state: LoadingState.Error, errors: [{ message: 'failed' }] })],
+    ['errors array without error state', () => ({ state: LoadingState.Done, errors: [{ message: 'partial failure' }] })],
+  ])('renders the clock and no notice: %s', (_, dataOverrides) => {
+    const props = getDefaultProps();
+    const { container } = render(<ClockPanel {...props} data={{ ...props.data, ...dataOverrides() }} />);
+    expect(screen.getByTestId(TEST_IDS.clockPanel)).toBeInTheDocument();
+    expect(container).not.toHaveTextContent(NOTICE_TEXT);
   });
 });
 const getDefaultProps = () => {
@@ -645,7 +606,9 @@ const getDefaultProps = () => {
   return props;
 };
 
-const mockRequest = (targets: Array<{ refId: string }>): DataQueryRequest<DataQuery> => ({
+const mockRequest = (
+  targets: Array<Partial<DataQuery> & { refId: string } & Record<string, unknown>>
+): DataQueryRequest<DataQuery> => ({
   requestId: 'test',
   interval: '1s',
   intervalMs: 1000,
