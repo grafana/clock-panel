@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.2.4
+
+- Removed the stale-query notice that Grafana 13 users could not clear. Grafana 13 runs an injected default query on panels saved without queries, so the notice fired on a query the user never added ([#535](https://github.com/grafana/clock-panel/issues/535)).
+
 ## 3.2.3
 
 - Update dependencies and workflows
