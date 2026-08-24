@@ -1,15 +1,6 @@
 import { ClockPanel } from 'ClockPanel';
 import { act, render, screen } from '@testing-library/react';
-import {
-  DataQueryRequest,
-  FieldConfigSource,
-  PanelData,
-  ScopedVars,
-  LoadingState,
-  getDefaultTimeRange,
-  DataFrame,
-  FieldType,
-} from '@grafana/data';
+import { DataQueryRequest, FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange, DataFrame, FieldType } from '@grafana/data';
 import { DataQuery } from '@grafana/schema';
 import {
   ClockMode,
@@ -470,28 +461,30 @@ describe('ClockPanel', () => {
 });
 
 describe('query state never produces a panel-level notice (issue #535)', () => {
-  // Grafana 13 injects and executes a default query on every panel regardless of what the panel
-  // JSON stores — verified on 13.0.2 with targets omitted, targets: [] and targets: [] +
-  // datasource: null — and resolves it against the org default datasource even when the panel
-  // names another one. On a datasource that rejects an empty query (InfluxDB: "error parsing
-  // query: found FROM, expected identifier") the result is an error the panel did not cause and
-  // the user cannot clear. The panel therefore renders no notice of its own in any query state;
-  // Grafana core reports query failures.
-  const NOTICE_TEXT = /does not use a datasource query/i;
-
-  it.each<[string, () => Partial<PanelData>]>([
-    ['idle, no request', () => ({})],
-    ['successful injected query', () => ({
-      state: LoadingState.Done,
-      request: mockRequest([{ refId: 'A' }]),
-    })],
-    ['error state', () => ({ state: LoadingState.Error, errors: [{ message: 'failed' }] })],
-    ['errors array without error state', () => ({ state: LoadingState.Done, errors: [{ message: 'partial failure' }] })],
-  ])('renders the clock and no notice: %s', (_, dataOverrides) => {
+  // Grafana 13 injects and runs a default query on every panel whatever the panel JSON stores,
+  // resolved against the org default datasource. The panel cannot tell that query apart from one
+  // the user added, so it reports nothing about query state — Grafana core reports failures.
+  const expectClockWithoutNotice = (data: object) => {
     const props = getDefaultProps();
-    const { container } = render(<ClockPanel {...props} data={{ ...props.data, ...dataOverrides() }} />);
+    const { container } = render(<ClockPanel {...props} data={{ ...props.data, ...data }} />);
     expect(screen.getByTestId(TEST_IDS.clockPanel)).toBeInTheDocument();
-    expect(container).not.toHaveTextContent(NOTICE_TEXT);
+    expect(container).not.toHaveTextContent(/does not use a datasource query/i);
+  };
+
+  it('idle, no request', () => {
+    expectClockWithoutNotice({});
+  });
+
+  it('successful injected query', () => {
+    expectClockWithoutNotice({ state: LoadingState.Done, request: mockRequest([{ refId: 'A' }]) });
+  });
+
+  it('error state', () => {
+    expectClockWithoutNotice({ state: LoadingState.Error, errors: [{ message: 'failed' }] });
+  });
+
+  it('errors array without error state', () => {
+    expectClockWithoutNotice({ state: LoadingState.Done, errors: [{ message: 'partial failure' }] });
   });
 });
 const getDefaultProps = () => {

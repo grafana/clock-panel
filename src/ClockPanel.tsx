@@ -49,12 +49,9 @@ export function ClockPanel(props: Props) {
     });
   }, [props.options, timezoneToUse, data, props.replaceVariables, now]);
 
-  // No stale-query notice is rendered here. Grafana 13 injects and executes a default query on
-  // every panel regardless of what the panel JSON stores (verified on 13.0.2 with targets
-  // omitted, targets: [] and targets: [] + datasource: null), and resolves it against the org
-  // default datasource even when the panel names another one. On a datasource that rejects an
-  // empty query the result is an error the panel cannot attribute, cannot clear, and cannot
-  // advise on — Grafana core already surfaces it. See issue #535.
+  // The panel deliberately reports nothing about query state. Grafana 13 injects and runs a
+  // default query on every panel whatever the panel JSON stores, so any notice about a stale
+  // query fires on a query the user never added and cannot remove. See issue #535.
   return (
     <div
       className={panel}
