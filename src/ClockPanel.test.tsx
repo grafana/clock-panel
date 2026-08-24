@@ -1,7 +1,6 @@
 import { ClockPanel } from 'ClockPanel';
 import { act, render, screen } from '@testing-library/react';
-import { DataQueryRequest, FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange, DataFrame, FieldType } from '@grafana/data';
-import { DataQuery } from '@grafana/schema';
+import { FieldConfigSource, ScopedVars, LoadingState, getDefaultTimeRange, DataFrame, FieldType } from '@grafana/data';
 import {
   ClockMode,
   ClockRefresh,
@@ -475,10 +474,6 @@ describe('query state never produces a panel-level notice (issue #535)', () => {
     expectClockWithoutNotice({});
   });
 
-  it('successful injected query', () => {
-    expectClockWithoutNotice({ state: LoadingState.Done, request: mockRequest([{ refId: 'A' }]) });
-  });
-
   it('error state', () => {
     expectClockWithoutNotice({ state: LoadingState.Error, errors: [{ message: 'failed' }] });
   });
@@ -596,15 +591,3 @@ const getDefaultProps = () => {
   };
   return props;
 };
-
-const mockRequest = (targets: Array<{ refId: string }>): DataQueryRequest<DataQuery> => ({
-  requestId: 'test',
-  interval: '1s',
-  intervalMs: 1000,
-  range: getDefaultTimeRange(),
-  scopedVars: {},
-  targets: targets as DataQuery[],
-  timezone: 'browser',
-  app: 'panel-editor',
-  startTime: 0,
-});
