@@ -483,9 +483,7 @@ describe('query state never produces a panel-level notice (issue #535)', () => {
     ['idle, no request', () => ({})],
     ['successful injected query', () => ({
       state: LoadingState.Done,
-      request: mockRequest([
-        { refId: 'A', scenarioId: 'random_walk', datasource: { type: 'grafana-testdata-datasource', uid: 'abc' } },
-      ]),
+      request: mockRequest([{ refId: 'A' }]),
     })],
     ['error state', () => ({ state: LoadingState.Error, errors: [{ message: 'failed' }] })],
     ['errors array without error state', () => ({ state: LoadingState.Done, errors: [{ message: 'partial failure' }] })],
@@ -606,9 +604,7 @@ const getDefaultProps = () => {
   return props;
 };
 
-const mockRequest = (
-  targets: Array<Partial<DataQuery> & { refId: string } & Record<string, unknown>>
-): DataQueryRequest<DataQuery> => ({
+const mockRequest = (targets: Array<{ refId: string }>): DataQueryRequest<DataQuery> => ({
   requestId: 'test',
   interval: '1s',
   intervalMs: 1000,
