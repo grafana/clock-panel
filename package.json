@@ -60,7 +60,7 @@
     "eslint-webpack-plugin": "6.0.0",
     "fork-ts-checker-webpack-plugin": "9.1.0",
     "glob": "13.0.6",
-    "i18next-cli": "1.67.7",
+    "i18next-cli": "1.72.4",
     "identity-obj-proxy": "3.0.0",
     "imports-loader": "5.0.0",
     "jest": "30.4.2",
