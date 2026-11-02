@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.2.5
+
+- Removed use of the deprecated `config.datasources`. Stale-query migrations now point to the built-in `-- Grafana --` datasource by its fixed uid ([#543](https://github.com/grafana/clock-panel/pull/543)).
+
 ## 3.2.4
 
 - Removed the stale-query notice that Grafana 13 users could not clear. Grafana 13 runs an injected default query on panels saved without queries, so the notice fired on a query the user never added ([#535](https://github.com/grafana/clock-panel/issues/535)).
