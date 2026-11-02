@@ -1,7 +1,7 @@
 import { PanelModel } from '@grafana/data';
 import { ClockOptions, ClockRefresh } from './types';
-import { config } from '@grafana/runtime';
-import { findGrafanaDataSource, isQueryDrivenOptions } from './utils';
+import { isQueryDrivenOptions } from './utils';
+import { GRAFANA_BUILTIN_DS } from './constants';
 
 const RANDOM_WALK_QUERY_TYPE = 'randomWalk';
 
@@ -23,15 +23,12 @@ export const clockMigrationHandler = (panel: PanelModel<ClockOptions>): Partial<
 
   // Grafana 12: targets is a read-only getter so we can't clear the array — redirect
   // stale targets to randomWalk on the Grafana built-in DS instead.
-  // uid 'grafana' is a Grafana core internal always present; used as fallback when absent
-  // from config (e.g. test environments).
   if (readonlyTargets && inputOnly) {
     const targets = panel.targets;
     if (Array.isArray(targets) && targets.length > 0) {
-      const grafanaDs = findGrafanaDataSource(config.datasources) ?? { type: 'datasource', uid: 'grafana' };
-      panel.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
+      panel.datasource = { ...GRAFANA_BUILTIN_DS };
       for (const target of targets) {
-        target.datasource = { type: grafanaDs.type, uid: grafanaDs.uid };
+        target.datasource = { ...GRAFANA_BUILTIN_DS };
         target.queryType = RANDOM_WALK_QUERY_TYPE;
       }
     }

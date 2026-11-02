@@ -1,4 +1,4 @@
-import { findGrafanaDataSource, getMoment, getTimeZoneNames, isQueryDrivenOptions } from './utils';
+import { getMoment, getTimeZoneNames, isQueryDrivenOptions } from './utils';
 import { ClockMode, ClockOptions, ClockSource, DescriptionSource } from './types';
 
 jest.mock('@grafana/runtime', () => ({
@@ -25,30 +25,6 @@ describe('getMoment', () => {
     const m = getMoment();
     expect(m).toBeDefined();
     expect(typeof m.format).toBe('function');
-  });
-});
-
-describe('findGrafanaDataSource', () => {
-  it('finds datasource by uid', () => {
-    const datasources = {
-      grafana: { uid: 'grafana', type: 'datasource', name: '-- Grafana --' },
-    };
-    expect(findGrafanaDataSource(datasources)).toBe(datasources.grafana);
-  });
-
-  it('finds datasource by name and type when uid differs', () => {
-    const datasources = {
-      special: { uid: 'other-uid', type: 'datasource', name: '-- Grafana --' },
-    };
-    expect(findGrafanaDataSource(datasources)).toBe(datasources.special);
-  });
-
-  it('returns undefined when no Grafana datasource is present', () => {
-    expect(findGrafanaDataSource({ influxdb: { uid: 'abc', type: 'influxdb', name: 'InfluxDB' } })).toBeUndefined();
-  });
-
-  it('returns undefined for empty datasources', () => {
-    expect(findGrafanaDataSource({})).toBeUndefined();
   });
 });
 
