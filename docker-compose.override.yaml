@@ -1,4 +1,4 @@
 services:
   grafana:
     ports: !override
-      - ${GRAFANA_PORT:-3001}:3000
+      - ${GRAFANA_PORT:-3000}:3000
