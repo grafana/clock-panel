@@ -11,3 +11,6 @@ export const TEST_IDS = {
   clockPanel: 'clock-panel',
   clockPanelTime: 'clock-panel-time',
 };
+
+// The built-in "-- Grafana --" datasource. Its uid is fixed in Grafana core, so no lookup is needed.
+export const GRAFANA_BUILTIN_DS = { type: 'datasource', uid: 'grafana' } as const;

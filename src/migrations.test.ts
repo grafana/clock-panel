@@ -1,6 +1,5 @@
 import { PanelModel } from '@grafana/data';
 import { cloneDeep } from 'lodash';
-import { config } from '@grafana/runtime';
 import { clockMigrationHandler } from './migrations';
 import { ClockRefresh, ClockSource, DescriptionSource } from './types';
 
@@ -309,16 +308,8 @@ describe('Clock migrations', () => {
       expect(panel.datasource).toEqual({ type: 'test', uid: '123' });
     });
 
-    describe('with Grafana built-in datasource available', () => {
-      const grafanaDs = { id: 1, uid: 'grafana', type: 'datasource', name: '-- Grafana --' };
-
-      beforeEach(() => {
-        (config as any).datasources = { grafana: grafanaDs };
-      });
-
-      afterEach(() => {
-        (config as any).datasources = {};
-      });
+    describe('redirecting stale targets to the Grafana built-in datasource', () => {
+      const grafanaDs = { uid: 'grafana', type: 'datasource' };
 
       it('sets panel datasource to Grafana built-in when targets are readonly and panel is input-only', () => {
         const panel = createPanelWithReadonlyTargets({
@@ -386,45 +377,6 @@ describe('Clock migrations', () => {
 
         expect(panel.datasource).toEqual({ type: 'influxdb', uid: 'xxx' });
         expect(panel.targets).toEqual([]);
-      });
-    });
-
-    describe('without Grafana built-in datasource in config.datasources', () => {
-      // The Grafana built-in DS uid='grafana' is a Grafana core internal always present
-      // in a real deployment. These tests simulate config.datasources being empty (e.g.
-      // test environments) and verify the fallback to the known-stable uid is used.
-      it('does not throw when Grafana DS is absent from config.datasources', () => {
-        const panel = createPanelWithReadonlyTargets({
-          options: {
-            countdownSettings: { source: ClockSource.input },
-            countupSettings: { source: ClockSource.input },
-            descriptionSettings: { source: DescriptionSource.none },
-          },
-          datasource: { type: 'influxdb', uid: 'xxx' },
-          targets: [{ refId: 'A' }],
-        } as unknown as PanelModel);
-
-        expect(() => clockMigrationHandler(panel)).not.toThrow();
-      });
-
-      it('redirects stale targets to built-in Grafana DS uid when absent from config.datasources', () => {
-        // Path D: even with no Grafana DS in config, fall back to { type:'datasource', uid:'grafana' }
-        // so stale targets use randomWalk rather than the default datasource.
-        const panel = createPanelWithReadonlyTargets({
-          options: {
-            countdownSettings: { source: ClockSource.input },
-            countupSettings: { source: ClockSource.input },
-            descriptionSettings: { source: DescriptionSource.none },
-          },
-          datasource: { type: 'influxdb', uid: 'xxx' },
-          targets: [{ refId: 'A' }],
-        } as unknown as PanelModel);
-
-        clockMigrationHandler(panel);
-
-        expect(panel.targets![0].datasource).toEqual({ type: 'datasource', uid: 'grafana' });
-        expect(panel.targets![0].queryType).toBe('randomWalk');
-        expect(panel.datasource).toEqual({ type: 'datasource', uid: 'grafana' });
       });
     });
   });
@@ -503,20 +455,10 @@ describe('Clock migrations', () => {
     });
   });
 
-  describe('mutable targets with Grafana built-in datasource available', () => {
-    const grafanaDs = { id: 1, uid: 'grafana', type: 'datasource', name: '-- Grafana --' };
-
-    beforeEach(() => {
-      (config as any).datasources = { grafana: grafanaDs };
-    });
-
-    afterEach(() => {
-      (config as any).datasources = {};
-    });
-
+  describe('mutable targets on input-only panels', () => {
     it('clears targets and datasource without inserting a randomWalk query', () => {
       // Path A₂: migrateInputOnlyPluginConfig must not re-add a randomWalk target even
-      // when the Grafana built-in DS is registered — the panel does not need a query.
+      // though the Grafana built-in DS is always available — the panel does not need a query.
       const panel = {
         options: {
           countdownSettings: { source: ClockSource.input },
@@ -593,27 +535,11 @@ describe('Real-world: barn-thermals-imperial v13 clock panel', () => {
     type: 'grafana-clock-panel',
   };
 
-  it('produces empty targets — no query inserted (no Grafana DS in env)', () => {
+  it('produces empty targets — no query inserted', () => {
     const panel = { ...v13Panel } as unknown as PanelModel;
     clockMigrationHandler(panel);
     expect(panel.targets).toEqual([]);
     expect(panel.datasource).toBeUndefined();
-  });
-
-  it('does not insert a query target even when Grafana built-in DS is available', () => {
-    (config as any).datasources = {
-      grafana: { uid: 'grafana', type: 'datasource', name: '-- Grafana --' },
-    };
-    try {
-      const panel = { ...v13Panel } as unknown as PanelModel;
-      clockMigrationHandler(panel);
-      // Input-only panels need no datasource or query — targets must be empty
-      // and datasource must be absent even when the Grafana built-in DS is registered.
-      expect(panel.targets).toEqual([]);
-      expect(panel.datasource).toBeUndefined();
-    } finally {
-      (config as any).datasources = {};
-    }
   });
 });
 

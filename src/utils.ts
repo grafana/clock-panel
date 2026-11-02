@@ -2,15 +2,6 @@ import { getTemplateSrv } from '@grafana/runtime';
 import moment, { Moment } from 'moment-timezone';
 import { ClockMode, ClockOptions, ClockSource, DescriptionSource } from './types';
 
-export const findGrafanaDataSource = (datasources: Record<string, any>) => {
-  for (const ds of Object.values(datasources || {})) {
-    if (ds.uid === 'grafana' || (ds.name === '-- Grafana --' && ds.type === 'datasource')) {
-      return ds;
-    }
-  }
-  return undefined;
-};
-
 // ClockSource is a two-value enum; absent/input both mean no query needed
 const isQuerySource = (src: ClockSource | undefined) => src === ClockSource.query;
 
