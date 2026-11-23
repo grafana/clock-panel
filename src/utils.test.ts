@@ -28,6 +28,23 @@ describe('getMoment', () => {
   });
 });
 
+describe('getMoment with Manitoba timezone rules', () => {
+  beforeAll(() => jest.useFakeTimers());
+  afterAll(() => jest.useRealTimers());
+
+  it.each([
+    ['2025-01-20T12:00:00Z', '2025-01-20 06:00:00 -06:00'],
+    ['2026-07-20T12:00:00Z', '2026-07-20 07:00:00 -05:00'],
+    ['2026-11-01T06:59:59Z', '2026-11-01 01:59:59 -05:00'],
+    ['2026-11-01T07:00:00Z', '2026-11-01 02:00:00 -05:00'],
+    ['2026-11-20T12:00:00Z', '2026-11-20 07:00:00 -05:00'],
+    ['2027-01-20T12:00:00Z', '2027-01-20 07:00:00 -05:00'],
+  ])('converts %s to %s without a November 2026 fall-back', (instant, expected) => {
+    jest.setSystemTime(new Date(instant));
+    expect(getMoment('America/Winnipeg').format('YYYY-MM-DD HH:mm:ss Z')).toBe(expected);
+  });
+});
+
 describe('isQueryDrivenOptions', () => {
   it('returns false for empty options', () => {
     expect(isQueryDrivenOptions({})).toBe(false);
