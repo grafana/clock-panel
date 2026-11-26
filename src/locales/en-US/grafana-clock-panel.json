@@ -1,5 +1,6 @@
 {
   "ColorEditor": {
+    "clearColor": "Clear color",
     "input": {
       "value": {
         "placeholder": "Pick Color"
