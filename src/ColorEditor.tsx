@@ -1,5 +1,5 @@
 import React from 'react';
-import { ColorPicker, Input, Icon, useStyles2 } from '@grafana/ui';
+import { ColorPicker, Input, IconButton, useStyles2 } from '@grafana/ui';
 import { css } from '@emotion/css';
 import { config } from '@grafana/runtime';
 import { t } from '@grafana/i18n';
@@ -11,7 +11,13 @@ export function ColorEditor(props: any) {
   let suffix: React.ReactNode = null;
   const value = props.value || t('ColorEditor.input.value.placeholder', 'Pick Color');
   if (props.value) {
-    suffix = <Icon className={styles.trashIcon} name="trash-alt" onClick={() => props.onChange(undefined)} />;
+    suffix = (
+      <IconButton
+        name="trash-alt"
+        aria-label={t('ColorEditor.clearColor', 'Clear color')}
+        onClick={() => props.onChange(undefined)}
+      />
+    );
   }
 
   prefix = (
@@ -41,13 +47,6 @@ const getStyles = (theme: GrafanaTheme2) => {
     inputPrefix: css`
       display: flex;
       align-items: center;
-    `,
-    trashIcon: css`
-      color: ${theme.colors.text.secondary};
-      cursor: pointer;
-      &:hover {
-        color: ${theme.colors.text};
-      }
     `,
   };
 };
